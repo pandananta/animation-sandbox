@@ -218,77 +218,84 @@
             100% { transform: translateY(-200%) translateX(0); opacity: 0; }
         }
 
-        /* Gentle horizontal drift right */
+        /* Slow drift right with fade */
         @keyframes driftRight {
             0% { transform: translateX(0); opacity: 0.5; }
-            100% { transform: translateX(80%); opacity: 0; }
+            50% { opacity: 0.7; }
+            100% { transform: translateX(100%); opacity: 0; }
         }
 
-        /* Gentle horizontal drift left */
+        /* Slow drift left with fade */
         @keyframes driftLeft {
             0% { transform: translateX(0); opacity: 0.5; }
-            100% { transform: translateX(-80%); opacity: 0; }
+            50% { opacity: 0.7; }
+            100% { transform: translateX(-100%); opacity: 0; }
         }
 
-        /* Twinkling fade */
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.1; transform: scale(0.8); }
-            50% { opacity: 1; transform: scale(1.2); }
-        }
-
-        /* Subtle pulsing */
-        @keyframes pulse {
-            0%, 100% { opacity: 0.2; transform: scale(1); }
-            50% { opacity: 0.6; transform: scale(1.3); }
-        }
-
-        /* Diagonal drift up-right */
-        @keyframes diagonalDrift {
+        /* Slow diagonal drift up-right */
+        @keyframes diagonalDriftUpRight {
             0% { transform: translate(0, 0); opacity: 0.4; }
-            100% { transform: translate(60%, -150%); opacity: 0; }
+            50% { opacity: 0.7; }
+            100% { transform: translate(80%, -180%); opacity: 0; }
         }
 
-        /* Orbital path - circular */
+        /* Slow diagonal drift up-left */
+        @keyframes diagonalDriftUpLeft {
+            0% { transform: translate(0, 0); opacity: 0.4; }
+            50% { opacity: 0.7; }
+            100% { transform: translate(-80%, -180%); opacity: 0; }
+        }
+
+        /* Slow orbital path - continuous circular */
         @keyframes orbit {
-            0% { transform: rotate(0deg) translateX(80px) rotate(0deg); }
-            100% { transform: rotate(360deg) translateX(80px) rotate(-360deg); }
+            0% { transform: rotate(0deg) translateX(80px) rotate(0deg); opacity: 0.7; }
+            100% { transform: rotate(360deg) translateX(80px) rotate(-360deg); opacity: 0.7; }
         }
 
-        /* Nebula shift */
-        @keyframes nebulaShift {
-            0%, 100% { transform: translate(0, 0); opacity: 0.2; }
-            50% { transform: translate(10%, 8%); opacity: 0.5; }
-        }
-
-        /* Vertical wave */
-        @keyframes verticalWave {
-            0%, 100% { transform: translateY(0); opacity: 0.3; }
-            50% { transform: translateY(-15%); opacity: 0.6; }
-        }
-
-        /* Gentle sway */
-        @keyframes sway {
-            0%, 100% { transform: translateX(0); }
-            50% { transform: translateX(25px); }
+        /* Very slow orbital path - larger radius */
+        @keyframes orbitWide {
+            0% { transform: rotate(0deg) translateX(120px) rotate(0deg); opacity: 0.6; }
+            100% { transform: rotate(360deg) translateX(120px) rotate(-360deg); opacity: 0.6; }
         }
 
         /* Rise with fade */
         @keyframes riseAndFade {
             0% { transform: translateY(0); opacity: 0.3; }
-            50% { opacity: 0.9; }
+            50% { opacity: 0.8; }
             100% { transform: translateY(-180%); opacity: 0; }
         }
 
-        /* Slow rotation */
+        /* Slow continuous rotation */
         @keyframes slowRotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% { transform: rotate(0deg); opacity: 0.3; }
+            100% { transform: rotate(360deg); opacity: 0.3; }
         }
 
-        /* Radial breathe */
-        @keyframes radialBreathe {
-            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.1; }
-            50% { transform: translate(-50%, -50%) scale(1.4); opacity: 0.4; }
+        /* Gentle upward drift with slight horizontal wobble */
+        @keyframes floatOrganic {
+            0% { transform: translate(0, 0); opacity: 0.4; }
+            25% { transform: translate(5%, -50%); opacity: 0.7; }
+            50% { transform: translate(-3%, -100%); opacity: 0.8; }
+            75% { transform: translate(4%, -150%); opacity: 0.6; }
+            100% { transform: translate(0, -200%); opacity: 0; }
+        }
+
+        /* Slow drift down and right (for atmosphere) */
+        @keyframes atmosphereDriftDownRight {
+            0% { transform: translate(0, 0); opacity: 0.3; }
+            100% { transform: translate(20%, 15%); opacity: 0.3; }
+        }
+
+        /* Slow drift up and left (for atmosphere) */
+        @keyframes atmosphereDriftUpLeft {
+            0% { transform: translate(0, 0); opacity: 0.3; }
+            100% { transform: translate(-20%, -15%); opacity: 0.3; }
+        }
+
+        /* Very slow fade in cycle */
+        @keyframes slowFadeIn {
+            0% { opacity: 0.2; }
+            100% { opacity: 0.5; }
         }
 
         /* ===== 1: SLOW VERTICAL RISE ===== */
@@ -304,27 +311,27 @@
             width: 75%;
             height: 55%;
             background: radial-gradient(ellipse,
-                rgba(100, 50, 130, 0.15),
-                rgba(60, 30, 90, 0.1) 60%,
+                rgba(100, 50, 130, 0.25),
+                rgba(60, 30, 90, 0.15) 60%,
                 transparent 85%);
             filter: blur(50px);
-            animation: pulse 8s ease-in-out infinite;
+            animation: slowRotate 120s linear infinite;
         }
 
         .var-1 .p1 {
             bottom: 20%; left: 20%; width: 10%; height: 5%;
             background: radial-gradient(circle, rgba(100, 220, 220, 0.7), transparent);
-            animation: floatUp 6s ease-in-out infinite;
+            animation: floatUp 15s ease-in-out infinite;
         }
         .var-1 .p2 {
             bottom: 35%; right: 18%; width: 11%; height: 5.5%;
             background: radial-gradient(circle, rgba(255, 200, 80, 0.65), transparent);
-            animation: floatUp 7s ease-in-out infinite 1s;
+            animation: floatUp 18s ease-in-out infinite 4s;
         }
         .var-1 .p3 {
             bottom: 15%; right: 25%; width: 9%; height: 4.5%;
             background: radial-gradient(circle, rgba(220, 80, 160, 0.6), transparent);
-            animation: floatUp 8s ease-in-out infinite 2s;
+            animation: floatUp 20s ease-in-out infinite 8s;
         }
 
         /* ===== 2: ORBITAL PATHS ===== */
@@ -341,10 +348,10 @@
             height: 65%;
             background: radial-gradient(ellipse,
                 transparent 25%,
-                rgba(180, 60, 120, 0.1) 50%,
+                rgba(180, 60, 120, 0.2) 50%,
                 transparent 85%);
             filter: blur(45px);
-            animation: radialBreathe 10s ease-in-out infinite;
+            animation: slowFadeIn 60s ease-in-out infinite alternate;
         }
 
         .var-2 .orbit-container {
@@ -358,17 +365,17 @@
         .var-2 .p1 {
             width: 9%; height: 4.5%;
             background: radial-gradient(circle, rgba(100, 220, 220, 0.7), transparent);
-            animation: orbit 8s linear infinite;
+            animation: orbit 20s linear infinite;
         }
         .var-2 .p2 {
             width: 10%; height: 5%;
             background: radial-gradient(circle, rgba(255, 200, 80, 0.65), transparent);
-            animation: orbit 10s linear infinite reverse;
+            animation: orbitWide 25s linear infinite reverse;
         }
         .var-2 .p3 {
             width: 8%; height: 4%;
             background: radial-gradient(circle, rgba(220, 80, 160, 0.7), transparent);
-            animation: orbit 6s linear infinite 2s;
+            animation: orbit 16s linear infinite 5s;
         }
 
         /* ===== 3: PULSING NEBULA CLOUDS ===== */
@@ -388,7 +395,7 @@
                 transparent 85%);
             filter: blur(45px);
             border-radius: 50%;
-            animation: nebulaShift 5s ease-in-out infinite;
+            animation: slowRotate 100s linear infinite;
         }
 
         .var-3 .nebula-2 {
@@ -403,18 +410,18 @@
                 transparent 85%);
             filter: blur(45px);
             border-radius: 50%;
-            animation: nebulaShift 6s ease-in-out infinite 1.5s;
+            animation: slowRotate 130s linear infinite reverse;
         }
 
         .var-3 .p1 {
             top: 25%; left: 20%; width: 9%; height: 4.5%;
             background: radial-gradient(circle, rgba(255, 200, 80, 0.7), transparent);
-            animation: sway 4s ease-in-out infinite;
+            animation: driftRight 22s ease-in-out infinite;
         }
         .var-3 .p2 {
             top: 65%; right: 22%; width: 10%; height: 5%;
             background: radial-gradient(circle, rgba(100, 220, 220, 0.65), transparent);
-            animation: sway 5s ease-in-out infinite 1s;
+            animation: driftLeft 20s ease-in-out infinite 6s;
         }
 
         /* ===== 4: DIAGONAL FLOW ===== */
@@ -429,28 +436,28 @@
             width: 80%;
             height: 70%;
             background: linear-gradient(to bottom right,
-                rgba(100, 220, 220, 0.18),
-                rgba(180, 60, 120, 0.15) 60%,
+                rgba(100, 220, 220, 0.25),
+                rgba(180, 60, 120, 0.2) 60%,
                 transparent 90%);
             filter: blur(50px);
             transform: rotate(-15deg);
-            animation: pulse 9s ease-in-out infinite;
+            animation: slowRotate 90s linear infinite;
         }
 
         .var-4 .p1 {
             bottom: 15%; left: 12%; width: 10%; height: 5%;
             background: radial-gradient(circle, rgba(100, 220, 220, 0.7), transparent);
-            animation: diagonalDrift 7s ease-in-out infinite;
+            animation: diagonalDriftUpRight 18s ease-in-out infinite;
         }
         .var-4 .p2 {
             bottom: 20%; left: 18%; width: 9%; height: 4.5%;
             background: radial-gradient(circle, rgba(255, 200, 80, 0.65), transparent);
-            animation: diagonalDrift 8s ease-in-out infinite 1.5s;
+            animation: diagonalDriftUpRight 22s ease-in-out infinite 5s;
         }
         .var-4 .p3 {
             bottom: 25%; left: 25%; width: 11%; height: 5.5%;
             background: radial-gradient(circle, rgba(220, 80, 160, 0.7), transparent);
-            animation: diagonalDrift 9s ease-in-out infinite 3s;
+            animation: diagonalDriftUpRight 20s ease-in-out infinite 10s;
         }
 
         /* ===== 5: RISING BUBBLES (ANIMATED) ===== */
@@ -465,32 +472,32 @@
             width: 100%;
             height: 65%;
             background: linear-gradient(to top,
-                rgba(100, 50, 130, 0.6),
-                rgba(180, 60, 120, 0.4) 50%,
+                rgba(100, 50, 130, 0.35),
+                rgba(180, 60, 120, 0.25) 50%,
                 transparent 100%);
             filter: blur(45px);
-            animation: verticalWave 5s ease-in-out infinite;
+            animation: slowFadeIn 80s ease-in-out infinite alternate;
         }
 
         .var-5 .p1 {
             bottom: 10%; left: 25%; width: 11%; height: 5.5%;
             background: radial-gradient(circle, rgba(255, 200, 80, 0.7), transparent);
-            animation: riseAndFade 5s ease-in-out infinite;
+            animation: riseAndFade 14s ease-in-out infinite;
         }
         .var-5 .p2 {
             bottom: 8%; right: 22%; width: 10%; height: 5%;
             background: radial-gradient(circle, rgba(100, 220, 220, 0.65), transparent);
-            animation: riseAndFade 6s ease-in-out infinite 1s;
+            animation: riseAndFade 16s ease-in-out infinite 3s;
         }
         .var-5 .p3 {
             bottom: 12%; left: 45%; width: 9%; height: 4.5%;
             background: radial-gradient(circle, rgba(220, 80, 160, 0.6), transparent);
-            animation: riseAndFade 7s ease-in-out infinite 2s;
+            animation: riseAndFade 18s ease-in-out infinite 6s;
         }
         .var-5 .p4 {
             bottom: 15%; right: 35%; width: 8%; height: 4%;
             background: radial-gradient(circle, rgba(180, 60, 120, 0.55), transparent);
-            animation: riseAndFade 8s ease-in-out infinite 3s;
+            animation: riseAndFade 20s ease-in-out infinite 9s;
         }
 
         /* ===== 6: ASYMMETRIC NEBULA ANIMATED ===== */
@@ -510,7 +517,7 @@
                 transparent 85%);
             filter: blur(45px);
             border-radius: 50%;
-            animation: pulse 5s ease-in-out infinite;
+            animation: slowFadeIn 70s ease-in-out infinite alternate;
         }
 
         .var-6 .nebula-2 {
@@ -525,18 +532,18 @@
                 transparent 85%);
             filter: blur(45px);
             border-radius: 50%;
-            animation: pulse 6s ease-in-out infinite 2s;
+            animation: slowFadeIn 90s ease-in-out infinite alternate 10s;
         }
 
         .var-6 .p1 {
             top: 25%; left: 20%; width: 9%; height: 4.5%;
             background: radial-gradient(circle, rgba(255, 200, 80, 0.7), transparent);
-            animation: floatUp 8s ease-in-out infinite;
+            animation: floatOrganic 24s ease-in-out infinite;
         }
         .var-6 .p2 {
             top: 65%; right: 22%; width: 10%; height: 5%;
             background: radial-gradient(circle, rgba(100, 220, 220, 0.65), transparent);
-            animation: twinkle 3s ease-in-out infinite;
+            animation: floatOrganic 20s ease-in-out infinite 8s;
         }
 
         /* ===== 7: HORIZONTAL FLOW ===== */
@@ -547,7 +554,7 @@
         .var-7 .flow-1 {
             position: absolute;
             top: 25%;
-            left: 0;
+            left: -50%;
             width: 100%;
             height: 18%;
             background: linear-gradient(to right,
@@ -555,13 +562,13 @@
                 rgba(100, 220, 220, 0.35) 50%,
                 transparent);
             filter: blur(35px);
-            animation: driftRight 10s ease-in-out infinite;
+            animation: driftRight 35s linear infinite;
         }
 
         .var-7 .flow-2 {
             position: absolute;
             bottom: 28%;
-            left: 0;
+            right: -50%;
             width: 100%;
             height: 20%;
             background: linear-gradient(to right,
@@ -569,28 +576,28 @@
                 rgba(220, 80, 160, 0.4) 50%,
                 transparent);
             filter: blur(35px);
-            animation: driftLeft 9s ease-in-out infinite;
+            animation: driftLeft 40s linear infinite;
         }
 
         .var-7 .p1 {
             top: 30%; left: 25%; width: 8%; height: 4%;
             background: radial-gradient(circle, rgba(100, 220, 220, 0.7), transparent);
-            animation: driftRight 7s ease-in-out infinite;
+            animation: driftRight 18s ease-in-out infinite;
         }
         .var-7 .p2 {
             top: 32%; right: 28%; width: 7%; height: 3.5%;
             background: radial-gradient(circle, rgba(100, 220, 220, 0.6), transparent);
-            animation: driftRight 8s ease-in-out infinite 1.5s;
+            animation: driftRight 22s ease-in-out infinite 4s;
         }
         .var-7 .p3 {
             bottom: 32%; left: 30%; width: 9%; height: 4.5%;
             background: radial-gradient(circle, rgba(220, 80, 160, 0.7), transparent);
-            animation: driftLeft 8s ease-in-out infinite;
+            animation: driftLeft 20s ease-in-out infinite;
         }
         .var-7 .p4 {
             bottom: 30%; right: 25%; width: 8%; height: 4%;
             background: radial-gradient(circle, rgba(220, 80, 160, 0.65), transparent);
-            animation: driftLeft 9s ease-in-out infinite 2s;
+            animation: driftLeft 24s ease-in-out infinite 6s;
         }
 
         /* ===== 8: SCATTERED TWINKLE ===== */
@@ -606,11 +613,11 @@
             width: 80%;
             height: 60%;
             background: radial-gradient(ellipse,
-                rgba(180, 60, 120, 0.12),
-                rgba(100, 50, 130, 0.08) 65%,
+                rgba(180, 60, 120, 0.2),
+                rgba(100, 50, 130, 0.15) 65%,
                 transparent 88%);
             filter: blur(55px);
-            animation: pulse 14s ease-in-out infinite;
+            animation: slowRotate 110s linear infinite;
         }
 
         .var-8 .particle {
@@ -618,39 +625,39 @@
         }
 
         .var-8 .p1 {
-            top: 15%; left: 18%; width: 5%; height: 2.5%;
+            bottom: 15%; left: 18%; width: 5%; height: 2.5%;
             background: radial-gradient(circle, rgba(100, 220, 220, 0.8), transparent);
-            animation: twinkle 2s ease-in-out infinite;
+            animation: floatUp 16s ease-in-out infinite;
         }
         .var-8 .p2 {
-            top: 22%; right: 25%; width: 4%; height: 2%;
+            bottom: 22%; right: 25%; width: 4%; height: 2%;
             background: radial-gradient(circle, rgba(255, 200, 80, 0.7), transparent);
-            animation: twinkle 2.5s ease-in-out infinite 0.5s;
+            animation: floatUp 18s ease-in-out infinite 4s;
         }
         .var-8 .p3 {
-            top: 38%; left: 12%; width: 4.5%; height: 2.2%;
+            bottom: 12%; left: 12%; width: 4.5%; height: 2.2%;
             background: radial-gradient(circle, rgba(220, 80, 160, 0.75), transparent);
-            animation: twinkle 3s ease-in-out infinite 1s;
+            animation: floatUp 20s ease-in-out infinite 8s;
         }
         .var-8 .p4 {
-            top: 62%; right: 18%; width: 5%; height: 2.5%;
+            bottom: 18%; right: 18%; width: 5%; height: 2.5%;
             background: radial-gradient(circle, rgba(100, 220, 220, 0.7), transparent);
-            animation: twinkle 2.3s ease-in-out infinite 0.8s;
+            animation: floatUp 17s ease-in-out infinite 6s;
         }
         .var-8 .p5 {
-            bottom: 18%; left: 20%; width: 4.5%; height: 2.2%;
+            bottom: 8%; left: 20%; width: 4.5%; height: 2.2%;
             background: radial-gradient(circle, rgba(180, 60, 120, 0.7), transparent);
-            animation: twinkle 2.8s ease-in-out infinite 1.3s;
+            animation: floatUp 19s ease-in-out infinite 10s;
         }
         .var-8 .p6 {
-            top: 28%; left: 65%; width: 4%; height: 2%;
+            bottom: 25%; left: 65%; width: 4%; height: 2%;
             background: radial-gradient(circle, rgba(255, 200, 80, 0.65), transparent);
-            animation: twinkle 2.4s ease-in-out infinite 0.3s;
+            animation: floatUp 21s ease-in-out infinite 12s;
         }
         .var-8 .p7 {
-            bottom: 25%; right: 30%; width: 4.5%; height: 2.2%;
+            bottom: 15%; right: 30%; width: 4.5%; height: 2.2%;
             background: radial-gradient(circle, rgba(220, 80, 160, 0.7), transparent);
-            animation: twinkle 2.6s ease-in-out infinite 1.5s;
+            animation: floatUp 22s ease-in-out infinite 14s;
         }
 
         /* ===== 9: RADIAL EXPANSION ===== */
@@ -666,27 +673,27 @@
             width: 70%;
             height: 50%;
             background: radial-gradient(ellipse,
-                rgba(100, 50, 130, 0.2),
-                rgba(60, 30, 90, 0.15) 60%,
+                rgba(100, 50, 130, 0.25),
+                rgba(60, 30, 90, 0.18) 60%,
                 transparent 85%);
             filter: blur(50px);
-            animation: radialBreathe 12s ease-in-out infinite;
+            animation: slowRotate 140s linear infinite;
         }
 
         .var-9 .p1 {
-            top: 22%; left: 18%; width: 10%; height: 5%;
+            bottom: 22%; left: 18%; width: 10%; height: 5%;
             background: radial-gradient(circle, rgba(100, 220, 220, 0.7), transparent);
-            animation: pulse 4s ease-in-out infinite;
+            animation: diagonalDriftUpLeft 24s ease-in-out infinite;
         }
         .var-9 .p2 {
-            top: 68%; right: 20%; width: 11%; height: 5.5%;
+            bottom: 18%; right: 20%; width: 11%; height: 5.5%;
             background: radial-gradient(circle, rgba(255, 200, 80, 0.65), transparent);
-            animation: pulse 5s ease-in-out infinite 1s;
+            animation: diagonalDriftUpRight 26s ease-in-out infinite 8s;
         }
         .var-9 .p3 {
-            top: 42%; right: 12%; width: 7%; height: 3.5%;
+            bottom: 12%; right: 12%; width: 7%; height: 3.5%;
             background: radial-gradient(circle, rgba(220, 80, 160, 0.6), transparent);
-            animation: pulse 4.5s ease-in-out infinite 2s;
+            animation: floatOrganic 28s ease-in-out infinite 16s;
         }
 
         /* ===== 10: GENTLE CHAOS ===== */
@@ -702,37 +709,37 @@
             width: 80%;
             height: 45%;
             background: radial-gradient(ellipse at top,
-                rgba(100, 220, 220, 0.2),
-                rgba(180, 60, 120, 0.15) 50%,
+                rgba(100, 220, 220, 0.25),
+                rgba(180, 60, 120, 0.2) 50%,
                 transparent 90%);
             filter: blur(50px);
-            animation: verticalWave 10s ease-in-out infinite;
+            animation: slowFadeIn 75s ease-in-out infinite alternate;
         }
 
         .var-10 .p1 {
-            top: 15%; left: 25%; width: 9%; height: 4.5%;
+            bottom: 15%; left: 25%; width: 9%; height: 4.5%;
             background: radial-gradient(circle, rgba(100, 220, 220, 0.75), transparent);
-            animation: twinkle 3s ease-in-out infinite;
+            animation: floatOrganic 26s ease-in-out infinite;
         }
         .var-10 .p2 {
-            top: 20%; left: 45%; width: 8%; height: 4%;
+            bottom: 20%; left: 45%; width: 8%; height: 4%;
             background: radial-gradient(circle, rgba(255, 200, 80, 0.7), transparent);
-            animation: floatUp 9s ease-in-out infinite 1s;
+            animation: floatUp 20s ease-in-out infinite 5s;
         }
         .var-10 .p3 {
-            top: 12%; right: 20%; width: 10%; height: 5%;
+            bottom: 12%; right: 20%; width: 10%; height: 5%;
             background: radial-gradient(circle, rgba(220, 80, 160, 0.7), transparent);
-            animation: sway 4s ease-in-out infinite;
+            animation: diagonalDriftUpLeft 22s ease-in-out infinite;
         }
         .var-10 .p4 {
-            top: 28%; left: 15%; width: 7%; height: 3.5%;
+            bottom: 28%; left: 15%; width: 7%; height: 3.5%;
             background: radial-gradient(circle, rgba(180, 60, 120, 0.65), transparent);
-            animation: driftRight 10s ease-in-out infinite;
+            animation: driftRight 24s ease-in-out infinite 10s;
         }
         .var-10 .p5 {
-            top: 32%; right: 15%; width: 8%; height: 4%;
+            bottom: 22%; right: 15%; width: 8%; height: 4%;
             background: radial-gradient(circle, rgba(100, 220, 220, 0.6), transparent);
-            animation: diagonalDrift 11s ease-in-out infinite 2s;
+            animation: diagonalDriftUpRight 28s ease-in-out infinite 15s;
         }
     </style>
 </head>
