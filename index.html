@@ -219,36 +219,48 @@
 
         /* Slow drift right - continuous with slight vertical wobble */
         @keyframes driftRightWobble1 {
-            0% { transform: translate(-100%, 0); }
-            25% { transform: translate(-25%, -2%); }
-            50% { transform: translate(50%, 0); }
-            75% { transform: translate(125%, 1%); }
-            100% { transform: translate(200%, 0); }
+            0% { transform: translate(-100%, 0); opacity: 0; }
+            5% { opacity: 1; }
+            20% { transform: translate(-25%, -2%); }
+            40% { transform: translate(50%, 0); }
+            60% { transform: translate(125%, 1%); }
+            75% { transform: translate(200%, 0); opacity: 1; }
+            80% { opacity: 0; }
+            100% { transform: translate(200%, 0); opacity: 0; }
         }
 
         /* Slow drift right - continuous with different wobble */
         @keyframes driftRightWobble2 {
-            0% { transform: translate(-100%, 0); }
-            30% { transform: translate(-40%, 1.5%); }
-            60% { transform: translate(20%, -1%); }
-            100% { transform: translate(200%, 0); }
+            0% { transform: translate(-100%, 0); opacity: 0; }
+            6% { opacity: 1; }
+            25% { transform: translate(-40%, 1.5%); }
+            50% { transform: translate(20%, -1%); }
+            72% { transform: translate(200%, 0); opacity: 1; }
+            78% { opacity: 0; }
+            100% { transform: translate(200%, 0); opacity: 0; }
         }
 
         /* Slow drift left - continuous with slight vertical wobble */
         @keyframes driftLeftWobble1 {
-            0% { transform: translate(100%, 0); }
-            25% { transform: translate(25%, 1%); }
-            50% { transform: translate(-50%, 0); }
-            75% { transform: translate(-125%, -1.5%); }
-            100% { transform: translate(-200%, 0); }
+            0% { transform: translate(100%, 0); opacity: 0; }
+            5% { opacity: 1; }
+            20% { transform: translate(25%, 1%); }
+            40% { transform: translate(-50%, 0); }
+            60% { transform: translate(-125%, -1.5%); }
+            75% { transform: translate(-200%, 0); opacity: 1; }
+            80% { opacity: 0; }
+            100% { transform: translate(-200%, 0); opacity: 0; }
         }
 
         /* Slow drift left - continuous with different wobble */
         @keyframes driftLeftWobble2 {
-            0% { transform: translate(100%, 0); }
-            35% { transform: translate(30%, -1%); }
-            65% { transform: translate(-40%, 1%); }
-            100% { transform: translate(-200%, 0); }
+            0% { transform: translate(100%, 0); opacity: 0; }
+            7% { opacity: 1; }
+            28% { transform: translate(30%, -1%); }
+            52% { transform: translate(-40%, 1%); }
+            73% { transform: translate(-200%, 0); opacity: 1; }
+            80% { opacity: 0; }
+            100% { transform: translate(-200%, 0); opacity: 0; }
         }
 
         /* Slow diagonal drift up-right */
@@ -732,7 +744,7 @@
                 rgba(100, 220, 220, 0.28) 50%,
                 transparent);
             filter: blur(39px);
-            animation: driftRightWobble1 23s ease-in-out infinite;
+            animation: driftRightWobble1 48s ease-in-out infinite;
         }
 
         .var-10 .flow-2 {
@@ -746,7 +758,7 @@
                 rgba(100, 220, 220, 0.22) 50%,
                 transparent);
             filter: blur(42px);
-            animation: driftRightWobble2 19s ease-in-out infinite 7s;
+            animation: driftRightWobble2 37s ease-in-out infinite 9s;
         }
 
         .var-10 .flow-3 {
@@ -760,7 +772,7 @@
                 rgba(220, 80, 160, 0.32) 50%,
                 transparent);
             filter: blur(39px);
-            animation: driftLeftWobble1 26s ease-in-out infinite;
+            animation: driftLeftWobble1 54s ease-in-out infinite 3s;
         }
 
         .var-10 .flow-4 {
@@ -774,7 +786,7 @@
                 rgba(220, 80, 160, 0.25) 50%,
                 transparent);
             filter: blur(44px);
-            animation: driftLeftWobble2 21s ease-in-out infinite 11s;
+            animation: driftLeftWobble2 41s ease-in-out infinite 15s;
         }
 
         .var-10 .diagonal-mist {
