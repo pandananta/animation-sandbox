@@ -143,14 +143,42 @@
 
         /* Soul glow animations */
         .soul-orb {
-            width: 120px;
-            height: 120px;
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            filter: blur(2px);
+            filter: blur(8px);
+        }
+
+        /* Inner bright core */
+        .soul-orb::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.8) 50%, transparent 100%);
+            border-radius: 50%;
+            filter: blur(4px);
+        }
+
+        /* Outer glow layer */
+        .soul-orb::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            opacity: 0.4;
+            filter: blur(30px);
         }
 
         .pulse-ring {
@@ -158,11 +186,12 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 120px;
-            height: 120px;
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
             opacity: 0;
             animation: pulse 2s ease-out infinite;
+            filter: blur(3px);
         }
 
         .pulse-ring:nth-child(2) {
@@ -180,103 +209,134 @@
         @keyframes pulse {
             0% {
                 transform: translate(-50%, -50%) scale(1);
-                opacity: 0.8;
+                opacity: 0.6;
             }
             100% {
-                transform: translate(-50%, -50%) scale(3);
+                transform: translate(-50%, -50%) scale(3.5);
                 opacity: 0;
             }
         }
 
-        /* Color variations */
+        /* Color variations - Cosmic Divine Palette */
+
+        /* 1. Deep Cosmic Purple */
         .animation-1 .soul-orb {
-            background: radial-gradient(circle, rgba(138, 43, 226, 0.8), rgba(75, 0, 130, 0.4));
-            box-shadow: 0 0 40px rgba(138, 43, 226, 0.6), 0 0 80px rgba(138, 43, 226, 0.3);
+            background: radial-gradient(circle, rgba(147, 51, 234, 0.9), rgba(109, 40, 217, 0.6));
+            box-shadow: 0 0 60px rgba(147, 51, 234, 0.8), 0 0 120px rgba(147, 51, 234, 0.4), 0 0 180px rgba(147, 51, 234, 0.2);
+        }
+        .animation-1 .soul-orb::after {
+            background: radial-gradient(circle, rgba(147, 51, 234, 0.6), transparent);
         }
         .animation-1 .pulse-ring {
-            border: 3px solid rgba(138, 43, 226, 0.6);
-            box-shadow: 0 0 20px rgba(138, 43, 226, 0.4);
+            background: radial-gradient(circle, rgba(147, 51, 234, 0.4), transparent);
         }
 
+        /* 2. Golden Amber */
         .animation-2 .soul-orb {
-            background: radial-gradient(circle, rgba(255, 20, 147, 0.8), rgba(199, 21, 133, 0.4));
-            box-shadow: 0 0 40px rgba(255, 20, 147, 0.6), 0 0 80px rgba(255, 20, 147, 0.3);
+            background: radial-gradient(circle, rgba(251, 191, 36, 0.9), rgba(245, 158, 11, 0.6));
+            box-shadow: 0 0 60px rgba(251, 191, 36, 0.8), 0 0 120px rgba(251, 191, 36, 0.4), 0 0 180px rgba(251, 191, 36, 0.2);
+        }
+        .animation-2 .soul-orb::after {
+            background: radial-gradient(circle, rgba(251, 191, 36, 0.6), transparent);
         }
         .animation-2 .pulse-ring {
-            border: 3px solid rgba(255, 20, 147, 0.6);
-            box-shadow: 0 0 20px rgba(255, 20, 147, 0.4);
+            background: radial-gradient(circle, rgba(251, 191, 36, 0.4), transparent);
         }
 
+        /* 3. Cosmic Teal */
         .animation-3 .soul-orb {
-            background: radial-gradient(circle, rgba(0, 191, 255, 0.8), rgba(30, 144, 255, 0.4));
-            box-shadow: 0 0 40px rgba(0, 191, 255, 0.6), 0 0 80px rgba(0, 191, 255, 0.3);
+            background: radial-gradient(circle, rgba(20, 184, 166, 0.9), rgba(13, 148, 136, 0.6));
+            box-shadow: 0 0 60px rgba(20, 184, 166, 0.8), 0 0 120px rgba(20, 184, 166, 0.4), 0 0 180px rgba(20, 184, 166, 0.2);
+        }
+        .animation-3 .soul-orb::after {
+            background: radial-gradient(circle, rgba(20, 184, 166, 0.6), transparent);
         }
         .animation-3 .pulse-ring {
-            border: 3px solid rgba(0, 191, 255, 0.6);
-            box-shadow: 0 0 20px rgba(0, 191, 255, 0.4);
+            background: radial-gradient(circle, rgba(20, 184, 166, 0.4), transparent);
         }
 
+        /* 4. Soft Peachy Coral */
         .animation-4 .soul-orb {
-            background: radial-gradient(circle, rgba(50, 205, 50, 0.8), rgba(34, 139, 34, 0.4));
-            box-shadow: 0 0 40px rgba(50, 205, 50, 0.6), 0 0 80px rgba(50, 205, 50, 0.3);
+            background: radial-gradient(circle, rgba(251, 146, 120, 0.9), rgba(249, 115, 22, 0.6));
+            box-shadow: 0 0 60px rgba(251, 146, 120, 0.8), 0 0 120px rgba(251, 146, 120, 0.4), 0 0 180px rgba(251, 146, 120, 0.2);
+        }
+        .animation-4 .soul-orb::after {
+            background: radial-gradient(circle, rgba(251, 146, 120, 0.6), transparent);
         }
         .animation-4 .pulse-ring {
-            border: 3px solid rgba(50, 205, 50, 0.6);
-            box-shadow: 0 0 20px rgba(50, 205, 50, 0.4);
+            background: radial-gradient(circle, rgba(251, 146, 120, 0.4), transparent);
         }
 
+        /* 5. Warm Orange Gold */
         .animation-5 .soul-orb {
-            background: radial-gradient(circle, rgba(255, 165, 0, 0.8), rgba(255, 140, 0, 0.4));
-            box-shadow: 0 0 40px rgba(255, 165, 0, 0.6), 0 0 80px rgba(255, 165, 0, 0.3);
+            background: radial-gradient(circle, rgba(249, 115, 22, 0.9), rgba(234, 88, 12, 0.6));
+            box-shadow: 0 0 60px rgba(249, 115, 22, 0.8), 0 0 120px rgba(249, 115, 22, 0.4), 0 0 180px rgba(249, 115, 22, 0.2);
+        }
+        .animation-5 .soul-orb::after {
+            background: radial-gradient(circle, rgba(249, 115, 22, 0.6), transparent);
         }
         .animation-5 .pulse-ring {
-            border: 3px solid rgba(255, 165, 0, 0.6);
-            box-shadow: 0 0 20px rgba(255, 165, 0, 0.4);
+            background: radial-gradient(circle, rgba(249, 115, 22, 0.4), transparent);
         }
 
+        /* 6. Deep Fuchsia Magenta */
         .animation-6 .soul-orb {
-            background: radial-gradient(circle, rgba(220, 20, 60, 0.8), rgba(178, 34, 34, 0.4));
-            box-shadow: 0 0 40px rgba(220, 20, 60, 0.6), 0 0 80px rgba(220, 20, 60, 0.3);
+            background: radial-gradient(circle, rgba(232, 121, 249, 0.9), rgba(192, 38, 211, 0.6));
+            box-shadow: 0 0 60px rgba(232, 121, 249, 0.8), 0 0 120px rgba(232, 121, 249, 0.4), 0 0 180px rgba(232, 121, 249, 0.2);
+        }
+        .animation-6 .soul-orb::after {
+            background: radial-gradient(circle, rgba(232, 121, 249, 0.6), transparent);
         }
         .animation-6 .pulse-ring {
-            border: 3px solid rgba(220, 20, 60, 0.6);
-            box-shadow: 0 0 20px rgba(220, 20, 60, 0.4);
+            background: radial-gradient(circle, rgba(232, 121, 249, 0.4), transparent);
         }
 
+        /* 7. Turquoise Green */
         .animation-7 .soul-orb {
-            background: radial-gradient(circle, rgba(64, 224, 208, 0.8), rgba(72, 209, 204, 0.4));
-            box-shadow: 0 0 40px rgba(64, 224, 208, 0.6), 0 0 80px rgba(64, 224, 208, 0.3);
+            background: radial-gradient(circle, rgba(45, 212, 191, 0.9), rgba(20, 184, 166, 0.6));
+            box-shadow: 0 0 60px rgba(45, 212, 191, 0.8), 0 0 120px rgba(45, 212, 191, 0.4), 0 0 180px rgba(45, 212, 191, 0.2);
+        }
+        .animation-7 .soul-orb::after {
+            background: radial-gradient(circle, rgba(45, 212, 191, 0.6), transparent);
         }
         .animation-7 .pulse-ring {
-            border: 3px solid rgba(64, 224, 208, 0.6);
-            box-shadow: 0 0 20px rgba(64, 224, 208, 0.4);
+            background: radial-gradient(circle, rgba(45, 212, 191, 0.4), transparent);
         }
 
+        /* 8. Bright Golden Yellow */
         .animation-8 .soul-orb {
-            background: radial-gradient(circle, rgba(255, 215, 0, 0.8), rgba(218, 165, 32, 0.4));
-            box-shadow: 0 0 40px rgba(255, 215, 0, 0.6), 0 0 80px rgba(255, 215, 0, 0.3);
+            background: radial-gradient(circle, rgba(253, 224, 71, 0.9), rgba(250, 204, 21, 0.6));
+            box-shadow: 0 0 60px rgba(253, 224, 71, 0.8), 0 0 120px rgba(253, 224, 71, 0.4), 0 0 180px rgba(253, 224, 71, 0.2);
+        }
+        .animation-8 .soul-orb::after {
+            background: radial-gradient(circle, rgba(253, 224, 71, 0.6), transparent);
         }
         .animation-8 .pulse-ring {
-            border: 3px solid rgba(255, 215, 0, 0.6);
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+            background: radial-gradient(circle, rgba(253, 224, 71, 0.4), transparent);
         }
 
+        /* 9. Lavender Purple */
         .animation-9 .soul-orb {
-            background: radial-gradient(circle, rgba(147, 112, 219, 0.8), rgba(123, 104, 238, 0.4));
-            box-shadow: 0 0 40px rgba(147, 112, 219, 0.6), 0 0 80px rgba(147, 112, 219, 0.3);
+            background: radial-gradient(circle, rgba(167, 139, 250, 0.9), rgba(139, 92, 246, 0.6));
+            box-shadow: 0 0 60px rgba(167, 139, 250, 0.8), 0 0 120px rgba(167, 139, 250, 0.4), 0 0 180px rgba(167, 139, 250, 0.2);
+        }
+        .animation-9 .soul-orb::after {
+            background: radial-gradient(circle, rgba(167, 139, 250, 0.6), transparent);
         }
         .animation-9 .pulse-ring {
-            border: 3px solid rgba(147, 112, 219, 0.6);
-            box-shadow: 0 0 20px rgba(147, 112, 219, 0.4);
+            background: radial-gradient(circle, rgba(167, 139, 250, 0.4), transparent);
         }
 
+        /* 10. Coral Pink */
         .animation-10 .soul-orb {
-            background: radial-gradient(circle, rgba(255, 105, 180, 0.8), rgba(219, 112, 147, 0.4));
-            box-shadow: 0 0 40px rgba(255, 105, 180, 0.6), 0 0 80px rgba(255, 105, 180, 0.3);
+            background: radial-gradient(circle, rgba(244, 114, 182, 0.9), rgba(236, 72, 153, 0.6));
+            box-shadow: 0 0 60px rgba(244, 114, 182, 0.8), 0 0 120px rgba(244, 114, 182, 0.4), 0 0 180px rgba(244, 114, 182, 0.2);
+        }
+        .animation-10 .soul-orb::after {
+            background: radial-gradient(circle, rgba(244, 114, 182, 0.6), transparent);
         }
         .animation-10 .pulse-ring {
-            border: 3px solid rgba(255, 105, 180, 0.6);
-            box-shadow: 0 0 20px rgba(255, 105, 180, 0.4);
+            background: radial-gradient(circle, rgba(244, 114, 182, 0.4), transparent);
         }
     </style>
 </head>
@@ -294,7 +354,7 @@
 
     <div class="container">
         <div class="phone animation-1" id="phone1">
-            <div class="phone-label">Purple Violet</div>
+            <div class="phone-label">Cosmic Purple</div>
             <div class="phone-screen">
                 <div class="animation-content">
                     <div class="soul-orb"></div>
@@ -307,7 +367,7 @@
         </div>
 
         <div class="phone animation-2" id="phone2">
-            <div class="phone-label">Deep Pink</div>
+            <div class="phone-label">Golden Amber</div>
             <div class="phone-screen">
                 <div class="animation-content">
                     <div class="soul-orb"></div>
@@ -320,7 +380,7 @@
         </div>
 
         <div class="phone animation-3" id="phone3">
-            <div class="phone-label">Sky Blue</div>
+            <div class="phone-label">Cosmic Teal</div>
             <div class="phone-screen">
                 <div class="animation-content">
                     <div class="soul-orb"></div>
@@ -333,7 +393,7 @@
         </div>
 
         <div class="phone animation-4" id="phone4">
-            <div class="phone-label">Lime Green</div>
+            <div class="phone-label">Peachy Coral</div>
             <div class="phone-screen">
                 <div class="animation-content">
                     <div class="soul-orb"></div>
@@ -346,7 +406,7 @@
         </div>
 
         <div class="phone animation-5" id="phone5">
-            <div class="phone-label">Warm Orange</div>
+            <div class="phone-label">Orange Gold</div>
             <div class="phone-screen">
                 <div class="animation-content">
                     <div class="soul-orb"></div>
@@ -359,7 +419,7 @@
         </div>
 
         <div class="phone animation-6" id="phone6">
-            <div class="phone-label">Crimson Red</div>
+            <div class="phone-label">Fuchsia Magenta</div>
             <div class="phone-screen">
                 <div class="animation-content">
                     <div class="soul-orb"></div>
@@ -398,7 +458,7 @@
         </div>
 
         <div class="phone animation-9" id="phone9">
-            <div class="phone-label">Medium Purple</div>
+            <div class="phone-label">Lavender</div>
             <div class="phone-screen">
                 <div class="animation-content">
                     <div class="soul-orb"></div>
@@ -411,7 +471,7 @@
         </div>
 
         <div class="phone animation-10" id="phone10">
-            <div class="phone-label">Hot Pink</div>
+            <div class="phone-label">Coral Pink</div>
             <div class="phone-screen">
                 <div class="animation-content">
                     <div class="soul-orb"></div>
