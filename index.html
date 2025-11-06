@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>iOS Animation Sandbox</title>
+    <title>Divine Mother Interpretations</title>
     <style>
         * {
             margin: 0;
@@ -104,11 +104,6 @@
             border-radius: 22px;
             position: relative;
             overflow: hidden;
-            background: #ffffff;
-            transition: background-color 0.3s ease;
-        }
-
-        .phone.dark-mode .phone-screen {
             background: #000000;
         }
 
@@ -117,546 +112,648 @@
             top: 15px;
             left: 50%;
             transform: translateX(-50%);
-            background: rgba(255,255,255,0.9);
+            background: rgba(50,50,50,0.8);
             padding: 5px 12px;
             border-radius: 12px;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 600;
-            color: #333;
-            z-index: 10;
-        }
-
-        .phone.dark-mode .phone-label {
-            background: rgba(50,50,50,0.9);
             color: #fff;
+            z-index: 100;
         }
 
-        /* Animation content area */
-        .animation-content {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-
-        /* Luminous Light Color Palette */
+        /* Divine Mother Color Palette */
         :root {
-            --light-burgundy: rgb(255, 80, 160);
-            --light-burgundy-glow: rgba(255, 80, 160, 0.8);
-            --light-teal: rgb(100, 240, 240);
-            --light-teal-glow: rgba(100, 240, 240, 0.7);
-            --light-purple: rgb(180, 120, 255);
-            --light-purple-glow: rgba(180, 120, 255, 0.7);
-            --light-gold: rgb(255, 220, 120);
-            --light-gold-glow: rgba(255, 220, 120, 0.8);
-            --light-cream: rgb(255, 255, 245);
-            --light-cream-glow: rgba(255, 255, 245, 0.9);
+            --deep-purple: rgb(60, 30, 90);
+            --royal-purple: rgb(100, 50, 130);
+            --magenta: rgb(180, 60, 120);
+            --bright-magenta: rgb(220, 80, 160);
+            --hot-pink: rgb(255, 100, 180);
+            --teal: rgb(60, 180, 180);
+            --cyan: rgb(100, 220, 220);
+            --gold: rgb(200, 160, 80);
+            --bright-gold: rgb(255, 200, 100);
+            --cream: rgb(255, 250, 240);
+            --space-black: rgb(10, 5, 20);
         }
 
-        /* BASE STYLES */
-        .animation-content {
+        .canvas {
             width: 100%;
             height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             position: relative;
-            background: radial-gradient(circle at center, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0));
+            overflow: hidden;
+            background: radial-gradient(circle at center, var(--deep-purple), var(--space-black));
         }
 
-        .phone.dark-mode .animation-content {
-            background: radial-gradient(circle at center, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1));
+        /* ===== 1: GODDESS SILHOUETTE - Most Literal ===== */
+        .interpretation-1 .canvas {
+            background: radial-gradient(circle at 50% 30%, rgb(40, 20, 60), rgb(10, 5, 20));
         }
 
-        /* ========== MAIN ANIMATION - OUTWARD EXPANSION ========== */
-
-        /* Main Expanding Echo */
-        .main-echo {
+        .interpretation-1 .goddess-body {
             position: absolute;
+            bottom: -5%;
             left: 50%;
-            top: 50%;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            opacity: 0;
-            animation: expandEcho 3.5s ease-out infinite;
-            z-index: 5;
+            transform: translateX(-50%);
+            width: 45%;
+            height: 75%;
+            background: linear-gradient(to top,
+                rgba(100, 50, 130, 0.9) 0%,
+                rgba(180, 60, 120, 0.8) 30%,
+                rgba(220, 80, 160, 0.6) 60%,
+                transparent 100%);
+            filter: blur(25px);
+            border-radius: 50% 50% 0 0;
         }
 
-        .main-echo:nth-child(2) { animation-delay: 0.7s; }
-        .main-echo:nth-child(3) { animation-delay: 1.4s; }
-        .main-echo:nth-child(4) { animation-delay: 2.1s; }
-        .main-echo:nth-child(5) { animation-delay: 2.8s; }
-
-        @keyframes expandEcho {
-            0% {
-                transform: translate(-50%, -50%) scale(0.5);
-                opacity: 0;
-            }
-            5% {
-                opacity: 0.9;
-            }
-            100% {
-                transform: translate(-50%, -50%) scale(4.5);
-                opacity: 0;
-            }
-        }
-
-        /* Central Light Core */
-        .light-core {
+        .interpretation-1 .goddess-head {
             position: absolute;
+            top: 15%;
             left: 50%;
-            top: 50%;
+            transform: translateX(-50%);
+            width: 25%;
+            height: 15%;
+            background: radial-gradient(circle,
+                rgba(255, 250, 240, 0.4),
+                rgba(255, 200, 100, 0.6) 20%,
+                rgba(220, 80, 160, 0.5) 50%,
+                transparent 100%);
+            filter: blur(20px);
             border-radius: 50%;
-            filter: blur(15px);
-            z-index: 10;
-            animation: corePulse 2s ease-in-out infinite;
         }
 
-        @keyframes corePulse {
-            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.95; }
-            50% { transform: translate(-50%, -50%) scale(1.15); opacity: 1; }
-        }
-
-        /* ========== ATMOSPHERIC EFFECTS ========== */
-
-        /* Subtle Background Pulse */
-        .atmo-pulse {
+        .interpretation-1 .crown {
             position: absolute;
+            top: 8%;
             left: 50%;
-            top: 50%;
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            opacity: 0;
-            animation: atmoPulse 4s ease-out infinite;
+            transform: translateX(-50%);
+            width: 50%;
+            height: 25%;
+            background: radial-gradient(ellipse at center,
+                rgba(255, 250, 240, 0.6),
+                rgba(255, 200, 100, 0.5) 15%,
+                rgba(100, 220, 220, 0.4) 35%,
+                rgba(180, 60, 120, 0.3) 60%,
+                transparent 100%);
             filter: blur(15px);
         }
 
-        .atmo-pulse:nth-child(2) { animation-delay: 1s; }
-        .atmo-pulse:nth-child(3) { animation-delay: 2s; }
-
-        @keyframes atmoPulse {
-            0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
-            10% { opacity: 0.25; }
-            100% { transform: translate(-50%, -50%) scale(3.5); opacity: 0; }
+        .interpretation-1 .aura {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            height: 85%;
+            background: radial-gradient(ellipse at center,
+                transparent 20%,
+                rgba(220, 80, 160, 0.2) 40%,
+                rgba(180, 60, 120, 0.3) 60%,
+                rgba(100, 50, 130, 0.2) 80%,
+                transparent 100%);
+            filter: blur(30px);
         }
 
-        /* Floating Particles */
-        .floatie {
+        /* Stars for interpretation 1 */
+        .interpretation-1 .star {
             position: absolute;
-            left: 50%;
-            top: 50%;
+            width: 2px;
+            height: 2px;
+            background: rgba(255, 250, 240, 0.8);
             border-radius: 50%;
-            filter: blur(3px);
-            animation: gentleFloat 6s ease-in-out infinite;
+            box-shadow: 0 0 3px rgba(255, 250, 240, 0.8);
         }
 
-        @keyframes gentleFloat {
-            0%, 100% {
-                transform: translate(-50%, -50%) translate(0, 0) scale(0.8);
-                opacity: 0.4;
-            }
-            25% {
-                transform: translate(-50%, -50%) translate(25px, -20px) scale(1);
-                opacity: 0.7;
-            }
-            50% {
-                transform: translate(-50%, -50%) translate(-20px, 25px) scale(0.9);
-                opacity: 0.5;
-            }
-            75% {
-                transform: translate(-50%, -50%) translate(30px, 20px) scale(1.1);
-                opacity: 0.8;
-            }
+        /* ===== 2: UPPER BODY & CROWN FOCUS ===== */
+        .interpretation-2 .canvas {
+            background: radial-gradient(ellipse at 50% 35%, rgb(60, 30, 90), rgb(10, 5, 20));
         }
 
-        /* Orbiting Elements */
-        .orbit-path {
+        .interpretation-2 .upper-body {
             position: absolute;
+            bottom: -10%;
             left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 60%;
+            background: linear-gradient(to top,
+                rgba(180, 60, 120, 0.8) 0%,
+                rgba(220, 80, 160, 0.7) 40%,
+                transparent 100%);
+            filter: blur(30px);
+            border-radius: 50% 50% 0 0;
+        }
+
+        .interpretation-2 .head-glow {
+            position: absolute;
+            top: 25%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 35%;
+            height: 20%;
+            background: radial-gradient(circle,
+                rgba(255, 250, 240, 0.7),
+                rgba(255, 200, 100, 0.8) 25%,
+                rgba(100, 220, 220, 0.4) 60%,
+                transparent 100%);
+            filter: blur(18px);
+            border-radius: 50%;
+        }
+
+        .interpretation-2 .crown-rays {
+            position: absolute;
+            top: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70%;
+            height: 40%;
+            background:
+                radial-gradient(ellipse 60% 100% at 50% 0%,
+                    rgba(255, 250, 240, 0.5) 0%,
+                    rgba(100, 220, 220, 0.4) 20%,
+                    rgba(255, 200, 100, 0.3) 40%,
+                    transparent 60%);
+            filter: blur(20px);
+        }
+
+        .interpretation-2 .shoulder-glow {
+            position: absolute;
+            bottom: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 75%;
+            height: 30%;
+            background: radial-gradient(ellipse at center,
+                rgba(220, 80, 160, 0.5),
+                rgba(180, 60, 120, 0.4) 40%,
+                transparent 70%);
+            filter: blur(35px);
+        }
+
+        /* ===== 3: FLOWING ROBES ===== */
+        .interpretation-3 .canvas {
+            background: linear-gradient(to bottom, rgb(40, 20, 60), rgb(10, 5, 20));
+        }
+
+        .interpretation-3 .robe-layer {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70%;
+            filter: blur(25px);
+        }
+
+        .interpretation-3 .robe-1 {
+            height: 80%;
+            background: linear-gradient(to top,
+                rgba(100, 50, 130, 0.9),
+                rgba(180, 60, 120, 0.7) 50%,
+                transparent 100%);
+            border-radius: 40% 40% 0 0;
+        }
+
+        .interpretation-3 .robe-2 {
+            height: 70%;
+            background: linear-gradient(to top,
+                rgba(180, 60, 120, 0.8),
+                rgba(220, 80, 160, 0.6) 50%,
+                transparent 100%);
+            border-radius: 45% 45% 0 0;
+            left: 48%;
+        }
+
+        .interpretation-3 .robe-3 {
+            height: 60%;
+            background: linear-gradient(to top,
+                rgba(220, 80, 160, 0.7),
+                rgba(255, 100, 180, 0.5) 50%,
+                transparent 100%);
+            border-radius: 50% 50% 0 0;
+            left: 52%;
+        }
+
+        .interpretation-3 .flow-light {
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 60%;
+            background: radial-gradient(ellipse at center,
+                rgba(255, 200, 100, 0.3),
+                rgba(100, 220, 220, 0.2) 40%,
+                transparent 70%);
+            filter: blur(30px);
+        }
+
+        /* ===== 4: ENERGY AURA (No Figure) ===== */
+        .interpretation-4 .canvas {
+            background: radial-gradient(circle at 50% 45%, rgb(40, 20, 60), rgb(10, 5, 20));
+        }
+
+        .interpretation-4 .aura-core {
+            position: absolute;
+            top: 45%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40%;
+            height: 30%;
+            background: radial-gradient(circle,
+                rgba(255, 250, 240, 0.6),
+                rgba(255, 200, 100, 0.7) 25%,
+                rgba(220, 80, 160, 0.5) 50%,
+                transparent 80%);
+            filter: blur(20px);
+            border-radius: 50%;
+        }
+
+        .interpretation-4 .aura-mid {
+            position: absolute;
+            top: 45%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 65%;
+            height: 55%;
+            background: radial-gradient(ellipse,
+                transparent 30%,
+                rgba(220, 80, 160, 0.4) 50%,
+                rgba(180, 60, 120, 0.4) 70%,
+                transparent 100%);
+            filter: blur(30px);
+        }
+
+        .interpretation-4 .aura-outer {
+            position: absolute;
             top: 50%;
-            animation: slowRotate 12s linear infinite;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            height: 80%;
+            background: radial-gradient(ellipse,
+                transparent 40%,
+                rgba(180, 60, 120, 0.3) 60%,
+                rgba(100, 50, 130, 0.3) 80%,
+                transparent 100%);
+            filter: blur(40px);
         }
 
-        @keyframes slowRotate {
-            0% { transform: translate(-50%, -50%) rotate(0deg); }
-            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        .interpretation-4 .teal-accent {
+            position: absolute;
+            top: 35%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 55%;
+            height: 40%;
+            background: radial-gradient(ellipse at top,
+                rgba(100, 220, 220, 0.4),
+                rgba(60, 180, 180, 0.3) 40%,
+                transparent 70%);
+            filter: blur(25px);
         }
 
-        .orbit-dot {
+        /* ===== 5: VERTICAL LIGHT PILLAR ===== */
+        .interpretation-5 .canvas {
+            background: linear-gradient(to bottom, rgb(30, 15, 50), rgb(10, 5, 20));
+        }
+
+        .interpretation-5 .pillar-base {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50%;
+            height: 90%;
+            background: linear-gradient(to top,
+                rgba(100, 50, 130, 0.9),
+                rgba(180, 60, 120, 0.7) 30%,
+                rgba(220, 80, 160, 0.6) 60%,
+                rgba(100, 220, 220, 0.4) 85%,
+                rgba(255, 250, 240, 0.3) 100%);
+            filter: blur(35px);
+        }
+
+        .interpretation-5 .pillar-inner {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30%;
+            height: 85%;
+            background: linear-gradient(to top,
+                rgba(180, 60, 120, 0.8),
+                rgba(220, 80, 160, 0.7) 40%,
+                rgba(255, 200, 100, 0.6) 80%,
+                rgba(255, 250, 240, 0.7) 100%);
+            filter: blur(20px);
+        }
+
+        .interpretation-5 .pillar-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70%;
+            height: 70%;
+            background: radial-gradient(ellipse,
+                transparent 30%,
+                rgba(220, 80, 160, 0.3) 55%,
+                transparent 85%);
+            filter: blur(40px);
+        }
+
+        /* ===== 6: COSMIC MANDALA ===== */
+        .interpretation-6 .canvas {
+            background: radial-gradient(circle at center, rgb(40, 20, 60), rgb(5, 2, 15));
+        }
+
+        .interpretation-6 .mandala-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 35%;
+            height: 18%;
+            background: radial-gradient(circle,
+                rgba(255, 250, 240, 0.8),
+                rgba(255, 200, 100, 0.8) 30%,
+                rgba(220, 80, 160, 0.6) 70%,
+                transparent 100%);
+            filter: blur(15px);
+            border-radius: 50%;
+        }
+
+        .interpretation-6 .mandala-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            filter: blur(25px);
+        }
+
+        .interpretation-6 .ring-1 {
+            width: 55%;
+            height: 29%;
+            background: radial-gradient(circle,
+                transparent 60%,
+                rgba(220, 80, 160, 0.5) 75%,
+                transparent 100%);
+        }
+
+        .interpretation-6 .ring-2 {
+            width: 70%;
+            height: 37%;
+            background: radial-gradient(circle,
+                transparent 60%,
+                rgba(100, 220, 220, 0.4) 75%,
+                transparent 100%);
+        }
+
+        .interpretation-6 .ring-3 {
+            width: 85%;
+            height: 45%;
+            background: radial-gradient(circle,
+                transparent 65%,
+                rgba(180, 60, 120, 0.4) 80%,
+                transparent 100%);
+        }
+
+        .interpretation-6 .ray {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 90%;
+            height: 2%;
+            background: linear-gradient(to right,
+                transparent,
+                rgba(255, 200, 100, 0.5) 50%,
+                transparent);
+            filter: blur(8px);
+        }
+
+        /* ===== 7: NEBULA CLOUDS ===== */
+        .interpretation-7 .canvas {
+            background: radial-gradient(circle at 60% 40%, rgb(40, 20, 60), rgb(10, 5, 20));
+        }
+
+        .interpretation-7 .cloud {
+            position: absolute;
+            filter: blur(40px);
+            border-radius: 50%;
+        }
+
+        .interpretation-7 .cloud-1 {
+            top: 15%;
+            left: 30%;
+            width: 50%;
+            height: 30%;
+            background: radial-gradient(ellipse,
+                rgba(100, 220, 220, 0.4),
+                rgba(60, 180, 180, 0.3) 50%,
+                transparent 80%);
+        }
+
+        .interpretation-7 .cloud-2 {
+            top: 35%;
+            left: 50%;
+            width: 60%;
+            height: 40%;
+            background: radial-gradient(ellipse,
+                rgba(220, 80, 160, 0.5),
+                rgba(180, 60, 120, 0.4) 50%,
+                transparent 80%);
+        }
+
+        .interpretation-7 .cloud-3 {
+            top: 60%;
+            left: 20%;
+            width: 55%;
+            height: 35%;
+            background: radial-gradient(ellipse,
+                rgba(180, 60, 120, 0.4),
+                rgba(100, 50, 130, 0.3) 50%,
+                transparent 80%);
+        }
+
+        .interpretation-7 .cloud-4 {
+            top: 25%;
+            left: 60%;
+            width: 40%;
+            height: 25%;
+            background: radial-gradient(ellipse,
+                rgba(255, 200, 100, 0.4),
+                rgba(200, 160, 80, 0.3) 50%,
+                transparent 80%);
+        }
+
+        .interpretation-7 .bright-spot {
+            position: absolute;
+            top: 40%;
+            left: 45%;
+            width: 30%;
+            height: 18%;
+            background: radial-gradient(circle,
+                rgba(255, 250, 240, 0.5),
+                rgba(255, 200, 100, 0.4) 40%,
+                transparent 80%);
+            filter: blur(20px);
+            border-radius: 50%;
+        }
+
+        /* ===== 8: LAYERED GRADIENTS ===== */
+        .interpretation-8 .canvas {
+            background: linear-gradient(to bottom, rgb(10, 5, 20), rgb(30, 15, 50), rgb(10, 5, 20));
+        }
+
+        .interpretation-8 .gradient-layer {
+            position: absolute;
+            width: 100%;
+            left: 0;
+            filter: blur(30px);
+        }
+
+        .interpretation-8 .layer-1 {
+            top: 0;
+            height: 30%;
+            background: linear-gradient(to bottom,
+                rgba(100, 220, 220, 0.4),
+                rgba(60, 180, 180, 0.3) 60%,
+                transparent 100%);
+        }
+
+        .interpretation-8 .layer-2 {
+            top: 20%;
+            height: 35%;
+            background: linear-gradient(to bottom,
+                transparent,
+                rgba(255, 200, 100, 0.5) 40%,
+                rgba(220, 80, 160, 0.4) 70%,
+                transparent);
+        }
+
+        .interpretation-8 .layer-3 {
+            top: 45%;
+            height: 30%;
+            background: linear-gradient(to bottom,
+                transparent,
+                rgba(220, 80, 160, 0.6) 50%,
+                rgba(180, 60, 120, 0.5) 80%,
+                transparent);
+        }
+
+        .interpretation-8 .layer-4 {
+            bottom: 0;
+            height: 35%;
+            background: linear-gradient(to top,
+                rgba(100, 50, 130, 0.6),
+                rgba(180, 60, 120, 0.4) 60%,
+                transparent 100%);
+        }
+
+        .interpretation-8 .center-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60%;
+            height: 35%;
+            background: radial-gradient(ellipse,
+                rgba(255, 250, 240, 0.3),
+                rgba(255, 200, 100, 0.4) 40%,
+                transparent 80%);
+            filter: blur(35px);
+        }
+
+        /* ===== 9: PARTICLE FIELD ===== */
+        .interpretation-9 .canvas {
+            background: radial-gradient(circle at 50% 40%, rgb(40, 20, 60), rgb(5, 2, 15));
+        }
+
+        .interpretation-9 .particle-glow {
             position: absolute;
             border-radius: 50%;
             filter: blur(4px);
         }
 
-        /* Slow Spiral */
-        .spiral-ring {
+        .interpretation-9 .large-particle {
             position: absolute;
-            left: 50%;
+            border-radius: 50%;
+            filter: blur(12px);
+        }
+
+        .interpretation-9 .ambient-light {
+            position: absolute;
             top: 50%;
-            border-radius: 50%;
-            border: 3px solid;
-            opacity: 0;
-            animation: spiralOut 8s linear infinite;
-            filter: blur(5px);
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            height: 60%;
+            background: radial-gradient(ellipse,
+                rgba(220, 80, 160, 0.2),
+                rgba(180, 60, 120, 0.15) 50%,
+                transparent 80%);
+            filter: blur(50px);
         }
 
-        @keyframes spiralOut {
-            0% { transform: translate(-50%, -50%) rotate(0deg) scale(0.3); opacity: 0; }
-            20% { opacity: 0.3; }
-            100% { transform: translate(-50%, -50%) rotate(180deg) scale(2.8); opacity: 0; }
+        /* ===== 10: PURE COLOR FIELD - Most Abstract ===== */
+        .interpretation-10 .canvas {
+            background: rgb(10, 5, 20);
         }
 
-        /* Shimmer Sparkles */
-        .sparkle {
+        .interpretation-10 .color-wash {
             position: absolute;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            filter: blur(2px);
-            animation: sparkleGlow 3s ease-in-out infinite;
-            z-index: 11;
+            filter: blur(60px);
         }
 
-        @keyframes sparkleGlow {
-            0%, 100% { opacity: 0.5; transform: scale(0.7); }
-            50% { opacity: 1; transform: scale(1.6); }
+        .interpretation-10 .wash-1 {
+            top: -10%;
+            left: -10%;
+            width: 70%;
+            height: 50%;
+            background: radial-gradient(ellipse,
+                rgba(100, 220, 220, 0.5),
+                rgba(60, 180, 180, 0.3) 60%,
+                transparent 100%);
         }
 
-        /* ========== 10 VARIATIONS ========== */
-
-        /* 1: Echo + Pulse - Burgundy/Gold */
-        .animation-1 .main-echo {
-            background: radial-gradient(circle, var(--light-cream) 0%, var(--light-gold) 20%, var(--light-burgundy) 60%, transparent 100%);
-            box-shadow: 0 0 60px var(--light-burgundy-glow),
-                        0 0 120px var(--light-gold-glow),
-                        0 0 180px var(--light-burgundy);
-            filter: blur(12px);
+        .interpretation-10 .wash-2 {
+            top: 20%;
+            right: -15%;
+            width: 75%;
+            height: 55%;
+            background: radial-gradient(ellipse,
+                rgba(255, 200, 100, 0.6),
+                rgba(220, 80, 160, 0.4) 50%,
+                transparent 100%);
         }
 
-        .animation-1 .light-core {
-            width: 50px;
-            height: 50px;
-            background: radial-gradient(circle, var(--light-cream) 0%, var(--light-gold) 50%, var(--light-burgundy) 100%);
-            box-shadow: 0 0 80px var(--light-gold),
-                        0 0 140px var(--light-burgundy-glow);
+        .interpretation-10 .wash-3 {
+            bottom: -10%;
+            left: 10%;
+            width: 80%;
+            height: 60%;
+            background: radial-gradient(ellipse,
+                rgba(180, 60, 120, 0.6),
+                rgba(100, 50, 130, 0.4) 60%,
+                transparent 100%);
         }
 
-        .animation-1 .atmo-pulse {
-            background: radial-gradient(circle, var(--light-burgundy-glow) 30%, transparent 70%);
-            box-shadow: 0 0 100px var(--light-burgundy-glow);
+        .interpretation-10 .wash-4 {
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60%;
+            height: 45%;
+            background: radial-gradient(circle,
+                rgba(255, 250, 240, 0.4),
+                rgba(220, 80, 160, 0.3) 50%,
+                transparent 80%);
         }
-
-        /* 2: Echo + Floaties - Teal */
-        .animation-2 .main-echo {
-            background: radial-gradient(circle, var(--light-cream) 0%, var(--light-teal) 30%, var(--light-purple) 70%, transparent 100%);
-            box-shadow: 0 0 70px var(--light-teal),
-                        0 0 130px var(--light-teal-glow),
-                        0 0 190px var(--light-purple-glow);
-            filter: blur(12px);
-        }
-
-        .animation-2 .light-core {
-            width: 45px;
-            height: 45px;
-            background: radial-gradient(circle, var(--light-cream) 0%, var(--light-teal) 60%, var(--light-purple) 100%);
-            box-shadow: 0 0 90px var(--light-teal),
-                        0 0 150px var(--light-teal-glow);
-        }
-
-        .animation-2 .floatie {
-            width: 10px;
-            height: 10px;
-            background: var(--light-teal);
-            box-shadow: 0 0 40px var(--light-teal),
-                        0 0 80px var(--light-teal-glow);
-        }
-
-        .animation-2 .floatie:nth-child(2) { animation-delay: 1s; animation-duration: 7s; }
-        .animation-2 .floatie:nth-child(3) { animation-delay: 2s; animation-duration: 6.5s; }
-        .animation-2 .floatie:nth-child(4) { animation-delay: 3s; animation-duration: 7.5s; }
-
-        /* 3: Shimmer + Pulse - Gold */
-        .animation-3 .light-core {
-            width: 55px;
-            height: 55px;
-            background: radial-gradient(circle, var(--light-cream) 0%, var(--light-gold) 40%, var(--light-burgundy) 100%);
-            box-shadow: 0 0 100px var(--light-gold),
-                        0 0 160px var(--light-gold-glow);
-        }
-
-        .animation-3 .sparkle {
-            background: var(--light-cream);
-            box-shadow: 0 0 30px var(--light-gold),
-                        0 0 60px var(--light-gold-glow);
-        }
-
-        .animation-3 .sparkle:nth-child(2) { animation-delay: 0.6s; }
-        .animation-3 .sparkle:nth-child(3) { animation-delay: 1.2s; }
-        .animation-3 .sparkle:nth-child(4) { animation-delay: 1.8s; }
-        .animation-3 .sparkle:nth-child(5) { animation-delay: 2.4s; }
-
-        .animation-3 .atmo-pulse {
-            background: radial-gradient(circle, var(--light-gold-glow) 20%, transparent 70%);
-            box-shadow: 0 0 90px var(--light-gold-glow);
-        }
-
-        /* 4: Echo + Orbit - Purple */
-        .animation-4 .main-echo {
-            background: radial-gradient(circle, var(--light-cream) 0%, var(--light-purple) 40%, var(--light-burgundy) 80%, transparent 100%);
-            box-shadow: 0 0 65px var(--light-purple),
-                        0 0 125px var(--light-purple-glow),
-                        0 0 185px var(--light-burgundy-glow);
-            filter: blur(12px);
-        }
-
-        .animation-4 .light-core {
-            width: 48px;
-            height: 48px;
-            background: radial-gradient(circle, var(--light-cream) 0%, var(--light-purple) 70%, var(--light-burgundy) 100%);
-            box-shadow: 0 0 85px var(--light-purple),
-                        0 0 145px var(--light-purple-glow);
-        }
-
-        .animation-4 .orbit-path {
-            width: 130px;
-            height: 130px;
-        }
-
-        .animation-4 .orbit-dot {
-            width: 14px;
-            height: 14px;
-            background: var(--light-teal);
-            box-shadow: 0 0 45px var(--light-teal),
-                        0 0 90px var(--light-teal-glow);
-        }
-
-        .animation-4 .orbit-dot:nth-child(1) { top: 0; left: 50%; transform: translateX(-50%); }
-        .animation-4 .orbit-dot:nth-child(2) { bottom: 0; left: 50%; transform: translateX(-50%); }
-
-        /* 5: Shimmer + Floaties - Teal/Gold */
-        .animation-5 .light-core {
-            width: 52px;
-            height: 52px;
-            background: radial-gradient(circle, var(--light-cream) 0%, var(--light-gold) 30%, var(--light-teal) 60%, var(--light-purple) 100%);
-            box-shadow: 0 0 95px var(--light-teal),
-                        0 0 155px var(--light-gold-glow);
-        }
-
-        .animation-5 .sparkle {
-            background: var(--light-cream);
-            box-shadow: 0 0 28px var(--light-teal),
-                        0 0 56px var(--light-teal-glow);
-        }
-
-        .animation-5 .sparkle:nth-child(1) { animation-delay: 0s; }
-        .animation-5 .sparkle:nth-child(2) { animation-delay: 0.8s; }
-        .animation-5 .sparkle:nth-child(3) { animation-delay: 1.6s; }
-        .animation-5 .sparkle:nth-child(4) { animation-delay: 2.4s; }
-
-        .animation-5 .floatie {
-            width: 9px;
-            height: 9px;
-            background: var(--light-gold);
-            box-shadow: 0 0 35px var(--light-gold),
-                        0 0 70px var(--light-gold-glow);
-        }
-
-        .animation-5 .floatie:nth-child(6) { animation-delay: 1.2s; animation-duration: 7.2s; }
-        .animation-5 .floatie:nth-child(7) { animation-delay: 2.4s; animation-duration: 6.8s; }
-
-        /* 6: Echo + Spiral - Burgundy/Gold */
-        .animation-6 .main-echo {
-            background: radial-gradient(circle, var(--light-gold) 0%, var(--light-burgundy) 50%, var(--light-purple) 80%, transparent 100%);
-            box-shadow: 0 0 75px var(--light-burgundy),
-                        0 0 135px var(--light-gold-glow),
-                        0 0 195px var(--light-burgundy-glow);
-            filter: blur(12px);
-        }
-
-        .animation-6 .light-core {
-            width: 46px;
-            height: 46px;
-            background: radial-gradient(circle, var(--light-gold) 0%, var(--light-burgundy) 60%, var(--light-purple) 100%);
-            box-shadow: 0 0 88px var(--light-burgundy),
-                        0 0 148px var(--light-gold);
-        }
-
-        .animation-6 .spiral-ring {
-            width: 110px;
-            height: 110px;
-            border-color: var(--light-teal);
-            box-shadow: 0 0 30px var(--light-teal-glow);
-        }
-
-        .animation-6 .spiral-ring:nth-child(1) { animation-delay: 0s; }
-        .animation-6 .spiral-ring:nth-child(2) { animation-delay: 2.6s; }
-        .animation-6 .spiral-ring:nth-child(3) { animation-delay: 5.2s; }
-
-        /* 7: Shimmer + Orbit - Burgundy */
-        .animation-7 .light-core {
-            width: 50px;
-            height: 50px;
-            background: radial-gradient(circle, var(--light-cream) 0%, var(--light-burgundy) 50%, var(--light-purple) 100%);
-            box-shadow: 0 0 98px var(--light-burgundy),
-                        0 0 158px var(--light-burgundy-glow);
-        }
-
-        .animation-7 .sparkle {
-            background: var(--light-gold);
-            box-shadow: 0 0 32px var(--light-gold),
-                        0 0 64px var(--light-gold-glow);
-        }
-
-        .animation-7 .sparkle:nth-child(2) { animation-delay: 0.7s; }
-        .animation-7 .sparkle:nth-child(3) { animation-delay: 1.4s; }
-        .animation-7 .sparkle:nth-child(4) { animation-delay: 2.1s; }
-
-        .animation-7 .orbit-path {
-            width: 120px;
-            height: 120px;
-            animation-duration: 11s;
-        }
-
-        .animation-7 .orbit-dot {
-            width: 12px;
-            height: 12px;
-            background: var(--light-purple);
-            box-shadow: 0 0 40px var(--light-purple),
-                        0 0 80px var(--light-purple-glow);
-        }
-
-        .animation-7 .orbit-dot:nth-child(1) { top: 0; left: 50%; transform: translateX(-50%); }
-
-        /* 8: Echo + Layered - Teal/Burgundy */
-        .animation-8 .main-echo {
-            background: radial-gradient(circle, var(--light-cream) 0%, var(--light-teal) 30%, var(--light-burgundy) 60%, var(--light-purple) 85%, transparent 100%);
-            box-shadow: 0 0 68px var(--light-teal),
-                        0 0 128px var(--light-burgundy-glow),
-                        0 0 188px var(--light-teal-glow);
-            filter: blur(12px);
-        }
-
-        .animation-8 .light-core {
-            width: 54px;
-            height: 54px;
-            background: radial-gradient(circle, var(--light-cream) 0%, var(--light-teal) 40%, var(--light-burgundy) 80%, var(--light-purple) 100%);
-            box-shadow: 0 0 92px var(--light-teal),
-                        0 0 152px var(--light-burgundy-glow);
-        }
-
-        .animation-8 .atmo-pulse {
-            background: radial-gradient(circle, var(--light-purple-glow) 25%, transparent 70%);
-            box-shadow: 0 0 95px var(--light-purple-glow);
-        }
-
-        .animation-8 .floatie {
-            width: 11px;
-            height: 11px;
-            background: var(--light-gold);
-            box-shadow: 0 0 42px var(--light-gold),
-                        0 0 84px var(--light-gold-glow);
-        }
-
-        .animation-8 .floatie:nth-child(7) { animation-delay: 1.3s; animation-duration: 7.3s; }
-        .animation-8 .floatie:nth-child(8) { animation-delay: 2.6s; animation-duration: 6.7s; }
-
-        /* 9: Shimmer + Complex - Gold/Purple */
-        .animation-9 .light-core {
-            width: 51px;
-            height: 51px;
-            background: radial-gradient(circle, var(--light-gold) 0%, var(--light-purple) 50%, var(--light-burgundy) 100%);
-            box-shadow: 0 0 96px var(--light-purple),
-                        0 0 156px var(--light-gold);
-        }
-
-        .animation-9 .sparkle {
-            background: var(--light-cream);
-            box-shadow: 0 0 30px var(--light-burgundy),
-                        0 0 60px var(--light-burgundy-glow);
-        }
-
-        .animation-9 .sparkle:nth-child(2) { animation-delay: 0.75s; }
-        .animation-9 .sparkle:nth-child(3) { animation-delay: 1.5s; }
-        .animation-9 .sparkle:nth-child(4) { animation-delay: 2.25s; }
-
-        .animation-9 .spiral-ring {
-            width: 100px;
-            height: 100px;
-            border-color: var(--light-burgundy);
-            box-shadow: 0 0 28px var(--light-burgundy-glow);
-        }
-
-        .animation-9 .spiral-ring:nth-child(1) { animation-delay: 0s; }
-        .animation-9 .spiral-ring:nth-child(5) { animation-delay: 3s; }
-
-        .animation-9 .floatie {
-            width: 8px;
-            height: 8px;
-            background: var(--light-teal);
-            box-shadow: 0 0 36px var(--light-teal),
-                        0 0 72px var(--light-teal-glow);
-        }
-
-        .animation-9 .floatie:nth-child(7) { animation-delay: 1.5s; animation-duration: 7.5s; }
-
-        /* 10: Echo + All - Full Spectrum */
-        .animation-10 .main-echo {
-            background: radial-gradient(circle, var(--light-cream) 0%, var(--light-gold) 20%, var(--light-burgundy) 40%, var(--light-teal) 60%, var(--light-purple) 80%, transparent 100%);
-            box-shadow: 0 0 72px var(--light-burgundy),
-                        0 0 132px var(--light-teal-glow),
-                        0 0 192px var(--light-purple-glow),
-                        0 0 252px var(--light-gold);
-            filter: blur(12px);
-        }
-
-        .animation-10 .light-core {
-            width: 58px;
-            height: 58px;
-            background: radial-gradient(circle, var(--light-cream) 0%, var(--light-gold) 25%, var(--light-burgundy) 50%, var(--light-teal) 75%, var(--light-purple) 100%);
-            box-shadow: 0 0 105px var(--light-burgundy),
-                        0 0 165px var(--light-teal-glow),
-                        0 0 225px var(--light-gold-glow);
-        }
-
-        .animation-10 .atmo-pulse {
-            background: radial-gradient(circle, var(--light-teal-glow) 22%, transparent 68%);
-            box-shadow: 0 0 102px var(--light-teal-glow);
-        }
-
-        .animation-10 .orbit-path {
-            width: 140px;
-            height: 140px;
-            animation-duration: 16s;
-        }
-
-        .animation-10 .orbit-dot {
-            width: 11px;
-            height: 11px;
-            background: var(--light-gold);
-            box-shadow: 0 0 48px var(--light-gold),
-                        0 0 96px var(--light-gold-glow);
-        }
-
-        .animation-10 .orbit-dot:nth-child(1) { top: 0; left: 50%; transform: translateX(-50%); }
-
-        .animation-10 .floatie {
-            width: 9px;
-            height: 9px;
-            background: var(--light-burgundy);
-            box-shadow: 0 0 38px var(--light-burgundy),
-                        0 0 76px var(--light-burgundy-glow);
-        }
-
-        .animation-10 .floatie:nth-child(8) { animation-delay: 2s; animation-duration: 8s; }
     </style>
 </head>
 <body>
     <div class="header">
-        <h1>iOS Animation Sandbox</h1>
+        <h1>Divine Mother Interpretations</h1>
         <div class="mode-toggle">
             <span>Light</span>
             <div class="toggle-switch" id="modeToggle">
@@ -667,154 +764,153 @@
     </div>
 
     <div class="container">
-        <div class="phone animation-1" id="phone1">
-            <div class="phone-label">Echo + Pulse</div>
+        <!-- 1: GODDESS SILHOUETTE -->
+        <div class="phone interpretation-1">
+            <div class="phone-label">1. Goddess Silhouette</div>
             <div class="phone-screen">
-                <div class="animation-content">
-                    <div class="main-echo"></div>
-                    <div class="main-echo"></div>
-                    <div class="main-echo"></div>
-                    <div class="atmo-pulse"></div>
-                    <div class="atmo-pulse"></div>
-                    <div class="atmo-pulse"></div>
-                    <div class="light-core"></div>
+                <div class="canvas">
+                    <div class="aura"></div>
+                    <div class="goddess-body"></div>
+                    <div class="goddess-head"></div>
+                    <div class="crown"></div>
+                    <div class="star" style="top: 10%; left: 20%;"></div>
+                    <div class="star" style="top: 15%; left: 80%;"></div>
+                    <div class="star" style="top: 25%; left: 15%;"></div>
+                    <div class="star" style="top: 30%; left: 85%;"></div>
+                    <div class="star" style="top: 70%; left: 25%;"></div>
+                    <div class="star" style="top: 75%; left: 75%;"></div>
                 </div>
             </div>
         </div>
 
-        <div class="phone animation-2" id="phone2">
-            <div class="phone-label">Echo + Floaties</div>
+        <!-- 2: UPPER BODY & CROWN -->
+        <div class="phone interpretation-2">
+            <div class="phone-label">2. Crown Focus</div>
             <div class="phone-screen">
-                <div class="animation-content">
-                    <div class="main-echo"></div>
-                    <div class="main-echo"></div>
-                    <div class="floatie"></div>
-                    <div class="floatie"></div>
-                    <div class="floatie"></div>
-                    <div class="floatie"></div>
-                    <div class="light-core"></div>
+                <div class="canvas">
+                    <div class="upper-body"></div>
+                    <div class="shoulder-glow"></div>
+                    <div class="head-glow"></div>
+                    <div class="crown-rays"></div>
                 </div>
             </div>
         </div>
 
-        <div class="phone animation-3" id="phone3">
-            <div class="phone-label">Shimmer + Pulse</div>
+        <!-- 3: FLOWING ROBES -->
+        <div class="phone interpretation-3">
+            <div class="phone-label">3. Flowing Robes</div>
             <div class="phone-screen">
-                <div class="animation-content">
-                    <div class="atmo-pulse"></div>
-                    <div class="atmo-pulse"></div>
-                    <div class="sparkle" style="left: 45%; top: 30%;"></div>
-                    <div class="sparkle" style="left: 60%; top: 45%;"></div>
-                    <div class="sparkle" style="left: 50%; top: 60%;"></div>
-                    <div class="sparkle" style="left: 35%; top: 50%;"></div>
-                    <div class="sparkle" style="left: 55%; top: 35%;"></div>
-                    <div class="light-core"></div>
+                <div class="canvas">
+                    <div class="robe-layer robe-1"></div>
+                    <div class="robe-layer robe-2"></div>
+                    <div class="robe-layer robe-3"></div>
+                    <div class="flow-light"></div>
                 </div>
             </div>
         </div>
 
-        <div class="phone animation-4" id="phone4">
-            <div class="phone-label">Echo + Orbit</div>
+        <!-- 4: ENERGY AURA -->
+        <div class="phone interpretation-4">
+            <div class="phone-label">4. Energy Aura</div>
             <div class="phone-screen">
-                <div class="animation-content">
-                    <div class="main-echo"></div>
-                    <div class="main-echo"></div>
-                    <div class="orbit-path">
-                        <div class="orbit-dot"></div>
-                        <div class="orbit-dot"></div>
-                    </div>
-                    <div class="light-core"></div>
+                <div class="canvas">
+                    <div class="aura-outer"></div>
+                    <div class="aura-mid"></div>
+                    <div class="teal-accent"></div>
+                    <div class="aura-core"></div>
                 </div>
             </div>
         </div>
 
-        <div class="phone animation-5" id="phone5">
-            <div class="phone-label">Shimmer + Floaties</div>
+        <!-- 5: VERTICAL PILLAR -->
+        <div class="phone interpretation-5">
+            <div class="phone-label">5. Light Pillar</div>
             <div class="phone-screen">
-                <div class="animation-content">
-                    <div class="sparkle" style="left: 42%; top: 28%;"></div>
-                    <div class="sparkle" style="left: 58%; top: 48%;"></div>
-                    <div class="sparkle" style="left: 48%; top: 65%;"></div>
-                    <div class="sparkle" style="left: 38%; top: 52%;"></div>
-                    <div class="floatie"></div>
-                    <div class="floatie"></div>
-                    <div class="light-core"></div>
+                <div class="canvas">
+                    <div class="pillar-glow"></div>
+                    <div class="pillar-base"></div>
+                    <div class="pillar-inner"></div>
                 </div>
             </div>
         </div>
 
-        <div class="phone animation-6" id="phone6">
-            <div class="phone-label">Echo + Spiral</div>
+        <!-- 6: COSMIC MANDALA -->
+        <div class="phone interpretation-6">
+            <div class="phone-label">6. Cosmic Mandala</div>
             <div class="phone-screen">
-                <div class="animation-content">
-                    <div class="main-echo"></div>
-                    <div class="main-echo"></div>
-                    <div class="spiral-ring"></div>
-                    <div class="spiral-ring"></div>
-                    <div class="spiral-ring"></div>
-                    <div class="light-core"></div>
+                <div class="canvas">
+                    <div class="mandala-ring ring-3"></div>
+                    <div class="mandala-ring ring-2"></div>
+                    <div class="mandala-ring ring-1"></div>
+                    <div class="ray" style="transform: translate(-50%, -50%) rotate(0deg);"></div>
+                    <div class="ray" style="transform: translate(-50%, -50%) rotate(45deg);"></div>
+                    <div class="ray" style="transform: translate(-50%, -50%) rotate(90deg);"></div>
+                    <div class="ray" style="transform: translate(-50%, -50%) rotate(135deg);"></div>
+                    <div class="mandala-center"></div>
                 </div>
             </div>
         </div>
 
-        <div class="phone animation-7" id="phone7">
-            <div class="phone-label">Shimmer + Orbit</div>
+        <!-- 7: NEBULA CLOUDS -->
+        <div class="phone interpretation-7">
+            <div class="phone-label">7. Nebula Clouds</div>
             <div class="phone-screen">
-                <div class="animation-content">
-                    <div class="orbit-path">
-                        <div class="orbit-dot"></div>
-                    </div>
-                    <div class="sparkle" style="left: 44%; top: 32%;"></div>
-                    <div class="sparkle" style="left: 62%; top: 50%;"></div>
-                    <div class="sparkle" style="left: 46%; top: 62%;"></div>
-                    <div class="sparkle" style="left: 34%; top: 48%;"></div>
-                    <div class="light-core"></div>
+                <div class="canvas">
+                    <div class="cloud cloud-1"></div>
+                    <div class="cloud cloud-2"></div>
+                    <div class="cloud cloud-3"></div>
+                    <div class="cloud cloud-4"></div>
+                    <div class="bright-spot"></div>
                 </div>
             </div>
         </div>
 
-        <div class="phone animation-8" id="phone8">
-            <div class="phone-label">Echo + Layered</div>
+        <!-- 8: LAYERED GRADIENTS -->
+        <div class="phone interpretation-8">
+            <div class="phone-label">8. Layered Gradients</div>
             <div class="phone-screen">
-                <div class="animation-content">
-                    <div class="main-echo"></div>
-                    <div class="main-echo"></div>
-                    <div class="atmo-pulse"></div>
-                    <div class="atmo-pulse"></div>
-                    <div class="floatie"></div>
-                    <div class="floatie"></div>
-                    <div class="light-core"></div>
+                <div class="canvas">
+                    <div class="gradient-layer layer-1"></div>
+                    <div class="gradient-layer layer-2"></div>
+                    <div class="gradient-layer layer-3"></div>
+                    <div class="gradient-layer layer-4"></div>
+                    <div class="center-glow"></div>
                 </div>
             </div>
         </div>
 
-        <div class="phone animation-9" id="phone9">
-            <div class="phone-label">Shimmer + Complex</div>
+        <!-- 9: PARTICLE FIELD -->
+        <div class="phone interpretation-9">
+            <div class="phone-label">9. Particle Field</div>
             <div class="phone-screen">
-                <div class="animation-content">
-                    <div class="spiral-ring"></div>
-                    <div class="sparkle" style="left: 40%; top: 35%;"></div>
-                    <div class="sparkle" style="left: 56%; top: 52%;"></div>
-                    <div class="sparkle" style="left: 52%; top: 68%;"></div>
-                    <div class="spiral-ring"></div>
-                    <div class="floatie"></div>
-                    <div class="light-core"></div>
+                <div class="canvas">
+                    <div class="ambient-light"></div>
+                    <!-- Large particles -->
+                    <div class="large-particle" style="top: 20%; left: 30%; width: 8%; height: 4%; background: radial-gradient(circle, rgba(100, 220, 220, 0.7), transparent);"></div>
+                    <div class="large-particle" style="top: 35%; left: 70%; width: 10%; height: 5%; background: radial-gradient(circle, rgba(255, 200, 100, 0.6), transparent);"></div>
+                    <div class="large-particle" style="top: 55%; left: 25%; width: 12%; height: 6%; background: radial-gradient(circle, rgba(220, 80, 160, 0.7), transparent);"></div>
+                    <div class="large-particle" style="top: 70%; left: 65%; width: 9%; height: 4.5%; background: radial-gradient(circle, rgba(180, 60, 120, 0.6), transparent);"></div>
+                    <!-- Small particles -->
+                    <div class="particle-glow" style="top: 15%; left: 50%; width: 3%; height: 1.5%; background: radial-gradient(circle, rgba(255, 250, 240, 0.8), transparent);"></div>
+                    <div class="particle-glow" style="top: 25%; left: 15%; width: 2.5%; height: 1.2%; background: radial-gradient(circle, rgba(100, 220, 220, 0.7), transparent);"></div>
+                    <div class="particle-glow" style="top: 40%; left: 85%; width: 3.5%; height: 1.8%; background: radial-gradient(circle, rgba(255, 200, 100, 0.8), transparent);"></div>
+                    <div class="particle-glow" style="top: 48%; left: 50%; width: 4%; height: 2%; background: radial-gradient(circle, rgba(255, 250, 240, 0.9), transparent);"></div>
+                    <div class="particle-glow" style="top: 60%; left: 40%; width: 2.8%; height: 1.4%; background: radial-gradient(circle, rgba(220, 80, 160, 0.7), transparent);"></div>
+                    <div class="particle-glow" style="top: 75%; left: 80%; width: 3.2%; height: 1.6%; background: radial-gradient(circle, rgba(180, 60, 120, 0.7), transparent);"></div>
+                    <div class="particle-glow" style="top: 85%; left: 20%; width: 2.5%; height: 1.2%; background: radial-gradient(circle, rgba(100, 220, 220, 0.6), transparent);"></div>
                 </div>
             </div>
         </div>
 
-        <div class="phone animation-10" id="phone10">
-            <div class="phone-label">Echo + All</div>
+        <!-- 10: PURE COLOR FIELD -->
+        <div class="phone interpretation-10">
+            <div class="phone-label">10. Pure Color Field</div>
             <div class="phone-screen">
-                <div class="animation-content">
-                    <div class="main-echo"></div>
-                    <div class="main-echo"></div>
-                    <div class="atmo-pulse"></div>
-                    <div class="orbit-path">
-                        <div class="orbit-dot"></div>
-                    </div>
-                    <div class="floatie"></div>
-                    <div class="light-core"></div>
+                <div class="canvas">
+                    <div class="color-wash wash-1"></div>
+                    <div class="color-wash wash-2"></div>
+                    <div class="color-wash wash-3"></div>
+                    <div class="color-wash wash-4"></div>
                 </div>
             </div>
         </div>
@@ -833,9 +929,6 @@
                 phone.classList.toggle('dark-mode');
             });
         });
-
-        // You can add custom animation logic here
-        // Each phone can have its own animation behavior
     </script>
 </body>
 </html>
