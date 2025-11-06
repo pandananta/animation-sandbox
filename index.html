@@ -217,16 +217,38 @@
             100% { transform: translateY(-200%) translateX(0); }
         }
 
-        /* Slow drift right - continuous */
-        @keyframes driftRight {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(200%); }
+        /* Slow drift right - continuous with slight vertical wobble */
+        @keyframes driftRightWobble1 {
+            0% { transform: translate(-100%, 0); }
+            25% { transform: translate(-25%, -2%); }
+            50% { transform: translate(50%, 0); }
+            75% { transform: translate(125%, 1%); }
+            100% { transform: translate(200%, 0); }
         }
 
-        /* Slow drift left - continuous */
-        @keyframes driftLeft {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-200%); }
+        /* Slow drift right - continuous with different wobble */
+        @keyframes driftRightWobble2 {
+            0% { transform: translate(-100%, 0); }
+            30% { transform: translate(-40%, 1.5%); }
+            60% { transform: translate(20%, -1%); }
+            100% { transform: translate(200%, 0); }
+        }
+
+        /* Slow drift left - continuous with slight vertical wobble */
+        @keyframes driftLeftWobble1 {
+            0% { transform: translate(100%, 0); }
+            25% { transform: translate(25%, 1%); }
+            50% { transform: translate(-50%, 0); }
+            75% { transform: translate(-125%, -1.5%); }
+            100% { transform: translate(-200%, 0); }
+        }
+
+        /* Slow drift left - continuous with different wobble */
+        @keyframes driftLeftWobble2 {
+            0% { transform: translate(100%, 0); }
+            35% { transform: translate(30%, -1%); }
+            65% { transform: translate(-40%, 1%); }
+            100% { transform: translate(-200%, 0); }
         }
 
         /* Slow diagonal drift up-right */
@@ -701,30 +723,58 @@
 
         .var-10 .flow-1 {
             position: absolute;
-            top: 25%;
+            top: 22%;
+            left: 0;
+            width: 100%;
+            height: 16%;
+            background: linear-gradient(to right,
+                transparent,
+                rgba(100, 220, 220, 0.28) 50%,
+                transparent);
+            filter: blur(39px);
+            animation: driftRightWobble1 23s ease-in-out infinite;
+        }
+
+        .var-10 .flow-2 {
+            position: absolute;
+            top: 35%;
+            left: 0;
+            width: 100%;
+            height: 14%;
+            background: linear-gradient(to right,
+                transparent,
+                rgba(100, 220, 220, 0.22) 50%,
+                transparent);
+            filter: blur(42px);
+            animation: driftRightWobble2 19s ease-in-out infinite 7s;
+        }
+
+        .var-10 .flow-3 {
+            position: absolute;
+            bottom: 25%;
             left: 0;
             width: 100%;
             height: 18%;
             background: linear-gradient(to right,
                 transparent,
-                rgba(100, 220, 220, 0.21) 50%,
+                rgba(220, 80, 160, 0.32) 50%,
                 transparent);
             filter: blur(39px);
-            animation: driftRight 20s linear infinite;
+            animation: driftLeftWobble1 26s ease-in-out infinite;
         }
 
-        .var-10 .flow-2 {
+        .var-10 .flow-4 {
             position: absolute;
-            bottom: 28%;
+            bottom: 38%;
             left: 0;
             width: 100%;
-            height: 20%;
+            height: 15%;
             background: linear-gradient(to right,
                 transparent,
-                rgba(220, 80, 160, 0.24) 50%,
+                rgba(220, 80, 160, 0.25) 50%,
                 transparent);
-            filter: blur(39px);
-            animation: driftLeft 24s linear infinite;
+            filter: blur(44px);
+            animation: driftLeftWobble2 21s ease-in-out infinite 11s;
         }
 
         .var-10 .diagonal-mist {
@@ -932,6 +982,8 @@
                 <div class="canvas">
                     <div class="flow-1"></div>
                     <div class="flow-2"></div>
+                    <div class="flow-3"></div>
+                    <div class="flow-4"></div>
                     <div class="diagonal-mist"></div>
                     <div class="particle p1"></div>
                     <div class="particle p2"></div>
