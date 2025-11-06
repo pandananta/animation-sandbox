@@ -330,141 +330,363 @@
             100% { opacity: 0.25; }
         }
 
-        /* ===== 1: SLOW VERTICAL RISE ===== */
+        /* ===== 1: PASTEL TEAL & ROSE ===== */
         .var-1 .canvas {
-            background: radial-gradient(circle at 50% 45%, rgb(30, 15, 50), rgb(5, 2, 15));
+            background: radial-gradient(ellipse at 40% 45%, rgb(35, 18, 55), rgb(5, 2, 15));
         }
 
-        .var-1 .ambient {
+        .var-1 .flow-1 {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 75%;
-            height: 55%;
-            background: radial-gradient(ellipse,
-                rgba(100, 50, 130, 0.25),
-                rgba(60, 30, 90, 0.15) 60%,
-                transparent 85%);
+            top: 22%;
+            left: 0;
+            width: 100%;
+            height: 16%;
+            background: linear-gradient(to right,
+                transparent,
+                rgba(120, 230, 230, 0.22) 50%,
+                transparent);
+            filter: blur(39px);
+            animation: driftRightWobble1 48s ease-in-out infinite 2s;
+            animation-fill-mode: backwards;
+        }
+
+        .var-1 .flow-2 {
+            position: absolute;
+            top: 35%;
+            left: 0;
+            width: 100%;
+            height: 14%;
+            background: linear-gradient(to right,
+                transparent,
+                rgba(120, 230, 230, 0.18) 50%,
+                transparent);
+            filter: blur(42px);
+            animation: driftRightWobble2 37s ease-in-out infinite 11s;
+            animation-fill-mode: backwards;
+        }
+
+        .var-1 .flow-3 {
+            position: absolute;
+            bottom: 25%;
+            left: 0;
+            width: 100%;
+            height: 18%;
+            background: linear-gradient(to right,
+                transparent,
+                rgba(240, 100, 180, 0.24) 50%,
+                transparent);
+            filter: blur(39px);
+            animation: driftLeftWobble1 54s ease-in-out infinite 5s;
+            animation-fill-mode: backwards;
+        }
+
+        .var-1 .flow-4 {
+            position: absolute;
+            bottom: 38%;
+            left: 0;
+            width: 100%;
+            height: 15%;
+            background: linear-gradient(to right,
+                transparent,
+                rgba(240, 100, 180, 0.19) 50%,
+                transparent);
+            filter: blur(44px);
+            animation: driftLeftWobble2 41s ease-in-out infinite 17s;
+            animation-fill-mode: backwards;
+        }
+
+        .var-1 .diagonal-mist {
+            position: absolute;
+            top: 20%;
+            left: -10%;
+            width: 80%;
+            height: 70%;
+            background: linear-gradient(to bottom right,
+                rgba(120, 230, 230, 0.25),
+                rgba(200, 80, 140, 0.2) 60%,
+                transparent 90%);
             filter: blur(50px);
-            animation: slowRotate 60s linear infinite, atmosphereFade 40s ease-in-out infinite;
+            transform: rotate(-15deg);
+            animation: slowRotate 45s linear infinite, atmosphereFade 28s ease-in-out infinite;
         }
 
         .var-1 .p1 {
-            bottom: 20%; left: 20%; width: 10%; height: 5%;
-            background: radial-gradient(circle, rgba(100, 220, 220, 0.7), transparent);
-            animation: floatUp 10s ease-in-out infinite, particleFade 10s ease-in-out infinite;
+            bottom: 15%; left: 12%; width: 10%; height: 5%;
+            background: radial-gradient(circle, rgba(120, 230, 230, 0.7), transparent);
+            animation: diagonalDriftUpRight 12s ease-in-out infinite, particleFade 12s ease-in-out infinite;
         }
         .var-1 .p2 {
-            bottom: 35%; right: 18%; width: 11%; height: 5.5%;
+            bottom: 20%; left: 18%; width: 9%; height: 4.5%;
             background: radial-gradient(circle, rgba(255, 200, 80, 0.65), transparent);
-            animation: floatUp 12s ease-in-out infinite 3s, particleFade 12s ease-in-out infinite 3s;
+            animation: diagonalDriftUpRight 14s ease-in-out infinite 3s, particleFade 14s ease-in-out infinite 3s;
             animation-fill-mode: backwards;
         }
         .var-1 .p3 {
-            bottom: 15%; right: 25%; width: 9%; height: 4.5%;
-            background: radial-gradient(circle, rgba(220, 80, 160, 0.6), transparent);
-            animation: floatUp 14s ease-in-out infinite 6s, particleFade 14s ease-in-out infinite 6s;
+            bottom: 25%; left: 25%; width: 11%; height: 5.5%;
+            background: radial-gradient(circle, rgba(240, 100, 180, 0.7), transparent);
+            animation: diagonalDriftUpRight 13s ease-in-out infinite 6s, particleFade 13s ease-in-out infinite 6s;
             animation-fill-mode: backwards;
         }
 
-        /* ===== 2: ORBITAL PATHS ===== */
+        /* ===== 2: DEEP SATURATED ===== */
         .var-2 .canvas {
-            background: radial-gradient(circle at 50% 50%, rgb(35, 18, 55), rgb(5, 2, 15));
+            background: radial-gradient(ellipse at 40% 45%, rgb(35, 18, 55), rgb(5, 2, 15));
         }
 
-        .var-2 .radial-glow {
+        .var-2 .flow-1 {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 85%;
-            height: 65%;
-            background: radial-gradient(ellipse,
-                transparent 25%,
-                rgba(180, 60, 120, 0.2) 50%,
-                transparent 85%);
-            filter: blur(45px);
-            animation: atmosphereFade 35s ease-in-out infinite;
+            top: 22%;
+            left: 0;
+            width: 100%;
+            height: 16%;
+            background: linear-gradient(to right,
+                transparent,
+                rgba(80, 200, 220, 0.35) 50%,
+                transparent);
+            filter: blur(39px);
+            animation: driftRightWobble1 48s ease-in-out infinite 2s;
+            animation-fill-mode: backwards;
         }
 
-        .var-2 .orbit-container {
+        .var-2 .flow-2 {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 1px;
-            height: 1px;
+            top: 35%;
+            left: 0;
+            width: 100%;
+            height: 14%;
+            background: linear-gradient(to right,
+                transparent,
+                rgba(80, 200, 220, 0.28) 50%,
+                transparent);
+            filter: blur(42px);
+            animation: driftRightWobble2 37s ease-in-out infinite 11s;
+            animation-fill-mode: backwards;
+        }
+
+        .var-2 .flow-3 {
+            position: absolute;
+            bottom: 25%;
+            left: 0;
+            width: 100%;
+            height: 18%;
+            background: linear-gradient(to right,
+                transparent,
+                rgba(240, 60, 140, 0.38) 50%,
+                transparent);
+            filter: blur(39px);
+            animation: driftLeftWobble1 54s ease-in-out infinite 5s;
+            animation-fill-mode: backwards;
+        }
+
+        .var-2 .flow-4 {
+            position: absolute;
+            bottom: 38%;
+            left: 0;
+            width: 100%;
+            height: 15%;
+            background: linear-gradient(to right,
+                transparent,
+                rgba(240, 60, 140, 0.30) 50%,
+                transparent);
+            filter: blur(44px);
+            animation: driftLeftWobble2 41s ease-in-out infinite 17s;
+            animation-fill-mode: backwards;
+        }
+
+        .var-2 .diagonal-mist {
+            position: absolute;
+            top: 20%;
+            left: -10%;
+            width: 80%;
+            height: 70%;
+            background: linear-gradient(to bottom right,
+                rgba(80, 200, 220, 0.25),
+                rgba(200, 50, 120, 0.2) 60%,
+                transparent 90%);
+            filter: blur(50px);
+            transform: rotate(-15deg);
+            animation: slowRotate 45s linear infinite, atmosphereFade 28s ease-in-out infinite;
         }
 
         .var-2 .p1 {
-            width: 9%; height: 4.5%;
-            background: radial-gradient(circle, rgba(100, 220, 220, 0.7), transparent);
-            animation: orbit 12s linear infinite, twinkle 5s ease-in-out infinite;
+            bottom: 15%; left: 12%; width: 10%; height: 5%;
+            background: radial-gradient(circle, rgba(80, 200, 220, 0.7), transparent);
+            animation: diagonalDriftUpRight 12s ease-in-out infinite, particleFade 12s ease-in-out infinite;
         }
         .var-2 .p2 {
-            width: 10%; height: 5%;
+            bottom: 20%; left: 18%; width: 9%; height: 4.5%;
             background: radial-gradient(circle, rgba(255, 200, 80, 0.65), transparent);
-            animation: orbitWide 16s linear infinite reverse, twinkle 6s ease-in-out infinite 2s;
+            animation: diagonalDriftUpRight 14s ease-in-out infinite 3s, particleFade 14s ease-in-out infinite 3s;
             animation-fill-mode: backwards;
         }
         .var-2 .p3 {
-            width: 8%; height: 4%;
-            background: radial-gradient(circle, rgba(220, 80, 160, 0.7), transparent);
-            animation: orbit 10s linear infinite 3s, twinkle 4s ease-in-out infinite 1s;
+            bottom: 25%; left: 25%; width: 11%; height: 5.5%;
+            background: radial-gradient(circle, rgba(240, 60, 140, 0.7), transparent);
+            animation: diagonalDriftUpRight 13s ease-in-out infinite 6s, particleFade 13s ease-in-out infinite 6s;
             animation-fill-mode: backwards;
         }
 
-        /* ===== 3: PULSING NEBULA CLOUDS ===== */
+        /* ===== 3: BLUE & ORANGE ===== */
         .var-3 .canvas {
-            background: radial-gradient(circle at 60% 35%, rgb(40, 20, 60), rgb(10, 5, 20));
+            background: radial-gradient(ellipse at 40% 45%, rgb(35, 18, 55), rgb(5, 2, 15));
         }
 
-        .var-3 .nebula-1 {
+        .var-3 .flow-1 {
             position: absolute;
-            top: 10%;
-            right: 10%;
-            width: 45%;
-            height: 40%;
-            background: radial-gradient(ellipse,
-                rgba(100, 220, 220, 0.35),
-                rgba(60, 180, 180, 0.25) 60%,
-                transparent 85%);
-            filter: blur(45px);
-            border-radius: 50%;
-            animation: slowRotate 50s linear infinite, atmosphereFade 30s ease-in-out infinite;
-        }
-
-        .var-3 .nebula-2 {
-            position: absolute;
-            bottom: 15%;
-            left: 10%;
-            width: 50%;
-            height: 45%;
-            background: radial-gradient(ellipse,
-                rgba(220, 80, 160, 0.4),
-                rgba(180, 60, 120, 0.3) 60%,
-                transparent 85%);
-            filter: blur(45px);
-            border-radius: 50%;
-            animation: slowRotate 65s linear infinite reverse, atmosphereFade 35s ease-in-out infinite 10s;
+            top: 22%;
+            left: 0;
+            width: 100%;
+            height: 16%;
+            background: linear-gradient(to right,
+                transparent,
+                rgba(60, 160, 240, 0.28) 50%,
+                transparent);
+            filter: blur(39px);
+            animation: driftRightWobble1 48s ease-in-out infinite 2s;
             animation-fill-mode: backwards;
+        }
+
+        .var-3 .flow-2 {
+            position: absolute;
+            top: 35%;
+            left: 0;
+            width: 100%;
+            height: 14%;
+            background: linear-gradient(to right,
+                transparent,
+                rgba(60, 160, 240, 0.22) 50%,
+                transparent);
+            filter: blur(42px);
+            animation: driftRightWobble2 37s ease-in-out infinite 11s;
+            animation-fill-mode: backwards;
+        }
+
+        .var-3 .flow-3 {
+            position: absolute;
+            bottom: 25%;
+            left: 0;
+            width: 100%;
+            height: 18%;
+            background: linear-gradient(to right,
+                transparent,
+                rgba(255, 140, 60, 0.29) 50%,
+                transparent);
+            filter: blur(39px);
+            animation: driftLeftWobble1 54s ease-in-out infinite 5s;
+            animation-fill-mode: backwards;
+        }
+
+        .var-3 .flow-4 {
+            position: absolute;
+            bottom: 38%;
+            left: 0;
+            width: 100%;
+            height: 15%;
+            background: linear-gradient(to right,
+                transparent,
+                rgba(255, 140, 60, 0.23) 50%,
+                transparent);
+            filter: blur(44px);
+            animation: driftLeftWobble2 41s ease-in-out infinite 17s;
+            animation-fill-mode: backwards;
+        }
+
+        .var-3 .diagonal-mist {
+            position: absolute;
+            top: 20%;
+            left: -10%;
+            width: 80%;
+            height: 70%;
+            background: linear-gradient(to bottom right,
+                rgba(60, 160, 240, 0.25),
+                rgba(220, 120, 50, 0.2) 60%,
+                transparent 90%);
+            filter: blur(50px);
+            transform: rotate(-15deg);
+            animation: slowRotate 45s linear infinite, atmosphereFade 28s ease-in-out infinite;
         }
 
         .var-3 .p1 {
-            top: 25%; left: 0%; width: 9%; height: 4.5%;
-            background: radial-gradient(circle, rgba(255, 200, 80, 0.7), transparent);
-            animation: driftRight 14s linear infinite, twinkle 5s ease-in-out infinite;
+            bottom: 15%; left: 12%; width: 10%; height: 5%;
+            background: radial-gradient(circle, rgba(60, 160, 240, 0.7), transparent);
+            animation: diagonalDriftUpRight 12s ease-in-out infinite, particleFade 12s ease-in-out infinite;
         }
         .var-3 .p2 {
-            top: 65%; left: 0%; width: 10%; height: 5%;
-            background: radial-gradient(circle, rgba(100, 220, 220, 0.65), transparent);
-            animation: driftLeft 13s linear infinite 4s, twinkle 6s ease-in-out infinite 2s;
+            bottom: 20%; left: 18%; width: 9%; height: 4.5%;
+            background: radial-gradient(circle, rgba(255, 200, 80, 0.65), transparent);
+            animation: diagonalDriftUpRight 14s ease-in-out infinite 3s, particleFade 14s ease-in-out infinite 3s;
+            animation-fill-mode: backwards;
+        }
+        .var-3 .p3 {
+            bottom: 25%; left: 25%; width: 11%; height: 5.5%;
+            background: radial-gradient(circle, rgba(255, 140, 60, 0.7), transparent);
+            animation: diagonalDriftUpRight 13s ease-in-out infinite 6s, particleFade 13s ease-in-out infinite 6s;
             animation-fill-mode: backwards;
         }
 
-        /* ===== 4: DIAGONAL FLOW ===== */
+        /* ===== 4: GREEN & PINK ===== */
         .var-4 .canvas {
             background: radial-gradient(ellipse at 40% 45%, rgb(35, 18, 55), rgb(5, 2, 15));
+        }
+
+        .var-4 .flow-1 {
+            position: absolute;
+            top: 22%;
+            left: 0;
+            width: 100%;
+            height: 16%;
+            background: linear-gradient(to right,
+                transparent,
+                rgba(80, 220, 160, 0.28) 50%,
+                transparent);
+            filter: blur(39px);
+            animation: driftRightWobble1 48s ease-in-out infinite 2s;
+            animation-fill-mode: backwards;
+        }
+
+        .var-4 .flow-2 {
+            position: absolute;
+            top: 35%;
+            left: 0;
+            width: 100%;
+            height: 14%;
+            background: linear-gradient(to right,
+                transparent,
+                rgba(80, 220, 160, 0.22) 50%,
+                transparent);
+            filter: blur(42px);
+            animation: driftRightWobble2 37s ease-in-out infinite 11s;
+            animation-fill-mode: backwards;
+        }
+
+        .var-4 .flow-3 {
+            position: absolute;
+            bottom: 25%;
+            left: 0;
+            width: 100%;
+            height: 18%;
+            background: linear-gradient(to right,
+                transparent,
+                rgba(255, 100, 180, 0.29) 50%,
+                transparent);
+            filter: blur(39px);
+            animation: driftLeftWobble1 54s ease-in-out infinite 5s;
+            animation-fill-mode: backwards;
+        }
+
+        .var-4 .flow-4 {
+            position: absolute;
+            bottom: 38%;
+            left: 0;
+            width: 100%;
+            height: 15%;
+            background: linear-gradient(to right,
+                transparent,
+                rgba(255, 100, 180, 0.23) 50%,
+                transparent);
+            filter: blur(44px);
+            animation: driftLeftWobble2 41s ease-in-out infinite 17s;
+            animation-fill-mode: backwards;
         }
 
         .var-4 .diagonal-mist {
@@ -474,8 +696,8 @@
             width: 80%;
             height: 70%;
             background: linear-gradient(to bottom right,
-                rgba(100, 220, 220, 0.25),
-                rgba(180, 60, 120, 0.2) 60%,
+                rgba(80, 220, 160, 0.25),
+                rgba(220, 80, 150, 0.2) 60%,
                 transparent 90%);
             filter: blur(50px);
             transform: rotate(-15deg);
@@ -484,7 +706,7 @@
 
         .var-4 .p1 {
             bottom: 15%; left: 12%; width: 10%; height: 5%;
-            background: radial-gradient(circle, rgba(100, 220, 220, 0.7), transparent);
+            background: radial-gradient(circle, rgba(80, 220, 160, 0.7), transparent);
             animation: diagonalDriftUpRight 12s ease-in-out infinite, particleFade 12s ease-in-out infinite;
         }
         .var-4 .p2 {
@@ -495,259 +717,498 @@
         }
         .var-4 .p3 {
             bottom: 25%; left: 25%; width: 11%; height: 5.5%;
-            background: radial-gradient(circle, rgba(220, 80, 160, 0.7), transparent);
+            background: radial-gradient(circle, rgba(255, 100, 180, 0.7), transparent);
             animation: diagonalDriftUpRight 13s ease-in-out infinite 6s, particleFade 13s ease-in-out infinite 6s;
             animation-fill-mode: backwards;
         }
 
-        /* ===== 5: RISING BUBBLES (ANIMATED) ===== */
+        /* ===== 5: PURPLE & GOLD ===== */
         .var-5 .canvas {
-            background: linear-gradient(to top, rgb(15, 8, 30), rgb(30, 15, 50), rgb(20, 10, 40));
+            background: radial-gradient(ellipse at 40% 45%, rgb(35, 18, 55), rgb(5, 2, 15));
         }
 
-        .var-5 .flow-base {
+        .var-5 .flow-1 {
             position: absolute;
-            bottom: 0;
+            top: 22%;
             left: 0;
             width: 100%;
-            height: 65%;
-            background: linear-gradient(to top,
-                rgba(100, 50, 130, 0.35),
-                rgba(180, 60, 120, 0.25) 50%,
-                transparent 100%);
-            filter: blur(45px);
-            animation: atmosphereFade 40s ease-in-out infinite;
-        }
-
-        .var-5 .p1 {
-            bottom: 10%; left: 25%; width: 11%; height: 5.5%;
-            background: radial-gradient(circle, rgba(255, 200, 80, 0.7), transparent);
-            animation: riseAndFade 9s ease-in-out infinite, particleFade 9s ease-in-out infinite;
-        }
-        .var-5 .p2 {
-            bottom: 8%; right: 22%; width: 10%; height: 5%;
-            background: radial-gradient(circle, rgba(100, 220, 220, 0.65), transparent);
-            animation: riseAndFade 10s ease-in-out infinite 2s, particleFade 10s ease-in-out infinite 2s;
-            animation-fill-mode: backwards;
-        }
-        .var-5 .p3 {
-            bottom: 12%; left: 45%; width: 9%; height: 4.5%;
-            background: radial-gradient(circle, rgba(220, 80, 160, 0.6), transparent);
-            animation: riseAndFade 11s ease-in-out infinite 4s, particleFade 11s ease-in-out infinite 4s;
-            animation-fill-mode: backwards;
-        }
-        .var-5 .p4 {
-            bottom: 15%; right: 35%; width: 8%; height: 4%;
-            background: radial-gradient(circle, rgba(180, 60, 120, 0.55), transparent);
-            animation: riseAndFade 12s ease-in-out infinite 6s, particleFade 12s ease-in-out infinite 6s;
+            height: 16%;
+            background: linear-gradient(to right,
+                transparent,
+                rgba(140, 80, 220, 0.28) 50%,
+                transparent);
+            filter: blur(39px);
+            animation: driftRightWobble1 48s ease-in-out infinite 2s;
             animation-fill-mode: backwards;
         }
 
-        /* ===== 6: ASYMMETRIC NEBULA ANIMATED ===== */
-        .var-6 .canvas {
-            background: radial-gradient(circle at 60% 35%, rgb(40, 20, 60), rgb(10, 5, 20));
-        }
-
-        .var-6 .nebula-1 {
+        .var-5 .flow-2 {
             position: absolute;
-            top: 10%;
-            right: 10%;
-            width: 45%;
-            height: 40%;
-            background: radial-gradient(ellipse,
-                rgba(100, 220, 220, 0.35),
-                rgba(60, 180, 180, 0.25) 60%,
-                transparent 85%);
-            filter: blur(45px);
-            border-radius: 50%;
-            animation: atmosphereFade 38s ease-in-out infinite;
-        }
-
-        .var-6 .nebula-2 {
-            position: absolute;
-            bottom: 15%;
-            left: 10%;
-            width: 50%;
-            height: 45%;
-            background: radial-gradient(ellipse,
-                rgba(220, 80, 160, 0.4),
-                rgba(180, 60, 120, 0.3) 60%,
-                transparent 85%);
-            filter: blur(45px);
-            border-radius: 50%;
-            animation: atmosphereFade 45s ease-in-out infinite 8s;
+            top: 35%;
+            left: 0;
+            width: 100%;
+            height: 14%;
+            background: linear-gradient(to right,
+                transparent,
+                rgba(140, 80, 220, 0.22) 50%,
+                transparent);
+            filter: blur(42px);
+            animation: driftRightWobble2 37s ease-in-out infinite 11s;
             animation-fill-mode: backwards;
         }
 
-        .var-6 .p1 {
-            top: 25%; left: 20%; width: 9%; height: 4.5%;
-            background: radial-gradient(circle, rgba(255, 200, 80, 0.7), transparent);
-            animation: floatOrganic 15s ease-in-out infinite, twinkle 6s ease-in-out infinite;
-        }
-        .var-6 .p2 {
-            top: 65%; right: 22%; width: 10%; height: 5%;
-            background: radial-gradient(circle, rgba(100, 220, 220, 0.65), transparent);
-            animation: floatOrganic 13s ease-in-out infinite 5s, twinkle 5s ease-in-out infinite 2s;
-            animation-fill-mode: backwards;
-        }
-
-        /* ===== 7: HORIZONTAL FLOW ===== */
-        .var-7 .canvas {
-            background: linear-gradient(to bottom, rgb(20, 10, 40), rgb(5, 2, 15), rgb(25, 12, 45));
-        }
-
-        .var-7 .flow-1 {
+        .var-5 .flow-3 {
             position: absolute;
-            top: 25%;
+            bottom: 25%;
             left: 0;
             width: 100%;
             height: 18%;
             background: linear-gradient(to right,
                 transparent,
-                rgba(100, 220, 220, 0.35) 50%,
+                rgba(255, 200, 60, 0.29) 50%,
                 transparent);
-            filter: blur(35px);
-            animation: driftRight 20s linear infinite;
+            filter: blur(39px);
+            animation: driftLeftWobble1 54s ease-in-out infinite 5s;
+            animation-fill-mode: backwards;
+        }
+
+        .var-5 .flow-4 {
+            position: absolute;
+            bottom: 38%;
+            left: 0;
+            width: 100%;
+            height: 15%;
+            background: linear-gradient(to right,
+                transparent,
+                rgba(255, 200, 60, 0.23) 50%,
+                transparent);
+            filter: blur(44px);
+            animation: driftLeftWobble2 41s ease-in-out infinite 17s;
+            animation-fill-mode: backwards;
+        }
+
+        .var-5 .diagonal-mist {
+            position: absolute;
+            top: 20%;
+            left: -10%;
+            width: 80%;
+            height: 70%;
+            background: linear-gradient(to bottom right,
+                rgba(140, 80, 220, 0.25),
+                rgba(220, 170, 40, 0.2) 60%,
+                transparent 90%);
+            filter: blur(50px);
+            transform: rotate(-15deg);
+            animation: slowRotate 45s linear infinite, atmosphereFade 28s ease-in-out infinite;
+        }
+
+        .var-5 .p1 {
+            bottom: 15%; left: 12%; width: 10%; height: 5%;
+            background: radial-gradient(circle, rgba(140, 80, 220, 0.7), transparent);
+            animation: diagonalDriftUpRight 12s ease-in-out infinite, particleFade 12s ease-in-out infinite;
+        }
+        .var-5 .p2 {
+            bottom: 20%; left: 18%; width: 9%; height: 4.5%;
+            background: radial-gradient(circle, rgba(255, 200, 80, 0.65), transparent);
+            animation: diagonalDriftUpRight 14s ease-in-out infinite 3s, particleFade 14s ease-in-out infinite 3s;
+            animation-fill-mode: backwards;
+        }
+        .var-5 .p3 {
+            bottom: 25%; left: 25%; width: 11%; height: 5.5%;
+            background: radial-gradient(circle, rgba(255, 200, 60, 0.7), transparent);
+            animation: diagonalDriftUpRight 13s ease-in-out infinite 6s, particleFade 13s ease-in-out infinite 6s;
+            animation-fill-mode: backwards;
+        }
+
+        /* ===== 6: CYAN & CORAL ===== */
+        .var-6 .canvas {
+            background: radial-gradient(ellipse at 40% 45%, rgb(35, 18, 55), rgb(5, 2, 15));
+        }
+
+        .var-6 .flow-1 {
+            position: absolute;
+            top: 22%;
+            left: 0;
+            width: 100%;
+            height: 16%;
+            background: linear-gradient(to right,
+                transparent,
+                rgba(60, 200, 240, 0.28) 50%,
+                transparent);
+            filter: blur(39px);
+            animation: driftRightWobble1 48s ease-in-out infinite 2s;
+            animation-fill-mode: backwards;
+        }
+
+        .var-6 .flow-2 {
+            position: absolute;
+            top: 35%;
+            left: 0;
+            width: 100%;
+            height: 14%;
+            background: linear-gradient(to right,
+                transparent,
+                rgba(60, 200, 240, 0.22) 50%,
+                transparent);
+            filter: blur(42px);
+            animation: driftRightWobble2 37s ease-in-out infinite 11s;
+            animation-fill-mode: backwards;
+        }
+
+        .var-6 .flow-3 {
+            position: absolute;
+            bottom: 25%;
+            left: 0;
+            width: 100%;
+            height: 18%;
+            background: linear-gradient(to right,
+                transparent,
+                rgba(255, 120, 100, 0.29) 50%,
+                transparent);
+            filter: blur(39px);
+            animation: driftLeftWobble1 54s ease-in-out infinite 5s;
+            animation-fill-mode: backwards;
+        }
+
+        .var-6 .flow-4 {
+            position: absolute;
+            bottom: 38%;
+            left: 0;
+            width: 100%;
+            height: 15%;
+            background: linear-gradient(to right,
+                transparent,
+                rgba(255, 120, 100, 0.23) 50%,
+                transparent);
+            filter: blur(44px);
+            animation: driftLeftWobble2 41s ease-in-out infinite 17s;
+            animation-fill-mode: backwards;
+        }
+
+        .var-6 .diagonal-mist {
+            position: absolute;
+            top: 20%;
+            left: -10%;
+            width: 80%;
+            height: 70%;
+            background: linear-gradient(to bottom right,
+                rgba(60, 200, 240, 0.25),
+                rgba(220, 100, 80, 0.2) 60%,
+                transparent 90%);
+            filter: blur(50px);
+            transform: rotate(-15deg);
+            animation: slowRotate 45s linear infinite, atmosphereFade 28s ease-in-out infinite;
+        }
+
+        .var-6 .p1 {
+            bottom: 15%; left: 12%; width: 10%; height: 5%;
+            background: radial-gradient(circle, rgba(60, 200, 240, 0.7), transparent);
+            animation: diagonalDriftUpRight 12s ease-in-out infinite, particleFade 12s ease-in-out infinite;
+        }
+        .var-6 .p2 {
+            bottom: 20%; left: 18%; width: 9%; height: 4.5%;
+            background: radial-gradient(circle, rgba(255, 200, 80, 0.65), transparent);
+            animation: diagonalDriftUpRight 14s ease-in-out infinite 3s, particleFade 14s ease-in-out infinite 3s;
+            animation-fill-mode: backwards;
+        }
+        .var-6 .p3 {
+            bottom: 25%; left: 25%; width: 11%; height: 5.5%;
+            background: radial-gradient(circle, rgba(255, 120, 100, 0.7), transparent);
+            animation: diagonalDriftUpRight 13s ease-in-out infinite 6s, particleFade 13s ease-in-out infinite 6s;
+            animation-fill-mode: backwards;
+        }
+
+        /* ===== 7: INDIGO & AMBER ===== */
+        .var-7 .canvas {
+            background: radial-gradient(ellipse at 40% 45%, rgb(35, 18, 55), rgb(5, 2, 15));
+        }
+
+        .var-7 .flow-1 {
+            position: absolute;
+            top: 22%;
+            left: 0;
+            width: 100%;
+            height: 16%;
+            background: linear-gradient(to right,
+                transparent,
+                rgba(100, 100, 240, 0.28) 50%,
+                transparent);
+            filter: blur(39px);
+            animation: driftRightWobble1 48s ease-in-out infinite 2s;
+            animation-fill-mode: backwards;
         }
 
         .var-7 .flow-2 {
             position: absolute;
-            bottom: 28%;
+            top: 35%;
             left: 0;
             width: 100%;
-            height: 20%;
+            height: 14%;
             background: linear-gradient(to right,
                 transparent,
-                rgba(220, 80, 160, 0.4) 50%,
+                rgba(100, 100, 240, 0.22) 50%,
                 transparent);
-            filter: blur(35px);
-            animation: driftLeft 24s linear infinite;
+            filter: blur(42px);
+            animation: driftRightWobble2 37s ease-in-out infinite 11s;
+            animation-fill-mode: backwards;
+        }
+
+        .var-7 .flow-3 {
+            position: absolute;
+            bottom: 25%;
+            left: 0;
+            width: 100%;
+            height: 18%;
+            background: linear-gradient(to right,
+                transparent,
+                rgba(255, 180, 40, 0.29) 50%,
+                transparent);
+            filter: blur(39px);
+            animation: driftLeftWobble1 54s ease-in-out infinite 5s;
+            animation-fill-mode: backwards;
+        }
+
+        .var-7 .flow-4 {
+            position: absolute;
+            bottom: 38%;
+            left: 0;
+            width: 100%;
+            height: 15%;
+            background: linear-gradient(to right,
+                transparent,
+                rgba(255, 180, 40, 0.23) 50%,
+                transparent);
+            filter: blur(44px);
+            animation: driftLeftWobble2 41s ease-in-out infinite 17s;
+            animation-fill-mode: backwards;
+        }
+
+        .var-7 .diagonal-mist {
+            position: absolute;
+            top: 20%;
+            left: -10%;
+            width: 80%;
+            height: 70%;
+            background: linear-gradient(to bottom right,
+                rgba(100, 100, 240, 0.25),
+                rgba(220, 150, 30, 0.2) 60%,
+                transparent 90%);
+            filter: blur(50px);
+            transform: rotate(-15deg);
+            animation: slowRotate 45s linear infinite, atmosphereFade 28s ease-in-out infinite;
         }
 
         .var-7 .p1 {
-            top: 30%; left: 0%; width: 8%; height: 4%;
-            background: radial-gradient(circle, rgba(100, 220, 220, 0.7), transparent);
-            animation: driftRight 12s linear infinite, twinkle 5s ease-in-out infinite;
+            bottom: 15%; left: 12%; width: 10%; height: 5%;
+            background: radial-gradient(circle, rgba(100, 100, 240, 0.7), transparent);
+            animation: diagonalDriftUpRight 12s ease-in-out infinite, particleFade 12s ease-in-out infinite;
         }
         .var-7 .p2 {
-            top: 32%; left: 0%; width: 7%; height: 3.5%;
-            background: radial-gradient(circle, rgba(100, 220, 220, 0.6), transparent);
-            animation: driftRight 14s linear infinite 3s, twinkle 6s ease-in-out infinite 2s;
+            bottom: 20%; left: 18%; width: 9%; height: 4.5%;
+            background: radial-gradient(circle, rgba(255, 200, 80, 0.65), transparent);
+            animation: diagonalDriftUpRight 14s ease-in-out infinite 3s, particleFade 14s ease-in-out infinite 3s;
             animation-fill-mode: backwards;
         }
         .var-7 .p3 {
-            bottom: 32%; left: 0%; width: 9%; height: 4.5%;
-            background: radial-gradient(circle, rgba(220, 80, 160, 0.7), transparent);
-            animation: driftLeft 13s linear infinite, twinkle 5s ease-in-out infinite 1s;
-        }
-        .var-7 .p4 {
-            bottom: 30%; left: 0%; width: 8%; height: 4%;
-            background: radial-gradient(circle, rgba(220, 80, 160, 0.65), transparent);
-            animation: driftLeft 15s linear infinite 4s, twinkle 6s ease-in-out infinite 3s;
+            bottom: 25%; left: 25%; width: 11%; height: 5.5%;
+            background: radial-gradient(circle, rgba(255, 180, 40, 0.7), transparent);
+            animation: diagonalDriftUpRight 13s ease-in-out infinite 6s, particleFade 13s ease-in-out infinite 6s;
             animation-fill-mode: backwards;
         }
 
-        /* ===== 8: SCATTERED TWINKLE ===== */
+        /* ===== 8: TURQUOISE & ROSE ===== */
         .var-8 .canvas {
-            background: radial-gradient(circle at 50% 50%, rgb(25, 12, 45), rgb(5, 2, 15));
+            background: radial-gradient(ellipse at 40% 45%, rgb(35, 18, 55), rgb(5, 2, 15));
         }
 
-        .var-8 .nebula {
+        .var-8 .flow-1 {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 80%;
-            height: 60%;
-            background: radial-gradient(ellipse,
-                rgba(180, 60, 120, 0.2),
-                rgba(100, 50, 130, 0.15) 65%,
-                transparent 88%);
-            filter: blur(55px);
-            animation: slowRotate 55s linear infinite, atmosphereFade 33s ease-in-out infinite;
+            top: 22%;
+            left: 0;
+            width: 100%;
+            height: 16%;
+            background: linear-gradient(to right,
+                transparent,
+                rgba(60, 220, 200, 0.28) 50%,
+                transparent);
+            filter: blur(39px);
+            animation: driftRightWobble1 48s ease-in-out infinite 2s;
+            animation-fill-mode: backwards;
         }
 
-        .var-8 .particle {
-            filter: blur(6px);
+        .var-8 .flow-2 {
+            position: absolute;
+            top: 35%;
+            left: 0;
+            width: 100%;
+            height: 14%;
+            background: linear-gradient(to right,
+                transparent,
+                rgba(60, 220, 200, 0.22) 50%,
+                transparent);
+            filter: blur(42px);
+            animation: driftRightWobble2 37s ease-in-out infinite 11s;
+            animation-fill-mode: backwards;
+        }
+
+        .var-8 .flow-3 {
+            position: absolute;
+            bottom: 25%;
+            left: 0;
+            width: 100%;
+            height: 18%;
+            background: linear-gradient(to right,
+                transparent,
+                rgba(255, 100, 150, 0.29) 50%,
+                transparent);
+            filter: blur(39px);
+            animation: driftLeftWobble1 54s ease-in-out infinite 5s;
+            animation-fill-mode: backwards;
+        }
+
+        .var-8 .flow-4 {
+            position: absolute;
+            bottom: 38%;
+            left: 0;
+            width: 100%;
+            height: 15%;
+            background: linear-gradient(to right,
+                transparent,
+                rgba(255, 100, 150, 0.23) 50%,
+                transparent);
+            filter: blur(44px);
+            animation: driftLeftWobble2 41s ease-in-out infinite 17s;
+            animation-fill-mode: backwards;
+        }
+
+        .var-8 .diagonal-mist {
+            position: absolute;
+            top: 20%;
+            left: -10%;
+            width: 80%;
+            height: 70%;
+            background: linear-gradient(to bottom right,
+                rgba(60, 220, 200, 0.25),
+                rgba(220, 80, 120, 0.2) 60%,
+                transparent 90%);
+            filter: blur(50px);
+            transform: rotate(-15deg);
+            animation: slowRotate 45s linear infinite, atmosphereFade 28s ease-in-out infinite;
         }
 
         .var-8 .p1 {
-            bottom: 15%; left: 18%; width: 5%; height: 2.5%;
-            background: radial-gradient(circle, rgba(100, 220, 220, 0.8), transparent);
-            animation: floatUp 10s ease-in-out infinite, twinkle 4s ease-in-out infinite;
+            bottom: 15%; left: 12%; width: 10%; height: 5%;
+            background: radial-gradient(circle, rgba(60, 220, 200, 0.7), transparent);
+            animation: diagonalDriftUpRight 12s ease-in-out infinite, particleFade 12s ease-in-out infinite;
         }
         .var-8 .p2 {
-            bottom: 22%; right: 25%; width: 4%; height: 2%;
-            background: radial-gradient(circle, rgba(255, 200, 80, 0.7), transparent);
-            animation: floatUp 11s ease-in-out infinite 2s, twinkle 5s ease-in-out infinite 1s;
+            bottom: 20%; left: 18%; width: 9%; height: 4.5%;
+            background: radial-gradient(circle, rgba(255, 200, 80, 0.65), transparent);
+            animation: diagonalDriftUpRight 14s ease-in-out infinite 3s, particleFade 14s ease-in-out infinite 3s;
             animation-fill-mode: backwards;
         }
         .var-8 .p3 {
-            bottom: 12%; left: 12%; width: 4.5%; height: 2.2%;
-            background: radial-gradient(circle, rgba(220, 80, 160, 0.75), transparent);
-            animation: floatUp 12s ease-in-out infinite 4s, twinkle 4.5s ease-in-out infinite 2s;
-            animation-fill-mode: backwards;
-        }
-        .var-8 .p4 {
-            bottom: 18%; right: 18%; width: 5%; height: 2.5%;
-            background: radial-gradient(circle, rgba(100, 220, 220, 0.7), transparent);
-            animation: floatUp 10.5s ease-in-out infinite 3s, twinkle 5.5s ease-in-out infinite 1.5s;
-            animation-fill-mode: backwards;
-        }
-        .var-8 .p5 {
-            bottom: 8%; left: 20%; width: 4.5%; height: 2.2%;
-            background: radial-gradient(circle, rgba(180, 60, 120, 0.7), transparent);
-            animation: floatUp 11.5s ease-in-out infinite 5s, twinkle 4.8s ease-in-out infinite 2.5s;
-            animation-fill-mode: backwards;
-        }
-        .var-8 .p6 {
-            bottom: 25%; left: 65%; width: 4%; height: 2%;
-            background: radial-gradient(circle, rgba(255, 200, 80, 0.65), transparent);
-            animation: floatUp 13s ease-in-out infinite 6s, twinkle 5.2s ease-in-out infinite 3s;
-            animation-fill-mode: backwards;
-        }
-        .var-8 .p7 {
-            bottom: 15%; right: 30%; width: 4.5%; height: 2.2%;
-            background: radial-gradient(circle, rgba(220, 80, 160, 0.7), transparent);
-            animation: floatUp 13.5s ease-in-out infinite 7s, twinkle 4.3s ease-in-out infinite 3.5s;
+            bottom: 25%; left: 25%; width: 11%; height: 5.5%;
+            background: radial-gradient(circle, rgba(255, 100, 150, 0.7), transparent);
+            animation: diagonalDriftUpRight 13s ease-in-out infinite 6s, particleFade 13s ease-in-out infinite 6s;
             animation-fill-mode: backwards;
         }
 
-        /* ===== 9: RADIAL EXPANSION ===== */
+        /* ===== 9: EMERALD & VIOLET ===== */
         .var-9 .canvas {
-            background: radial-gradient(circle at 50% 50%, rgb(30, 15, 50), rgb(5, 2, 15));
+            background: radial-gradient(ellipse at 40% 45%, rgb(35, 18, 55), rgb(5, 2, 15));
         }
 
-        .var-9 .ambient {
+        .var-9 .flow-1 {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 70%;
-            height: 50%;
-            background: radial-gradient(ellipse,
-                rgba(100, 50, 130, 0.25),
-                rgba(60, 30, 90, 0.18) 60%,
-                transparent 85%);
+            top: 22%;
+            left: 0;
+            width: 100%;
+            height: 16%;
+            background: linear-gradient(to right,
+                transparent,
+                rgba(60, 200, 140, 0.28) 50%,
+                transparent);
+            filter: blur(39px);
+            animation: driftRightWobble1 48s ease-in-out infinite 2s;
+            animation-fill-mode: backwards;
+        }
+
+        .var-9 .flow-2 {
+            position: absolute;
+            top: 35%;
+            left: 0;
+            width: 100%;
+            height: 14%;
+            background: linear-gradient(to right,
+                transparent,
+                rgba(60, 200, 140, 0.22) 50%,
+                transparent);
+            filter: blur(42px);
+            animation: driftRightWobble2 37s ease-in-out infinite 11s;
+            animation-fill-mode: backwards;
+        }
+
+        .var-9 .flow-3 {
+            position: absolute;
+            bottom: 25%;
+            left: 0;
+            width: 100%;
+            height: 18%;
+            background: linear-gradient(to right,
+                transparent,
+                rgba(180, 100, 220, 0.29) 50%,
+                transparent);
+            filter: blur(39px);
+            animation: driftLeftWobble1 54s ease-in-out infinite 5s;
+            animation-fill-mode: backwards;
+        }
+
+        .var-9 .flow-4 {
+            position: absolute;
+            bottom: 38%;
+            left: 0;
+            width: 100%;
+            height: 15%;
+            background: linear-gradient(to right,
+                transparent,
+                rgba(180, 100, 220, 0.23) 50%,
+                transparent);
+            filter: blur(44px);
+            animation: driftLeftWobble2 41s ease-in-out infinite 17s;
+            animation-fill-mode: backwards;
+        }
+
+        .var-9 .diagonal-mist {
+            position: absolute;
+            top: 20%;
+            left: -10%;
+            width: 80%;
+            height: 70%;
+            background: linear-gradient(to bottom right,
+                rgba(60, 200, 140, 0.25),
+                rgba(160, 80, 200, 0.2) 60%,
+                transparent 90%);
             filter: blur(50px);
-            animation: slowRotate 70s linear infinite, atmosphereFade 42s ease-in-out infinite;
+            transform: rotate(-15deg);
+            animation: slowRotate 45s linear infinite, atmosphereFade 28s ease-in-out infinite;
         }
 
         .var-9 .p1 {
-            bottom: 22%; left: 18%; width: 10%; height: 5%;
-            background: radial-gradient(circle, rgba(100, 220, 220, 0.7), transparent);
-            animation: diagonalDriftUpLeft 15s ease-in-out infinite, particleFade 15s ease-in-out infinite;
+            bottom: 15%; left: 12%; width: 10%; height: 5%;
+            background: radial-gradient(circle, rgba(60, 200, 140, 0.7), transparent);
+            animation: diagonalDriftUpRight 12s ease-in-out infinite, particleFade 12s ease-in-out infinite;
         }
         .var-9 .p2 {
-            bottom: 18%; right: 20%; width: 11%; height: 5.5%;
+            bottom: 20%; left: 18%; width: 9%; height: 4.5%;
             background: radial-gradient(circle, rgba(255, 200, 80, 0.65), transparent);
-            animation: diagonalDriftUpRight 16s ease-in-out infinite 5s, particleFade 16s ease-in-out infinite 5s;
+            animation: diagonalDriftUpRight 14s ease-in-out infinite 3s, particleFade 14s ease-in-out infinite 3s;
             animation-fill-mode: backwards;
         }
         .var-9 .p3 {
-            bottom: 12%; right: 12%; width: 7%; height: 3.5%;
-            background: radial-gradient(circle, rgba(220, 80, 160, 0.6), transparent);
-            animation: floatOrganic 17s ease-in-out infinite 10s, twinkle 6s ease-in-out infinite 3s;
+            bottom: 25%; left: 25%; width: 11%; height: 5.5%;
+            background: radial-gradient(circle, rgba(180, 100, 220, 0.7), transparent);
+            animation: diagonalDriftUpRight 13s ease-in-out infinite 6s, particleFade 13s ease-in-out infinite 6s;
             animation-fill-mode: backwards;
         }
 
@@ -764,7 +1225,7 @@
             height: 16%;
             background: linear-gradient(to right,
                 transparent,
-                rgba(80, 200, 240, 0.28) 50%,
+                rgba(100, 220, 220, 0.28) 50%,
                 transparent);
             filter: blur(39px);
             animation: driftRightWobble1 48s ease-in-out infinite 2s;
@@ -779,7 +1240,7 @@
             height: 14%;
             background: linear-gradient(to right,
                 transparent,
-                rgba(80, 200, 240, 0.22) 50%,
+                rgba(100, 220, 220, 0.22) 50%,
                 transparent);
             filter: blur(42px);
             animation: driftRightWobble2 37s ease-in-out infinite 11s;
@@ -794,7 +1255,7 @@
             height: 18%;
             background: linear-gradient(to right,
                 transparent,
-                rgba(160, 80, 200, 0.29) 50%,
+                rgba(220, 80, 160, 0.29) 50%,
                 transparent);
             filter: blur(39px);
             animation: driftLeftWobble1 54s ease-in-out infinite 5s;
@@ -809,7 +1270,7 @@
             height: 15%;
             background: linear-gradient(to right,
                 transparent,
-                rgba(160, 80, 200, 0.23) 50%,
+                rgba(220, 80, 160, 0.23) 50%,
                 transparent);
             filter: blur(44px);
             animation: driftLeftWobble2 41s ease-in-out infinite 17s;
@@ -823,8 +1284,8 @@
             width: 80%;
             height: 70%;
             background: linear-gradient(to bottom right,
-                rgba(80, 200, 240, 0.25),
-                rgba(160, 80, 200, 0.2) 60%,
+                rgba(100, 220, 220, 0.25),
+                rgba(180, 60, 120, 0.2) 60%,
                 transparent 90%);
             filter: blur(50px);
             transform: rotate(-15deg);
@@ -833,7 +1294,7 @@
 
         .var-10 .p1 {
             bottom: 15%; left: 12%; width: 10%; height: 5%;
-            background: radial-gradient(circle, rgba(80, 200, 240, 0.7), transparent);
+            background: radial-gradient(circle, rgba(100, 220, 220, 0.7), transparent);
             animation: diagonalDriftUpRight 12s ease-in-out infinite, particleFade 12s ease-in-out infinite;
         }
         .var-10 .p2 {
@@ -844,7 +1305,7 @@
         }
         .var-10 .p3 {
             bottom: 25%; left: 25%; width: 11%; height: 5.5%;
-            background: radial-gradient(circle, rgba(160, 80, 200, 0.7), transparent);
+            background: radial-gradient(circle, rgba(220, 80, 160, 0.7), transparent);
             animation: diagonalDriftUpRight 13s ease-in-out infinite 6s, particleFade 13s ease-in-out infinite 6s;
             animation-fill-mode: backwards;
         }
