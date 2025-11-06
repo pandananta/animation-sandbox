@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iOS Animation Sandbox</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .mode-toggle {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            background: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .mode-toggle span {
+            font-size: 16px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background-color: #ccc;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .toggle-switch.dark {
+            background-color: #4a4a4a;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 24px;
+            height: 24px;
+            background-color: white;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+
+        .toggle-switch.dark .toggle-slider {
+            transform: translateX(30px);
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .phone {
+            background: white;
+            border-radius: 30px;
+            padding: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+            aspect-ratio: 9/19.5;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .phone.dark-mode {
+            background: #1c1c1e;
+        }
+
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            border-radius: 22px;
+            position: relative;
+            overflow: hidden;
+            background: #ffffff;
+            transition: background-color 0.3s ease;
+        }
+
+        .phone.dark-mode .phone-screen {
+            background: #000000;
+        }
+
+        .phone-label {
+            position: absolute;
+            top: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255,255,255,0.9);
+            padding: 5px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #333;
+            z-index: 10;
+        }
+
+        .phone.dark-mode .phone-label {
+            background: rgba(50,50,50,0.9);
+            color: #fff;
+        }
+
+        /* Animation content area */
+        .animation-content {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* Placeholder animations for each version */
+        .animation-1 .animation-content::after {
+            content: 'Version 1';
+            font-size: 14px;
+            color: #999;
+        }
+
+        .animation-2 .animation-content::after {
+            content: 'Version 2';
+            font-size: 14px;
+            color: #999;
+        }
+
+        .animation-3 .animation-content::after {
+            content: 'Version 3';
+            font-size: 14px;
+            color: #999;
+        }
+
+        .animation-4 .animation-content::after {
+            content: 'Version 4';
+            font-size: 14px;
+            color: #999;
+        }
+
+        .animation-5 .animation-content::after {
+            content: 'Version 5';
+            font-size: 14px;
+            color: #999;
+        }
+
+        .animation-6 .animation-content::after {
+            content: 'Version 6';
+            font-size: 14px;
+            color: #999;
+        }
+
+        .animation-7 .animation-content::after {
+            content: 'Version 7';
+            font-size: 14px;
+            color: #999;
+        }
+
+        .animation-8 .animation-content::after {
+            content: 'Version 8';
+            font-size: 14px;
+            color: #999;
+        }
+
+        .phone.dark-mode .animation-content::after {
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>iOS Animation Sandbox</h1>
+        <div class="mode-toggle">
+            <span>Light</span>
+            <div class="toggle-switch" id="modeToggle">
+                <div class="toggle-slider"></div>
+            </div>
+            <span>Dark</span>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="phone animation-1" id="phone1">
+            <div class="phone-label">Version 1</div>
+            <div class="phone-screen">
+                <div class="animation-content">
+                    <!-- Animation 1 content here -->
+                </div>
+            </div>
+        </div>
+
+        <div class="phone animation-2" id="phone2">
+            <div class="phone-label">Version 2</div>
+            <div class="phone-screen">
+                <div class="animation-content">
+                    <!-- Animation 2 content here -->
+                </div>
+            </div>
+        </div>
+
+        <div class="phone animation-3" id="phone3">
+            <div class="phone-label">Version 3</div>
+            <div class="phone-screen">
+                <div class="animation-content">
+                    <!-- Animation 3 content here -->
+                </div>
+            </div>
+        </div>
+
+        <div class="phone animation-4" id="phone4">
+            <div class="phone-label">Version 4</div>
+            <div class="phone-screen">
+                <div class="animation-content">
+                    <!-- Animation 4 content here -->
+                </div>
+            </div>
+        </div>
+
+        <div class="phone animation-5" id="phone5">
+            <div class="phone-label">Version 5</div>
+            <div class="phone-screen">
+                <div class="animation-content">
+                    <!-- Animation 5 content here -->
+                </div>
+            </div>
+        </div>
+
+        <div class="phone animation-6" id="phone6">
+            <div class="phone-label">Version 6</div>
+            <div class="phone-screen">
+                <div class="animation-content">
+                    <!-- Animation 6 content here -->
+                </div>
+            </div>
+        </div>
+
+        <div class="phone animation-7" id="phone7">
+            <div class="phone-label">Version 7</div>
+            <div class="phone-screen">
+                <div class="animation-content">
+                    <!-- Animation 7 content here -->
+                </div>
+            </div>
+        </div>
+
+        <div class="phone animation-8" id="phone8">
+            <div class="phone-label">Version 8</div>
+            <div class="phone-screen">
+                <div class="animation-content">
+                    <!-- Animation 8 content here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const modeToggle = document.getElementById('modeToggle');
+        const phones = document.querySelectorAll('.phone');
+        let isDarkMode = false;
+
+        modeToggle.addEventListener('click', () => {
+            isDarkMode = !isDarkMode;
+            modeToggle.classList.toggle('dark');
+
+            phones.forEach(phone => {
+                phone.classList.toggle('dark-mode');
+            });
+        });
+
+        // You can add custom animation logic here
+        // Each phone can have its own animation behavior
+    </script>
+</body>
+</html>
