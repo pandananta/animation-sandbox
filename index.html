@@ -141,18 +141,21 @@
             position: relative;
         }
 
-        /* Unified Cosmic Color Palette */
+        /* New Divine Color Palette */
         :root {
-            --cosmic-mauve: rgba(219, 112, 147, 0.9);
-            --cosmic-magenta: rgba(232, 121, 249, 0.9);
-            --cosmic-purple: rgba(186, 85, 211, 0.9);
-            --cosmic-deep-purple: rgba(138, 43, 226, 0.8);
-            --cosmic-gold: rgba(251, 191, 36, 0.7);
-            --cosmic-teal: rgba(20, 184, 166, 0.7);
-            --cosmic-white: rgba(255, 255, 255, 0.9);
+            --soul-burgundy: rgba(116, 20, 68, 0.9);
+            --soul-burgundy-soft: rgba(116, 20, 68, 0.5);
+            --soul-teal: rgba(25, 94, 97, 0.9);
+            --soul-teal-soft: rgba(25, 94, 97, 0.5);
+            --soul-purple: rgba(51, 33, 71, 0.9);
+            --soul-purple-soft: rgba(51, 33, 71, 0.5);
+            --soul-gold: rgba(173, 125, 47, 0.9);
+            --soul-gold-soft: rgba(173, 125, 47, 0.5);
+            --soul-cream: rgba(254, 251, 240, 0.9);
+            --soul-cream-soft: rgba(254, 251, 240, 0.5);
         }
 
-        /* BASE STYLES FOR ALL ANIMATIONS */
+        /* BASE STYLES */
         .animation-content {
             width: 100%;
             height: 100%;
@@ -162,295 +165,351 @@
             position: relative;
         }
 
-        /* ===== ANIMATION 1: CLASSIC PULSE ===== */
-        .animation-1 .soul-orb {
+        /* ========== ATMOSPHERIC EFFECTS ========== */
+
+        /* Subtle Background Pulse */
+        .atmo-pulse {
+            position: absolute;
             width: 100px;
             height: 100px;
             border-radius: 50%;
-            position: absolute;
-            background: radial-gradient(circle, var(--cosmic-gold) 0%, var(--cosmic-mauve) 40%, var(--cosmic-purple) 70%, var(--cosmic-deep-purple) 100%);
-            box-shadow: 0 0 80px var(--cosmic-mauve), 0 0 150px var(--cosmic-purple);
+            opacity: 0;
+            animation: atmoPulse 4s ease-out infinite;
             filter: blur(8px);
         }
 
-        .animation-1 .pulse-ring {
+        .atmo-pulse:nth-child(2) { animation-delay: 0.8s; }
+        .atmo-pulse:nth-child(3) { animation-delay: 1.6s; }
+        .atmo-pulse:nth-child(4) { animation-delay: 2.4s; }
+        .atmo-pulse:nth-child(5) { animation-delay: 3.2s; }
+
+        @keyframes atmoPulse {
+            0% { transform: translate(-50%, -50%) scale(1); opacity: 0; }
+            10% { opacity: 0.15; }
+            100% { transform: translate(-50%, -50%) scale(4); opacity: 0; }
+        }
+
+        /* Floating Particles */
+        .floatie {
             position: absolute;
-            width: 100px;
-            height: 100px;
             border-radius: 50%;
-            background: radial-gradient(circle, var(--cosmic-magenta), transparent);
-            opacity: 0;
-            animation: pulse 3.5s ease-out infinite;
-            filter: blur(3px);
-        }
-
-        .animation-1 .pulse-ring:nth-child(2) { animation-delay: 0.7s; }
-        .animation-1 .pulse-ring:nth-child(3) { animation-delay: 1.4s; }
-        .animation-1 .pulse-ring:nth-child(4) { animation-delay: 2.1s; }
-        .animation-1 .pulse-ring:nth-child(5) { animation-delay: 2.8s; }
-
-        @keyframes pulse {
-            0% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
-            100% { transform: translate(-50%, -50%) scale(3.5); opacity: 0; }
-        }
-
-        /* ===== ANIMATION 2: BREATHING ===== */
-        .animation-2 .soul-orb {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            position: absolute;
-            background: radial-gradient(circle, var(--cosmic-white) 0%, var(--cosmic-magenta) 30%, var(--cosmic-purple) 60%, var(--cosmic-deep-purple) 100%);
-            box-shadow: 0 0 80px var(--cosmic-magenta), 0 0 150px var(--cosmic-purple);
-            filter: blur(6px);
-            animation: breathe 4s ease-in-out infinite;
-        }
-
-        @keyframes breathe {
-            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
-            50% { transform: translate(-50%, -50%) scale(1.6); opacity: 1; }
-        }
-
-        /* ===== ANIMATION 3: SPIRAL WAVES ===== */
-        .animation-3 .spiral {
-            position: absolute;
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            border: 3px solid var(--cosmic-magenta);
+            opacity: 0.3;
             filter: blur(2px);
-            animation: spiral 5s linear infinite;
         }
 
-        .animation-3 .spiral:nth-child(1) { animation-delay: 0s; opacity: 0.8; }
-        .animation-3 .spiral:nth-child(2) { animation-delay: 1s; opacity: 0.6; width: 100px; height: 100px; }
-        .animation-3 .spiral:nth-child(3) { animation-delay: 2s; opacity: 0.4; width: 80px; height: 80px; }
+        @keyframes gentleFloat {
+            0%, 100% { transform: translate(-50%, -50%) translate(0, 0); opacity: 0.2; }
+            25% { transform: translate(-50%, -50%) translate(20px, -15px); opacity: 0.4; }
+            50% { transform: translate(-50%, -50%) translate(-15px, 20px); opacity: 0.3; }
+            75% { transform: translate(-50%, -50%) translate(25px, 15px); opacity: 0.5; }
+        }
 
-        .animation-3 .core {
+        /* Orbiting Elements */
+        .orbit-path {
             position: absolute;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: radial-gradient(circle, var(--cosmic-white), var(--cosmic-mauve));
-            box-shadow: 0 0 60px var(--cosmic-magenta);
-            filter: blur(4px);
+            animation: slowRotate 12s linear infinite;
         }
 
-        @keyframes spiral {
-            0% { transform: translate(-50%, -50%) rotate(0deg) scale(0.5); opacity: 0; }
-            50% { opacity: 0.8; }
-            100% { transform: translate(-50%, -50%) rotate(360deg) scale(2); opacity: 0; }
-        }
-
-        /* ===== ANIMATION 4: PARTICLE CLOUD ===== */
-        .animation-4 .particle {
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--cosmic-magenta);
-            box-shadow: 0 0 20px var(--cosmic-magenta);
-            filter: blur(1px);
-            animation: float 4s ease-in-out infinite;
-        }
-
-        .animation-4 .particle:nth-child(1) { animation-delay: 0s; animation-duration: 3s; }
-        .animation-4 .particle:nth-child(2) { animation-delay: 0.5s; animation-duration: 3.5s; }
-        .animation-4 .particle:nth-child(3) { animation-delay: 1s; animation-duration: 4s; }
-        .animation-4 .particle:nth-child(4) { animation-delay: 1.5s; animation-duration: 3.2s; }
-        .animation-4 .particle:nth-child(5) { animation-delay: 2s; animation-duration: 3.8s; }
-        .animation-4 .particle:nth-child(6) { animation-delay: 2.5s; animation-duration: 4.2s; }
-
-        @keyframes float {
-            0%, 100% { transform: translate(-50%, -50%) translate(0, 0); opacity: 0.3; }
-            25% { transform: translate(-50%, -50%) translate(30px, -20px); opacity: 1; }
-            50% { transform: translate(-50%, -50%) translate(-20px, 30px); opacity: 0.6; }
-            75% { transform: translate(-50%, -50%) translate(40px, 20px); opacity: 0.9; }
-        }
-
-        /* ===== ANIMATION 5: DUAL ORBIT ===== */
-        .animation-5 .orbit-container {
-            position: absolute;
-            width: 150px;
-            height: 150px;
-            animation: rotate 6s linear infinite;
-        }
-
-        .animation-5 .orb {
-            position: absolute;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            background: radial-gradient(circle, var(--cosmic-white), var(--cosmic-magenta));
-            box-shadow: 0 0 40px var(--cosmic-magenta);
-            filter: blur(3px);
-        }
-
-        .animation-5 .orb:nth-child(1) { top: 0; left: 50%; transform: translateX(-50%); }
-        .animation-5 .orb:nth-child(2) { bottom: 0; left: 50%; transform: translateX(-50%); }
-
-        .animation-5 .center-glow {
-            position: absolute;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: radial-gradient(circle, var(--cosmic-gold), var(--cosmic-purple));
-            box-shadow: 0 0 60px var(--cosmic-mauve);
-            filter: blur(6px);
-        }
-
-        @keyframes rotate {
+        @keyframes slowRotate {
             0% { transform: translate(-50%, -50%) rotate(0deg); }
             100% { transform: translate(-50%, -50%) rotate(360deg); }
         }
 
-        /* ===== ANIMATION 6: WAVE RIPPLE ===== */
-        .animation-6 .wave {
+        .orbit-dot {
             position: absolute;
             border-radius: 50%;
-            border: 2px solid var(--cosmic-mauve);
+            filter: blur(2px);
+            opacity: 0.4;
+        }
+
+        /* Slow Spiral */
+        .spiral-ring {
+            position: absolute;
+            border-radius: 50%;
+            border: 2px solid;
             opacity: 0;
-            animation: ripple 3s ease-out infinite;
-            filter: blur(2px);
-        }
-
-        .animation-6 .wave:nth-child(1) { animation-delay: 0s; }
-        .animation-6 .wave:nth-child(2) { animation-delay: 0.6s; }
-        .animation-6 .wave:nth-child(3) { animation-delay: 1.2s; }
-        .animation-6 .wave:nth-child(4) { animation-delay: 1.8s; }
-        .animation-6 .wave:nth-child(5) { animation-delay: 2.4s; }
-
-        @keyframes ripple {
-            0% { width: 20px; height: 20px; opacity: 0; }
-            10% { opacity: 0.8; }
-            100% { width: 250px; height: 250px; opacity: 0; }
-        }
-
-        /* ===== ANIMATION 7: ENERGY BURST ===== */
-        .animation-7 .burst {
-            position: absolute;
-            width: 4px;
-            height: 80px;
-            background: linear-gradient(to top, transparent, var(--cosmic-magenta), transparent);
-            filter: blur(2px);
-            transform-origin: center center;
-            animation: burst 2s ease-out infinite;
-        }
-
-        .animation-7 .burst:nth-child(1) { transform: translate(-50%, -50%) rotate(0deg); }
-        .animation-7 .burst:nth-child(2) { transform: translate(-50%, -50%) rotate(45deg); }
-        .animation-7 .burst:nth-child(3) { transform: translate(-50%, -50%) rotate(90deg); }
-        .animation-7 .burst:nth-child(4) { transform: translate(-50%, -50%) rotate(135deg); }
-        .animation-7 .burst:nth-child(5) { transform: translate(-50%, -50%) rotate(180deg); }
-        .animation-7 .burst:nth-child(6) { transform: translate(-50%, -50%) rotate(225deg); }
-
-        .animation-7 .center {
-            position: absolute;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            background: radial-gradient(circle, var(--cosmic-white), var(--cosmic-mauve));
-            box-shadow: 0 0 60px var(--cosmic-magenta);
-            filter: blur(4px);
-        }
-
-        @keyframes burst {
-            0%, 100% { opacity: 0.2; height: 60px; }
-            50% { opacity: 1; height: 120px; }
-        }
-
-        /* ===== ANIMATION 8: ROTATING HALO ===== */
-        .animation-8 .halo {
-            position: absolute;
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            border: 3px solid transparent;
-            border-top-color: var(--cosmic-magenta);
-            border-right-color: var(--cosmic-purple);
+            animation: spiralOut 8s linear infinite;
             filter: blur(3px);
-            animation: spin 3s linear infinite;
         }
 
-        .animation-8 .halo:nth-child(2) {
-            width: 90px;
-            height: 90px;
-            animation-duration: 2s;
-            animation-direction: reverse;
-            border-top-color: var(--cosmic-mauve);
-            border-left-color: var(--cosmic-gold);
+        @keyframes spiralOut {
+            0% { transform: translate(-50%, -50%) rotate(0deg) scale(0.3); opacity: 0; }
+            30% { opacity: 0.2; }
+            100% { transform: translate(-50%, -50%) rotate(180deg) scale(2.5); opacity: 0; }
         }
 
-        .animation-8 .inner-core {
+        /* ========== MAIN ANIMATIONS ========== */
+
+        /* Breathing Core */
+        .main-breath {
             position: absolute;
-            width: 50px;
-            height: 50px;
             border-radius: 50%;
-            background: radial-gradient(circle, var(--cosmic-white), var(--cosmic-magenta));
-            box-shadow: 0 0 60px var(--cosmic-mauve);
-            filter: blur(5px);
-            animation: breathe 2s ease-in-out infinite;
+            filter: blur(10px);
+            animation: soulBreathe 4.5s ease-in-out infinite;
+            z-index: 10;
         }
 
-        @keyframes spin {
-            0% { transform: translate(-50%, -50%) rotate(0deg); }
-            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        @keyframes soulBreathe {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.9; filter: blur(10px); }
+            50% { transform: translate(-50%, -50%) scale(1.5); opacity: 1; filter: blur(12px); }
         }
 
-        /* ===== ANIMATION 9: BLOOM ===== */
-        .animation-9 .petal {
+        /* Shimmer Core */
+        .main-shimmer-base {
             position: absolute;
-            width: 60px;
-            height: 60px;
             border-radius: 50%;
-            background: radial-gradient(circle, var(--cosmic-magenta), transparent);
-            filter: blur(4px);
-            animation: bloom 4s ease-in-out infinite;
-            transform-origin: center center;
+            filter: blur(12px);
+            z-index: 10;
         }
 
-        .animation-9 .petal:nth-child(1) { animation-delay: 0s; }
-        .animation-9 .petal:nth-child(2) { animation-delay: 0.4s; }
-        .animation-9 .petal:nth-child(3) { animation-delay: 0.8s; }
-        .animation-9 .petal:nth-child(4) { animation-delay: 1.2s; }
-        .animation-9 .petal:nth-child(5) { animation-delay: 1.6s; }
-
-        @keyframes bloom {
-            0%, 100% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
-            50% { transform: translate(-50%, -50%) scale(1.5); opacity: 0.8; }
-        }
-
-        /* ===== ANIMATION 10: SHIMMER ===== */
-        .animation-10 .shimmer-dot {
+        .sparkle {
             position: absolute;
             width: 6px;
             height: 6px;
             border-radius: 50%;
-            background: var(--cosmic-white);
-            box-shadow: 0 0 20px var(--cosmic-magenta);
-            animation: shimmer 3s ease-in-out infinite;
+            filter: blur(1px);
+            animation: sparkleGlow 3s ease-in-out infinite;
+            z-index: 11;
         }
 
-        .animation-10 .shimmer-dot:nth-child(1) { left: 45%; top: 30%; animation-delay: 0s; }
-        .animation-10 .shimmer-dot:nth-child(2) { left: 60%; top: 45%; animation-delay: 0.5s; }
-        .animation-10 .shimmer-dot:nth-child(3) { left: 50%; top: 60%; animation-delay: 1s; }
-        .animation-10 .shimmer-dot:nth-child(4) { left: 35%; top: 50%; animation-delay: 1.5s; }
-        .animation-10 .shimmer-dot:nth-child(5) { left: 55%; top: 35%; animation-delay: 2s; }
+        @keyframes sparkleGlow {
+            0%, 100% { opacity: 0.3; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.4); }
+        }
 
-        .animation-10 .glow-base {
-            position: absolute;
+        /* ========== 10 VARIATIONS ========== */
+
+        /* 1: Breathing + Subtle Pulse */
+        .animation-1 .main-breath {
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, var(--soul-cream) 0%, var(--soul-gold) 30%, var(--soul-burgundy) 60%, var(--soul-purple) 100%);
+            box-shadow: 0 0 80px var(--soul-burgundy), 0 0 120px var(--soul-purple);
+        }
+
+        .animation-1 .atmo-pulse {
+            background: radial-gradient(circle, var(--soul-burgundy-soft), transparent);
+        }
+
+        /* 2: Breathing + Floaties */
+        .animation-2 .main-breath {
+            width: 90px;
+            height: 90px;
+            background: radial-gradient(circle, var(--soul-cream) 0%, var(--soul-teal) 40%, var(--soul-purple) 70%, var(--soul-burgundy) 100%);
+            box-shadow: 0 0 80px var(--soul-teal), 0 0 120px var(--soul-purple);
+        }
+
+        .animation-2 .floatie {
+            width: 8px;
+            height: 8px;
+            background: var(--soul-teal-soft);
+            box-shadow: 0 0 15px var(--soul-teal);
+            animation: gentleFloat 5s ease-in-out infinite;
+        }
+
+        .animation-2 .floatie:nth-child(2) { animation-delay: 0.5s; animation-duration: 5.5s; }
+        .animation-2 .floatie:nth-child(3) { animation-delay: 1s; animation-duration: 6s; }
+        .animation-2 .floatie:nth-child(4) { animation-delay: 1.5s; animation-duration: 5.2s; }
+
+        /* 3: Shimmer + Pulse */
+        .animation-3 .main-shimmer-base {
+            width: 85px;
+            height: 85px;
+            background: radial-gradient(circle, var(--soul-gold) 0%, var(--soul-burgundy) 50%, var(--soul-purple) 100%);
+            box-shadow: 0 0 80px var(--soul-gold);
+        }
+
+        .animation-3 .sparkle { background: var(--soul-cream); box-shadow: 0 0 20px var(--soul-gold); }
+        .animation-3 .sparkle:nth-child(2) { animation-delay: 0.5s; }
+        .animation-3 .sparkle:nth-child(3) { animation-delay: 1s; }
+        .animation-3 .sparkle:nth-child(4) { animation-delay: 1.5s; }
+        .animation-3 .sparkle:nth-child(5) { animation-delay: 2s; }
+
+        .animation-3 .atmo-pulse {
+            background: radial-gradient(circle, var(--soul-gold-soft), transparent);
+        }
+
+        /* 4: Breathing + Orbit */
+        .animation-4 .main-breath {
             width: 80px;
             height: 80px;
-            border-radius: 50%;
-            background: radial-gradient(circle, var(--cosmic-gold) 0%, var(--cosmic-mauve) 40%, var(--cosmic-purple) 100%);
-            box-shadow: 0 0 80px var(--cosmic-mauve);
-            filter: blur(10px);
+            background: radial-gradient(circle, var(--soul-cream) 0%, var(--soul-purple) 40%, var(--soul-burgundy) 100%);
+            box-shadow: 0 0 70px var(--soul-purple);
         }
 
-        @keyframes shimmer {
-            0%, 100% { opacity: 0.2; transform: scale(0.8); }
-            50% { opacity: 1; transform: scale(1.3); }
+        .animation-4 .orbit-path {
+            width: 120px;
+            height: 120px;
         }
+
+        .animation-4 .orbit-dot {
+            width: 12px;
+            height: 12px;
+            background: var(--soul-teal);
+            box-shadow: 0 0 20px var(--soul-teal);
+        }
+
+        .animation-4 .orbit-dot:nth-child(1) { top: 0; left: 50%; transform: translateX(-50%); }
+        .animation-4 .orbit-dot:nth-child(2) { bottom: 0; left: 50%; transform: translateX(-50%); }
+
+        /* 5: Shimmer + Floaties */
+        .animation-5 .main-shimmer-base {
+            width: 95px;
+            height: 95px;
+            background: radial-gradient(circle, var(--soul-cream) 0%, var(--soul-gold) 35%, var(--soul-teal) 65%, var(--soul-purple) 100%);
+            box-shadow: 0 0 85px var(--soul-teal);
+        }
+
+        .animation-5 .sparkle { background: var(--soul-cream); box-shadow: 0 0 18px var(--soul-teal); }
+        .animation-5 .sparkle:nth-child(2) { animation-delay: 0.6s; }
+        .animation-5 .sparkle:nth-child(3) { animation-delay: 1.2s; }
+        .animation-5 .sparkle:nth-child(4) { animation-delay: 1.8s; }
+
+        .animation-5 .floatie {
+            width: 6px;
+            height: 6px;
+            background: var(--soul-gold-soft);
+            box-shadow: 0 0 12px var(--soul-gold);
+            animation: gentleFloat 6s ease-in-out infinite;
+        }
+
+        .animation-5 .floatie:nth-child(6) { animation-delay: 0.8s; animation-duration: 6.5s; }
+        .animation-5 .floatie:nth-child(7) { animation-delay: 1.6s; animation-duration: 5.8s; }
+
+        /* 6: Breathing + Spiral */
+        .animation-6 .main-breath {
+            width: 85px;
+            height: 85px;
+            background: radial-gradient(circle, var(--soul-gold) 0%, var(--soul-burgundy) 45%, var(--soul-purple) 100%);
+            box-shadow: 0 0 75px var(--soul-burgundy);
+        }
+
+        .animation-6 .spiral-ring {
+            width: 100px;
+            height: 100px;
+            border-color: var(--soul-teal-soft);
+        }
+
+        .animation-6 .spiral-ring:nth-child(2) { animation-delay: 2s; }
+        .animation-6 .spiral-ring:nth-child(3) { animation-delay: 4s; }
+
+        /* 7: Shimmer + Orbit */
+        .animation-7 .main-shimmer-base {
+            width: 90px;
+            height: 90px;
+            background: radial-gradient(circle, var(--soul-cream) 0%, var(--soul-burgundy) 40%, var(--soul-purple) 100%);
+            box-shadow: 0 0 90px var(--soul-burgundy);
+        }
+
+        .animation-7 .sparkle { background: var(--soul-gold); box-shadow: 0 0 22px var(--soul-gold); }
+        .animation-7 .sparkle:nth-child(2) { animation-delay: 0.7s; }
+        .animation-7 .sparkle:nth-child(3) { animation-delay: 1.4s; }
+        .animation-7 .sparkle:nth-child(4) { animation-delay: 2.1s; }
+
+        .animation-7 .orbit-path {
+            width: 110px;
+            height: 110px;
+            animation-duration: 10s;
+        }
+
+        .animation-7 .orbit-dot {
+            width: 10px;
+            height: 10px;
+            background: var(--soul-purple);
+            box-shadow: 0 0 18px var(--soul-purple);
+        }
+
+        .animation-7 .orbit-dot:nth-child(1) { top: 0; left: 50%; transform: translateX(-50%); }
+
+        /* 8: Breathing + Pulse + Floaties */
+        .animation-8 .main-breath {
+            width: 95px;
+            height: 95px;
+            background: radial-gradient(circle, var(--soul-cream) 0%, var(--soul-teal) 35%, var(--soul-burgundy) 70%, var(--soul-purple) 100%);
+            box-shadow: 0 0 85px var(--soul-teal), 0 0 140px var(--soul-burgundy);
+        }
+
+        .animation-8 .atmo-pulse {
+            background: radial-gradient(circle, var(--soul-purple-soft), transparent);
+        }
+
+        .animation-8 .floatie {
+            width: 7px;
+            height: 7px;
+            background: var(--soul-gold-soft);
+            box-shadow: 0 0 14px var(--soul-gold);
+            animation: gentleFloat 5.5s ease-in-out infinite;
+        }
+
+        .animation-8 .floatie:nth-child(7) { animation-delay: 1s; animation-duration: 6s; }
+        .animation-8 .floatie:nth-child(8) { animation-delay: 2s; animation-duration: 5.3s; }
+
+        /* 9: Shimmer + Spiral + Floaties */
+        .animation-9 .main-shimmer-base {
+            width: 88px;
+            height: 88px;
+            background: radial-gradient(circle, var(--soul-gold) 0%, var(--soul-purple) 50%, var(--soul-burgundy) 100%);
+            box-shadow: 0 0 88px var(--soul-purple);
+        }
+
+        .animation-9 .sparkle { background: var(--soul-cream); box-shadow: 0 0 20px var(--soul-burgundy); }
+        .animation-9 .sparkle:nth-child(2) { animation-delay: 0.75s; }
+        .animation-9 .sparkle:nth-child(3) { animation-delay: 1.5s; }
+
+        .animation-9 .spiral-ring {
+            width: 90px;
+            height: 90px;
+            border-color: var(--soul-burgundy-soft);
+        }
+
+        .animation-9 .spiral-ring:nth-child(5) { animation-delay: 2.5s; }
+
+        .animation-9 .floatie {
+            width: 6px;
+            height: 6px;
+            background: var(--soul-teal-soft);
+            box-shadow: 0 0 13px var(--soul-teal);
+            animation: gentleFloat 6.2s ease-in-out infinite;
+        }
+
+        .animation-9 .floatie:nth-child(7) { animation-delay: 1.2s; }
+
+        /* 10: Breathing + All Atmospheric */
+        .animation-10 .main-breath {
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, var(--soul-cream) 0%, var(--soul-gold) 25%, var(--soul-burgundy) 50%, var(--soul-teal) 75%, var(--soul-purple) 100%);
+            box-shadow: 0 0 95px var(--soul-burgundy), 0 0 150px var(--soul-purple);
+        }
+
+        .animation-10 .atmo-pulse {
+            background: radial-gradient(circle, var(--soul-teal-soft), transparent);
+        }
+
+        .animation-10 .orbit-path {
+            width: 130px;
+            height: 130px;
+            animation-duration: 15s;
+        }
+
+        .animation-10 .orbit-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--soul-gold);
+            box-shadow: 0 0 16px var(--soul-gold);
+        }
+
+        .animation-10 .orbit-dot:nth-child(1) { top: 0; left: 50%; transform: translateX(-50%); }
+
+        .animation-10 .floatie {
+            width: 5px;
+            height: 5px;
+            background: var(--soul-burgundy-soft);
+            box-shadow: 0 0 11px var(--soul-burgundy);
+            animation: gentleFloat 7s ease-in-out infinite;
+        }
+
+        .animation-10 .floatie:nth-child(8) { animation-delay: 1.5s; animation-duration: 6.5s; }
     </style>
 </head>
 <body>
@@ -467,129 +526,141 @@
 
     <div class="container">
         <div class="phone animation-1" id="phone1">
-            <div class="phone-label">Classic Pulse</div>
+            <div class="phone-label">Breath + Pulse</div>
             <div class="phone-screen">
                 <div class="animation-content">
-                    <div class="soul-orb"></div>
-                    <div class="pulse-ring"></div>
-                    <div class="pulse-ring"></div>
-                    <div class="pulse-ring"></div>
-                    <div class="pulse-ring"></div>
-                    <div class="pulse-ring"></div>
+                    <div class="atmo-pulse"></div>
+                    <div class="atmo-pulse"></div>
+                    <div class="atmo-pulse"></div>
+                    <div class="atmo-pulse"></div>
+                    <div class="atmo-pulse"></div>
+                    <div class="main-breath"></div>
                 </div>
             </div>
         </div>
 
         <div class="phone animation-2" id="phone2">
-            <div class="phone-label">Breathing</div>
+            <div class="phone-label">Breath + Floaties</div>
             <div class="phone-screen">
                 <div class="animation-content">
-                    <div class="soul-orb"></div>
+                    <div class="floatie"></div>
+                    <div class="floatie"></div>
+                    <div class="floatie"></div>
+                    <div class="floatie"></div>
+                    <div class="main-breath"></div>
                 </div>
             </div>
         </div>
 
         <div class="phone animation-3" id="phone3">
-            <div class="phone-label">Spiral Waves</div>
+            <div class="phone-label">Shimmer + Pulse</div>
             <div class="phone-screen">
                 <div class="animation-content">
-                    <div class="core"></div>
-                    <div class="spiral"></div>
-                    <div class="spiral"></div>
-                    <div class="spiral"></div>
+                    <div class="atmo-pulse"></div>
+                    <div class="sparkle" style="left: 45%; top: 30%;"></div>
+                    <div class="sparkle" style="left: 60%; top: 45%;"></div>
+                    <div class="sparkle" style="left: 50%; top: 60%;"></div>
+                    <div class="sparkle" style="left: 35%; top: 50%;"></div>
+                    <div class="sparkle" style="left: 55%; top: 35%;"></div>
+                    <div class="main-shimmer-base"></div>
                 </div>
             </div>
         </div>
 
         <div class="phone animation-4" id="phone4">
-            <div class="phone-label">Particle Cloud</div>
+            <div class="phone-label">Breath + Orbit</div>
             <div class="phone-screen">
                 <div class="animation-content">
-                    <div class="particle"></div>
-                    <div class="particle"></div>
-                    <div class="particle"></div>
-                    <div class="particle"></div>
-                    <div class="particle"></div>
-                    <div class="particle"></div>
+                    <div class="orbit-path">
+                        <div class="orbit-dot"></div>
+                        <div class="orbit-dot"></div>
+                    </div>
+                    <div class="main-breath"></div>
                 </div>
             </div>
         </div>
 
         <div class="phone animation-5" id="phone5">
-            <div class="phone-label">Dual Orbit</div>
+            <div class="phone-label">Shimmer + Floaties</div>
             <div class="phone-screen">
                 <div class="animation-content">
-                    <div class="center-glow"></div>
-                    <div class="orbit-container">
-                        <div class="orb"></div>
-                        <div class="orb"></div>
-                    </div>
+                    <div class="sparkle" style="left: 42%; top: 28%;"></div>
+                    <div class="sparkle" style="left: 58%; top: 48%;"></div>
+                    <div class="sparkle" style="left: 48%; top: 65%;"></div>
+                    <div class="sparkle" style="left: 38%; top: 52%;"></div>
+                    <div class="floatie"></div>
+                    <div class="floatie"></div>
+                    <div class="main-shimmer-base"></div>
                 </div>
             </div>
         </div>
 
         <div class="phone animation-6" id="phone6">
-            <div class="phone-label">Wave Ripple</div>
+            <div class="phone-label">Breath + Spiral</div>
             <div class="phone-screen">
                 <div class="animation-content">
-                    <div class="wave"></div>
-                    <div class="wave"></div>
-                    <div class="wave"></div>
-                    <div class="wave"></div>
-                    <div class="wave"></div>
+                    <div class="spiral-ring"></div>
+                    <div class="spiral-ring"></div>
+                    <div class="spiral-ring"></div>
+                    <div class="main-breath"></div>
                 </div>
             </div>
         </div>
 
         <div class="phone animation-7" id="phone7">
-            <div class="phone-label">Energy Burst</div>
+            <div class="phone-label">Shimmer + Orbit</div>
             <div class="phone-screen">
                 <div class="animation-content">
-                    <div class="center"></div>
-                    <div class="burst"></div>
-                    <div class="burst"></div>
-                    <div class="burst"></div>
-                    <div class="burst"></div>
-                    <div class="burst"></div>
-                    <div class="burst"></div>
+                    <div class="orbit-path">
+                        <div class="orbit-dot"></div>
+                    </div>
+                    <div class="sparkle" style="left: 44%; top: 32%;"></div>
+                    <div class="sparkle" style="left: 62%; top: 50%;"></div>
+                    <div class="sparkle" style="left: 46%; top: 62%;"></div>
+                    <div class="sparkle" style="left: 34%; top: 48%;"></div>
+                    <div class="main-shimmer-base"></div>
                 </div>
             </div>
         </div>
 
         <div class="phone animation-8" id="phone8">
-            <div class="phone-label">Rotating Halo</div>
+            <div class="phone-label">Breath + Layered</div>
             <div class="phone-screen">
                 <div class="animation-content">
-                    <div class="inner-core"></div>
-                    <div class="halo"></div>
-                    <div class="halo"></div>
+                    <div class="atmo-pulse"></div>
+                    <div class="atmo-pulse"></div>
+                    <div class="floatie"></div>
+                    <div class="floatie"></div>
+                    <div class="main-breath"></div>
                 </div>
             </div>
         </div>
 
         <div class="phone animation-9" id="phone9">
-            <div class="phone-label">Bloom</div>
+            <div class="phone-label">Shimmer + Complex</div>
             <div class="phone-screen">
                 <div class="animation-content">
-                    <div class="petal"></div>
-                    <div class="petal"></div>
-                    <div class="petal"></div>
-                    <div class="petal"></div>
-                    <div class="petal"></div>
+                    <div class="spiral-ring"></div>
+                    <div class="sparkle" style="left: 40%; top: 35%;"></div>
+                    <div class="sparkle" style="left: 56%; top: 52%;"></div>
+                    <div class="sparkle" style="left: 52%; top: 68%;"></div>
+                    <div class="spiral-ring"></div>
+                    <div class="floatie"></div>
+                    <div class="main-shimmer-base"></div>
                 </div>
             </div>
         </div>
 
         <div class="phone animation-10" id="phone10">
-            <div class="phone-label">Shimmer</div>
+            <div class="phone-label">Breath + All</div>
             <div class="phone-screen">
                 <div class="animation-content">
-                    <div class="glow-base"></div>
-                    <div class="shimmer-dot"></div>
-                    <div class="shimmer-dot"></div>
-                    <div class="shimmer-dot"></div>
-                    <div class="shimmer-dot"></div>
-                    <div class="shimmer-dot"></div>
+                    <div class="atmo-pulse"></div>
+                    <div class="orbit-path">
+                        <div class="orbit-dot"></div>
+                    </div>
+                    <div class="floatie"></div>
+                    <div class="main-breath"></div>
                 </div>
             </div>
         </div>
