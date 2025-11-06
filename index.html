@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Divine Mother Interpretations</title>
+    <title>Soul Frequency Variations</title>
     <style>
         * {
             margin: 0;
@@ -121,17 +121,16 @@
             z-index: 100;
         }
 
-        /* Divine Mother Color Palette */
+        /* Divine Mother Color Palette - Refined */
         :root {
             --deep-purple: rgb(60, 30, 90);
             --royal-purple: rgb(100, 50, 130);
-            --magenta: rgb(180, 60, 120);
-            --bright-magenta: rgb(220, 80, 160);
-            --hot-pink: rgb(255, 100, 180);
+            --magenta: rgb(220, 80, 160);
+            --bright-magenta: rgb(255, 100, 180);
             --teal: rgb(60, 180, 180);
             --cyan: rgb(100, 220, 220);
-            --gold: rgb(200, 160, 80);
-            --bright-gold: rgb(255, 200, 100);
+            --gold: rgb(255, 200, 80);
+            --bright-gold: rgb(255, 230, 120);
             --cream: rgb(255, 250, 240);
             --space-black: rgb(10, 5, 20);
         }
@@ -144,329 +143,129 @@
             background: radial-gradient(circle at center, var(--deep-purple), var(--space-black));
         }
 
-        /* ===== 1: GODDESS SILHOUETTE - Most Literal ===== */
-        .interpretation-1 .canvas {
-            background: radial-gradient(circle at 50% 30%, rgb(40, 20, 60), rgb(10, 5, 20));
+        /* ===== 1: STARBURST CORE ===== */
+        .var-1 .canvas {
+            background: radial-gradient(circle at 50% 50%, rgb(40, 20, 60), rgb(5, 2, 15));
         }
 
-        .interpretation-1 .goddess-body {
-            position: absolute;
-            bottom: -5%;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 45%;
-            height: 75%;
-            background: linear-gradient(to top,
-                rgba(100, 50, 130, 0.9) 0%,
-                rgba(180, 60, 120, 0.8) 30%,
-                rgba(220, 80, 160, 0.6) 60%,
-                transparent 100%);
-            filter: blur(25px);
-            border-radius: 50% 50% 0 0;
-        }
-
-        .interpretation-1 .goddess-head {
-            position: absolute;
-            top: 15%;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 25%;
-            height: 15%;
-            background: radial-gradient(circle,
-                rgba(255, 250, 240, 0.4),
-                rgba(255, 200, 100, 0.6) 20%,
-                rgba(220, 80, 160, 0.5) 50%,
-                transparent 100%);
-            filter: blur(20px);
-            border-radius: 50%;
-        }
-
-        .interpretation-1 .crown {
-            position: absolute;
-            top: 8%;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 50%;
-            height: 25%;
-            background: radial-gradient(ellipse at center,
-                rgba(255, 250, 240, 0.6),
-                rgba(255, 200, 100, 0.5) 15%,
-                rgba(100, 220, 220, 0.4) 35%,
-                rgba(180, 60, 120, 0.3) 60%,
-                transparent 100%);
-            filter: blur(15px);
-        }
-
-        .interpretation-1 .aura {
+        /* Cosmic atmosphere */
+        .var-1 .atmosphere {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             width: 90%;
-            height: 85%;
-            background: radial-gradient(ellipse at center,
-                transparent 20%,
-                rgba(220, 80, 160, 0.2) 40%,
-                rgba(180, 60, 120, 0.3) 60%,
-                rgba(100, 50, 130, 0.2) 80%,
-                transparent 100%);
-            filter: blur(30px);
-        }
-
-        /* Stars for interpretation 1 */
-        .interpretation-1 .star {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: rgba(255, 250, 240, 0.8);
-            border-radius: 50%;
-            box-shadow: 0 0 3px rgba(255, 250, 240, 0.8);
-        }
-
-        /* ===== 2: UPPER BODY & CROWN FOCUS ===== */
-        .interpretation-2 .canvas {
-            background: radial-gradient(ellipse at 50% 35%, rgb(60, 30, 90), rgb(10, 5, 20));
-        }
-
-        .interpretation-2 .upper-body {
-            position: absolute;
-            bottom: -10%;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60%;
-            height: 60%;
-            background: linear-gradient(to top,
-                rgba(180, 60, 120, 0.8) 0%,
-                rgba(220, 80, 160, 0.7) 40%,
-                transparent 100%);
-            filter: blur(30px);
-            border-radius: 50% 50% 0 0;
-        }
-
-        .interpretation-2 .head-glow {
-            position: absolute;
-            top: 25%;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 35%;
-            height: 20%;
-            background: radial-gradient(circle,
-                rgba(255, 250, 240, 0.7),
-                rgba(255, 200, 100, 0.8) 25%,
-                rgba(100, 220, 220, 0.4) 60%,
-                transparent 100%);
-            filter: blur(18px);
-            border-radius: 50%;
-        }
-
-        .interpretation-2 .crown-rays {
-            position: absolute;
-            top: 10%;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 70%;
-            height: 40%;
-            background:
-                radial-gradient(ellipse 60% 100% at 50% 0%,
-                    rgba(255, 250, 240, 0.5) 0%,
-                    rgba(100, 220, 220, 0.4) 20%,
-                    rgba(255, 200, 100, 0.3) 40%,
-                    transparent 60%);
-            filter: blur(20px);
-        }
-
-        .interpretation-2 .shoulder-glow {
-            position: absolute;
-            bottom: 20%;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 75%;
-            height: 30%;
-            background: radial-gradient(ellipse at center,
-                rgba(220, 80, 160, 0.5),
-                rgba(180, 60, 120, 0.4) 40%,
-                transparent 70%);
-            filter: blur(35px);
-        }
-
-        /* ===== 3: FLOWING ROBES ===== */
-        .interpretation-3 .canvas {
-            background: linear-gradient(to bottom, rgb(40, 20, 60), rgb(10, 5, 20));
-        }
-
-        .interpretation-3 .robe-layer {
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 70%;
-            filter: blur(25px);
-        }
-
-        .interpretation-3 .robe-1 {
-            height: 80%;
-            background: linear-gradient(to top,
-                rgba(100, 50, 130, 0.9),
-                rgba(180, 60, 120, 0.7) 50%,
-                transparent 100%);
-            border-radius: 40% 40% 0 0;
-        }
-
-        .interpretation-3 .robe-2 {
-            height: 70%;
-            background: linear-gradient(to top,
-                rgba(180, 60, 120, 0.8),
-                rgba(220, 80, 160, 0.6) 50%,
-                transparent 100%);
-            border-radius: 45% 45% 0 0;
-            left: 48%;
-        }
-
-        .interpretation-3 .robe-3 {
-            height: 60%;
-            background: linear-gradient(to top,
-                rgba(220, 80, 160, 0.7),
-                rgba(255, 100, 180, 0.5) 50%,
-                transparent 100%);
-            border-radius: 50% 50% 0 0;
-            left: 52%;
-        }
-
-        .interpretation-3 .flow-light {
-            position: absolute;
-            top: 20%;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80%;
-            height: 60%;
-            background: radial-gradient(ellipse at center,
-                rgba(255, 200, 100, 0.3),
-                rgba(100, 220, 220, 0.2) 40%,
-                transparent 70%);
-            filter: blur(30px);
-        }
-
-        /* ===== 4: ENERGY AURA (No Figure) ===== */
-        .interpretation-4 .canvas {
-            background: radial-gradient(circle at 50% 45%, rgb(40, 20, 60), rgb(10, 5, 20));
-        }
-
-        .interpretation-4 .aura-core {
-            position: absolute;
-            top: 45%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 40%;
-            height: 30%;
-            background: radial-gradient(circle,
-                rgba(255, 250, 240, 0.6),
-                rgba(255, 200, 100, 0.7) 25%,
-                rgba(220, 80, 160, 0.5) 50%,
-                transparent 80%);
-            filter: blur(20px);
-            border-radius: 50%;
-        }
-
-        .interpretation-4 .aura-mid {
-            position: absolute;
-            top: 45%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 65%;
-            height: 55%;
-            background: radial-gradient(ellipse,
-                transparent 30%,
-                rgba(220, 80, 160, 0.4) 50%,
-                rgba(180, 60, 120, 0.4) 70%,
-                transparent 100%);
-            filter: blur(30px);
-        }
-
-        .interpretation-4 .aura-outer {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 90%;
-            height: 80%;
-            background: radial-gradient(ellipse,
-                transparent 40%,
-                rgba(180, 60, 120, 0.3) 60%,
-                rgba(100, 50, 130, 0.3) 80%,
-                transparent 100%);
-            filter: blur(40px);
-        }
-
-        .interpretation-4 .teal-accent {
-            position: absolute;
-            top: 35%;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 55%;
-            height: 40%;
-            background: radial-gradient(ellipse at top,
-                rgba(100, 220, 220, 0.4),
-                rgba(60, 180, 180, 0.3) 40%,
-                transparent 70%);
-            filter: blur(25px);
-        }
-
-        /* ===== 5: VERTICAL LIGHT PILLAR ===== */
-        .interpretation-5 .canvas {
-            background: linear-gradient(to bottom, rgb(30, 15, 50), rgb(10, 5, 20));
-        }
-
-        .interpretation-5 .pillar-base {
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 50%;
-            height: 90%;
-            background: linear-gradient(to top,
-                rgba(100, 50, 130, 0.9),
-                rgba(180, 60, 120, 0.7) 30%,
-                rgba(220, 80, 160, 0.6) 60%,
-                rgba(100, 220, 220, 0.4) 85%,
-                rgba(255, 250, 240, 0.3) 100%);
-            filter: blur(35px);
-        }
-
-        .interpretation-5 .pillar-inner {
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 30%;
-            height: 85%;
-            background: linear-gradient(to top,
-                rgba(180, 60, 120, 0.8),
-                rgba(220, 80, 160, 0.7) 40%,
-                rgba(255, 200, 100, 0.6) 80%,
-                rgba(255, 250, 240, 0.7) 100%);
-            filter: blur(20px);
-        }
-
-        .interpretation-5 .pillar-glow {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 70%;
             height: 70%;
             background: radial-gradient(ellipse,
-                transparent 30%,
-                rgba(220, 80, 160, 0.3) 55%,
+                rgba(100, 50, 130, 0.3),
+                rgba(60, 30, 90, 0.2) 60%,
                 transparent 85%);
             filter: blur(40px);
         }
 
-        /* ===== 6: COSMIC MANDALA ===== */
-        .interpretation-6 .canvas {
-            background: radial-gradient(circle at center, rgb(40, 20, 60), rgb(5, 2, 15));
+        .var-1 .nebula-1 {
+            position: absolute;
+            top: 20%;
+            left: 60%;
+            width: 40%;
+            height: 30%;
+            background: radial-gradient(ellipse,
+                rgba(100, 220, 220, 0.25),
+                transparent 70%);
+            filter: blur(35px);
+            border-radius: 50%;
         }
 
-        .interpretation-6 .mandala-center {
+        .var-1 .nebula-2 {
+            position: absolute;
+            bottom: 25%;
+            left: 20%;
+            width: 45%;
+            height: 35%;
+            background: radial-gradient(ellipse,
+                rgba(220, 80, 160, 0.3),
+                transparent 70%);
+            filter: blur(35px);
+            border-radius: 50%;
+        }
+
+        /* Intense bright core */
+        .var-1 .core {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20%;
+            height: 10%;
+            background: radial-gradient(circle,
+                rgb(255, 250, 240),
+                rgb(255, 230, 120) 30%,
+                rgb(255, 200, 80) 60%,
+                transparent 100%);
+            filter: blur(8px);
+            border-radius: 50%;
+            box-shadow: 0 0 60px rgba(255, 230, 120, 0.8),
+                        0 0 100px rgba(255, 200, 80, 0.6);
+        }
+
+        /* Sharp radiating beams */
+        .var-1 .beam {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            height: 2px;
+            background: linear-gradient(to right,
+                transparent,
+                rgba(255, 250, 240, 0.9) 48%,
+                rgba(255, 250, 240, 0.9) 52%,
+                transparent);
+            filter: blur(2px);
+            transform-origin: left center;
+        }
+
+        .var-1 .beam-1 { width: 45%; transform: translate(0, -50%) rotate(0deg); }
+        .var-1 .beam-2 { width: 45%; transform: translate(0, -50%) rotate(45deg); }
+        .var-1 .beam-3 { width: 45%; transform: translate(0, -50%) rotate(90deg); }
+        .var-1 .beam-4 { width: 45%; transform: translate(0, -50%) rotate(135deg); }
+        .var-1 .beam-5 { width: 40%; transform: translate(0, -50%) rotate(22.5deg); }
+        .var-1 .beam-6 { width: 40%; transform: translate(0, -50%) rotate(67.5deg); }
+        .var-1 .beam-7 { width: 40%; transform: translate(0, -50%) rotate(112.5deg); }
+        .var-1 .beam-8 { width: 40%; transform: translate(0, -50%) rotate(157.5deg); }
+
+        /* ===== 2: GLOWING ORB ===== */
+        .var-2 .canvas {
+            background: radial-gradient(circle at 50% 50%, rgb(30, 15, 50), rgb(5, 2, 15));
+        }
+
+        .var-2 .space-nebula {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 85%;
+            height: 65%;
+            background: radial-gradient(ellipse,
+                rgba(220, 80, 160, 0.2),
+                rgba(100, 50, 130, 0.15) 50%,
+                transparent 80%);
+            filter: blur(45px);
+        }
+
+        .var-2 .teal-cloud {
+            position: absolute;
+            top: 30%;
+            right: 15%;
+            width: 35%;
+            height: 25%;
+            background: radial-gradient(circle,
+                rgba(100, 220, 220, 0.3),
+                transparent 70%);
+            filter: blur(30px);
+            border-radius: 50%;
+        }
+
+        /* Super bright orb core */
+        .var-2 .orb-outer {
             position: absolute;
             top: 50%;
             left: 50%;
@@ -474,286 +273,1040 @@
             width: 35%;
             height: 18%;
             background: radial-gradient(circle,
-                rgba(255, 250, 240, 0.8),
-                rgba(255, 200, 100, 0.8) 30%,
-                rgba(220, 80, 160, 0.6) 70%,
+                rgba(255, 200, 80, 0.8),
+                rgba(220, 80, 160, 0.6) 50%,
+                rgba(100, 50, 130, 0.3) 80%,
                 transparent 100%);
             filter: blur(15px);
             border-radius: 50%;
         }
 
-        .interpretation-6 .mandala-ring {
+        .var-2 .orb-mid {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+            width: 25%;
+            height: 13%;
+            background: radial-gradient(circle,
+                rgb(255, 250, 240),
+                rgb(255, 230, 120) 40%,
+                rgb(255, 100, 180) 80%,
+                transparent 100%);
+            filter: blur(10px);
             border-radius: 50%;
-            filter: blur(25px);
         }
 
-        .interpretation-6 .ring-1 {
-            width: 55%;
-            height: 29%;
-            background: radial-gradient(circle,
-                transparent 60%,
-                rgba(220, 80, 160, 0.5) 75%,
-                transparent 100%);
-        }
-
-        .interpretation-6 .ring-2 {
-            width: 70%;
-            height: 37%;
-            background: radial-gradient(circle,
-                transparent 60%,
-                rgba(100, 220, 220, 0.4) 75%,
-                transparent 100%);
-        }
-
-        .interpretation-6 .ring-3 {
-            width: 85%;
-            height: 45%;
-            background: radial-gradient(circle,
-                transparent 65%,
-                rgba(180, 60, 120, 0.4) 80%,
-                transparent 100%);
-        }
-
-        .interpretation-6 .ray {
+        .var-2 .orb-core {
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 90%;
-            height: 2%;
-            background: linear-gradient(to right,
-                transparent,
-                rgba(255, 200, 100, 0.5) 50%,
-                transparent);
-            filter: blur(8px);
+            transform: translate(-50%, -50%);
+            width: 15%;
+            height: 8%;
+            background: radial-gradient(circle,
+                rgb(255, 255, 255),
+                rgb(255, 250, 240) 50%,
+                rgb(255, 230, 120) 100%);
+            filter: blur(4px);
+            border-radius: 50%;
+            box-shadow: 0 0 40px rgba(255, 250, 240, 1),
+                        0 0 80px rgba(255, 230, 120, 0.8);
         }
 
-        /* ===== 7: NEBULA CLOUDS ===== */
-        .interpretation-7 .canvas {
-            background: radial-gradient(circle at 60% 40%, rgb(40, 20, 60), rgb(10, 5, 20));
+        /* ===== 3: VERTICAL FLAME ===== */
+        .var-3 .canvas {
+            background: linear-gradient(to bottom, rgb(20, 10, 40), rgb(5, 2, 15), rgb(20, 10, 40));
         }
 
-        .interpretation-7 .cloud {
+        .var-3 .cosmic-bg {
             position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 70%;
+            background: radial-gradient(ellipse at bottom,
+                rgba(100, 50, 130, 0.3),
+                rgba(60, 30, 90, 0.2) 50%,
+                transparent 80%);
             filter: blur(40px);
+        }
+
+        .var-3 .side-glow-1 {
+            position: absolute;
+            top: 40%;
+            left: 10%;
+            width: 30%;
+            height: 25%;
+            background: radial-gradient(circle,
+                rgba(100, 220, 220, 0.25),
+                transparent 70%);
+            filter: blur(35px);
             border-radius: 50%;
         }
 
-        .interpretation-7 .cloud-1 {
-            top: 15%;
-            left: 30%;
-            width: 50%;
-            height: 30%;
-            background: radial-gradient(ellipse,
-                rgba(100, 220, 220, 0.4),
-                rgba(60, 180, 180, 0.3) 50%,
-                transparent 80%);
-        }
-
-        .interpretation-7 .cloud-2 {
-            top: 35%;
-            left: 50%;
-            width: 60%;
-            height: 40%;
-            background: radial-gradient(ellipse,
-                rgba(220, 80, 160, 0.5),
-                rgba(180, 60, 120, 0.4) 50%,
-                transparent 80%);
-        }
-
-        .interpretation-7 .cloud-3 {
-            top: 60%;
-            left: 20%;
-            width: 55%;
-            height: 35%;
-            background: radial-gradient(ellipse,
-                rgba(180, 60, 120, 0.4),
-                rgba(100, 50, 130, 0.3) 50%,
-                transparent 80%);
-        }
-
-        .interpretation-7 .cloud-4 {
-            top: 25%;
-            left: 60%;
-            width: 40%;
-            height: 25%;
-            background: radial-gradient(ellipse,
-                rgba(255, 200, 100, 0.4),
-                rgba(200, 160, 80, 0.3) 50%,
-                transparent 80%);
-        }
-
-        .interpretation-7 .bright-spot {
+        .var-3 .side-glow-2 {
             position: absolute;
-            top: 40%;
-            left: 45%;
+            top: 60%;
+            right: 10%;
+            width: 28%;
+            height: 22%;
+            background: radial-gradient(circle,
+                rgba(220, 80, 160, 0.3),
+                transparent 70%);
+            filter: blur(35px);
+            border-radius: 50%;
+        }
+
+        /* Bright vertical flame */
+        .var-3 .flame-outer {
+            position: absolute;
+            bottom: 15%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 45%;
+            height: 70%;
+            background: linear-gradient(to top,
+                rgba(220, 80, 160, 0.7),
+                rgba(255, 200, 80, 0.8) 50%,
+                rgba(255, 250, 240, 0.5) 90%,
+                transparent 100%);
+            filter: blur(25px);
+            border-radius: 50% 50% 20% 20%;
+        }
+
+        .var-3 .flame-mid {
+            position: absolute;
+            bottom: 15%;
+            left: 50%;
+            transform: translateX(-50%);
             width: 30%;
+            height: 65%;
+            background: linear-gradient(to top,
+                rgb(255, 100, 180),
+                rgb(255, 230, 120) 60%,
+                rgb(255, 250, 240) 95%);
+            filter: blur(12px);
+            border-radius: 50% 50% 25% 25%;
+        }
+
+        .var-3 .flame-core {
+            position: absolute;
+            bottom: 15%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 18%;
+            height: 60%;
+            background: linear-gradient(to top,
+                rgb(255, 230, 120),
+                rgb(255, 250, 240) 70%,
+                rgb(255, 255, 255) 95%);
+            filter: blur(6px);
+            border-radius: 50% 50% 30% 30%;
+            box-shadow: 0 0 50px rgba(255, 250, 240, 0.9);
+        }
+
+        /* ===== 4: CRYSTAL MATRIX ===== */
+        .var-4 .canvas {
+            background: radial-gradient(circle at center, rgb(35, 20, 55), rgb(5, 2, 15));
+        }
+
+        .var-4 .ambient-purple {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            height: 60%;
+            background: radial-gradient(ellipse,
+                rgba(180, 60, 120, 0.25),
+                rgba(100, 50, 130, 0.15) 60%,
+                transparent 85%);
+            filter: blur(50px);
+        }
+
+        .var-4 .wisp-1 {
+            position: absolute;
+            top: 25%;
+            left: 25%;
+            width: 25%;
             height: 18%;
             background: radial-gradient(circle,
-                rgba(255, 250, 240, 0.5),
-                rgba(255, 200, 100, 0.4) 40%,
-                transparent 80%);
+                rgba(100, 220, 220, 0.3),
+                transparent 70%);
+            filter: blur(30px);
+            border-radius: 50%;
+        }
+
+        .var-4 .wisp-2 {
+            position: absolute;
+            bottom: 30%;
+            right: 20%;
+            width: 30%;
+            height: 20%;
+            background: radial-gradient(circle,
+                rgba(255, 200, 80, 0.25),
+                transparent 70%);
+            filter: blur(30px);
+            border-radius: 50%;
+        }
+
+        /* Bright geometric crystal */
+        .var-4 .crystal-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40%;
+            height: 20%;
+            background: radial-gradient(circle,
+                rgba(255, 230, 120, 0.6),
+                rgba(220, 80, 160, 0.4) 60%,
+                transparent 90%);
             filter: blur(20px);
             border-radius: 50%;
         }
 
-        /* ===== 8: LAYERED GRADIENTS ===== */
-        .interpretation-8 .canvas {
-            background: linear-gradient(to bottom, rgb(10, 5, 20), rgb(30, 15, 50), rgb(10, 5, 20));
-        }
-
-        .interpretation-8 .gradient-layer {
+        .var-4 .crystal-outer {
             position: absolute;
-            width: 100%;
-            left: 0;
-            filter: blur(30px);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(45deg);
+            width: 22%;
+            height: 11%;
+            background: linear-gradient(135deg,
+                rgba(255, 250, 240, 0.8),
+                rgba(255, 230, 120, 0.9) 50%,
+                rgba(255, 100, 180, 0.7));
+            filter: blur(8px);
+            border-radius: 15%;
         }
 
-        .interpretation-8 .layer-1 {
-            top: 0;
-            height: 30%;
-            background: linear-gradient(to bottom,
-                rgba(100, 220, 220, 0.4),
-                rgba(60, 180, 180, 0.3) 60%,
-                transparent 100%);
+        .var-4 .crystal-inner {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(45deg);
+            width: 15%;
+            height: 7.5%;
+            background: linear-gradient(135deg,
+                rgb(255, 255, 255),
+                rgb(255, 250, 240) 40%,
+                rgb(255, 230, 120) 80%,
+                rgb(255, 200, 80));
+            filter: blur(3px);
+            border-radius: 12%;
+            box-shadow: 0 0 30px rgba(255, 250, 240, 0.9),
+                        0 0 60px rgba(255, 230, 120, 0.7);
         }
 
-        .interpretation-8 .layer-2 {
-            top: 20%;
-            height: 35%;
-            background: linear-gradient(to bottom,
-                transparent,
-                rgba(255, 200, 100, 0.5) 40%,
-                rgba(220, 80, 160, 0.4) 70%,
-                transparent);
-        }
-
-        .interpretation-8 .layer-3 {
-            top: 45%;
-            height: 30%;
-            background: linear-gradient(to bottom,
-                transparent,
-                rgba(220, 80, 160, 0.6) 50%,
-                rgba(180, 60, 120, 0.5) 80%,
-                transparent);
-        }
-
-        .interpretation-8 .layer-4 {
-            bottom: 0;
-            height: 35%;
-            background: linear-gradient(to top,
-                rgba(100, 50, 130, 0.6),
-                rgba(180, 60, 120, 0.4) 60%,
-                transparent 100%);
-        }
-
-        .interpretation-8 .center-glow {
+        .var-4 .crystal-cross-h {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 60%;
+            width: 30%;
+            height: 2%;
+            background: linear-gradient(to right,
+                transparent,
+                rgba(255, 250, 240, 0.8) 50%,
+                transparent);
+            filter: blur(2px);
+        }
+
+        .var-4 .crystal-cross-v {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 2%;
+            height: 15%;
+            background: linear-gradient(to bottom,
+                transparent,
+                rgba(255, 250, 240, 0.8) 50%,
+                transparent);
+            filter: blur(2px);
+        }
+
+        /* ===== 5: EYE PORTAL ===== */
+        .var-5 .canvas {
+            background: radial-gradient(ellipse at 50% 50%, rgb(40, 20, 60), rgb(5, 2, 15));
+        }
+
+        .var-5 .swirl-1 {
+            position: absolute;
+            top: 35%;
+            left: 20%;
+            width: 40%;
+            height: 30%;
+            background: radial-gradient(ellipse,
+                rgba(100, 220, 220, 0.3),
+                rgba(60, 180, 180, 0.2) 50%,
+                transparent 75%);
+            filter: blur(35px);
+            border-radius: 50%;
+            transform: rotate(-25deg);
+        }
+
+        .var-5 .swirl-2 {
+            position: absolute;
+            top: 45%;
+            right: 15%;
+            width: 45%;
             height: 35%;
             background: radial-gradient(ellipse,
-                rgba(255, 250, 240, 0.3),
-                rgba(255, 200, 100, 0.4) 40%,
-                transparent 80%);
+                rgba(220, 80, 160, 0.35),
+                rgba(180, 60, 120, 0.25) 50%,
+                transparent 75%);
+            filter: blur(35px);
+            border-radius: 50%;
+            transform: rotate(25deg);
+        }
+
+        .var-5 .swirl-3 {
+            position: absolute;
+            bottom: 25%;
+            left: 30%;
+            width: 35%;
+            height: 25%;
+            background: radial-gradient(ellipse,
+                rgba(100, 50, 130, 0.3),
+                transparent 70%);
+            filter: blur(40px);
+            border-radius: 50%;
+        }
+
+        /* Bright eye/portal */
+        .var-5 .eye-outer {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50%;
+            height: 20%;
+            background: radial-gradient(ellipse,
+                rgba(255, 200, 80, 0.6),
+                rgba(220, 80, 160, 0.5) 60%,
+                transparent 90%);
+            filter: blur(18px);
+            border-radius: 50%;
+        }
+
+        .var-5 .eye-mid {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 38%;
+            height: 15%;
+            background: radial-gradient(ellipse,
+                rgb(255, 250, 240),
+                rgb(255, 230, 120) 40%,
+                rgb(255, 100, 180) 70%,
+                rgba(220, 80, 160, 0.8) 90%);
+            filter: blur(10px);
+            border-radius: 50%;
+        }
+
+        .var-5 .eye-iris {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 18%;
+            height: 9%;
+            background: radial-gradient(circle,
+                rgb(255, 255, 255),
+                rgb(255, 250, 240) 30%,
+                rgb(255, 230, 120) 60%,
+                rgb(255, 200, 80) 90%);
+            filter: blur(4px);
+            border-radius: 50%;
+            box-shadow: 0 0 40px rgba(255, 250, 240, 1),
+                        0 0 70px rgba(255, 230, 120, 0.8);
+        }
+
+        /* ===== 6: LOTUS BLOOM ===== */
+        .var-6 .canvas {
+            background: radial-gradient(circle at 50% 55%, rgb(35, 18, 55), rgb(5, 2, 15));
+        }
+
+        .var-6 .garden-mist {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 85%;
+            height: 70%;
+            background: radial-gradient(ellipse,
+                rgba(180, 60, 120, 0.2),
+                rgba(100, 50, 130, 0.15) 55%,
+                transparent 82%);
+            filter: blur(45px);
+        }
+
+        .var-6 .garden-accent-1 {
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50%;
+            height: 30%;
+            background: radial-gradient(ellipse at top,
+                rgba(100, 220, 220, 0.3),
+                transparent 70%);
             filter: blur(35px);
         }
 
-        /* ===== 9: PARTICLE FIELD ===== */
-        .interpretation-9 .canvas {
-            background: radial-gradient(circle at 50% 40%, rgb(40, 20, 60), rgb(5, 2, 15));
-        }
-
-        .interpretation-9 .particle-glow {
+        .var-6 .garden-accent-2 {
             position: absolute;
-            border-radius: 50%;
-            filter: blur(4px);
+            bottom: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 55%;
+            height: 35%;
+            background: radial-gradient(ellipse at bottom,
+                rgba(220, 80, 160, 0.25),
+                transparent 70%);
+            filter: blur(35px);
         }
 
-        .interpretation-9 .large-particle {
+        /* Bright lotus petals */
+        .var-6 .petal {
             position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 18%;
+            height: 9%;
             border-radius: 50%;
-            filter: blur(12px);
+            filter: blur(8px);
+            transform-origin: center center;
         }
 
-        .interpretation-9 .ambient-light {
+        .var-6 .petal-1 {
+            background: radial-gradient(ellipse,
+                rgb(255, 250, 240),
+                rgb(255, 230, 120) 50%,
+                rgb(255, 100, 180) 90%);
+            transform: translate(-50%, -50%) translateY(-35%) rotate(0deg);
+        }
+
+        .var-6 .petal-2 {
+            background: radial-gradient(ellipse,
+                rgb(255, 250, 240),
+                rgb(255, 230, 120) 50%,
+                rgb(255, 100, 180) 90%);
+            transform: translate(-50%, -50%) rotate(45deg) translateY(-35%);
+        }
+
+        .var-6 .petal-3 {
+            background: radial-gradient(ellipse,
+                rgb(255, 250, 240),
+                rgb(255, 230, 120) 50%,
+                rgb(255, 100, 180) 90%);
+            transform: translate(-50%, -50%) rotate(90deg) translateY(-35%);
+        }
+
+        .var-6 .petal-4 {
+            background: radial-gradient(ellipse,
+                rgb(255, 250, 240),
+                rgb(255, 230, 120) 50%,
+                rgb(255, 100, 180) 90%);
+            transform: translate(-50%, -50%) rotate(135deg) translateY(-35%);
+        }
+
+        .var-6 .petal-5 {
+            background: radial-gradient(ellipse,
+                rgb(255, 250, 240),
+                rgb(255, 230, 120) 50%,
+                rgb(220, 80, 160) 90%);
+            transform: translate(-50%, -50%) rotate(22.5deg) translateY(-28%);
+        }
+
+        .var-6 .petal-6 {
+            background: radial-gradient(ellipse,
+                rgb(255, 250, 240),
+                rgb(255, 230, 120) 50%,
+                rgb(220, 80, 160) 90%);
+            transform: translate(-50%, -50%) rotate(67.5deg) translateY(-28%);
+        }
+
+        .var-6 .petal-7 {
+            background: radial-gradient(ellipse,
+                rgb(255, 250, 240),
+                rgb(255, 230, 120) 50%,
+                rgb(220, 80, 160) 90%);
+            transform: translate(-50%, -50%) rotate(112.5deg) translateY(-28%);
+        }
+
+        .var-6 .petal-8 {
+            background: radial-gradient(ellipse,
+                rgb(255, 250, 240),
+                rgb(255, 230, 120) 50%,
+                rgb(220, 80, 160) 90%);
+            transform: translate(-50%, -50%) rotate(157.5deg) translateY(-28%);
+        }
+
+        .var-6 .lotus-center {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 80%;
-            height: 60%;
+            width: 22%;
+            height: 11%;
+            background: radial-gradient(circle,
+                rgb(255, 255, 255),
+                rgb(255, 250, 240) 40%,
+                rgb(255, 230, 120) 80%);
+            filter: blur(6px);
+            border-radius: 50%;
+            box-shadow: 0 0 50px rgba(255, 250, 240, 1),
+                        0 0 90px rgba(255, 230, 120, 0.8);
+        }
+
+        /* ===== 7: DNA HELIX ===== */
+        .var-7 .canvas {
+            background: linear-gradient(to bottom, rgb(25, 12, 45), rgb(5, 2, 15), rgb(25, 12, 45));
+        }
+
+        .var-7 .cosmic-dust {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70%;
+            height: 90%;
             background: radial-gradient(ellipse,
-                rgba(220, 80, 160, 0.2),
-                rgba(180, 60, 120, 0.15) 50%,
+                rgba(100, 50, 130, 0.2),
+                rgba(60, 30, 90, 0.15) 50%,
                 transparent 80%);
             filter: blur(50px);
         }
 
-        /* ===== 10: PURE COLOR FIELD - Most Abstract ===== */
-        .interpretation-10 .canvas {
-            background: rgb(10, 5, 20);
-        }
-
-        .interpretation-10 .color-wash {
+        .var-7 .dust-1 {
             position: absolute;
-            filter: blur(60px);
+            top: 25%;
+            left: 20%;
+            width: 25%;
+            height: 18%;
+            background: radial-gradient(circle,
+                rgba(100, 220, 220, 0.25),
+                transparent 70%);
+            filter: blur(30px);
+            border-radius: 50%;
         }
 
-        .interpretation-10 .wash-1 {
-            top: -10%;
-            left: -10%;
-            width: 70%;
-            height: 50%;
-            background: radial-gradient(ellipse,
-                rgba(100, 220, 220, 0.5),
-                rgba(60, 180, 180, 0.3) 60%,
-                transparent 100%);
+        .var-7 .dust-2 {
+            position: absolute;
+            bottom: 25%;
+            right: 20%;
+            width: 28%;
+            height: 20%;
+            background: radial-gradient(circle,
+                rgba(220, 80, 160, 0.3),
+                transparent 70%);
+            filter: blur(30px);
+            border-radius: 50%;
         }
 
-        .interpretation-10 .wash-2 {
-            top: 20%;
-            right: -15%;
-            width: 75%;
-            height: 55%;
-            background: radial-gradient(ellipse,
-                rgba(255, 200, 100, 0.6),
-                rgba(220, 80, 160, 0.4) 50%,
-                transparent 100%);
-        }
-
-        .interpretation-10 .wash-3 {
-            bottom: -10%;
-            left: 10%;
-            width: 80%;
-            height: 60%;
-            background: radial-gradient(ellipse,
-                rgba(180, 60, 120, 0.6),
-                rgba(100, 50, 130, 0.4) 60%,
-                transparent 100%);
-        }
-
-        .interpretation-10 .wash-4 {
-            top: 40%;
+        /* Bright DNA strands */
+        .var-7 .helix-glow {
+            position: absolute;
+            top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+            width: 35%;
+            height: 75%;
+            background: radial-gradient(ellipse,
+                rgba(255, 230, 120, 0.3),
+                transparent 70%);
+            filter: blur(25px);
+        }
+
+        .var-7 .strand {
+            position: absolute;
+            left: 50%;
+            width: 12%;
+            height: 6%;
+            border-radius: 50%;
+            filter: blur(6px);
+        }
+
+        /* Left strand */
+        .var-7 .strand-L1 {
+            top: 15%;
+            transform: translateX(-80%);
+            background: radial-gradient(circle, rgb(255, 250, 240), rgb(255, 230, 120) 60%, rgb(255, 200, 80));
+            box-shadow: 0 0 30px rgba(255, 230, 120, 0.8);
+        }
+
+        .var-7 .strand-L2 {
+            top: 30%;
+            transform: translateX(-60%);
+            background: radial-gradient(circle, rgb(255, 250, 240), rgb(255, 100, 180) 60%, rgb(220, 80, 160));
+            box-shadow: 0 0 30px rgba(255, 100, 180, 0.8);
+        }
+
+        .var-7 .strand-L3 {
+            top: 45%;
+            transform: translateX(-80%);
+            background: radial-gradient(circle, rgb(255, 250, 240), rgb(255, 230, 120) 60%, rgb(255, 200, 80));
+            box-shadow: 0 0 30px rgba(255, 230, 120, 0.8);
+        }
+
+        .var-7 .strand-L4 {
+            top: 60%;
+            transform: translateX(-60%);
+            background: radial-gradient(circle, rgb(255, 250, 240), rgb(255, 100, 180) 60%, rgb(220, 80, 160));
+            box-shadow: 0 0 30px rgba(255, 100, 180, 0.8);
+        }
+
+        .var-7 .strand-L5 {
+            top: 75%;
+            transform: translateX(-80%);
+            background: radial-gradient(circle, rgb(255, 250, 240), rgb(255, 230, 120) 60%, rgb(255, 200, 80));
+            box-shadow: 0 0 30px rgba(255, 230, 120, 0.8);
+        }
+
+        /* Right strand */
+        .var-7 .strand-R1 {
+            top: 22%;
+            transform: translateX(-20%);
+            background: radial-gradient(circle, rgb(255, 250, 240), rgb(100, 220, 220) 60%, rgb(60, 180, 180));
+            box-shadow: 0 0 30px rgba(100, 220, 220, 0.8);
+        }
+
+        .var-7 .strand-R2 {
+            top: 37%;
+            transform: translateX(-40%);
+            background: radial-gradient(circle, rgb(255, 250, 240), rgb(255, 200, 80) 60%, rgb(255, 230, 120));
+            box-shadow: 0 0 30px rgba(255, 230, 120, 0.8);
+        }
+
+        .var-7 .strand-R3 {
+            top: 52%;
+            transform: translateX(-20%);
+            background: radial-gradient(circle, rgb(255, 250, 240), rgb(100, 220, 220) 60%, rgb(60, 180, 180));
+            box-shadow: 0 0 30px rgba(100, 220, 220, 0.8);
+        }
+
+        .var-7 .strand-R4 {
+            top: 67%;
+            transform: translateX(-40%);
+            background: radial-gradient(circle, rgb(255, 250, 240), rgb(255, 200, 80) 60%, rgb(255, 230, 120));
+            box-shadow: 0 0 30px rgba(255, 230, 120, 0.8);
+        }
+
+        .var-7 .strand-R5 {
+            top: 82%;
+            transform: translateX(-20%);
+            background: radial-gradient(circle, rgb(255, 250, 240), rgb(100, 220, 220) 60%, rgb(60, 180, 180));
+            box-shadow: 0 0 30px rgba(100, 220, 220, 0.8);
+        }
+
+        /* ===== 8: HEART CHAKRA ===== */
+        .var-8 .canvas {
+            background: radial-gradient(ellipse at 50% 50%, rgb(40, 20, 60), rgb(5, 2, 15));
+        }
+
+        .var-8 .aura-field {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 88%;
+            height: 68%;
+            background: radial-gradient(ellipse,
+                rgba(220, 80, 160, 0.25),
+                rgba(180, 60, 120, 0.18) 55%,
+                transparent 85%);
+            filter: blur(45px);
+        }
+
+        .var-8 .aura-accent-1 {
+            position: absolute;
+            top: 30%;
+            left: 50%;
+            transform: translateX(-50%);
             width: 60%;
-            height: 45%;
+            height: 35%;
+            background: radial-gradient(ellipse at top,
+                rgba(255, 200, 80, 0.3),
+                transparent 70%);
+            filter: blur(35px);
+        }
+
+        .var-8 .aura-accent-2 {
+            position: absolute;
+            bottom: 28%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 55%;
+            height: 30%;
+            background: radial-gradient(ellipse at bottom,
+                rgba(100, 220, 220, 0.25),
+                transparent 70%);
+            filter: blur(35px);
+        }
+
+        /* Bright heart */
+        .var-8 .heart-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40%;
+            height: 20%;
+            background: radial-gradient(ellipse,
+                rgba(255, 230, 120, 0.6),
+                rgba(255, 100, 180, 0.4) 60%,
+                transparent 90%);
+            filter: blur(20px);
+        }
+
+        .var-8 .heart {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 24%;
+            height: 12%;
+        }
+
+        .var-8 .heart::before,
+        .var-8 .heart::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            width: 50%;
+            height: 80%;
+            border-radius: 50% 50% 0 0;
+            filter: blur(8px);
+        }
+
+        .var-8 .heart::before {
+            left: 0;
+            background: radial-gradient(circle at 30% 40%,
+                rgb(255, 250, 240),
+                rgb(255, 230, 120) 40%,
+                rgb(255, 100, 180) 80%,
+                rgb(220, 80, 160));
+            box-shadow: 0 0 40px rgba(255, 100, 180, 0.9);
+        }
+
+        .var-8 .heart::after {
+            right: 0;
+            background: radial-gradient(circle at 70% 40%,
+                rgb(255, 250, 240),
+                rgb(255, 230, 120) 40%,
+                rgb(255, 100, 180) 80%,
+                rgb(220, 80, 160));
+            box-shadow: 0 0 40px rgba(255, 100, 180, 0.9);
+        }
+
+        .var-8 .heart-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 12%;
+            height: 6%;
             background: radial-gradient(circle,
-                rgba(255, 250, 240, 0.4),
-                rgba(220, 80, 160, 0.3) 50%,
+                rgb(255, 255, 255),
+                rgb(255, 250, 240) 50%,
+                rgb(255, 230, 120));
+            border-radius: 50%;
+            filter: blur(4px);
+            box-shadow: 0 0 35px rgba(255, 250, 240, 1);
+        }
+
+        /* ===== 9: SACRED GEOMETRY ===== */
+        .var-9 .canvas {
+            background: radial-gradient(circle at center, rgb(30, 15, 50), rgb(5, 2, 15));
+        }
+
+        .var-9 .geo-space {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 85%;
+            height: 65%;
+            background: radial-gradient(ellipse,
+                rgba(100, 50, 130, 0.25),
+                rgba(60, 30, 90, 0.18) 55%,
+                transparent 82%);
+            filter: blur(42px);
+        }
+
+        .var-9 .geo-wisp-1 {
+            position: absolute;
+            top: 22%;
+            left: 22%;
+            width: 28%;
+            height: 20%;
+            background: radial-gradient(circle,
+                rgba(100, 220, 220, 0.28),
+                transparent 70%);
+            filter: blur(32px);
+            border-radius: 50%;
+        }
+
+        .var-9 .geo-wisp-2 {
+            position: absolute;
+            top: 25%;
+            right: 20%;
+            width: 30%;
+            height: 22%;
+            background: radial-gradient(circle,
+                rgba(255, 200, 80, 0.3),
+                transparent 70%);
+            filter: blur(32px);
+            border-radius: 50%;
+        }
+
+        .var-9 .geo-wisp-3 {
+            position: absolute;
+            bottom: 22%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 32%;
+            height: 24%;
+            background: radial-gradient(circle,
+                rgba(220, 80, 160, 0.3),
+                transparent 70%);
+            filter: blur(32px);
+            border-radius: 50%;
+        }
+
+        /* Bright sacred geometry pattern */
+        .var-9 .geometry-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 42%;
+            height: 21%;
+            background: radial-gradient(circle,
+                rgba(255, 230, 120, 0.5),
+                rgba(255, 200, 80, 0.3) 60%,
+                transparent 90%);
+            filter: blur(18px);
+            border-radius: 50%;
+        }
+
+        .var-9 .geo-circle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            filter: blur(5px);
+        }
+
+        .var-9 .geo-center {
+            width: 18%;
+            height: 9%;
+            background: radial-gradient(circle,
+                rgb(255, 255, 255),
+                rgb(255, 250, 240) 40%,
+                rgb(255, 230, 120) 80%);
+            box-shadow: 0 0 45px rgba(255, 250, 240, 1),
+                        0 0 75px rgba(255, 230, 120, 0.8);
+        }
+
+        .var-9 .geo-ring-1 {
+            width: 28%;
+            height: 14%;
+            background: radial-gradient(circle,
+                transparent 60%,
+                rgb(255, 250, 240) 65%,
+                rgb(255, 230, 120) 72%,
+                transparent 78%);
+        }
+
+        .var-9 .geo-ring-2 {
+            width: 36%;
+            height: 18%;
+            background: radial-gradient(circle,
+                transparent 62%,
+                rgb(255, 230, 120) 67%,
+                rgb(255, 100, 180) 74%,
                 transparent 80%);
         }
+
+        .var-9 .geo-petal {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 10%;
+            height: 5%;
+            border-radius: 50%;
+            background: radial-gradient(circle,
+                rgb(255, 250, 240),
+                rgb(255, 230, 120) 60%,
+                rgba(255, 200, 80, 0.6));
+            filter: blur(4px);
+            transform-origin: center center;
+        }
+
+        .var-9 .geo-petal:nth-child(6) { transform: translate(-50%, -50%) translateX(0%) rotate(0deg) translateX(50%); }
+        .var-9 .geo-petal:nth-child(7) { transform: translate(-50%, -50%) translateX(0%) rotate(60deg) translateX(50%); }
+        .var-9 .geo-petal:nth-child(8) { transform: translate(-50%, -50%) translateX(0%) rotate(120deg) translateX(50%); }
+        .var-9 .geo-petal:nth-child(9) { transform: translate(-50%, -50%) translateX(0%) rotate(180deg) translateX(50%); }
+        .var-9 .geo-petal:nth-child(10) { transform: translate(-50%, -50%) translateX(0%) rotate(240deg) translateX(50%); }
+        .var-9 .geo-petal:nth-child(11) { transform: translate(-50%, -50%) translateX(0%) rotate(300deg) translateX(50%); }
+
+        /* ===== 10: SUPERNOVA ===== */
+        .var-10 .canvas {
+            background: radial-gradient(circle at 50% 50%, rgb(35, 18, 55), rgb(5, 2, 15));
+        }
+
+        .var-10 .explosion-field {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            height: 70%;
+            background: radial-gradient(ellipse,
+                rgba(255, 200, 80, 0.15),
+                rgba(220, 80, 160, 0.12) 50%,
+                rgba(100, 50, 130, 0.08) 70%,
+                transparent 88%);
+            filter: blur(48px);
+        }
+
+        .var-10 .debris-1 {
+            position: absolute;
+            top: 20%;
+            left: 30%;
+            width: 22%;
+            height: 16%;
+            background: radial-gradient(circle,
+                rgba(100, 220, 220, 0.35),
+                transparent 70%);
+            filter: blur(28px);
+            border-radius: 50%;
+        }
+
+        .var-10 .debris-2 {
+            position: absolute;
+            top: 35%;
+            right: 20%;
+            width: 25%;
+            height: 18%;
+            background: radial-gradient(circle,
+                rgba(255, 200, 80, 0.4),
+                transparent 70%);
+            filter: blur(28px);
+            border-radius: 50%;
+        }
+
+        .var-10 .debris-3 {
+            position: absolute;
+            bottom: 28%;
+            left: 25%;
+            width: 28%;
+            height: 20%;
+            background: radial-gradient(circle,
+                rgba(220, 80, 160, 0.38),
+                transparent 70%);
+            filter: blur(28px);
+            border-radius: 50%;
+        }
+
+        .var-10 .debris-4 {
+            position: absolute;
+            bottom: 25%;
+            right: 25%;
+            width: 24%;
+            height: 17%;
+            background: radial-gradient(circle,
+                rgba(180, 60, 120, 0.32),
+                transparent 70%);
+            filter: blur(28px);
+            border-radius: 50%;
+        }
+
+        /* Intense explosion core */
+        .var-10 .nova-burst-outer {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 55%;
+            height: 28%;
+            background: radial-gradient(ellipse,
+                rgba(255, 230, 120, 0.7),
+                rgba(255, 200, 80, 0.6) 40%,
+                rgba(255, 100, 180, 0.4) 70%,
+                transparent 95%);
+            filter: blur(20px);
+            border-radius: 50%;
+        }
+
+        .var-10 .nova-burst-mid {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 38%;
+            height: 19%;
+            background: radial-gradient(ellipse,
+                rgb(255, 250, 240),
+                rgb(255, 230, 120) 45%,
+                rgb(255, 200, 80) 75%,
+                rgba(255, 100, 180, 0.8) 95%);
+            filter: blur(12px);
+            border-radius: 50%;
+        }
+
+        .var-10 .nova-core {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20%;
+            height: 10%;
+            background: radial-gradient(circle,
+                rgb(255, 255, 255),
+                rgb(255, 250, 240) 35%,
+                rgb(255, 230, 120) 70%);
+            filter: blur(5px);
+            border-radius: 50%;
+            box-shadow: 0 0 50px rgba(255, 255, 255, 1),
+                        0 0 85px rgba(255, 250, 240, 0.9),
+                        0 0 120px rgba(255, 230, 120, 0.7);
+        }
+
+        /* Explosion rays */
+        .var-10 .nova-ray {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            height: 3px;
+            background: linear-gradient(to right,
+                transparent,
+                rgba(255, 250, 240, 0.7) 30%,
+                rgba(255, 230, 120, 0.8) 50%,
+                rgba(255, 250, 240, 0.7) 70%,
+                transparent);
+            filter: blur(3px);
+            transform-origin: left center;
+        }
+
+        .var-10 .nova-ray-1 { width: 42%; transform: translate(0, -50%) rotate(0deg); }
+        .var-10 .nova-ray-2 { width: 38%; transform: translate(0, -50%) rotate(30deg); }
+        .var-10 .nova-ray-3 { width: 45%; transform: translate(0, -50%) rotate(60deg); }
+        .var-10 .nova-ray-4 { width: 40%; transform: translate(0, -50%) rotate(90deg); }
+        .var-10 .nova-ray-5 { width: 43%; transform: translate(0, -50%) rotate(120deg); }
+        .var-10 .nova-ray-6 { width: 39%; transform: translate(0, -50%) rotate(150deg); }
     </style>
 </head>
 <body>
     <div class="header">
-        <h1>Divine Mother Interpretations</h1>
+        <h1>Soul Frequency Variations</h1>
         <div class="mode-toggle">
             <span>Light</span>
             <div class="toggle-switch" id="modeToggle">
@@ -764,153 +1317,189 @@
     </div>
 
     <div class="container">
-        <!-- 1: GODDESS SILHOUETTE -->
-        <div class="phone interpretation-1">
-            <div class="phone-label">1. Goddess Silhouette</div>
+        <!-- 1: STARBURST CORE -->
+        <div class="phone var-1">
+            <div class="phone-label">1. Starburst</div>
             <div class="phone-screen">
                 <div class="canvas">
-                    <div class="aura"></div>
-                    <div class="goddess-body"></div>
-                    <div class="goddess-head"></div>
-                    <div class="crown"></div>
-                    <div class="star" style="top: 10%; left: 20%;"></div>
-                    <div class="star" style="top: 15%; left: 80%;"></div>
-                    <div class="star" style="top: 25%; left: 15%;"></div>
-                    <div class="star" style="top: 30%; left: 85%;"></div>
-                    <div class="star" style="top: 70%; left: 25%;"></div>
-                    <div class="star" style="top: 75%; left: 75%;"></div>
+                    <div class="atmosphere"></div>
+                    <div class="nebula-1"></div>
+                    <div class="nebula-2"></div>
+                    <div class="beam beam-1"></div>
+                    <div class="beam beam-2"></div>
+                    <div class="beam beam-3"></div>
+                    <div class="beam beam-4"></div>
+                    <div class="beam beam-5"></div>
+                    <div class="beam beam-6"></div>
+                    <div class="beam beam-7"></div>
+                    <div class="beam beam-8"></div>
+                    <div class="core"></div>
                 </div>
             </div>
         </div>
 
-        <!-- 2: UPPER BODY & CROWN -->
-        <div class="phone interpretation-2">
-            <div class="phone-label">2. Crown Focus</div>
+        <!-- 2: GLOWING ORB -->
+        <div class="phone var-2">
+            <div class="phone-label">2. Glowing Orb</div>
             <div class="phone-screen">
                 <div class="canvas">
-                    <div class="upper-body"></div>
-                    <div class="shoulder-glow"></div>
-                    <div class="head-glow"></div>
-                    <div class="crown-rays"></div>
+                    <div class="space-nebula"></div>
+                    <div class="teal-cloud"></div>
+                    <div class="orb-outer"></div>
+                    <div class="orb-mid"></div>
+                    <div class="orb-core"></div>
                 </div>
             </div>
         </div>
 
-        <!-- 3: FLOWING ROBES -->
-        <div class="phone interpretation-3">
-            <div class="phone-label">3. Flowing Robes</div>
+        <!-- 3: VERTICAL FLAME -->
+        <div class="phone var-3">
+            <div class="phone-label">3. Vertical Flame</div>
             <div class="phone-screen">
                 <div class="canvas">
-                    <div class="robe-layer robe-1"></div>
-                    <div class="robe-layer robe-2"></div>
-                    <div class="robe-layer robe-3"></div>
-                    <div class="flow-light"></div>
+                    <div class="cosmic-bg"></div>
+                    <div class="side-glow-1"></div>
+                    <div class="side-glow-2"></div>
+                    <div class="flame-outer"></div>
+                    <div class="flame-mid"></div>
+                    <div class="flame-core"></div>
                 </div>
             </div>
         </div>
 
-        <!-- 4: ENERGY AURA -->
-        <div class="phone interpretation-4">
-            <div class="phone-label">4. Energy Aura</div>
+        <!-- 4: CRYSTAL MATRIX -->
+        <div class="phone var-4">
+            <div class="phone-label">4. Crystal Matrix</div>
             <div class="phone-screen">
                 <div class="canvas">
-                    <div class="aura-outer"></div>
-                    <div class="aura-mid"></div>
-                    <div class="teal-accent"></div>
-                    <div class="aura-core"></div>
+                    <div class="ambient-purple"></div>
+                    <div class="wisp-1"></div>
+                    <div class="wisp-2"></div>
+                    <div class="crystal-glow"></div>
+                    <div class="crystal-outer"></div>
+                    <div class="crystal-inner"></div>
+                    <div class="crystal-cross-h"></div>
+                    <div class="crystal-cross-v"></div>
                 </div>
             </div>
         </div>
 
-        <!-- 5: VERTICAL PILLAR -->
-        <div class="phone interpretation-5">
-            <div class="phone-label">5. Light Pillar</div>
+        <!-- 5: EYE PORTAL -->
+        <div class="phone var-5">
+            <div class="phone-label">5. Eye Portal</div>
             <div class="phone-screen">
                 <div class="canvas">
-                    <div class="pillar-glow"></div>
-                    <div class="pillar-base"></div>
-                    <div class="pillar-inner"></div>
+                    <div class="swirl-1"></div>
+                    <div class="swirl-2"></div>
+                    <div class="swirl-3"></div>
+                    <div class="eye-outer"></div>
+                    <div class="eye-mid"></div>
+                    <div class="eye-iris"></div>
                 </div>
             </div>
         </div>
 
-        <!-- 6: COSMIC MANDALA -->
-        <div class="phone interpretation-6">
-            <div class="phone-label">6. Cosmic Mandala</div>
+        <!-- 6: LOTUS BLOOM -->
+        <div class="phone var-6">
+            <div class="phone-label">6. Lotus Bloom</div>
             <div class="phone-screen">
                 <div class="canvas">
-                    <div class="mandala-ring ring-3"></div>
-                    <div class="mandala-ring ring-2"></div>
-                    <div class="mandala-ring ring-1"></div>
-                    <div class="ray" style="transform: translate(-50%, -50%) rotate(0deg);"></div>
-                    <div class="ray" style="transform: translate(-50%, -50%) rotate(45deg);"></div>
-                    <div class="ray" style="transform: translate(-50%, -50%) rotate(90deg);"></div>
-                    <div class="ray" style="transform: translate(-50%, -50%) rotate(135deg);"></div>
-                    <div class="mandala-center"></div>
+                    <div class="garden-mist"></div>
+                    <div class="garden-accent-1"></div>
+                    <div class="garden-accent-2"></div>
+                    <div class="petal petal-1"></div>
+                    <div class="petal petal-2"></div>
+                    <div class="petal petal-3"></div>
+                    <div class="petal petal-4"></div>
+                    <div class="petal petal-5"></div>
+                    <div class="petal petal-6"></div>
+                    <div class="petal petal-7"></div>
+                    <div class="petal petal-8"></div>
+                    <div class="lotus-center"></div>
                 </div>
             </div>
         </div>
 
-        <!-- 7: NEBULA CLOUDS -->
-        <div class="phone interpretation-7">
-            <div class="phone-label">7. Nebula Clouds</div>
+        <!-- 7: DNA HELIX -->
+        <div class="phone var-7">
+            <div class="phone-label">7. DNA Helix</div>
             <div class="phone-screen">
                 <div class="canvas">
-                    <div class="cloud cloud-1"></div>
-                    <div class="cloud cloud-2"></div>
-                    <div class="cloud cloud-3"></div>
-                    <div class="cloud cloud-4"></div>
-                    <div class="bright-spot"></div>
+                    <div class="cosmic-dust"></div>
+                    <div class="dust-1"></div>
+                    <div class="dust-2"></div>
+                    <div class="helix-glow"></div>
+                    <div class="strand strand-L1"></div>
+                    <div class="strand strand-L2"></div>
+                    <div class="strand strand-L3"></div>
+                    <div class="strand strand-L4"></div>
+                    <div class="strand strand-L5"></div>
+                    <div class="strand strand-R1"></div>
+                    <div class="strand strand-R2"></div>
+                    <div class="strand strand-R3"></div>
+                    <div class="strand strand-R4"></div>
+                    <div class="strand strand-R5"></div>
                 </div>
             </div>
         </div>
 
-        <!-- 8: LAYERED GRADIENTS -->
-        <div class="phone interpretation-8">
-            <div class="phone-label">8. Layered Gradients</div>
+        <!-- 8: HEART CHAKRA -->
+        <div class="phone var-8">
+            <div class="phone-label">8. Heart Chakra</div>
             <div class="phone-screen">
                 <div class="canvas">
-                    <div class="gradient-layer layer-1"></div>
-                    <div class="gradient-layer layer-2"></div>
-                    <div class="gradient-layer layer-3"></div>
-                    <div class="gradient-layer layer-4"></div>
-                    <div class="center-glow"></div>
+                    <div class="aura-field"></div>
+                    <div class="aura-accent-1"></div>
+                    <div class="aura-accent-2"></div>
+                    <div class="heart-glow"></div>
+                    <div class="heart"></div>
+                    <div class="heart-center"></div>
                 </div>
             </div>
         </div>
 
-        <!-- 9: PARTICLE FIELD -->
-        <div class="phone interpretation-9">
-            <div class="phone-label">9. Particle Field</div>
+        <!-- 9: SACRED GEOMETRY -->
+        <div class="phone var-9">
+            <div class="phone-label">9. Sacred Geometry</div>
             <div class="phone-screen">
                 <div class="canvas">
-                    <div class="ambient-light"></div>
-                    <!-- Large particles -->
-                    <div class="large-particle" style="top: 20%; left: 30%; width: 8%; height: 4%; background: radial-gradient(circle, rgba(100, 220, 220, 0.7), transparent);"></div>
-                    <div class="large-particle" style="top: 35%; left: 70%; width: 10%; height: 5%; background: radial-gradient(circle, rgba(255, 200, 100, 0.6), transparent);"></div>
-                    <div class="large-particle" style="top: 55%; left: 25%; width: 12%; height: 6%; background: radial-gradient(circle, rgba(220, 80, 160, 0.7), transparent);"></div>
-                    <div class="large-particle" style="top: 70%; left: 65%; width: 9%; height: 4.5%; background: radial-gradient(circle, rgba(180, 60, 120, 0.6), transparent);"></div>
-                    <!-- Small particles -->
-                    <div class="particle-glow" style="top: 15%; left: 50%; width: 3%; height: 1.5%; background: radial-gradient(circle, rgba(255, 250, 240, 0.8), transparent);"></div>
-                    <div class="particle-glow" style="top: 25%; left: 15%; width: 2.5%; height: 1.2%; background: radial-gradient(circle, rgba(100, 220, 220, 0.7), transparent);"></div>
-                    <div class="particle-glow" style="top: 40%; left: 85%; width: 3.5%; height: 1.8%; background: radial-gradient(circle, rgba(255, 200, 100, 0.8), transparent);"></div>
-                    <div class="particle-glow" style="top: 48%; left: 50%; width: 4%; height: 2%; background: radial-gradient(circle, rgba(255, 250, 240, 0.9), transparent);"></div>
-                    <div class="particle-glow" style="top: 60%; left: 40%; width: 2.8%; height: 1.4%; background: radial-gradient(circle, rgba(220, 80, 160, 0.7), transparent);"></div>
-                    <div class="particle-glow" style="top: 75%; left: 80%; width: 3.2%; height: 1.6%; background: radial-gradient(circle, rgba(180, 60, 120, 0.7), transparent);"></div>
-                    <div class="particle-glow" style="top: 85%; left: 20%; width: 2.5%; height: 1.2%; background: radial-gradient(circle, rgba(100, 220, 220, 0.6), transparent);"></div>
+                    <div class="geo-space"></div>
+                    <div class="geo-wisp-1"></div>
+                    <div class="geo-wisp-2"></div>
+                    <div class="geo-wisp-3"></div>
+                    <div class="geometry-glow"></div>
+                    <div class="geo-circle geo-ring-2"></div>
+                    <div class="geo-circle geo-ring-1"></div>
+                    <div class="geo-petal"></div>
+                    <div class="geo-petal"></div>
+                    <div class="geo-petal"></div>
+                    <div class="geo-petal"></div>
+                    <div class="geo-petal"></div>
+                    <div class="geo-petal"></div>
+                    <div class="geo-circle geo-center"></div>
                 </div>
             </div>
         </div>
 
-        <!-- 10: PURE COLOR FIELD -->
-        <div class="phone interpretation-10">
-            <div class="phone-label">10. Pure Color Field</div>
+        <!-- 10: SUPERNOVA -->
+        <div class="phone var-10">
+            <div class="phone-label">10. Supernova</div>
             <div class="phone-screen">
                 <div class="canvas">
-                    <div class="color-wash wash-1"></div>
-                    <div class="color-wash wash-2"></div>
-                    <div class="color-wash wash-3"></div>
-                    <div class="color-wash wash-4"></div>
+                    <div class="explosion-field"></div>
+                    <div class="debris-1"></div>
+                    <div class="debris-2"></div>
+                    <div class="debris-3"></div>
+                    <div class="debris-4"></div>
+                    <div class="nova-ray nova-ray-1"></div>
+                    <div class="nova-ray nova-ray-2"></div>
+                    <div class="nova-ray nova-ray-3"></div>
+                    <div class="nova-ray nova-ray-4"></div>
+                    <div class="nova-ray nova-ray-5"></div>
+                    <div class="nova-ray nova-ray-6"></div>
+                    <div class="nova-burst-outer"></div>
+                    <div class="nova-burst-mid"></div>
+                    <div class="nova-core"></div>
                 </div>
             </div>
         </div>
