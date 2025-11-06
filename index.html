@@ -141,69 +141,142 @@
             position: relative;
         }
 
-        /* Placeholder animations for each version */
-        .animation-1 .animation-content::after {
-            content: 'Version 1';
-            font-size: 14px;
-            color: #999;
+        /* Soul glow animations */
+        .soul-orb {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            filter: blur(2px);
         }
 
-        .animation-2 .animation-content::after {
-            content: 'Version 2';
-            font-size: 14px;
-            color: #999;
+        .pulse-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            opacity: 0;
+            animation: pulse 2s ease-out infinite;
         }
 
-        .animation-3 .animation-content::after {
-            content: 'Version 3';
-            font-size: 14px;
-            color: #999;
+        .pulse-ring:nth-child(2) {
+            animation-delay: 0.5s;
         }
 
-        .animation-4 .animation-content::after {
-            content: 'Version 4';
-            font-size: 14px;
-            color: #999;
+        .pulse-ring:nth-child(3) {
+            animation-delay: 1s;
         }
 
-        .animation-5 .animation-content::after {
-            content: 'Version 5';
-            font-size: 14px;
-            color: #999;
+        .pulse-ring:nth-child(4) {
+            animation-delay: 1.5s;
         }
 
-        .animation-6 .animation-content::after {
-            content: 'Version 6';
-            font-size: 14px;
-            color: #999;
+        @keyframes pulse {
+            0% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(3);
+                opacity: 0;
+            }
         }
 
-        .animation-7 .animation-content::after {
-            content: 'Version 7';
-            font-size: 14px;
-            color: #999;
+        /* Color variations */
+        .animation-1 .soul-orb {
+            background: radial-gradient(circle, rgba(138, 43, 226, 0.8), rgba(75, 0, 130, 0.4));
+            box-shadow: 0 0 40px rgba(138, 43, 226, 0.6), 0 0 80px rgba(138, 43, 226, 0.3);
+        }
+        .animation-1 .pulse-ring {
+            border: 3px solid rgba(138, 43, 226, 0.6);
+            box-shadow: 0 0 20px rgba(138, 43, 226, 0.4);
         }
 
-        .animation-8 .animation-content::after {
-            content: 'Version 8';
-            font-size: 14px;
-            color: #999;
+        .animation-2 .soul-orb {
+            background: radial-gradient(circle, rgba(255, 20, 147, 0.8), rgba(199, 21, 133, 0.4));
+            box-shadow: 0 0 40px rgba(255, 20, 147, 0.6), 0 0 80px rgba(255, 20, 147, 0.3);
+        }
+        .animation-2 .pulse-ring {
+            border: 3px solid rgba(255, 20, 147, 0.6);
+            box-shadow: 0 0 20px rgba(255, 20, 147, 0.4);
         }
 
-        .animation-9 .animation-content::after {
-            content: 'Version 9';
-            font-size: 14px;
-            color: #999;
+        .animation-3 .soul-orb {
+            background: radial-gradient(circle, rgba(0, 191, 255, 0.8), rgba(30, 144, 255, 0.4));
+            box-shadow: 0 0 40px rgba(0, 191, 255, 0.6), 0 0 80px rgba(0, 191, 255, 0.3);
+        }
+        .animation-3 .pulse-ring {
+            border: 3px solid rgba(0, 191, 255, 0.6);
+            box-shadow: 0 0 20px rgba(0, 191, 255, 0.4);
         }
 
-        .animation-10 .animation-content::after {
-            content: 'Version 10';
-            font-size: 14px;
-            color: #999;
+        .animation-4 .soul-orb {
+            background: radial-gradient(circle, rgba(50, 205, 50, 0.8), rgba(34, 139, 34, 0.4));
+            box-shadow: 0 0 40px rgba(50, 205, 50, 0.6), 0 0 80px rgba(50, 205, 50, 0.3);
+        }
+        .animation-4 .pulse-ring {
+            border: 3px solid rgba(50, 205, 50, 0.6);
+            box-shadow: 0 0 20px rgba(50, 205, 50, 0.4);
         }
 
-        .phone.dark-mode .animation-content::after {
-            color: #666;
+        .animation-5 .soul-orb {
+            background: radial-gradient(circle, rgba(255, 165, 0, 0.8), rgba(255, 140, 0, 0.4));
+            box-shadow: 0 0 40px rgba(255, 165, 0, 0.6), 0 0 80px rgba(255, 165, 0, 0.3);
+        }
+        .animation-5 .pulse-ring {
+            border: 3px solid rgba(255, 165, 0, 0.6);
+            box-shadow: 0 0 20px rgba(255, 165, 0, 0.4);
+        }
+
+        .animation-6 .soul-orb {
+            background: radial-gradient(circle, rgba(220, 20, 60, 0.8), rgba(178, 34, 34, 0.4));
+            box-shadow: 0 0 40px rgba(220, 20, 60, 0.6), 0 0 80px rgba(220, 20, 60, 0.3);
+        }
+        .animation-6 .pulse-ring {
+            border: 3px solid rgba(220, 20, 60, 0.6);
+            box-shadow: 0 0 20px rgba(220, 20, 60, 0.4);
+        }
+
+        .animation-7 .soul-orb {
+            background: radial-gradient(circle, rgba(64, 224, 208, 0.8), rgba(72, 209, 204, 0.4));
+            box-shadow: 0 0 40px rgba(64, 224, 208, 0.6), 0 0 80px rgba(64, 224, 208, 0.3);
+        }
+        .animation-7 .pulse-ring {
+            border: 3px solid rgba(64, 224, 208, 0.6);
+            box-shadow: 0 0 20px rgba(64, 224, 208, 0.4);
+        }
+
+        .animation-8 .soul-orb {
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.8), rgba(218, 165, 32, 0.4));
+            box-shadow: 0 0 40px rgba(255, 215, 0, 0.6), 0 0 80px rgba(255, 215, 0, 0.3);
+        }
+        .animation-8 .pulse-ring {
+            border: 3px solid rgba(255, 215, 0, 0.6);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+        }
+
+        .animation-9 .soul-orb {
+            background: radial-gradient(circle, rgba(147, 112, 219, 0.8), rgba(123, 104, 238, 0.4));
+            box-shadow: 0 0 40px rgba(147, 112, 219, 0.6), 0 0 80px rgba(147, 112, 219, 0.3);
+        }
+        .animation-9 .pulse-ring {
+            border: 3px solid rgba(147, 112, 219, 0.6);
+            box-shadow: 0 0 20px rgba(147, 112, 219, 0.4);
+        }
+
+        .animation-10 .soul-orb {
+            background: radial-gradient(circle, rgba(255, 105, 180, 0.8), rgba(219, 112, 147, 0.4));
+            box-shadow: 0 0 40px rgba(255, 105, 180, 0.6), 0 0 80px rgba(255, 105, 180, 0.3);
+        }
+        .animation-10 .pulse-ring {
+            border: 3px solid rgba(255, 105, 180, 0.6);
+            box-shadow: 0 0 20px rgba(255, 105, 180, 0.4);
         }
     </style>
 </head>
@@ -221,91 +294,131 @@
 
     <div class="container">
         <div class="phone animation-1" id="phone1">
-            <div class="phone-label">Version 1</div>
+            <div class="phone-label">Purple Violet</div>
             <div class="phone-screen">
                 <div class="animation-content">
-                    <!-- Animation 1 content here -->
+                    <div class="soul-orb"></div>
+                    <div class="pulse-ring"></div>
+                    <div class="pulse-ring"></div>
+                    <div class="pulse-ring"></div>
+                    <div class="pulse-ring"></div>
                 </div>
             </div>
         </div>
 
         <div class="phone animation-2" id="phone2">
-            <div class="phone-label">Version 2</div>
+            <div class="phone-label">Deep Pink</div>
             <div class="phone-screen">
                 <div class="animation-content">
-                    <!-- Animation 2 content here -->
+                    <div class="soul-orb"></div>
+                    <div class="pulse-ring"></div>
+                    <div class="pulse-ring"></div>
+                    <div class="pulse-ring"></div>
+                    <div class="pulse-ring"></div>
                 </div>
             </div>
         </div>
 
         <div class="phone animation-3" id="phone3">
-            <div class="phone-label">Version 3</div>
+            <div class="phone-label">Sky Blue</div>
             <div class="phone-screen">
                 <div class="animation-content">
-                    <!-- Animation 3 content here -->
+                    <div class="soul-orb"></div>
+                    <div class="pulse-ring"></div>
+                    <div class="pulse-ring"></div>
+                    <div class="pulse-ring"></div>
+                    <div class="pulse-ring"></div>
                 </div>
             </div>
         </div>
 
         <div class="phone animation-4" id="phone4">
-            <div class="phone-label">Version 4</div>
+            <div class="phone-label">Lime Green</div>
             <div class="phone-screen">
                 <div class="animation-content">
-                    <!-- Animation 4 content here -->
+                    <div class="soul-orb"></div>
+                    <div class="pulse-ring"></div>
+                    <div class="pulse-ring"></div>
+                    <div class="pulse-ring"></div>
+                    <div class="pulse-ring"></div>
                 </div>
             </div>
         </div>
 
         <div class="phone animation-5" id="phone5">
-            <div class="phone-label">Version 5</div>
+            <div class="phone-label">Warm Orange</div>
             <div class="phone-screen">
                 <div class="animation-content">
-                    <!-- Animation 5 content here -->
+                    <div class="soul-orb"></div>
+                    <div class="pulse-ring"></div>
+                    <div class="pulse-ring"></div>
+                    <div class="pulse-ring"></div>
+                    <div class="pulse-ring"></div>
                 </div>
             </div>
         </div>
 
         <div class="phone animation-6" id="phone6">
-            <div class="phone-label">Version 6</div>
+            <div class="phone-label">Crimson Red</div>
             <div class="phone-screen">
                 <div class="animation-content">
-                    <!-- Animation 6 content here -->
+                    <div class="soul-orb"></div>
+                    <div class="pulse-ring"></div>
+                    <div class="pulse-ring"></div>
+                    <div class="pulse-ring"></div>
+                    <div class="pulse-ring"></div>
                 </div>
             </div>
         </div>
 
         <div class="phone animation-7" id="phone7">
-            <div class="phone-label">Version 7</div>
+            <div class="phone-label">Turquoise</div>
             <div class="phone-screen">
                 <div class="animation-content">
-                    <!-- Animation 7 content here -->
+                    <div class="soul-orb"></div>
+                    <div class="pulse-ring"></div>
+                    <div class="pulse-ring"></div>
+                    <div class="pulse-ring"></div>
+                    <div class="pulse-ring"></div>
                 </div>
             </div>
         </div>
 
         <div class="phone animation-8" id="phone8">
-            <div class="phone-label">Version 8</div>
+            <div class="phone-label">Golden Yellow</div>
             <div class="phone-screen">
                 <div class="animation-content">
-                    <!-- Animation 8 content here -->
+                    <div class="soul-orb"></div>
+                    <div class="pulse-ring"></div>
+                    <div class="pulse-ring"></div>
+                    <div class="pulse-ring"></div>
+                    <div class="pulse-ring"></div>
                 </div>
             </div>
         </div>
 
         <div class="phone animation-9" id="phone9">
-            <div class="phone-label">Version 9</div>
+            <div class="phone-label">Medium Purple</div>
             <div class="phone-screen">
                 <div class="animation-content">
-                    <!-- Animation 9 content here -->
+                    <div class="soul-orb"></div>
+                    <div class="pulse-ring"></div>
+                    <div class="pulse-ring"></div>
+                    <div class="pulse-ring"></div>
+                    <div class="pulse-ring"></div>
                 </div>
             </div>
         </div>
 
         <div class="phone animation-10" id="phone10">
-            <div class="phone-label">Version 10</div>
+            <div class="phone-label">Hot Pink</div>
             <div class="phone-screen">
                 <div class="animation-content">
-                    <!-- Animation 10 content here -->
+                    <div class="soul-orb"></div>
+                    <div class="pulse-ring"></div>
+                    <div class="pulse-ring"></div>
+                    <div class="pulse-ring"></div>
+                    <div class="pulse-ring"></div>
                 </div>
             </div>
         </div>
