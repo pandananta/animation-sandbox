@@ -217,16 +217,16 @@
             100% { transform: translateY(-200%) translateX(0); }
         }
 
-        /* Slow drift right */
+        /* Slow drift right - continuous */
         @keyframes driftRight {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(100%); }
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(200%); }
         }
 
-        /* Slow drift left */
+        /* Slow drift left - continuous */
         @keyframes driftLeft {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-100%); }
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-200%); }
         }
 
         /* Slow diagonal drift up-right */
@@ -412,14 +412,14 @@
         }
 
         .var-3 .p1 {
-            top: 25%; left: 20%; width: 9%; height: 4.5%;
+            top: 25%; left: 0%; width: 9%; height: 4.5%;
             background: radial-gradient(circle, rgba(255, 200, 80, 0.7), transparent);
-            animation: driftRight 14s ease-in-out infinite, twinkle 5s ease-in-out infinite;
+            animation: driftRight 14s linear infinite, twinkle 5s ease-in-out infinite;
         }
         .var-3 .p2 {
-            top: 65%; right: 22%; width: 10%; height: 5%;
+            top: 65%; left: 0%; width: 10%; height: 5%;
             background: radial-gradient(circle, rgba(100, 220, 220, 0.65), transparent);
-            animation: driftLeft 13s ease-in-out infinite 4s, twinkle 6s ease-in-out infinite 2s;
+            animation: driftLeft 13s linear infinite 4s, twinkle 6s ease-in-out infinite 2s;
         }
 
         /* ===== 4: DIAGONAL FLOW ===== */
@@ -552,7 +552,7 @@
         .var-7 .flow-1 {
             position: absolute;
             top: 25%;
-            left: -50%;
+            left: 0;
             width: 100%;
             height: 18%;
             background: linear-gradient(to right,
@@ -566,7 +566,7 @@
         .var-7 .flow-2 {
             position: absolute;
             bottom: 28%;
-            right: -50%;
+            left: 0;
             width: 100%;
             height: 20%;
             background: linear-gradient(to right,
@@ -578,24 +578,24 @@
         }
 
         .var-7 .p1 {
-            top: 30%; left: 25%; width: 8%; height: 4%;
+            top: 30%; left: 0%; width: 8%; height: 4%;
             background: radial-gradient(circle, rgba(100, 220, 220, 0.7), transparent);
-            animation: driftRight 12s ease-in-out infinite, twinkle 5s ease-in-out infinite;
+            animation: driftRight 12s linear infinite, twinkle 5s ease-in-out infinite;
         }
         .var-7 .p2 {
-            top: 32%; right: 28%; width: 7%; height: 3.5%;
+            top: 32%; left: 0%; width: 7%; height: 3.5%;
             background: radial-gradient(circle, rgba(100, 220, 220, 0.6), transparent);
-            animation: driftRight 14s ease-in-out infinite 3s, twinkle 6s ease-in-out infinite 2s;
+            animation: driftRight 14s linear infinite 3s, twinkle 6s ease-in-out infinite 2s;
         }
         .var-7 .p3 {
-            bottom: 32%; left: 30%; width: 9%; height: 4.5%;
+            bottom: 32%; left: 0%; width: 9%; height: 4.5%;
             background: radial-gradient(circle, rgba(220, 80, 160, 0.7), transparent);
-            animation: driftLeft 13s ease-in-out infinite, twinkle 5s ease-in-out infinite 1s;
+            animation: driftLeft 13s linear infinite, twinkle 5s ease-in-out infinite 1s;
         }
         .var-7 .p4 {
-            bottom: 30%; right: 25%; width: 8%; height: 4%;
+            bottom: 30%; left: 0%; width: 8%; height: 4%;
             background: radial-gradient(circle, rgba(220, 80, 160, 0.65), transparent);
-            animation: driftLeft 15s ease-in-out infinite 4s, twinkle 6s ease-in-out infinite 3s;
+            animation: driftLeft 15s linear infinite 4s, twinkle 6s ease-in-out infinite 3s;
         }
 
         /* ===== 8: SCATTERED TWINKLE ===== */
@@ -694,50 +694,78 @@
             animation: floatOrganic 17s ease-in-out infinite 10s, twinkle 6s ease-in-out infinite 3s;
         }
 
-        /* ===== 10: GENTLE CHAOS ===== */
+        /* ===== 10: HORIZONTAL + DIAGONAL FLOW ===== */
         .var-10 .canvas {
-            background: radial-gradient(circle at 50% 30%, rgb(35, 18, 55), rgb(5, 2, 15));
+            background: linear-gradient(to bottom, rgb(20, 10, 40), rgb(5, 2, 15), rgb(25, 12, 45));
         }
 
-        .var-10 .top-glow {
+        .var-10 .flow-1 {
             position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
+            top: 30%;
+            left: 0;
+            width: 100%;
+            height: 15%;
+            background: linear-gradient(to right,
+                transparent,
+                rgba(100, 220, 220, 0.3) 50%,
+                transparent);
+            filter: blur(35px);
+            animation: driftRight 18s linear infinite;
+        }
+
+        .var-10 .flow-2 {
+            position: absolute;
+            bottom: 30%;
+            left: 0;
+            width: 100%;
+            height: 18%;
+            background: linear-gradient(to right,
+                transparent,
+                rgba(220, 80, 160, 0.35) 50%,
+                transparent);
+            filter: blur(35px);
+            animation: driftLeft 22s linear infinite;
+        }
+
+        .var-10 .diagonal-mist {
+            position: absolute;
+            top: 20%;
+            left: -10%;
             width: 80%;
-            height: 45%;
-            background: radial-gradient(ellipse at top,
-                rgba(100, 220, 220, 0.25),
-                rgba(180, 60, 120, 0.2) 50%,
+            height: 70%;
+            background: linear-gradient(to bottom right,
+                rgba(100, 220, 220, 0.2),
+                rgba(180, 60, 120, 0.15) 60%,
                 transparent 90%);
             filter: blur(50px);
-            animation: atmosphereFade 37s ease-in-out infinite;
+            transform: rotate(-15deg);
+            animation: slowRotate 50s linear infinite, atmosphereFade 32s ease-in-out infinite;
         }
 
         .var-10 .p1 {
-            bottom: 15%; left: 25%; width: 9%; height: 4.5%;
-            background: radial-gradient(circle, rgba(100, 220, 220, 0.75), transparent);
-            animation: floatOrganic 16s ease-in-out infinite, twinkle 6s ease-in-out infinite;
+            bottom: 15%; left: 0%; width: 10%; height: 5%;
+            background: radial-gradient(circle, rgba(100, 220, 220, 0.7), transparent);
+            animation: diagonalDriftUpRight 13s ease-in-out infinite, particleFade 13s ease-in-out infinite;
         }
         .var-10 .p2 {
-            bottom: 20%; left: 45%; width: 8%; height: 4%;
-            background: radial-gradient(circle, rgba(255, 200, 80, 0.7), transparent);
-            animation: floatUp 13s ease-in-out infinite 3s, particleFade 13s ease-in-out infinite 3s;
+            bottom: 20%; left: 0%; width: 9%; height: 4.5%;
+            background: radial-gradient(circle, rgba(255, 200, 80, 0.65), transparent);
+            animation: diagonalDriftUpRight 15s ease-in-out infinite 3s, particleFade 15s ease-in-out infinite 3s;
         }
         .var-10 .p3 {
-            bottom: 12%; right: 20%; width: 10%; height: 5%;
-            background: radial-gradient(circle, rgba(220, 80, 160, 0.7), transparent);
-            animation: diagonalDriftUpLeft 14s ease-in-out infinite, particleFade 14s ease-in-out infinite;
+            top: 35%; left: 0%; width: 8%; height: 4%;
+            background: radial-gradient(circle, rgba(100, 220, 220, 0.6), transparent);
+            animation: driftRight 11s linear infinite, twinkle 5s ease-in-out infinite;
         }
         .var-10 .p4 {
-            bottom: 28%; left: 15%; width: 7%; height: 3.5%;
-            background: radial-gradient(circle, rgba(180, 60, 120, 0.65), transparent);
-            animation: driftRight 15s ease-in-out infinite 6s, twinkle 5s ease-in-out infinite 2s;
+            bottom: 35%; left: 0%; width: 9%; height: 4.5%;
+            background: radial-gradient(circle, rgba(220, 80, 160, 0.7), transparent);
+            animation: driftLeft 12s linear infinite 2s, twinkle 6s ease-in-out infinite 1s;
         }
         .var-10 .p5 {
-            bottom: 22%; right: 15%; width: 8%; height: 4%;
-            background: radial-gradient(circle, rgba(100, 220, 220, 0.6), transparent);
-            animation: diagonalDriftUpRight 17s ease-in-out infinite 9s, particleFade 17s ease-in-out infinite 9s;
+            bottom: 25%; left: 0%; width: 11%; height: 5.5%;
+            background: radial-gradient(circle, rgba(220, 80, 160, 0.7), transparent);
+            animation: diagonalDriftUpLeft 14s ease-in-out infinite 5s, particleFade 14s ease-in-out infinite 5s;
         }
     </style>
 </head>
@@ -907,12 +935,14 @@
             </div>
         </div>
 
-        <!-- 10: GENTLE CHAOS -->
+        <!-- 10: HORIZONTAL + DIAGONAL FLOW -->
         <div class="phone var-10">
-            <div class="phone-label">10. Gentle Chaos</div>
+            <div class="phone-label">10. Horizontal + Diagonal</div>
             <div class="phone-screen">
                 <div class="canvas">
-                    <div class="top-glow"></div>
+                    <div class="diagonal-mist"></div>
+                    <div class="flow-1"></div>
+                    <div class="flow-2"></div>
                     <div class="particle p1"></div>
                     <div class="particle p2"></div>
                     <div class="particle p3"></div>
