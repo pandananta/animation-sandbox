@@ -330,6 +330,103 @@
             100% { opacity: 0.25; }
         }
 
+        /* Color cycling for teal/blue bands - 4 color cycle */
+        @keyframes colorCycleTeal1 {
+            0%, 100% {
+                background: linear-gradient(to right, transparent, rgba(100, 220, 220, 0.28) 50%, transparent);
+            }
+            25% {
+                background: linear-gradient(to right, transparent, rgba(60, 160, 240, 0.28) 50%, transparent);
+            }
+            50% {
+                background: linear-gradient(to right, transparent, rgba(80, 200, 220, 0.35) 50%, transparent);
+            }
+            75% {
+                background: linear-gradient(to right, transparent, rgba(100, 100, 240, 0.28) 50%, transparent);
+            }
+        }
+
+        @keyframes colorCycleTeal2 {
+            0%, 100% {
+                background: linear-gradient(to right, transparent, rgba(100, 220, 220, 0.22) 50%, transparent);
+            }
+            25% {
+                background: linear-gradient(to right, transparent, rgba(60, 160, 240, 0.22) 50%, transparent);
+            }
+            50% {
+                background: linear-gradient(to right, transparent, rgba(80, 200, 220, 0.28) 50%, transparent);
+            }
+            75% {
+                background: linear-gradient(to right, transparent, rgba(100, 100, 240, 0.22) 50%, transparent);
+            }
+        }
+
+        /* Color cycling for magenta bands - alternate between orange and indigo */
+        @keyframes colorCycleMagenta1 {
+            0%, 100% {
+                background: linear-gradient(to right, transparent, rgba(100, 100, 240, 0.29) 50%, transparent);
+            }
+            50% {
+                background: linear-gradient(to right, transparent, rgba(255, 140, 60, 0.29) 50%, transparent);
+            }
+        }
+
+        @keyframes colorCycleMagenta2 {
+            0%, 100% {
+                background: linear-gradient(to right, transparent, rgba(100, 100, 240, 0.23) 50%, transparent);
+            }
+            50% {
+                background: linear-gradient(to right, transparent, rgba(255, 140, 60, 0.23) 50%, transparent);
+            }
+        }
+
+        /* Color cycling for diagonal mist */
+        @keyframes colorCycleDiagonalMist {
+            0%, 100% {
+                background: linear-gradient(to bottom right,
+                    rgba(100, 220, 220, 0.25),
+                    rgba(100, 100, 240, 0.2) 60%,
+                    transparent 90%);
+            }
+            33% {
+                background: linear-gradient(to bottom right,
+                    rgba(60, 160, 240, 0.25),
+                    rgba(255, 140, 60, 0.2) 60%,
+                    transparent 90%);
+            }
+            66% {
+                background: linear-gradient(to bottom right,
+                    rgba(80, 200, 220, 0.25),
+                    rgba(100, 100, 240, 0.2) 60%,
+                    transparent 90%);
+            }
+        }
+
+        /* Color cycling for particles */
+        @keyframes colorCycleParticleTeal {
+            0%, 100% {
+                background: radial-gradient(circle, rgba(100, 220, 220, 0.7), transparent);
+            }
+            25% {
+                background: radial-gradient(circle, rgba(60, 160, 240, 0.7), transparent);
+            }
+            50% {
+                background: radial-gradient(circle, rgba(80, 200, 220, 0.7), transparent);
+            }
+            75% {
+                background: radial-gradient(circle, rgba(100, 100, 240, 0.7), transparent);
+            }
+        }
+
+        @keyframes colorCycleParticleMagenta {
+            0%, 100% {
+                background: radial-gradient(circle, rgba(100, 100, 240, 0.7), transparent);
+            }
+            50% {
+                background: radial-gradient(circle, rgba(255, 140, 60, 0.7), transparent);
+            }
+        }
+
         /* ===== 1: PASTEL TEAL & ROSE ===== */
         .var-1 .canvas {
             background: radial-gradient(ellipse at 40% 45%, rgb(35, 18, 55), rgb(5, 2, 15));
@@ -1228,7 +1325,9 @@
                 rgba(100, 220, 220, 0.28) 50%,
                 transparent);
             filter: blur(39px);
-            animation: driftRightWobble1 48s ease-in-out infinite 2s;
+            animation:
+                driftRightWobble1 48s ease-in-out infinite 2s,
+                colorCycleTeal1 192s ease-in-out infinite;
             animation-fill-mode: backwards;
         }
 
@@ -1243,7 +1342,9 @@
                 rgba(100, 220, 220, 0.22) 50%,
                 transparent);
             filter: blur(42px);
-            animation: driftRightWobble2 37s ease-in-out infinite 11s;
+            animation:
+                driftRightWobble2 37s ease-in-out infinite 11s,
+                colorCycleTeal2 148s ease-in-out infinite;
             animation-fill-mode: backwards;
         }
 
@@ -1255,10 +1356,12 @@
             height: 18%;
             background: linear-gradient(to right,
                 transparent,
-                rgba(220, 80, 160, 0.29) 50%,
+                rgba(100, 100, 240, 0.29) 50%,
                 transparent);
             filter: blur(39px);
-            animation: driftLeftWobble1 54s ease-in-out infinite 5s;
+            animation:
+                driftLeftWobble1 54s ease-in-out infinite 5s,
+                colorCycleMagenta1 108s ease-in-out infinite;
             animation-fill-mode: backwards;
         }
 
@@ -1270,10 +1373,12 @@
             height: 15%;
             background: linear-gradient(to right,
                 transparent,
-                rgba(220, 80, 160, 0.23) 50%,
+                rgba(100, 100, 240, 0.23) 50%,
                 transparent);
             filter: blur(44px);
-            animation: driftLeftWobble2 41s ease-in-out infinite 17s;
+            animation:
+                driftLeftWobble2 41s ease-in-out infinite 17s,
+                colorCycleMagenta2 82s ease-in-out infinite;
             animation-fill-mode: backwards;
         }
 
@@ -1285,17 +1390,23 @@
             height: 70%;
             background: linear-gradient(to bottom right,
                 rgba(100, 220, 220, 0.25),
-                rgba(180, 60, 120, 0.2) 60%,
+                rgba(100, 100, 240, 0.2) 60%,
                 transparent 90%);
             filter: blur(50px);
             transform: rotate(-15deg);
-            animation: slowRotate 45s linear infinite, atmosphereFade 28s ease-in-out infinite;
+            animation:
+                slowRotate 45s linear infinite,
+                atmosphereFade 28s ease-in-out infinite,
+                colorCycleDiagonalMist 135s ease-in-out infinite;
         }
 
         .var-10 .p1 {
             bottom: 15%; left: 12%; width: 10%; height: 5%;
             background: radial-gradient(circle, rgba(100, 220, 220, 0.7), transparent);
-            animation: diagonalDriftUpRight 12s ease-in-out infinite, particleFade 12s ease-in-out infinite;
+            animation:
+                diagonalDriftUpRight 12s ease-in-out infinite,
+                particleFade 12s ease-in-out infinite,
+                colorCycleParticleTeal 192s ease-in-out infinite;
         }
         .var-10 .p2 {
             bottom: 20%; left: 18%; width: 9%; height: 4.5%;
@@ -1305,8 +1416,11 @@
         }
         .var-10 .p3 {
             bottom: 25%; left: 25%; width: 11%; height: 5.5%;
-            background: radial-gradient(circle, rgba(220, 80, 160, 0.7), transparent);
-            animation: diagonalDriftUpRight 13s ease-in-out infinite 6s, particleFade 13s ease-in-out infinite 6s;
+            background: radial-gradient(circle, rgba(100, 100, 240, 0.7), transparent);
+            animation:
+                diagonalDriftUpRight 13s ease-in-out infinite 6s,
+                particleFade 13s ease-in-out infinite 6s,
+                colorCycleParticleMagenta 104s ease-in-out infinite;
             animation-fill-mode: backwards;
         }
     </style>
