@@ -429,31 +429,31 @@
         /* Color cycling for particles */
         @keyframes colorCycleParticleTeal {
             0%, 100% {
-                background: radial-gradient(circle, rgba(100, 220, 220, 0.7), transparent);
+                background: radial-gradient(circle, rgba(100, 220, 220, 0.45), transparent);
             }
             25% {
-                background: radial-gradient(circle, rgba(60, 160, 240, 0.7), transparent);
+                background: radial-gradient(circle, rgba(60, 160, 240, 0.45), transparent);
             }
             50% {
-                background: radial-gradient(circle, rgba(80, 200, 220, 0.7), transparent);
+                background: radial-gradient(circle, rgba(80, 200, 220, 0.45), transparent);
             }
             75% {
-                background: radial-gradient(circle, rgba(100, 100, 240, 0.7), transparent);
+                background: radial-gradient(circle, rgba(100, 100, 240, 0.45), transparent);
             }
         }
 
         @keyframes colorCycleParticleMagenta {
             0% {
-                background: radial-gradient(circle, rgba(100, 100, 240, 0.7), transparent);
+                background: radial-gradient(circle, rgba(100, 100, 240, 0.45), transparent);
             }
             40% {
-                background: radial-gradient(circle, rgba(100, 100, 240, 0.7), transparent);
+                background: radial-gradient(circle, rgba(100, 100, 240, 0.45), transparent);
             }
             60% {
-                background: radial-gradient(circle, rgba(255, 140, 60, 0.7), transparent);
+                background: radial-gradient(circle, rgba(255, 140, 60, 0.45), transparent);
             }
             100% {
-                background: radial-gradient(circle, rgba(100, 100, 240, 0.7), transparent);
+                background: radial-gradient(circle, rgba(100, 100, 240, 0.45), transparent);
             }
         }
 
@@ -1432,25 +1432,30 @@
 
         .var-10 .p1 {
             bottom: 15%; left: 12%; width: 10%; height: 5%;
-            background: radial-gradient(circle, rgba(100, 220, 220, 0.7), transparent);
+            background: radial-gradient(circle, rgba(100, 220, 220, 0.45), transparent);
             animation:
                 diagonalDriftUpRight 12s ease-in-out infinite,
                 particleFade 12s ease-in-out infinite,
-                colorCycleParticleTeal 192s ease-in-out infinite;
+                colorCycleParticleTeal 192s ease-in-out infinite,
+                twinkle 5s ease-in-out infinite;
         }
         .var-10 .p2 {
             bottom: 20%; left: 18%; width: 9%; height: 4.5%;
-            background: radial-gradient(circle, rgba(255, 200, 80, 0.65), transparent);
-            animation: diagonalDriftUpRight 14s ease-in-out infinite 3s, particleFade 14s ease-in-out infinite 3s;
+            background: radial-gradient(circle, rgba(255, 200, 80, 0.45), transparent);
+            animation:
+                diagonalDriftUpRight 14s ease-in-out infinite 3s,
+                particleFade 14s ease-in-out infinite 3s,
+                twinkle 4.5s ease-in-out infinite 1s;
             animation-fill-mode: backwards;
         }
         .var-10 .p3 {
             bottom: 25%; left: 25%; width: 11%; height: 5.5%;
-            background: radial-gradient(circle, rgba(100, 100, 240, 0.7), transparent);
+            background: radial-gradient(circle, rgba(100, 100, 240, 0.45), transparent);
             animation:
                 diagonalDriftUpRight 13s ease-in-out infinite 6s,
                 particleFade 13s ease-in-out infinite 6s,
-                colorCycleParticleMagenta 104s ease-in-out infinite;
+                colorCycleParticleMagenta 104s ease-in-out infinite,
+                twinkle 5.5s ease-in-out infinite 2s;
             animation-fill-mode: backwards;
         }
     </style>
