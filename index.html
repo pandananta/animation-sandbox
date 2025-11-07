@@ -591,7 +591,7 @@
             z-index: 9;
         }
 
-        /* ===== 1: MEDIUM FILLED CIRCLE ===== */
+        /* ===== 1: SOFT DIFFUSE WITH SUBTLE RING ===== */
         .var-1 .canvas {
             background: radial-gradient(ellipse at 40% 45%, rgb(35, 18, 55), rgb(5, 2, 15));
         }
@@ -599,7 +599,14 @@
         .var-1 .pulse-echo {
             width: 28%;
             height: 14%;
-            background: radial-gradient(circle, rgba(255, 100, 180, 0.8), rgba(255, 100, 180, 0.3) 50%, transparent 70%);
+            background: radial-gradient(circle,
+                rgba(200, 60, 160, 0.5) 20%,
+                rgba(200, 60, 160, 0.25) 40%,
+                transparent 45%,
+                rgba(200, 60, 160, 0.6) 50%,
+                rgba(200, 60, 160, 0.35) 54%,
+                transparent 60%);
+            filter: blur(4px);
             animation: pulseRing 2s ease-out infinite;
         }
 
@@ -718,7 +725,7 @@
             animation-fill-mode: backwards;
         }
 
-        /* ===== 2: THIN RING ===== */
+        /* ===== 2: VERY SOFT DIFFUSE ===== */
         .var-2 .canvas {
             background: radial-gradient(ellipse at 40% 45%, rgb(35, 18, 55), rgb(5, 2, 15));
         }
@@ -726,7 +733,8 @@
         .var-2 .pulse-echo {
             width: 28%;
             height: 14%;
-            background: radial-gradient(circle, transparent 35%, rgba(255, 100, 180, 0.9) 40%, rgba(255, 100, 180, 0.6) 42%, transparent 47%);
+            background: radial-gradient(circle, rgba(200, 60, 160, 0.6), rgba(200, 60, 160, 0.35) 45%, transparent 70%);
+            filter: blur(10px);
             animation: pulseRing 2s ease-out infinite;
         }
 
@@ -845,7 +853,7 @@
             animation-fill-mode: backwards;
         }
 
-        /* ===== 3: THICK BOLD RING ===== */
+        /* ===== 3: DIFFUSE CORE WITH RING ===== */
         .var-3 .canvas {
             background: radial-gradient(ellipse at 40% 45%, rgb(35, 18, 55), rgb(5, 2, 15));
         }
@@ -853,7 +861,14 @@
         .var-3 .pulse-echo {
             width: 28%;
             height: 14%;
-            background: radial-gradient(circle, transparent 20%, rgba(255, 100, 180, 1) 30%, rgba(255, 100, 180, 0.8) 45%, transparent 55%);
+            background: radial-gradient(circle,
+                rgba(200, 60, 160, 0.7) 15%,
+                rgba(200, 60, 160, 0.3) 35%,
+                transparent 40%,
+                rgba(200, 60, 160, 0.8) 48%,
+                rgba(200, 60, 160, 0.5) 52%,
+                transparent 58%);
+            filter: blur(5px);
             animation: pulseRing 2s ease-out infinite;
         }
 
@@ -972,7 +987,7 @@
             animation-fill-mode: backwards;
         }
 
-        /* ===== 4: INTENSE/BRIGHT FILLED ===== */
+        /* ===== 4: MEDIUM SOFT DIFFUSE ===== */
         .var-4 .canvas {
             background: radial-gradient(ellipse at 40% 45%, rgb(35, 18, 55), rgb(5, 2, 15));
         }
@@ -980,7 +995,8 @@
         .var-4 .pulse-echo {
             width: 28%;
             height: 14%;
-            background: radial-gradient(circle, rgba(255, 120, 200, 1), rgba(255, 100, 180, 0.7) 40%, rgba(255, 80, 160, 0.4) 60%, transparent 75%);
+            background: radial-gradient(circle, rgba(200, 60, 160, 0.55) 25%, rgba(200, 60, 160, 0.28) 50%, transparent 70%);
+            filter: blur(6px);
             animation: pulseRing 2s ease-out infinite;
         }
 
@@ -1099,7 +1115,7 @@
             animation-fill-mode: backwards;
         }
 
-        /* ===== 5: SUBTLE/SOFT FILLED ===== */
+        /* ===== 5: SOFT WITH FAINT OUTER RING ===== */
         .var-5 .canvas {
             background: radial-gradient(ellipse at 40% 45%, rgb(35, 18, 55), rgb(5, 2, 15));
         }
@@ -1107,8 +1123,13 @@
         .var-5 .pulse-echo {
             width: 28%;
             height: 14%;
-            background: radial-gradient(circle, rgba(255, 100, 180, 0.4), rgba(255, 100, 180, 0.2) 50%, transparent 70%);
-            filter: blur(3px);
+            background: radial-gradient(circle,
+                rgba(200, 60, 160, 0.5) 30%,
+                rgba(200, 60, 160, 0.2) 50%,
+                transparent 56%,
+                rgba(200, 60, 160, 0.4) 62%,
+                transparent 66%);
+            filter: blur(7px);
             animation: pulseRing 2s ease-out infinite;
         }
 
@@ -1227,7 +1248,7 @@
             animation-fill-mode: backwards;
         }
 
-        /* ===== 6: MEDIUM RING ===== */
+        /* ===== 6: BLURRED RING (ECHO FOCUSED) ===== */
         .var-6 .canvas {
             background: radial-gradient(ellipse at 40% 45%, rgb(35, 18, 55), rgb(5, 2, 15));
         }
@@ -1235,7 +1256,8 @@
         .var-6 .pulse-echo {
             width: 28%;
             height: 14%;
-            background: radial-gradient(circle, transparent 28%, rgba(255, 100, 180, 0.85) 35%, rgba(255, 100, 180, 0.6) 42%, transparent 50%);
+            background: radial-gradient(circle, transparent 30%, rgba(200, 60, 160, 0.85) 40%, rgba(200, 60, 160, 0.6) 48%, transparent 56%);
+            filter: blur(3px);
             animation: pulseRing 2s ease-out infinite;
         }
 
@@ -1354,7 +1376,7 @@
             animation-fill-mode: backwards;
         }
 
-        /* ===== 7: VERY THICK BOLD RING ===== */
+        /* ===== 7: GRADIENT FADE WITH HINT OF RING ===== */
         .var-7 .canvas {
             background: radial-gradient(ellipse at 40% 45%, rgb(35, 18, 55), rgb(5, 2, 15));
         }
@@ -1362,7 +1384,13 @@
         .var-7 .pulse-echo {
             width: 28%;
             height: 14%;
-            background: radial-gradient(circle, transparent 15%, rgba(255, 100, 180, 1) 25%, rgba(255, 100, 180, 0.9) 50%, transparent 60%);
+            background: radial-gradient(circle,
+                rgba(200, 60, 160, 0.6) 10%,
+                rgba(200, 60, 160, 0.35) 30%,
+                rgba(200, 60, 160, 0.15) 45%,
+                rgba(200, 60, 160, 0.5) 52%,
+                transparent 60%);
+            filter: blur(4px);
             animation: pulseRing 2s ease-out infinite;
         }
 
@@ -1481,7 +1509,7 @@
             animation-fill-mode: backwards;
         }
 
-        /* ===== 8: SOFT DIFFUSE FILLED ===== */
+        /* ===== 8: DOUBLE RING SOFT ===== */
         .var-8 .canvas {
             background: radial-gradient(ellipse at 40% 45%, rgb(35, 18, 55), rgb(5, 2, 15));
         }
@@ -1489,8 +1517,15 @@
         .var-8 .pulse-echo {
             width: 28%;
             height: 14%;
-            background: radial-gradient(circle, rgba(255, 100, 180, 0.6), rgba(255, 100, 180, 0.35) 45%, transparent 70%);
-            filter: blur(8px);
+            background: radial-gradient(circle,
+                rgba(200, 60, 160, 0.4) 25%,
+                transparent 30%,
+                rgba(200, 60, 160, 0.7) 38%,
+                rgba(200, 60, 160, 0.45) 42%,
+                transparent 48%,
+                rgba(200, 60, 160, 0.5) 55%,
+                transparent 60%);
+            filter: blur(5px);
             animation: pulseRing 2s ease-out infinite;
         }
 
@@ -1609,7 +1644,7 @@
             animation-fill-mode: backwards;
         }
 
-        /* ===== 9: SHARP DEFINED FILLED ===== */
+        /* ===== 9: INTENSE SOFT CORE + RING ===== */
         .var-9 .canvas {
             background: radial-gradient(ellipse at 40% 45%, rgb(35, 18, 55), rgb(5, 2, 15));
         }
@@ -1617,7 +1652,14 @@
         .var-9 .pulse-echo {
             width: 28%;
             height: 14%;
-            background: radial-gradient(circle, rgba(255, 100, 180, 0.9) 30%, rgba(255, 100, 180, 0.4) 55%, transparent 65%);
+            background: radial-gradient(circle,
+                rgba(200, 60, 160, 0.75) 18%,
+                rgba(200, 60, 160, 0.4) 32%,
+                transparent 38%,
+                rgba(200, 60, 160, 0.85) 46%,
+                rgba(200, 60, 160, 0.55) 51%,
+                transparent 58%);
+            filter: blur(6px);
             animation: pulseRing 2s ease-out infinite;
         }
 
@@ -1736,7 +1778,7 @@
             animation-fill-mode: backwards;
         }
 
-        /* ===== 10: RING WITH SUBTLE FILL ===== */
+        /* ===== 10: SOFT HALO WITH CLEAR RING ===== */
         .var-10 .canvas {
             background: radial-gradient(ellipse at 40% 45%, rgb(35, 18, 55), rgb(5, 2, 15));
         }
@@ -1745,11 +1787,13 @@
             width: 28%;
             height: 14%;
             background: radial-gradient(circle,
-                rgba(255, 100, 180, 0.3) 20%,
-                transparent 25%,
-                rgba(255, 100, 180, 0.85) 35%,
-                rgba(255, 100, 180, 0.6) 42%,
-                transparent 50%);
+                rgba(200, 60, 160, 0.45) 28%,
+                rgba(200, 60, 160, 0.2) 42%,
+                transparent 46%,
+                rgba(200, 60, 160, 0.75) 52%,
+                rgba(200, 60, 160, 0.45) 57%,
+                transparent 63%);
+            filter: blur(5px);
             animation: pulseRing 2s ease-out infinite;
         }
 
@@ -1882,9 +1926,9 @@
     </div>
 
     <div class="container">
-        <!-- 1: MEDIUM FILLED CIRCLE -->
+        <!-- 1: SOFT DIFFUSE WITH SUBTLE RING -->
         <div class="phone var-1">
-            <div class="phone-label">1. Medium Filled</div>
+            <div class="phone-label">1. Soft + Subtle Ring</div>
             <div class="phone-screen">
                 <div class="canvas">
                     <div class="flow-1"></div>
@@ -1903,9 +1947,9 @@
             </div>
         </div>
 
-        <!-- 2: THIN RING -->
+        <!-- 2: VERY SOFT DIFFUSE -->
         <div class="phone var-2">
-            <div class="phone-label">2. Thin Ring</div>
+            <div class="phone-label">2. Very Soft Diffuse</div>
             <div class="phone-screen">
                 <div class="canvas">
                     <div class="flow-1"></div>
@@ -1924,9 +1968,9 @@
             </div>
         </div>
 
-        <!-- 3: THICK BOLD RING -->
+        <!-- 3: DIFFUSE CORE WITH RING -->
         <div class="phone var-3">
-            <div class="phone-label">3. Thick Bold Ring</div>
+            <div class="phone-label">3. Core + Ring</div>
             <div class="phone-screen">
                 <div class="canvas">
                     <div class="flow-1"></div>
@@ -1945,9 +1989,9 @@
             </div>
         </div>
 
-        <!-- 4: INTENSE/BRIGHT FILLED -->
+        <!-- 4: MEDIUM SOFT DIFFUSE -->
         <div class="phone var-4">
-            <div class="phone-label">4. Intense Bright</div>
+            <div class="phone-label">4. Medium Soft</div>
             <div class="phone-screen">
                 <div class="canvas">
                     <div class="flow-1"></div>
@@ -1966,9 +2010,9 @@
             </div>
         </div>
 
-        <!-- 5: SUBTLE/SOFT FILLED -->
+        <!-- 5: SOFT WITH FAINT OUTER RING -->
         <div class="phone var-5">
-            <div class="phone-label">5. Subtle Soft</div>
+            <div class="phone-label">5. Soft + Faint Ring</div>
             <div class="phone-screen">
                 <div class="canvas">
                     <div class="flow-1"></div>
@@ -1986,9 +2030,9 @@
             </div>
         </div>
 
-        <!-- 6: MEDIUM RING -->
+        <!-- 6: BLURRED RING (ECHO FOCUSED) -->
         <div class="phone var-6">
-            <div class="phone-label">6. Medium Ring</div>
+            <div class="phone-label">6. Blurred Ring</div>
             <div class="phone-screen">
                 <div class="canvas">
                     <div class="flow-1"></div>
@@ -2007,9 +2051,9 @@
             </div>
         </div>
 
-        <!-- 7: VERY THICK BOLD RING -->
+        <!-- 7: GRADIENT FADE WITH HINT OF RING -->
         <div class="phone var-7">
-            <div class="phone-label">7. Very Thick Ring</div>
+            <div class="phone-label">7. Gradient + Ring</div>
             <div class="phone-screen">
                 <div class="canvas">
                     <div class="flow-1"></div>
@@ -2028,9 +2072,9 @@
             </div>
         </div>
 
-        <!-- 8: SOFT DIFFUSE FILLED -->
+        <!-- 8: DOUBLE RING SOFT -->
         <div class="phone var-8">
-            <div class="phone-label">8. Soft Diffuse</div>
+            <div class="phone-label">8. Double Ring Soft</div>
             <div class="phone-screen">
                 <div class="canvas">
                     <div class="flow-1"></div>
@@ -2049,9 +2093,9 @@
             </div>
         </div>
 
-        <!-- 9: SHARP DEFINED FILLED -->
+        <!-- 9: INTENSE SOFT CORE + RING -->
         <div class="phone var-9">
-            <div class="phone-label">9. Sharp Defined</div>
+            <div class="phone-label">9. Intense Core + Ring</div>
             <div class="phone-screen">
                 <div class="canvas">
                     <div class="flow-1"></div>
@@ -2070,9 +2114,9 @@
             </div>
         </div>
 
-        <!-- 10: RING WITH SUBTLE FILL -->
+        <!-- 10: SOFT HALO WITH CLEAR RING -->
         <div class="phone var-10">
-            <div class="phone-label">10. Ring + Fill</div>
+            <div class="phone-label">10. Soft Halo + Ring</div>
             <div class="phone-screen">
                 <div class="canvas">
                     <div class="flow-1"></div>
