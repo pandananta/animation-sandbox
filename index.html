@@ -581,9 +581,26 @@
             }
         }
 
+        /* ===== PULSE ECHO BASE STYLE ===== */
+        .pulse-echo {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9;
+        }
+
         /* ===== 1: SIMPLE PULSE ===== */
         .var-1 .canvas {
             background: radial-gradient(ellipse at 40% 45%, rgb(35, 18, 55), rgb(5, 2, 15));
+        }
+
+        .var-1 .pulse-echo {
+            width: 24%;
+            height: 12%;
+            background: radial-gradient(circle, rgba(255, 100, 180, 0.6), transparent 70%);
+            animation: pulseRing 3s ease-out infinite;
         }
 
         .var-1 .flow-1 {
@@ -701,9 +718,16 @@
             animation-fill-mode: backwards;
         }
 
-        /* ===== 2: DEEP SATURATED ===== */
+        /* ===== 2: HEARTBEAT (TWO PULSES) ===== */
         .var-2 .canvas {
             background: radial-gradient(ellipse at 40% 45%, rgb(35, 18, 55), rgb(5, 2, 15));
+        }
+
+        .var-2 .pulse-echo {
+            width: 24%;
+            height: 12%;
+            background: radial-gradient(circle, rgba(255, 100, 180, 0.6), transparent 70%);
+            animation: heartbeat 2.5s ease-out infinite;
         }
 
         .var-2 .flow-1 {
@@ -821,9 +845,30 @@
             animation-fill-mode: backwards;
         }
 
-        /* ===== 3: BLUE & ORANGE ===== */
+        /* ===== 3: SEQUENTIAL RIPPLES ===== */
         .var-3 .canvas {
             background: radial-gradient(ellipse at 40% 45%, rgb(35, 18, 55), rgb(5, 2, 15));
+        }
+
+        .var-3 .pulse-echo-1 {
+            width: 24%;
+            height: 12%;
+            background: radial-gradient(circle, rgba(255, 100, 180, 0.5), transparent 70%);
+            animation: ripple 4s ease-out infinite;
+        }
+
+        .var-3 .pulse-echo-2 {
+            width: 24%;
+            height: 12%;
+            background: radial-gradient(circle, rgba(255, 100, 180, 0.4), transparent 70%);
+            animation: ripple 4s ease-out infinite 1.3s;
+        }
+
+        .var-3 .pulse-echo-3 {
+            width: 24%;
+            height: 12%;
+            background: radial-gradient(circle, rgba(255, 100, 180, 0.3), transparent 70%);
+            animation: ripple 4s ease-out infinite 2.6s;
         }
 
         .var-3 .flow-1 {
@@ -941,9 +986,16 @@
             animation-fill-mode: backwards;
         }
 
-        /* ===== 4: GREEN & PINK ===== */
+        /* ===== 4: SLOW BREATHING PULSE ===== */
         .var-4 .canvas {
             background: radial-gradient(ellipse at 40% 45%, rgb(35, 18, 55), rgb(5, 2, 15));
+        }
+
+        .var-4 .pulse-echo {
+            width: 24%;
+            height: 12%;
+            background: radial-gradient(circle, rgba(255, 100, 180, 0.4), transparent 70%);
+            animation: breathe 5s ease-in-out infinite;
         }
 
         .var-4 .flow-1 {
@@ -1061,9 +1113,17 @@
             animation-fill-mode: backwards;
         }
 
-        /* ===== 5: PURPLE & GOLD ===== */
+        /* ===== 5: GLOW PULSE + CENTER PULSE ===== */
         .var-5 .canvas {
             background: radial-gradient(ellipse at 40% 45%, rgb(35, 18, 55), rgb(5, 2, 15));
+        }
+
+        .var-5 .heart-glow {
+            animation: glowPulse 3s ease-in-out infinite;
+        }
+
+        .var-5 .heart-center {
+            animation: centerPulse 3s ease-in-out infinite;
         }
 
         .var-5 .flow-1 {
@@ -1181,9 +1241,16 @@
             animation-fill-mode: backwards;
         }
 
-        /* ===== 6: CYAN & CORAL ===== */
+        /* ===== 6: RAPID SHIMMER ===== */
         .var-6 .canvas {
             background: radial-gradient(ellipse at 40% 45%, rgb(35, 18, 55), rgb(5, 2, 15));
+        }
+
+        .var-6 .pulse-echo {
+            width: 24%;
+            height: 12%;
+            background: radial-gradient(circle, rgba(255, 100, 180, 0.5), transparent 70%);
+            animation: shimmer 1.2s ease-out infinite;
         }
 
         .var-6 .flow-1 {
@@ -1301,9 +1368,16 @@
             animation-fill-mode: backwards;
         }
 
-        /* ===== 7: INDIGO & AMBER ===== */
+        /* ===== 7: STRONG ECHO ===== */
         .var-7 .canvas {
             background: radial-gradient(ellipse at 40% 45%, rgb(35, 18, 55), rgb(5, 2, 15));
+        }
+
+        .var-7 .pulse-echo {
+            width: 24%;
+            height: 12%;
+            background: radial-gradient(circle, rgba(255, 100, 180, 0.7), transparent 70%);
+            animation: strongEcho 4s ease-out infinite;
         }
 
         .var-7 .flow-1 {
@@ -1421,9 +1495,16 @@
             animation-fill-mode: backwards;
         }
 
-        /* ===== 8: TURQUOISE & ROSE ===== */
+        /* ===== 8: LONG FADE TRAILS ===== */
         .var-8 .canvas {
             background: radial-gradient(ellipse at 40% 45%, rgb(35, 18, 55), rgb(5, 2, 15));
+        }
+
+        .var-8 .pulse-echo {
+            width: 24%;
+            height: 12%;
+            background: radial-gradient(circle, rgba(255, 100, 180, 0.6), transparent 70%);
+            animation: fadeTrail 5s ease-out infinite;
         }
 
         .var-8 .flow-1 {
@@ -1541,9 +1622,24 @@
             animation-fill-mode: backwards;
         }
 
-        /* ===== 9: EMERALD & VIOLET ===== */
+        /* ===== 9: HEARTBEAT + GLOW COMBO ===== */
         .var-9 .canvas {
             background: radial-gradient(ellipse at 40% 45%, rgb(35, 18, 55), rgb(5, 2, 15));
+        }
+
+        .var-9 .pulse-echo {
+            width: 24%;
+            height: 12%;
+            background: radial-gradient(circle, rgba(255, 100, 180, 0.6), transparent 70%);
+            animation: heartbeat 2.5s ease-out infinite;
+        }
+
+        .var-9 .heart-glow {
+            animation: glowPulse 2.5s ease-in-out infinite;
+        }
+
+        .var-9 .heart-center {
+            animation: centerPulse 2.5s ease-in-out infinite;
         }
 
         .var-9 .flow-1 {
@@ -1661,9 +1757,23 @@
             animation-fill-mode: backwards;
         }
 
-        /* ===== 10: DIAGONAL + HORIZONTAL FLOW (FINAL) ===== */
+        /* ===== 10: LAYERED PULSES (DIFFERENT SPEEDS) ===== */
         .var-10 .canvas {
             background: radial-gradient(ellipse at 40% 45%, rgb(35, 18, 55), rgb(5, 2, 15));
+        }
+
+        .var-10 .pulse-echo-1 {
+            width: 24%;
+            height: 12%;
+            background: radial-gradient(circle, rgba(255, 100, 180, 0.5), transparent 70%);
+            animation: pulseRing 3s ease-out infinite;
+        }
+
+        .var-10 .pulse-echo-2 {
+            width: 24%;
+            height: 12%;
+            background: radial-gradient(circle, rgba(255, 100, 180, 0.4), transparent 70%);
+            animation: pulseRing 4.5s ease-out infinite 0.8s;
         }
 
         .var-10 .flow-1 {
@@ -1795,9 +1905,9 @@
     </div>
 
     <div class="container">
-        <!-- 1: PASTEL TEAL & ROSE -->
+        <!-- 1: SIMPLE PULSE -->
         <div class="phone var-1">
-            <div class="phone-label">1. Pastel Teal & Rose</div>
+            <div class="phone-label">1. Simple Pulse</div>
             <div class="phone-screen">
                 <div class="canvas">
                     <div class="flow-1"></div>
@@ -1808,6 +1918,7 @@
                     <div class="particle p1"></div>
                     <div class="particle p2"></div>
                     <div class="particle p3"></div>
+                    <div class="pulse-echo"></div>
                     <div class="heart-glow"></div>
                     <div class="heart"></div>
                     <div class="heart-center"></div>
@@ -1815,9 +1926,9 @@
             </div>
         </div>
 
-        <!-- 2: DEEP SATURATED -->
+        <!-- 2: HEARTBEAT (TWO PULSES) -->
         <div class="phone var-2">
-            <div class="phone-label">2. Deep Saturated</div>
+            <div class="phone-label">2. Heartbeat</div>
             <div class="phone-screen">
                 <div class="canvas">
                     <div class="flow-1"></div>
@@ -1828,6 +1939,7 @@
                     <div class="particle p1"></div>
                     <div class="particle p2"></div>
                     <div class="particle p3"></div>
+                    <div class="pulse-echo"></div>
                     <div class="heart-glow"></div>
                     <div class="heart"></div>
                     <div class="heart-center"></div>
@@ -1835,9 +1947,9 @@
             </div>
         </div>
 
-        <!-- 3: BLUE & ORANGE -->
+        <!-- 3: SEQUENTIAL RIPPLES -->
         <div class="phone var-3">
-            <div class="phone-label">3. Blue & Orange</div>
+            <div class="phone-label">3. Sequential Ripples</div>
             <div class="phone-screen">
                 <div class="canvas">
                     <div class="flow-1"></div>
@@ -1848,6 +1960,9 @@
                     <div class="particle p1"></div>
                     <div class="particle p2"></div>
                     <div class="particle p3"></div>
+                    <div class="pulse-echo pulse-echo-1"></div>
+                    <div class="pulse-echo pulse-echo-2"></div>
+                    <div class="pulse-echo pulse-echo-3"></div>
                     <div class="heart-glow"></div>
                     <div class="heart"></div>
                     <div class="heart-center"></div>
@@ -1855,9 +1970,9 @@
             </div>
         </div>
 
-        <!-- 4: GREEN & PINK -->
+        <!-- 4: SLOW BREATHING PULSE -->
         <div class="phone var-4">
-            <div class="phone-label">4. Green & Pink</div>
+            <div class="phone-label">4. Breathing Pulse</div>
             <div class="phone-screen">
                 <div class="canvas">
                     <div class="flow-1"></div>
@@ -1868,6 +1983,7 @@
                     <div class="particle p1"></div>
                     <div class="particle p2"></div>
                     <div class="particle p3"></div>
+                    <div class="pulse-echo"></div>
                     <div class="heart-glow"></div>
                     <div class="heart"></div>
                     <div class="heart-center"></div>
@@ -1875,9 +1991,9 @@
             </div>
         </div>
 
-        <!-- 5: PURPLE & GOLD -->
+        <!-- 5: GLOW PULSE + CENTER PULSE -->
         <div class="phone var-5">
-            <div class="phone-label">5. Purple & Gold</div>
+            <div class="phone-label">5. Glow Pulse</div>
             <div class="phone-screen">
                 <div class="canvas">
                     <div class="flow-1"></div>
@@ -1895,9 +2011,9 @@
             </div>
         </div>
 
-        <!-- 6: CYAN & CORAL -->
+        <!-- 6: RAPID SHIMMER -->
         <div class="phone var-6">
-            <div class="phone-label">6. Cyan & Coral</div>
+            <div class="phone-label">6. Rapid Shimmer</div>
             <div class="phone-screen">
                 <div class="canvas">
                     <div class="flow-1"></div>
@@ -1908,6 +2024,7 @@
                     <div class="particle p1"></div>
                     <div class="particle p2"></div>
                     <div class="particle p3"></div>
+                    <div class="pulse-echo"></div>
                     <div class="heart-glow"></div>
                     <div class="heart"></div>
                     <div class="heart-center"></div>
@@ -1915,9 +2032,9 @@
             </div>
         </div>
 
-        <!-- 7: INDIGO & AMBER -->
+        <!-- 7: STRONG ECHO -->
         <div class="phone var-7">
-            <div class="phone-label">7. Indigo & Amber</div>
+            <div class="phone-label">7. Strong Echo</div>
             <div class="phone-screen">
                 <div class="canvas">
                     <div class="flow-1"></div>
@@ -1928,6 +2045,7 @@
                     <div class="particle p1"></div>
                     <div class="particle p2"></div>
                     <div class="particle p3"></div>
+                    <div class="pulse-echo"></div>
                     <div class="heart-glow"></div>
                     <div class="heart"></div>
                     <div class="heart-center"></div>
@@ -1935,9 +2053,9 @@
             </div>
         </div>
 
-        <!-- 8: TURQUOISE & ROSE -->
+        <!-- 8: LONG FADE TRAILS -->
         <div class="phone var-8">
-            <div class="phone-label">8. Turquoise & Rose</div>
+            <div class="phone-label">8. Fade Trails</div>
             <div class="phone-screen">
                 <div class="canvas">
                     <div class="flow-1"></div>
@@ -1948,6 +2066,7 @@
                     <div class="particle p1"></div>
                     <div class="particle p2"></div>
                     <div class="particle p3"></div>
+                    <div class="pulse-echo"></div>
                     <div class="heart-glow"></div>
                     <div class="heart"></div>
                     <div class="heart-center"></div>
@@ -1955,9 +2074,9 @@
             </div>
         </div>
 
-        <!-- 9: EMERALD & VIOLET -->
+        <!-- 9: HEARTBEAT + GLOW COMBO -->
         <div class="phone var-9">
-            <div class="phone-label">9. Emerald & Violet</div>
+            <div class="phone-label">9. Heartbeat + Glow</div>
             <div class="phone-screen">
                 <div class="canvas">
                     <div class="flow-1"></div>
@@ -1968,6 +2087,7 @@
                     <div class="particle p1"></div>
                     <div class="particle p2"></div>
                     <div class="particle p3"></div>
+                    <div class="pulse-echo"></div>
                     <div class="heart-glow"></div>
                     <div class="heart"></div>
                     <div class="heart-center"></div>
@@ -1975,9 +2095,9 @@
             </div>
         </div>
 
-        <!-- 10: TEAL & MAGENTA -->
+        <!-- 10: LAYERED PULSES -->
         <div class="phone var-10">
-            <div class="phone-label">10. Teal & Magenta (Original)</div>
+            <div class="phone-label">10. Layered Pulses</div>
             <div class="phone-screen">
                 <div class="canvas">
                     <div class="flow-1"></div>
@@ -1988,6 +2108,8 @@
                     <div class="particle p1"></div>
                     <div class="particle p2"></div>
                     <div class="particle p3"></div>
+                    <div class="pulse-echo pulse-echo-1"></div>
+                    <div class="pulse-echo pulse-echo-2"></div>
                     <div class="heart-glow"></div>
                     <div class="heart"></div>
                     <div class="heart-center"></div>
