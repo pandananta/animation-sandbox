@@ -363,40 +363,64 @@
 
         /* Color cycling for magenta bands - alternate between orange and indigo */
         @keyframes colorCycleMagenta1 {
-            0%, 100% {
+            0% {
                 background: linear-gradient(to right, transparent, rgba(100, 100, 240, 0.29) 50%, transparent);
             }
-            50% {
+            40% {
+                background: linear-gradient(to right, transparent, rgba(100, 100, 240, 0.29) 50%, transparent);
+            }
+            60% {
                 background: linear-gradient(to right, transparent, rgba(255, 140, 60, 0.29) 50%, transparent);
+            }
+            100% {
+                background: linear-gradient(to right, transparent, rgba(100, 100, 240, 0.29) 50%, transparent);
             }
         }
 
         @keyframes colorCycleMagenta2 {
-            0%, 100% {
+            0% {
                 background: linear-gradient(to right, transparent, rgba(100, 100, 240, 0.23) 50%, transparent);
             }
-            50% {
+            40% {
+                background: linear-gradient(to right, transparent, rgba(100, 100, 240, 0.23) 50%, transparent);
+            }
+            60% {
                 background: linear-gradient(to right, transparent, rgba(255, 140, 60, 0.23) 50%, transparent);
+            }
+            100% {
+                background: linear-gradient(to right, transparent, rgba(100, 100, 240, 0.23) 50%, transparent);
             }
         }
 
         /* Color cycling for diagonal mist */
         @keyframes colorCycleDiagonalMist {
-            0%, 100% {
+            0% {
                 background: linear-gradient(to bottom right,
                     rgba(100, 220, 220, 0.25),
                     rgba(100, 100, 240, 0.2) 60%,
                     transparent 90%);
             }
-            33% {
+            30% {
+                background: linear-gradient(to bottom right,
+                    rgba(100, 220, 220, 0.25),
+                    rgba(100, 100, 240, 0.2) 60%,
+                    transparent 90%);
+            }
+            50% {
                 background: linear-gradient(to bottom right,
                     rgba(60, 160, 240, 0.25),
                     rgba(255, 140, 60, 0.2) 60%,
                     transparent 90%);
             }
-            66% {
+            70% {
                 background: linear-gradient(to bottom right,
                     rgba(80, 200, 220, 0.25),
+                    rgba(100, 100, 240, 0.2) 60%,
+                    transparent 90%);
+            }
+            100% {
+                background: linear-gradient(to bottom right,
+                    rgba(100, 220, 220, 0.25),
                     rgba(100, 100, 240, 0.2) 60%,
                     transparent 90%);
             }
@@ -419,11 +443,17 @@
         }
 
         @keyframes colorCycleParticleMagenta {
-            0%, 100% {
+            0% {
                 background: radial-gradient(circle, rgba(100, 100, 240, 0.7), transparent);
             }
-            50% {
+            40% {
+                background: radial-gradient(circle, rgba(100, 100, 240, 0.7), transparent);
+            }
+            60% {
                 background: radial-gradient(circle, rgba(255, 140, 60, 0.7), transparent);
+            }
+            100% {
+                background: radial-gradient(circle, rgba(100, 100, 240, 0.7), transparent);
             }
         }
 
