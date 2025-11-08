@@ -21,9 +21,18 @@ struct ContentView: View {
                 VStack {
                     Spacer()
                     Button(action: { isPlaying.toggle() }) {
-                        Image(systemName: isPlaying ? "pause.circle.fill" : "play.circle.fill")
-                            .font(.system(size: 60))
-                            .foregroundColor(.white.opacity(0.8))
+                        ZStack {
+                            // Transparent halo
+                            Circle()
+                                .fill(Color.white.opacity(0.15))
+                                .frame(width: 70, height: 70)
+                                .blur(radius: 8)
+
+                            // Icon in app color
+                            Image(systemName: isPlaying ? "pause.fill" : "play.fill")
+                                .font(.system(size: 28))
+                                .foregroundColor(Color(red: 160/255, green: 87/255, blue: 136/255)) // #a05788
+                        }
                     }
                     .padding(.bottom, geometry.size.height * 0.1)  // Center in bottom 20%
                 }
