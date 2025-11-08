@@ -237,27 +237,52 @@ struct HeartStaticView: View {
                 .blur(radius: 20)
                 .position(x: size.width * 0.5, y: size.height * 0.5)
 
-            // Heart center - ENHANCED for crispness
-            Circle()
-                .fill(
-                    RadialGradient(
-                        gradient: Gradient(stops: [
-                            .init(color: Color.white, location: 0),
-                            .init(color: Color.white, location: 0.3),  // More white core
-                            .init(color: Color(red: 1.0, green: 250/255, blue: 240/255), location: 0.6),
-                            .init(color: Color(red: 1.0, green: 230/255, blue: 120/255), location: 1.0)
-                        ]),
-                        center: .center,
-                        startRadius: 0,
-                        endRadius: size.width * 0.06
+            // Heart center - SHARP LIGHT (like Zelda fairy)
+            ZStack {
+                // Outer glow layer (soft)
+                Circle()
+                    .fill(
+                        RadialGradient(
+                            gradient: Gradient(stops: [
+                                .init(color: Color(red: 1.0, green: 250/255, blue: 240/255).opacity(0.8), location: 0),
+                                .init(color: Color(red: 1.0, green: 230/255, blue: 120/255).opacity(0.4), location: 0.5),
+                                .init(color: Color.clear, location: 1.0)
+                            ]),
+                            center: .center,
+                            startRadius: 0,
+                            endRadius: size.width * 0.06
+                        )
                     )
-                )
-                .frame(width: size.width * 0.12, height: size.height * 0.06)
-                .blur(radius: 3)  // Reduced from 4 for more crispness
-                .shadow(color: Color(red: 1.0, green: 250/255, blue: 240/255).opacity(0.9), radius: 35)
-                .shadow(color: Color.white, radius: 15)  // Extra bright core glow
-                .brightness(0.1)  // Slight brightness boost
-                .position(x: size.width * 0.5, y: size.height * 0.5)
+                    .frame(width: size.width * 0.12, height: size.height * 0.06)
+                    .blur(radius: 8)
+
+                // Core light (SHARP - minimal blur)
+                Circle()
+                    .fill(
+                        RadialGradient(
+                            gradient: Gradient(stops: [
+                                .init(color: Color.white, location: 0),
+                                .init(color: Color.white, location: 0.4),
+                                .init(color: Color(red: 1.0, green: 250/255, blue: 240/255), location: 0.7),
+                                .init(color: Color.clear, location: 1.0)
+                            ]),
+                            center: .center,
+                            startRadius: 0,
+                            endRadius: size.width * 0.04
+                        )
+                    )
+                    .frame(width: size.width * 0.08, height: size.height * 0.04)
+                    .blur(radius: 1)  // Minimal blur for sharp light
+                    .brightness(0.2)
+
+                // Bright center spot (NO blur - sharp point)
+                Circle()
+                    .fill(Color.white)
+                    .frame(width: size.width * 0.02, height: size.height * 0.01)
+                    .shadow(color: Color.white, radius: 10, x: 0, y: 0)
+                    .shadow(color: Color(red: 1.0, green: 250/255, blue: 240/255), radius: 20, x: 0, y: 0)
+            }
+            .position(x: size.width * 0.5, y: size.height * 0.5)
         }
     }
 }
@@ -333,10 +358,11 @@ struct FPSCounterView: View {
 
 struct HeartCenterTuningView: View {
     let size: CGSize
-    @State private var blurRadius: Double = 3
-    @State private var brightness: Double = 0.1
-    @State private var whiteStop: Double = 0.3
-    @State private var saturation: Double = 1.0
+    @State private var outerBlur: Double = 8
+    @State private var coreBlur: Double = 1
+    @State private var brightness: Double = 0.2
+    @State private var coreSize: Double = 0.08
+    @State private var spotSize: Double = 0.02
 
     var body: some View {
         ZStack {
@@ -365,27 +391,51 @@ struct HeartCenterTuningView: View {
                         .frame(width: 200, height: 100)
                         .blur(radius: 20)
 
-                    // Heart center - TUNABLE
-                    Circle()
-                        .fill(
-                            RadialGradient(
-                                gradient: Gradient(stops: [
-                                    .init(color: Color.white, location: 0),
-                                    .init(color: Color.white, location: whiteStop),
-                                    .init(color: Color(red: 1.0, green: 250/255, blue: 240/255), location: 0.6),
-                                    .init(color: Color(red: 1.0, green: 230/255, blue: 120/255), location: 1.0)
-                                ]),
-                                center: .center,
-                                startRadius: 0,
-                                endRadius: 30
+                    // Heart center - SHARP LIGHT (3-layer)
+                    ZStack {
+                        // Outer glow
+                        Circle()
+                            .fill(
+                                RadialGradient(
+                                    gradient: Gradient(stops: [
+                                        .init(color: Color(red: 1.0, green: 250/255, blue: 240/255).opacity(0.8), location: 0),
+                                        .init(color: Color(red: 1.0, green: 230/255, blue: 120/255).opacity(0.4), location: 0.5),
+                                        .init(color: Color.clear, location: 1.0)
+                                    ]),
+                                    center: .center,
+                                    startRadius: 0,
+                                    endRadius: 30
+                                )
                             )
-                        )
-                        .frame(width: 60, height: 30)
-                        .blur(radius: blurRadius)
-                        .shadow(color: Color(red: 1.0, green: 250/255, blue: 240/255).opacity(0.9), radius: 35)
-                        .shadow(color: Color.white, radius: 15)
-                        .brightness(brightness)
-                        .saturation(saturation)
+                            .frame(width: 60, height: 30)
+                            .blur(radius: outerBlur)
+
+                        // Sharp core
+                        Circle()
+                            .fill(
+                                RadialGradient(
+                                    gradient: Gradient(stops: [
+                                        .init(color: Color.white, location: 0),
+                                        .init(color: Color.white, location: 0.4),
+                                        .init(color: Color(red: 1.0, green: 250/255, blue: 240/255), location: 0.7),
+                                        .init(color: Color.clear, location: 1.0)
+                                    ]),
+                                    center: .center,
+                                    startRadius: 0,
+                                    endRadius: 20
+                                )
+                            )
+                            .frame(width: coreSize * 500, height: coreSize * 250)
+                            .blur(radius: coreBlur)
+                            .brightness(brightness)
+
+                        // Bright spot (NO blur)
+                        Circle()
+                            .fill(Color.white)
+                            .frame(width: spotSize * 500, height: spotSize * 250)
+                            .shadow(color: Color.white, radius: 10)
+                            .shadow(color: Color(red: 1.0, green: 250/255, blue: 240/255), radius: 20)
+                    }
                 }
                 .frame(height: 200)
                 .padding(.top, 50)
@@ -400,35 +450,43 @@ struct HeartCenterTuningView: View {
 
                     VStack(alignment: .leading, spacing: 8) {
                         HStack {
-                            Text("Blur: \(String(format: "%.1f", blurRadius))")
+                            Text("Outer Blur: \(String(format: "%.1f", outerBlur))")
                                 .foregroundColor(.white)
-                                .frame(width: 100, alignment: .leading)
+                                .frame(width: 110, alignment: .leading)
                                 .font(.caption)
-                            Slider(value: $blurRadius, in: 0...8)
+                            Slider(value: $outerBlur, in: 0...15)
                         }
 
                         HStack {
-                            Text("Bright: \(String(format: "%.2f", brightness))")
+                            Text("Core Blur: \(String(format: "%.1f", coreBlur))")
                                 .foregroundColor(.white)
-                                .frame(width: 100, alignment: .leading)
+                                .frame(width: 110, alignment: .leading)
                                 .font(.caption)
-                            Slider(value: $brightness, in: -0.2...0.5)
+                            Slider(value: $coreBlur, in: 0...5)
                         }
 
                         HStack {
-                            Text("Core: \(String(format: "%.2f", whiteStop))")
+                            Text("Brightness: \(String(format: "%.2f", brightness))")
                                 .foregroundColor(.white)
-                                .frame(width: 100, alignment: .leading)
+                                .frame(width: 110, alignment: .leading)
                                 .font(.caption)
-                            Slider(value: $whiteStop, in: 0...0.6)
+                            Slider(value: $brightness, in: 0...0.5)
                         }
 
                         HStack {
-                            Text("Sat: \(String(format: "%.2f", saturation))")
+                            Text("Core Size: \(String(format: "%.2f", coreSize))")
                                 .foregroundColor(.white)
-                                .frame(width: 100, alignment: .leading)
+                                .frame(width: 110, alignment: .leading)
                                 .font(.caption)
-                            Slider(value: $saturation, in: 0.5...1.5)
+                            Slider(value: $coreSize, in: 0.04...0.15)
+                        }
+
+                        HStack {
+                            Text("Spot Size: \(String(format: "%.2f", spotSize))")
+                                .foregroundColor(.white)
+                                .frame(width: 110, alignment: .leading)
+                                .font(.caption)
+                            Slider(value: $spotSize, in: 0.005...0.05)
                         }
                     }
 
@@ -439,41 +497,55 @@ struct HeartCenterTuningView: View {
 
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 10) {
-                            Button("CSS") {
-                                blurRadius = 4
-                                brightness = 0
-                                whiteStop = 0.5
-                                saturation = 1.0
+                            Button("Fairy ✨") {
+                                outerBlur = 8
+                                coreBlur = 0.5
+                                brightness = 0.25
+                                coreSize = 0.06
+                                spotSize = 0.015
                             }
                             .buttonStyle(.bordered)
-                            .tint(.blue)
+                            .tint(.yellow)
 
-                            Button("Crisp") {
-                                blurRadius = 3
-                                brightness = 0.1
-                                whiteStop = 0.3
-                                saturation = 1.1
+                            Button("Sharp 💎") {
+                                outerBlur = 8
+                                coreBlur = 1
+                                brightness = 0.2
+                                coreSize = 0.08
+                                spotSize = 0.02
                             }
                             .buttonStyle(.bordered)
                             .tint(.green)
 
-                            Button("Extra Crisp") {
-                                blurRadius = 2
-                                brightness = 0.15
-                                whiteStop = 0.2
-                                saturation = 1.2
+                            Button("Star ⭐") {
+                                outerBlur = 10
+                                coreBlur = 0
+                                brightness = 0.3
+                                coreSize = 0.05
+                                spotSize = 0.01
                             }
                             .buttonStyle(.bordered)
                             .tint(.orange)
 
-                            Button("Soft") {
-                                blurRadius = 6
-                                brightness = 0
-                                whiteStop = 0.4
-                                saturation = 0.9
+                            Button("Soft 🌙") {
+                                outerBlur = 12
+                                coreBlur = 3
+                                brightness = 0.1
+                                coreSize = 0.1
+                                spotSize = 0.03
                             }
                             .buttonStyle(.bordered)
                             .tint(.purple)
+
+                            Button("CSS Match") {
+                                outerBlur = 8
+                                coreBlur = 2
+                                brightness = 0.15
+                                coreSize = 0.08
+                                spotSize = 0.02
+                            }
+                            .buttonStyle(.bordered)
+                            .tint(.blue)
                         }
                     }
 
@@ -483,10 +555,11 @@ struct HeartCenterTuningView: View {
                         .foregroundColor(.gray)
 
                     Text("""
-                    blur: \(String(format: "%.1f", blurRadius))
+                    outerBlur: \(String(format: "%.1f", outerBlur))
+                    coreBlur: \(String(format: "%.1f", coreBlur))
                     brightness: \(String(format: "%.2f", brightness))
-                    whiteStop: \(String(format: "%.2f", whiteStop))
-                    saturation: \(String(format: "%.2f", saturation))
+                    coreSize: \(String(format: "%.2f", coreSize))
+                    spotSize: \(String(format: "%.3f", spotSize))
                     """)
                     .font(.system(.caption2, design: .monospaced))
                     .foregroundColor(.green)
