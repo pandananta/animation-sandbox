@@ -105,9 +105,9 @@ struct FlowBandsView: View {
             // Flow-1: Top, teal, drifts right
             FlowBand(
                 size: size,
-                color: Color(red: 100/255, green: 220/255, blue: 220/255).opacity(0.238),
+                color: Color(red: 100/255, green: 220/255, blue: 220/255).opacity(0.2261),
                 topPosition: 0.22,
-                height: 0.16,
+                height: 0.08,
                 blur: 39,
                 duration: 72,
                 delay: 10,
@@ -117,9 +117,9 @@ struct FlowBandsView: View {
             // Flow-2: Upper middle, teal lighter, drifts right
             FlowBand(
                 size: size,
-                color: Color(red: 100/255, green: 220/255, blue: 220/255).opacity(0.187),
+                color: Color(red: 100/255, green: 220/255, blue: 220/255).opacity(0.17765),
                 topPosition: 0.35,
-                height: 0.14,
+                height: 0.07,
                 blur: 42,
                 duration: 56,
                 delay: 20,
