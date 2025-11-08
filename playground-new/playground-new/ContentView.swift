@@ -655,20 +655,6 @@ struct PulseEchoView: View {
             let cycle = elapsed.truncatingRemainder(dividingBy: 3.5)
             let overallProgress = CGFloat(cycle / 3.5)
 
-            // Check if we should start a new cycle
-            if !isPlaying && overallProgress < 0.05 && shouldAnimate {
-                // Complete current cycle, then stop
-                DispatchQueue.main.async {
-                    shouldAnimate = false
-                }
-            } else if isPlaying && !shouldAnimate {
-                // Restart animation when play is pressed
-                DispatchQueue.main.async {
-                    startTime = timeline.date
-                    shouldAnimate = true
-                }
-            }
-
             // Delay ring start until heart reaches peak brightness (10% of cycle)
             // Map 10%-100% of overall cycle to 0%-100% of ring expansion
             let ringDelay: CGFloat = 0.1
@@ -717,8 +703,12 @@ struct PulseEchoView: View {
         }
         .onChange(of: isPlaying) {
             if isPlaying {
-                // Reset timer when play is pressed
+                // Reset timer and restart animation when play is pressed
                 startTime = Date()
+                shouldAnimate = true
+            } else {
+                // Mark to stop after current cycle completes
+                shouldAnimate = false
             }
         }
     }
@@ -807,20 +797,6 @@ struct HeartStaticView: View {
             let cycle = elapsed.truncatingRemainder(dividingBy: 3.5)
             let progress = CGFloat(cycle / 3.5)
 
-            // Check if we should start a new cycle
-            if !isPlaying && progress < 0.05 && shouldAnimate {
-                // Complete current cycle, then stop
-                DispatchQueue.main.async {
-                    shouldAnimate = false
-                }
-            } else if isPlaying && !shouldAnimate {
-                // Restart animation when play is pressed
-                DispatchQueue.main.async {
-                    startTime = timeline.date
-                    shouldAnimate = true
-                }
-            }
-
             // Calculate pulse scale with pause at peak and slower retraction
             // 0-10%: Rise to peak, 10-30%: Hold at peak, 30-100%: Slowly fall back
             let pulseScale: CGFloat = {
@@ -907,8 +883,12 @@ struct HeartStaticView: View {
         }
         .onChange(of: isPlaying) {
             if isPlaying {
-                // Reset timer when play is pressed
+                // Reset timer and restart animation when play is pressed
                 startTime = Date()
+                shouldAnimate = true
+            } else {
+                // Mark to stop after current cycle completes
+                shouldAnimate = false
             }
         }
     }
@@ -928,20 +908,6 @@ struct HeartCenterPulsingView: View {
             let elapsed = timeline.date.timeIntervalSince(startTime)
             let cycle = elapsed.truncatingRemainder(dividingBy: 3.5) // 3.5 second cycle
             let progress = CGFloat(cycle / 3.5) // 0 to 1
-
-            // Check if we should start a new cycle
-            if !isPlaying && progress < 0.05 && shouldAnimate {
-                // Complete current cycle, then stop
-                DispatchQueue.main.async {
-                    shouldAnimate = false
-                }
-            } else if isPlaying && !shouldAnimate {
-                // Restart animation when play is pressed
-                DispatchQueue.main.async {
-                    startTime = timeline.date
-                    shouldAnimate = true
-                }
-            }
 
             ZStack {
                 // Outer glow layer (soft)
@@ -997,8 +963,12 @@ struct HeartCenterPulsingView: View {
         }
         .onChange(of: isPlaying) {
             if isPlaying {
-                // Reset timer when play is pressed
+                // Reset timer and restart animation when play is pressed
                 startTime = Date()
+                shouldAnimate = true
+            } else {
+                // Mark to stop after current cycle completes
+                shouldAnimate = false
             }
         }
     }
