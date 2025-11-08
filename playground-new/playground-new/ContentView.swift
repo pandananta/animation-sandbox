@@ -44,6 +44,7 @@ struct HeartChakraTestView: View {
 
             // Heart (static for now)
             HeartStaticView(size: size)
+                .drawingGroup()
         }
         .opacity(sceneOpacity)
         .onAppear {
@@ -84,7 +85,7 @@ struct FlowBandsView: View {
                 color: Color(red: 100/255, green: 220/255, blue: 220/255).opacity(0.2261),
                 topPosition: 0.22,
                 height: 0.06,
-                blur: 55,
+                blur: 45,
                 duration: 72,
                 delay: 15,
                 direction: .right,
@@ -98,7 +99,7 @@ struct FlowBandsView: View {
                 color: Color(red: 100/255, green: 220/255, blue: 220/255).opacity(0.17765),
                 topPosition: 0.35,
                 height: 0.0525,
-                blur: 60,
+                blur: 50,
                 duration: 56,
                 delay: 35,
                 direction: .right,
@@ -112,7 +113,7 @@ struct FlowBandsView: View {
                 color: Color(red: 100/255, green: 100/255, blue: 240/255).opacity(0.2465),
                 bottomPosition: 0.25,
                 height: 0.135,
-                blur: 55,
+                blur: 45,
                 duration: 81,
                 delay: 0,
                 direction: .left,
@@ -126,7 +127,7 @@ struct FlowBandsView: View {
                 color: Color(red: 100/255, green: 100/255, blue: 240/255).opacity(0.1955),
                 bottomPosition: 0.38,
                 height: 0.1125,
-                blur: 62,
+                blur: 52,
                 duration: 62,
                 delay: 27,
                 direction: .left,
@@ -161,7 +162,7 @@ struct FlowBand: View {
     @State private var startTime = Date()
 
     var body: some View {
-        TimelineView(.animation) { timeline in
+        TimelineView(.animation(minimumInterval: 0.1)) { timeline in
             let elapsed = timeline.date.timeIntervalSince(startTime)
             let adjustedTime = max(0, elapsed - delay)
             let progress = adjustedTime.truncatingRemainder(dividingBy: duration) / duration
@@ -373,7 +374,7 @@ struct Particle: View {
     @State private var startTime = Date()
 
     var body: some View {
-        TimelineView(.animation) { timeline in
+        TimelineView(.animation(minimumInterval: 0.1)) { timeline in
             let elapsed = timeline.date.timeIntervalSince(startTime)
 
             // Drift animation (diagonal up-right: 0,0 -> 80%, -180%)
@@ -436,7 +437,7 @@ struct Particle: View {
                     )
                 )
                 .frame(width: size.width * width, height: size.height * height)
-                .blur(radius: 12)
+                .blur(radius: 10)
                 .opacity(finalOpacity)
                 .offset(x: xOffset, y: yOffset)
                 .position(
@@ -522,7 +523,7 @@ struct DiagonalMistView: View {
     @State private var startTime = Date()
 
     var body: some View {
-        TimelineView(.animation) { timeline in
+        TimelineView(.animation(minimumInterval: 0.1)) { timeline in
             let elapsed = timeline.date.timeIntervalSince(startTime)
             let colorCycle = elapsed.truncatingRemainder(dividingBy: 135) / 135
 
@@ -538,7 +539,7 @@ struct DiagonalMistView: View {
                 endPoint: .bottomTrailing
             )
             .frame(width: size.width * 0.8, height: size.height * 0.7)
-            .blur(radius: 50)
+            .blur(radius: 40)
             .rotationEffect(.degrees(rotation))
             .opacity(opacity)
             .position(x: size.width * 0.4, y: size.height * 0.55)
@@ -647,22 +648,27 @@ struct PulseEchoView: View {
             } else {
                 let progress = (overallProgress - ringDelay) / (1.0 - ringDelay)
 
-                // Apply easing to expansion - fast at first (matching pulse), then slow down
-                let easedProgress = easeOutCubic(progress)
+                // Skip rendering if ring is invisible (optimization)
+                if progress >= 0.6 {
+                    Color.clear
+                        .frame(width: 0, height: 0)
+                } else {
+                    // Apply easing to expansion - fast at first (matching pulse), then slow down
+                    let easedProgress = easeOutCubic(progress)
 
-                // Calculate heart's current pulse scale to make ring "breathe" with it
-                let heartPulseScale = calculateHeartPulseScale(overallProgress: overallProgress)
+                    // Calculate heart's current pulse scale to make ring "breathe" with it
+                    let heartPulseScale = calculateHeartPulseScale(overallProgress: overallProgress)
 
-                // Interpolate colors from heart (yellow-pink) to magenta as ring expands
-                let ringColors = getRingColors(progress: progress)
+                    // Interpolate colors from heart (yellow-pink) to magenta as ring expands
+                    let ringColors = getRingColors(progress: progress)
 
-                // Base expansion scale (1.15 to 6)
-                let baseScale = 1.15 + (easedProgress * 4.85)
+                    // Base expansion scale (1.15 to 6)
+                    let baseScale = 1.15 + (easedProgress * 4.85)
 
-                // Apply heart pulse breathing on top of base expansion
-                let finalScale = baseScale * heartPulseScale
+                    // Apply heart pulse breathing on top of base expansion
+                    let finalScale = baseScale * heartPulseScale
 
-                Ellipse()
+                    Ellipse()
                     .fill(
                         RadialGradient(
                             gradient: Gradient(stops: [
@@ -682,6 +688,7 @@ struct PulseEchoView: View {
                     .scaleEffect(finalScale)
                     .opacity(calculateOpacity(progress: progress))
                     .position(x: size.width * 0.5, y: size.height * 0.3)
+                }
             }
         }
     }
@@ -709,28 +716,19 @@ struct PulseEchoView: View {
 
     func calculateOpacity(progress: CGFloat) -> Double {
         // Base opacity curve
-        let baseOpacity: Double
         if progress < 0.05 {
             // 0 to 5%: fade in quickly to 0.7 (sync with heart pulse)
-            baseOpacity = Double(progress / 0.05 * 0.7)
+            return Double(progress / 0.05 * 0.7)
         } else if progress < 0.15 {
             // 5% to 15%: stay at peak while heart pulse peaks
-            baseOpacity = 0.7
+            return 0.7
         } else if progress < 0.6 {
             // 15% to 60%: fade out faster with nice taper
-            baseOpacity = Double(0.7 * (1 - (progress - 0.15) / 0.45))
+            return Double(0.7 * (1 - (progress - 0.15) / 0.45))
         } else {
             // After 60%: fully transparent
             return 0
         }
-
-        // Add subtle wave motion (shimmer) as ring expands
-        // Multiple sine waves create a ripple effect
-        let wave1 = sin(progress * .pi * 4) * 0.08  // Fast shimmer
-        let wave2 = sin(progress * .pi * 2) * 0.05  // Slower pulse
-        let waveModulation = (wave1 + wave2) * Double(progress)  // Increases with distance
-
-        return max(0, min(1, baseOpacity * (1.0 + waveModulation)))
     }
 
     func getRingColors(progress: CGFloat) -> (Color, Color) {
