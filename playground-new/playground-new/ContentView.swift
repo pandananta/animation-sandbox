@@ -701,7 +701,7 @@ struct PulseEchoView: View {
                     )
                     .frame(width: size.width * 0.28, height: size.height * 0.14)
                     .blur(radius: 4)  // Softer than original but still distinct
-                    .scaleEffect(1.15 + (easedProgress * 8.85))  // 1.15 to 10 - launches at heart's peak expansion
+                    .scaleEffect(1.15 + (easedProgress * 4.85))  // 1.15 to 6 - smaller final size
                     .opacity(calculateOpacity(progress: progress))
                     .position(x: size.width * 0.5, y: size.height * 0.5)
             }
@@ -780,14 +780,18 @@ struct HeartStaticView: View {
             let cycle = elapsed.truncatingRemainder(dividingBy: 2.5)
             let progress = CGFloat(cycle / 2.5)
 
-            // Calculate pulse scale (1.0 -> 1.15 at 10% -> back to 1.0)
+            // Calculate pulse scale with pause at peak and slower retraction
+            // 0-10%: Rise to peak, 10-30%: Hold at peak, 30-100%: Slowly fall back
             let pulseScale: CGFloat = {
                 if progress < 0.1 {
                     // Rising to peak (0% to 10%)
                     return 1.0 + (0.15 * (progress / 0.1))
+                } else if progress < 0.3 {
+                    // Hold at peak (10% to 30%)
+                    return 1.15
                 } else {
-                    // Falling from peak (10% to 100%)
-                    return 1.15 - (0.15 * ((progress - 0.1) / 0.9))
+                    // Slowly falling from peak (30% to 100%)
+                    return 1.15 - (0.15 * ((progress - 0.3) / 0.7))
                 }
             }()
 
