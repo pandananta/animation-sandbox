@@ -194,6 +194,28 @@ struct FlowBand: View {
                 -1.0 + (progress * 3.0) :  // Right: -1 to 2
                 1.0 - (progress * 3.0)     // Left: 1 to -2
 
+            // Vertical wobble - subtle up/down movement
+            let wobbleOffset: CGFloat = {
+                let keyframes: [(progress: Double, offset: CGFloat)] = [
+                    (0.0, 0.0),
+                    (0.07, -0.01),
+                    (0.28, 0.01),
+                    (0.52, -0.01),
+                    (0.73, 0.01),
+                    (1.0, 0.0)
+                ]
+
+                for i in 0..<(keyframes.count - 1) {
+                    let current = keyframes[i]
+                    let next = keyframes[i + 1]
+                    if progress >= current.progress && progress < next.progress {
+                        let segmentProgress = (progress - current.progress) / (next.progress - current.progress)
+                        return current.offset + (next.offset - current.offset) * segmentProgress
+                    }
+                }
+                return 0.0
+            }()
+
             let opacity: Double = {
                 if elapsed < delay {
                     return 0
@@ -210,6 +232,9 @@ struct FlowBand: View {
             let colorCycleProgress = elapsed.truncatingRemainder(dividingBy: colorCycleDuration) / colorCycleDuration
             let currentColor = getCycledFlowBandColor(baseColor: color, cycleType: colorCycleType, progress: colorCycleProgress)
 
+            let baseY = topPosition != nil ? size.height * topPosition! : -(size.height * bottomPosition!)
+            let finalY = baseY + (size.height * wobbleOffset)
+
             LinearGradient(
                 gradient: Gradient(stops: [
                     .init(color: Color.clear, location: 0),
@@ -224,7 +249,7 @@ struct FlowBand: View {
             .opacity(opacity)
             .offset(
                 x: size.width * offset,
-                y: topPosition != nil ? size.height * topPosition! : -(size.height * bottomPosition!)
+                y: finalY
             )
         }
     }
