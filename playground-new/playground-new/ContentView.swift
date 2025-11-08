@@ -239,7 +239,7 @@ struct HeartStaticView: View {
                 .blur(radius: 20)
                 .position(x: size.width * 0.5, y: size.height * 0.5)
 
-            // Subtle heart hint (just two soft circles - gentle but visible)
+            // Subtle heart hint (two lobes with visible dip between)
             ZStack {
                 // Left lobe
                 Circle()
@@ -252,12 +252,12 @@ struct HeartStaticView: View {
                             ]),
                             center: UnitPoint(x: 0.3, y: 0.4),
                             startRadius: 0,
-                            endRadius: size.width * 0.06
+                            endRadius: size.width * 0.08
                         )
                     )
-                    .frame(width: size.width * 0.12, height: size.height * 0.096)
+                    .frame(width: size.width * 0.16, height: size.height * 0.128)
                     .blur(radius: 10)
-                    .offset(x: -size.width * 0.03)
+                    .offset(x: -size.width * 0.05, y: -size.height * 0.015)
 
                 // Right lobe
                 Circle()
@@ -270,12 +270,12 @@ struct HeartStaticView: View {
                             ]),
                             center: UnitPoint(x: 0.7, y: 0.4),
                             startRadius: 0,
-                            endRadius: size.width * 0.06
+                            endRadius: size.width * 0.08
                         )
                     )
-                    .frame(width: size.width * 0.12, height: size.height * 0.096)
+                    .frame(width: size.width * 0.16, height: size.height * 0.128)
                     .blur(radius: 10)
-                    .offset(x: size.width * 0.03)
+                    .offset(x: size.width * 0.05, y: -size.height * 0.015)
             }
             .position(x: size.width * 0.5, y: size.height * 0.5)
 
