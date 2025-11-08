@@ -667,6 +667,9 @@ struct PulseEchoView: View {
             let cycle = elapsed.truncatingRemainder(dividingBy: 2.5)
             let progress = CGFloat(cycle / 2.5)
 
+            // Apply easing to expansion - fast at first (matching pulse), then slow down
+            let easedProgress = easeOutCubic(progress)
+
             // Interpolate colors from heart (yellow-pink) to magenta as ring expands
             let ringColors = getRingColors(progress: progress)
 
@@ -687,10 +690,16 @@ struct PulseEchoView: View {
                 )
                 .frame(width: size.width * 0.28, height: size.height * 0.14)
                 .blur(radius: 2)
-                .scaleEffect(1.15 + (progress * 8.85))  // 1.15 to 10 - starts from heart boundary at peak
+                .scaleEffect(1.15 + (easedProgress * 8.85))  // 1.15 to 10 - starts from heart boundary at peak
                 .opacity(calculateOpacity(progress: progress))
                 .position(x: size.width * 0.5, y: size.height * 0.5)
         }
+    }
+
+    // Ease-out cubic: fast start, slow end (matches heart pulse energy then decelerates)
+    func easeOutCubic(_ t: CGFloat) -> CGFloat {
+        let p = 1 - t
+        return 1 - (p * p * p)
     }
 
     func calculateOpacity(progress: CGFloat) -> Double {
