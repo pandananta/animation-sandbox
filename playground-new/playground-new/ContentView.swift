@@ -239,77 +239,50 @@ struct HeartStaticView: View {
                 .blur(radius: 20)
                 .position(x: size.width * 0.5, y: size.height * 0.5)
 
-            // Heart shape (subtle two-lobe design)
-            HeartShape()
-                .fill(
-                    RadialGradient(
-                        gradient: Gradient(stops: [
-                            .init(color: Color(red: 1.0, green: 250/255, blue: 240/255), location: 0),
-                            .init(color: Color(red: 1.0, green: 230/255, blue: 120/255), location: 0.4),
-                            .init(color: Color(red: 1.0, green: 100/255, blue: 180/255), location: 0.8),
-                            .init(color: Color(red: 220/255, green: 80/255, blue: 160/255), location: 1.0)
-                        ]),
-                        center: .center,
-                        startRadius: 0,
-                        endRadius: size.width * 0.12
+            // Subtle heart hint (just two soft circles - very subtle)
+            ZStack {
+                // Left lobe
+                Circle()
+                    .fill(
+                        RadialGradient(
+                            gradient: Gradient(stops: [
+                                .init(color: Color(red: 1.0, green: 230/255, blue: 120/255).opacity(0.3), location: 0),
+                                .init(color: Color(red: 1.0, green: 100/255, blue: 180/255).opacity(0.15), location: 0.6),
+                                .init(color: Color.clear, location: 1.0)
+                            ]),
+                            center: UnitPoint(x: 0.3, y: 0.4),
+                            startRadius: 0,
+                            endRadius: size.width * 0.06
+                        )
                     )
-                )
-                .frame(width: size.width * 0.24, height: size.height * 0.12)
-                .blur(radius: 8)
-                .shadow(color: Color(red: 1.0, green: 100/255, blue: 180/255).opacity(0.9), radius: 40)
-                .position(x: size.width * 0.5, y: size.height * 0.5)
+                    .frame(width: size.width * 0.12, height: size.height * 0.096)
+                    .blur(radius: 12)
+                    .offset(x: -size.width * 0.03)
+
+                // Right lobe
+                Circle()
+                    .fill(
+                        RadialGradient(
+                            gradient: Gradient(stops: [
+                                .init(color: Color(red: 1.0, green: 230/255, blue: 120/255).opacity(0.3), location: 0),
+                                .init(color: Color(red: 1.0, green: 100/255, blue: 180/255).opacity(0.15), location: 0.6),
+                                .init(color: Color.clear, location: 1.0)
+                            ]),
+                            center: UnitPoint(x: 0.7, y: 0.4),
+                            startRadius: 0,
+                            endRadius: size.width * 0.06
+                        )
+                    )
+                    .frame(width: size.width * 0.12, height: size.height * 0.096)
+                    .blur(radius: 12)
+                    .offset(x: size.width * 0.03)
+            }
+            .position(x: size.width * 0.5, y: size.height * 0.5)
 
             // Heart center - PULSING SHARP LIGHT
             HeartCenterPulsingView(size: size)
                 .position(x: size.width * 0.5, y: size.height * 0.5)
         }
-    }
-}
-
-// Heart shape made of two rounded lobes at top
-struct HeartShape: Shape {
-    func path(in rect: CGRect) -> Path {
-        var path = Path()
-
-        let width = rect.width
-        let height = rect.height
-
-        // Start from bottom center point
-        path.move(to: CGPoint(x: width / 2, y: height))
-
-        // Left side curve up to left lobe
-        path.addQuadCurve(
-            to: CGPoint(x: 0, y: height * 0.4),
-            control: CGPoint(x: width * 0.15, y: height * 0.75)
-        )
-
-        // Left lobe (rounded top)
-        path.addArc(
-            center: CGPoint(x: width * 0.25, y: height * 0.25),
-            radius: width * 0.25,
-            startAngle: .degrees(180),
-            endAngle: .degrees(0),
-            clockwise: false
-        )
-
-        // Right lobe (rounded top)
-        path.addArc(
-            center: CGPoint(x: width * 0.75, y: height * 0.25),
-            radius: width * 0.25,
-            startAngle: .degrees(180),
-            endAngle: .degrees(0),
-            clockwise: false
-        )
-
-        // Right side curve back down to bottom
-        path.addQuadCurve(
-            to: CGPoint(x: width / 2, y: height),
-            control: CGPoint(x: width * 0.85, y: height * 0.75)
-        )
-
-        path.closeSubpath()
-
-        return path
     }
 }
 
