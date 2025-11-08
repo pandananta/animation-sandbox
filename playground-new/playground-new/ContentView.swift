@@ -111,7 +111,7 @@ struct FlowBandsView: View {
             FlowBand(
                 size: size,
                 color: Color(red: 100/255, green: 100/255, blue: 240/255).opacity(0.209),
-                bottomPosition: 0.25,
+                bottomPosition: 0.40,
                 height: 0.135,
                 blur: 45,
                 duration: 81,
@@ -125,7 +125,7 @@ struct FlowBandsView: View {
             FlowBand(
                 size: size,
                 color: Color(red: 100/255, green: 100/255, blue: 240/255).opacity(0.166),
-                bottomPosition: 0.38,
+                bottomPosition: 0.53,
                 height: 0.1125,
                 blur: 52,
                 duration: 62,
