@@ -687,23 +687,33 @@ struct PulseEchoView: View {
                 )
                 .frame(width: size.width * 0.28, height: size.height * 0.14)
                 .blur(radius: 2)
-                .scaleEffect(0.15 + (progress * 9.85))  // 0.15 to 10 - starts from bright center spot
+                .scaleEffect(1.15 + (progress * 8.85))  // 1.15 to 10 - starts from heart boundary at peak
                 .opacity(calculateOpacity(progress: progress))
                 .position(x: size.width * 0.5, y: size.height * 0.5)
         }
     }
 
     func calculateOpacity(progress: CGFloat) -> Double {
+        // Base opacity curve
+        let baseOpacity: Double
         if progress < 0.05 {
             // 0 to 5%: fade in quickly to 0.7 (sync with heart pulse)
-            return Double(progress / 0.05 * 0.7)
+            baseOpacity = Double(progress / 0.05 * 0.7)
         } else if progress < 0.15 {
             // 5% to 15%: stay at peak while heart pulse peaks
-            return 0.7
+            baseOpacity = 0.7
         } else {
             // 15% to 100%: fade out as ring expands away
-            return Double(0.7 * (1 - (progress - 0.15) / 0.85))
+            baseOpacity = Double(0.7 * (1 - (progress - 0.15) / 0.85))
         }
+
+        // Add subtle wave motion (shimmer) as ring expands
+        // Multiple sine waves create a ripple effect
+        let wave1 = sin(progress * .pi * 4) * 0.08  // Fast shimmer
+        let wave2 = sin(progress * .pi * 2) * 0.05  // Slower pulse
+        let waveModulation = (wave1 + wave2) * Double(progress)  // Increases with distance
+
+        return max(0, min(1, baseOpacity * (1.0 + waveModulation)))
     }
 
     func getRingColors(progress: CGFloat) -> (Color, Color) {
