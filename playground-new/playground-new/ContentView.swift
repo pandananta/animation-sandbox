@@ -219,7 +219,7 @@ struct ParticlesView: View {
 
     var body: some View {
         ZStack {
-            // Particle 1: Teal
+            // Particle 1: Teal with color cycling
             Particle(
                 size: size,
                 color: Color(red: 100/255, green: 220/255, blue: 220/255).opacity(0.65),
@@ -230,10 +230,12 @@ struct ParticlesView: View {
                 driftDuration: 12,
                 driftDelay: 0,
                 twinkleDuration: 5,
-                twinkleDelay: 0
+                twinkleDelay: 0,
+                colorCycleDuration: 192,
+                colorCycleType: .teal
             )
 
-            // Particle 2: Yellow
+            // Particle 2: Yellow (no color cycling)
             Particle(
                 size: size,
                 color: Color(red: 255/255, green: 200/255, blue: 80/255).opacity(0.65),
@@ -244,10 +246,12 @@ struct ParticlesView: View {
                 driftDuration: 14,
                 driftDelay: 3,
                 twinkleDuration: 4.5,
-                twinkleDelay: 1
+                twinkleDelay: 1,
+                colorCycleDuration: nil,
+                colorCycleType: nil
             )
 
-            // Particle 3: Indigo
+            // Particle 3: Indigo with color cycling
             Particle(
                 size: size,
                 color: Color(red: 100/255, green: 100/255, blue: 240/255).opacity(0.65),
@@ -258,10 +262,16 @@ struct ParticlesView: View {
                 driftDuration: 13,
                 driftDelay: 6,
                 twinkleDuration: 5.5,
-                twinkleDelay: 2
+                twinkleDelay: 2,
+                colorCycleDuration: 104,
+                colorCycleType: .magenta
             )
         }
     }
+}
+
+enum ParticleColorCycle {
+    case teal, magenta
 }
 
 struct Particle: View {
@@ -275,6 +285,8 @@ struct Particle: View {
     let driftDelay: Double
     let twinkleDuration: Double
     let twinkleDelay: Double
+    let colorCycleDuration: Double?
+    let colorCycleType: ParticleColorCycle?
 
     @State private var startTime = Date()
 
@@ -319,11 +331,21 @@ struct Particle: View {
             // Combined opacity
             let finalOpacity = fadeOpacity * twinkleOpacity
 
+            // Color cycling
+            let currentColor: Color = {
+                if let duration = colorCycleDuration, let cycleType = colorCycleType {
+                    let cycleProgress = elapsed.truncatingRemainder(dividingBy: duration) / duration
+                    return getCycledColor(baseColor: color, cycleType: cycleType, progress: cycleProgress)
+                } else {
+                    return color
+                }
+            }()
+
             Circle()
                 .fill(
                     RadialGradient(
                         gradient: Gradient(stops: [
-                            .init(color: color, location: 0),
+                            .init(color: currentColor, location: 0),
                             .init(color: Color.clear, location: 1.0)
                         ]),
                         center: .center,
@@ -340,6 +362,71 @@ struct Particle: View {
                     y: size.height * (1 - bottomPosition)
                 )
         }
+    }
+
+    func getCycledColor(baseColor: Color, cycleType: ParticleColorCycle, progress: Double) -> Color {
+        let baseOpacity = 0.65
+
+        switch cycleType {
+        case .teal:
+            // Teal particle cycles through teal variants (simplified)
+            if progress < 0.5 {
+                // Teal to cyan
+                let t = progress * 2
+                return interpolateParticleColor(
+                    from: Color(red: 100/255, green: 220/255, blue: 220/255),
+                    to: Color(red: 80/255, green: 240/255, blue: 240/255),
+                    progress: t
+                ).opacity(baseOpacity)
+            } else {
+                // Cyan back to teal
+                let t = (progress - 0.5) * 2
+                return interpolateParticleColor(
+                    from: Color(red: 80/255, green: 240/255, blue: 240/255),
+                    to: Color(red: 100/255, green: 220/255, blue: 220/255),
+                    progress: t
+                ).opacity(baseOpacity)
+            }
+
+        case .magenta:
+            // Magenta particle cycles through indigo/magenta/orange
+            if progress < 0.33 {
+                // Indigo to magenta
+                let t = progress / 0.33
+                return interpolateParticleColor(
+                    from: Color(red: 100/255, green: 100/255, blue: 240/255),
+                    to: Color(red: 200/255, green: 80/255, blue: 200/255),
+                    progress: t
+                ).opacity(baseOpacity)
+            } else if progress < 0.66 {
+                // Magenta to orange
+                let t = (progress - 0.33) / 0.33
+                return interpolateParticleColor(
+                    from: Color(red: 200/255, green: 80/255, blue: 200/255),
+                    to: Color(red: 255/255, green: 140/255, blue: 60/255),
+                    progress: t
+                ).opacity(baseOpacity)
+            } else {
+                // Orange back to indigo
+                let t = (progress - 0.66) / 0.34
+                return interpolateParticleColor(
+                    from: Color(red: 255/255, green: 140/255, blue: 60/255),
+                    to: Color(red: 100/255, green: 100/255, blue: 240/255),
+                    progress: t
+                ).opacity(baseOpacity)
+            }
+        }
+    }
+
+    func interpolateParticleColor(from: Color, to: Color, progress: Double) -> Color {
+        let fromComponents = UIColor(from).cgColor.components ?? [0, 0, 0, 1]
+        let toComponents = UIColor(to).cgColor.components ?? [0, 0, 0, 1]
+
+        let r = fromComponents[0] + (toComponents[0] - fromComponents[0]) * progress
+        let g = fromComponents[1] + (toComponents[1] - fromComponents[1]) * progress
+        let b = fromComponents[2] + (toComponents[2] - fromComponents[2]) * progress
+
+        return Color(red: r, green: g, blue: b)
     }
 }
 
@@ -507,38 +594,26 @@ struct PulseEchoView: View {
 
 struct HeartStaticView: View {
     let size: CGSize
-    @State private var startTime = Date()
 
     var body: some View {
         ZStack {
-            // Heart glow (background) - PULSING
-            TimelineView(.animation) { timeline in
-                let elapsed = timeline.date.timeIntervalSince(startTime)
-                let cycle = elapsed.truncatingRemainder(dividingBy: 2.5)
-                let progress = CGFloat(cycle / 2.5)
-
-                let blur = interpolatePulse(dull: 20, bright: 24, progress: progress)
-                let glowOpacity = interpolatePulse(dull: 0.6, bright: 0.75, progress: progress)
-
-                Ellipse()
-                    .fill(
-                        RadialGradient(
-                            gradient: Gradient(stops: [
-                                .init(color: Color(red: 1.0, green: 230/255, blue: 120/255).opacity(0.6), location: 0),
-                                .init(color: Color(red: 1.0, green: 100/255, blue: 180/255).opacity(0.4), location: 0.6),
-                                .init(color: Color.clear, location: 0.9)
-                            ]),
-                            center: .center,
-                            startRadius: 0,
-                            endRadius: size.width * 0.2
-                        )
+            // Heart glow (background)
+            Ellipse()
+                .fill(
+                    RadialGradient(
+                        gradient: Gradient(stops: [
+                            .init(color: Color(red: 1.0, green: 230/255, blue: 120/255).opacity(0.6), location: 0),
+                            .init(color: Color(red: 1.0, green: 100/255, blue: 180/255).opacity(0.4), location: 0.6),
+                            .init(color: Color.clear, location: 0.9)
+                        ]),
+                        center: .center,
+                        startRadius: 0,
+                        endRadius: size.width * 0.2
                     )
-                    .frame(width: size.width * 0.4, height: size.height * 0.2)
-                    .blur(radius: blur)
-                    .brightness(interpolatePulse(dull: 0, bright: 0.2, progress: progress))
-                    .opacity(glowOpacity)
-                    .position(x: size.width * 0.5, y: size.height * 0.5)
-            }
+                )
+                .frame(width: size.width * 0.4, height: size.height * 0.2)
+                .blur(radius: 20)
+                .position(x: size.width * 0.5, y: size.height * 0.5)
 
             // Subtle heart hint (two lobes with visible dip between)
             ZStack {
@@ -584,19 +659,6 @@ struct HeartStaticView: View {
             HeartCenterPulsingView(size: size)
                 .position(x: size.width * 0.5, y: size.height * 0.5)
         }
-    }
-
-    // Pulse interpolation function (same curve as heart center)
-    func interpolatePulse(dull: CGFloat, bright: CGFloat, progress: CGFloat) -> CGFloat {
-        let pulseIntensity: CGFloat
-        if progress < 0.1 {
-            // Rising to peak (0% to 10%)
-            pulseIntensity = progress / 0.1
-        } else {
-            // Falling from peak (10% to 100%)
-            pulseIntensity = 1.0 - ((progress - 0.1) / 0.9)
-        }
-        return dull + (bright - dull) * pulseIntensity
     }
 }
 
