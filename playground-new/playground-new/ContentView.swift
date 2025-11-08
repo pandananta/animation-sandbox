@@ -111,7 +111,9 @@ struct FlowBandsView: View {
                 blur: 55,
                 duration: 72,
                 delay: 15,
-                direction: .right
+                direction: .right,
+                colorCycleDuration: 192,
+                colorCycleType: .teal1
             )
 
             // Flow-2: Upper middle, teal lighter, drifts right
@@ -123,7 +125,9 @@ struct FlowBandsView: View {
                 blur: 60,
                 duration: 56,
                 delay: 35,
-                direction: .right
+                direction: .right,
+                colorCycleDuration: 148,
+                colorCycleType: .teal2
             )
 
             // Flow-3: Lower middle, indigo, drifts left (FIRST)
@@ -135,7 +139,9 @@ struct FlowBandsView: View {
                 blur: 55,
                 duration: 81,
                 delay: 0,
-                direction: .left
+                direction: .left,
+                colorCycleDuration: 108,
+                colorCycleType: .magenta1
             )
 
             // Flow-4: Bottom, indigo lighter, drifts left
@@ -147,7 +153,9 @@ struct FlowBandsView: View {
                 blur: 62,
                 duration: 62,
                 delay: 27,
-                direction: .left
+                direction: .left,
+                colorCycleDuration: 82,
+                colorCycleType: .magenta2
             )
         }
     }
@@ -155,6 +163,10 @@ struct FlowBandsView: View {
 
 enum FlowDirection {
     case left, right
+}
+
+enum FlowBandColorCycle {
+    case teal1, teal2, magenta1, magenta2
 }
 
 struct FlowBand: View {
@@ -167,6 +179,8 @@ struct FlowBand: View {
     let duration: Double
     let delay: Double
     let direction: FlowDirection
+    let colorCycleDuration: Double
+    let colorCycleType: FlowBandColorCycle
 
     @State private var startTime = Date()
 
@@ -192,10 +206,14 @@ struct FlowBand: View {
                 }
             }()
 
+            // Color cycling
+            let colorCycleProgress = elapsed.truncatingRemainder(dividingBy: colorCycleDuration) / colorCycleDuration
+            let currentColor = getCycledFlowBandColor(baseColor: color, cycleType: colorCycleType, progress: colorCycleProgress)
+
             LinearGradient(
                 gradient: Gradient(stops: [
                     .init(color: Color.clear, location: 0),
-                    .init(color: color, location: 0.35),
+                    .init(color: currentColor, location: 0.35),
                     .init(color: Color.clear, location: 0.65)
                 ]),
                 startPoint: .leading,
@@ -209,6 +227,69 @@ struct FlowBand: View {
                 y: topPosition != nil ? size.height * topPosition! : -(size.height * bottomPosition!)
             )
         }
+    }
+
+    func getCycledFlowBandColor(baseColor: Color, cycleType: FlowBandColorCycle, progress: Double) -> Color {
+        let baseOpacity = UIColor(baseColor).cgColor.components?[3] ?? 0.2
+
+        switch cycleType {
+        case .teal1, .teal2:
+            // Teal bands cycle through teal/cyan variants
+            if progress < 0.5 {
+                let t = progress * 2
+                return interpolateFlowColor(
+                    from: Color(red: 100/255, green: 220/255, blue: 220/255),
+                    to: Color(red: 80/255, green: 240/255, blue: 240/255),
+                    progress: t
+                ).opacity(baseOpacity)
+            } else {
+                let t = (progress - 0.5) * 2
+                return interpolateFlowColor(
+                    from: Color(red: 80/255, green: 240/255, blue: 240/255),
+                    to: Color(red: 100/255, green: 220/255, blue: 220/255),
+                    progress: t
+                ).opacity(baseOpacity)
+            }
+
+        case .magenta1, .magenta2:
+            // Magenta bands cycle through indigo/magenta/orange
+            if progress < 0.4 {
+                // Indigo base
+                let t = progress / 0.4
+                return interpolateFlowColor(
+                    from: Color(red: 100/255, green: 100/255, blue: 240/255),
+                    to: Color(red: 150/255, green: 90/255, blue: 220/255),
+                    progress: t
+                ).opacity(baseOpacity)
+            } else if progress < 0.6 {
+                // To orange
+                let t = (progress - 0.4) / 0.2
+                return interpolateFlowColor(
+                    from: Color(red: 150/255, green: 90/255, blue: 220/255),
+                    to: Color(red: 255/255, green: 140/255, blue: 60/255),
+                    progress: t
+                ).opacity(baseOpacity)
+            } else {
+                // Back to indigo
+                let t = (progress - 0.6) / 0.4
+                return interpolateFlowColor(
+                    from: Color(red: 255/255, green: 140/255, blue: 60/255),
+                    to: Color(red: 100/255, green: 100/255, blue: 240/255),
+                    progress: t
+                ).opacity(baseOpacity)
+            }
+        }
+    }
+
+    func interpolateFlowColor(from: Color, to: Color, progress: Double) -> Color {
+        let fromComponents = UIColor(from).cgColor.components ?? [0, 0, 0, 1]
+        let toComponents = UIColor(to).cgColor.components ?? [0, 0, 0, 1]
+
+        let r = fromComponents[0] + (toComponents[0] - fromComponents[0]) * progress
+        let g = fromComponents[1] + (toComponents[1] - fromComponents[1]) * progress
+        let b = fromComponents[2] + (toComponents[2] - fromComponents[2]) * progress
+
+        return Color(red: r, green: g, blue: b)
     }
 }
 
