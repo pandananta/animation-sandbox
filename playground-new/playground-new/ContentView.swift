@@ -684,19 +684,22 @@ struct PulseEchoView: View {
                 )
                 .frame(width: size.width * 0.28, height: size.height * 0.14)
                 .blur(radius: 2)
-                .scaleEffect(0.6 + (progress * 9.4))  // 0.6 to 10
+                .scaleEffect(1.0 + (progress * 9.0))  // 1.0 to 10 - starts with heart pulse
                 .opacity(calculateOpacity(progress: progress))
                 .position(x: size.width * 0.5, y: size.height * 0.5)
         }
     }
 
     func calculateOpacity(progress: CGFloat) -> Double {
-        if progress < 0.12 {
-            // 0 to 12%: fade in to 0.6
-            return Double(progress / 0.12 * 0.6)
+        if progress < 0.05 {
+            // 0 to 5%: fade in quickly to 0.7 (sync with heart pulse)
+            return Double(progress / 0.05 * 0.7)
+        } else if progress < 0.15 {
+            // 5% to 15%: stay at peak while heart pulse peaks
+            return 0.7
         } else {
-            // 12% to 100%: fade out from 0.6 to 0
-            return Double(0.6 * (1 - (progress - 0.12) / 0.88))
+            // 15% to 100%: fade out as ring expands away
+            return Double(0.7 * (1 - (progress - 0.15) / 0.85))
         }
     }
 }
