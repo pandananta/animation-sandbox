@@ -19,21 +19,23 @@ struct ContentView: View {
                     HeartChakraTestView(size: geometry.size)
                 }
 
-                // Toggle button
+                // Toggle button - moved to bottom for easier tapping
                 VStack {
+                    Spacer()
                     HStack {
                         Button(action: { showTuning.toggle() }) {
                             Text(showTuning ? "Performance Test" : "Tuning Mode")
-                                .font(.caption)
-                                .padding(8)
+                                .font(.system(size: 14, weight: .semibold))
+                                .padding(.horizontal, 16)
+                                .padding(.vertical, 12)
                                 .background(Color.blue)
                                 .foregroundColor(.white)
-                                .cornerRadius(8)
+                                .cornerRadius(12)
                         }
-                        .padding()
+                        .padding(.leading, 20)
+                        .padding(.bottom, 30)
                         Spacer()
                     }
-                    Spacer()
                 }
             }
             .frame(width: geometry.size.width, height: geometry.size.height)
@@ -275,12 +277,13 @@ struct HeartStaticView: View {
                     .blur(radius: 1)  // Minimal blur for sharp light
                     .brightness(0.2)
 
-                // Bright center spot (NO blur - sharp point)
+                // Bright center spot (NO blur - pure white point)
                 Circle()
                     .fill(Color.white)
-                    .frame(width: size.width * 0.02, height: size.height * 0.01)
-                    .shadow(color: Color.white, radius: 10, x: 0, y: 0)
-                    .shadow(color: Color(red: 1.0, green: 250/255, blue: 240/255), radius: 20, x: 0, y: 0)
+                    .frame(width: size.width * 0.03, height: size.height * 0.015)
+                    .shadow(color: Color.white, radius: 15, x: 0, y: 0)
+                    .shadow(color: Color.white, radius: 8, x: 0, y: 0)
+                    .blendMode(.plusLighter)  // Ensures pure white brightness
             }
             .position(x: size.width * 0.5, y: size.height * 0.5)
         }
@@ -362,7 +365,8 @@ struct HeartCenterTuningView: View {
     @State private var coreBlur: Double = 1
     @State private var brightness: Double = 0.2
     @State private var coreSize: Double = 0.08
-    @State private var spotSize: Double = 0.02
+    @State private var spotSize: Double = 0.03
+    @State private var useBlendMode: Bool = true
 
     var body: some View {
         ZStack {
@@ -429,12 +433,13 @@ struct HeartCenterTuningView: View {
                             .blur(radius: coreBlur)
                             .brightness(brightness)
 
-                        // Bright spot (NO blur)
+                        // Bright spot (NO blur - pure white)
                         Circle()
                             .fill(Color.white)
                             .frame(width: spotSize * 500, height: spotSize * 250)
-                            .shadow(color: Color.white, radius: 10)
-                            .shadow(color: Color(red: 1.0, green: 250/255, blue: 240/255), radius: 20)
+                            .shadow(color: Color.white, radius: 15)
+                            .shadow(color: Color.white, radius: 8)
+                            .blendMode(useBlendMode ? .plusLighter : .normal)
                     }
                 }
                 .frame(height: 200)
@@ -488,6 +493,18 @@ struct HeartCenterTuningView: View {
                                 .font(.caption)
                             Slider(value: $spotSize, in: 0.005...0.05)
                         }
+
+                        HStack {
+                            Text("Blend Mode")
+                                .foregroundColor(.white)
+                                .frame(width: 110, alignment: .leading)
+                                .font(.caption)
+                            Toggle("", isOn: $useBlendMode)
+                                .labelsHidden()
+                            Text(useBlendMode ? "Bright" : "Normal")
+                                .foregroundColor(.gray)
+                                .font(.caption2)
+                        }
                     }
 
                     // Presets
@@ -502,7 +519,8 @@ struct HeartCenterTuningView: View {
                                 coreBlur = 0.5
                                 brightness = 0.25
                                 coreSize = 0.06
-                                spotSize = 0.015
+                                spotSize = 0.025
+                                useBlendMode = true
                             }
                             .buttonStyle(.bordered)
                             .tint(.yellow)
@@ -512,7 +530,8 @@ struct HeartCenterTuningView: View {
                                 coreBlur = 1
                                 brightness = 0.2
                                 coreSize = 0.08
-                                spotSize = 0.02
+                                spotSize = 0.03
+                                useBlendMode = true
                             }
                             .buttonStyle(.bordered)
                             .tint(.green)
@@ -522,7 +541,8 @@ struct HeartCenterTuningView: View {
                                 coreBlur = 0
                                 brightness = 0.3
                                 coreSize = 0.05
-                                spotSize = 0.01
+                                spotSize = 0.02
+                                useBlendMode = true
                             }
                             .buttonStyle(.bordered)
                             .tint(.orange)
@@ -532,7 +552,8 @@ struct HeartCenterTuningView: View {
                                 coreBlur = 3
                                 brightness = 0.1
                                 coreSize = 0.1
-                                spotSize = 0.03
+                                spotSize = 0.035
+                                useBlendMode = false
                             }
                             .buttonStyle(.bordered)
                             .tint(.purple)
@@ -542,7 +563,8 @@ struct HeartCenterTuningView: View {
                                 coreBlur = 2
                                 brightness = 0.15
                                 coreSize = 0.08
-                                spotSize = 0.02
+                                spotSize = 0.025
+                                useBlendMode = false
                             }
                             .buttonStyle(.bordered)
                             .tint(.blue)
@@ -560,6 +582,7 @@ struct HeartCenterTuningView: View {
                     brightness: \(String(format: "%.2f", brightness))
                     coreSize: \(String(format: "%.2f", coreSize))
                     spotSize: \(String(format: "%.3f", spotSize))
+                    blendMode: \(useBlendMode ? ".plusLighter" : ".normal")
                     """)
                     .font(.system(.caption2, design: .monospaced))
                     .foregroundColor(.green)
