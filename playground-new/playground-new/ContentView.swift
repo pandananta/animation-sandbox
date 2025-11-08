@@ -239,15 +239,15 @@ struct HeartStaticView: View {
                 .blur(radius: 20)
                 .position(x: size.width * 0.5, y: size.height * 0.5)
 
-            // Subtle heart hint (just two soft circles - very subtle)
+            // Subtle heart hint (just two soft circles - gentle but visible)
             ZStack {
                 // Left lobe
                 Circle()
                     .fill(
                         RadialGradient(
                             gradient: Gradient(stops: [
-                                .init(color: Color(red: 1.0, green: 230/255, blue: 120/255).opacity(0.3), location: 0),
-                                .init(color: Color(red: 1.0, green: 100/255, blue: 180/255).opacity(0.15), location: 0.6),
+                                .init(color: Color(red: 1.0, green: 230/255, blue: 120/255).opacity(0.5), location: 0),
+                                .init(color: Color(red: 1.0, green: 100/255, blue: 180/255).opacity(0.25), location: 0.6),
                                 .init(color: Color.clear, location: 1.0)
                             ]),
                             center: UnitPoint(x: 0.3, y: 0.4),
@@ -256,7 +256,7 @@ struct HeartStaticView: View {
                         )
                     )
                     .frame(width: size.width * 0.12, height: size.height * 0.096)
-                    .blur(radius: 12)
+                    .blur(radius: 10)
                     .offset(x: -size.width * 0.03)
 
                 // Right lobe
@@ -264,8 +264,8 @@ struct HeartStaticView: View {
                     .fill(
                         RadialGradient(
                             gradient: Gradient(stops: [
-                                .init(color: Color(red: 1.0, green: 230/255, blue: 120/255).opacity(0.3), location: 0),
-                                .init(color: Color(red: 1.0, green: 100/255, blue: 180/255).opacity(0.15), location: 0.6),
+                                .init(color: Color(red: 1.0, green: 230/255, blue: 120/255).opacity(0.5), location: 0),
+                                .init(color: Color(red: 1.0, green: 100/255, blue: 180/255).opacity(0.25), location: 0.6),
                                 .init(color: Color.clear, location: 1.0)
                             ]),
                             center: UnitPoint(x: 0.7, y: 0.4),
@@ -274,7 +274,7 @@ struct HeartStaticView: View {
                         )
                     )
                     .frame(width: size.width * 0.12, height: size.height * 0.096)
-                    .blur(radius: 12)
+                    .blur(radius: 10)
                     .offset(x: size.width * 0.03)
             }
             .position(x: size.width * 0.5, y: size.height * 0.5)
