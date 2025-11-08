@@ -8,11 +8,36 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var showTuning = false
+
     var body: some View {
         GeometryReader { geometry in
-            HeartChakraTestView(size: geometry.size)
-                .frame(width: geometry.size.width, height: geometry.size.height)
-                .background(Color.black)
+            ZStack {
+                if showTuning {
+                    HeartCenterTuningView(size: geometry.size)
+                } else {
+                    HeartChakraTestView(size: geometry.size)
+                }
+
+                // Toggle button
+                VStack {
+                    HStack {
+                        Button(action: { showTuning.toggle() }) {
+                            Text(showTuning ? "Performance Test" : "Tuning Mode")
+                                .font(.caption)
+                                .padding(8)
+                                .background(Color.blue)
+                                .foregroundColor(.white)
+                                .cornerRadius(8)
+                        }
+                        .padding()
+                        Spacer()
+                    }
+                    Spacer()
+                }
+            }
+            .frame(width: geometry.size.width, height: geometry.size.height)
+            .background(Color.black)
         }
         .ignoresSafeArea()
     }
@@ -212,14 +237,15 @@ struct HeartStaticView: View {
                 .blur(radius: 20)
                 .position(x: size.width * 0.5, y: size.height * 0.5)
 
-            // Heart center
+            // Heart center - ENHANCED for crispness
             Circle()
                 .fill(
                     RadialGradient(
-                        gradient: Gradient(colors: [
-                            Color.white,
-                            Color(red: 1.0, green: 250/255, blue: 240/255),
-                            Color(red: 1.0, green: 230/255, blue: 120/255)
+                        gradient: Gradient(stops: [
+                            .init(color: Color.white, location: 0),
+                            .init(color: Color.white, location: 0.3),  // More white core
+                            .init(color: Color(red: 1.0, green: 250/255, blue: 240/255), location: 0.6),
+                            .init(color: Color(red: 1.0, green: 230/255, blue: 120/255), location: 1.0)
                         ]),
                         center: .center,
                         startRadius: 0,
@@ -227,8 +253,10 @@ struct HeartStaticView: View {
                     )
                 )
                 .frame(width: size.width * 0.12, height: size.height * 0.06)
-                .blur(radius: 4)
-                .shadow(color: Color(red: 1.0, green: 250/255, blue: 240/255), radius: 35)
+                .blur(radius: 3)  // Reduced from 4 for more crispness
+                .shadow(color: Color(red: 1.0, green: 250/255, blue: 240/255).opacity(0.9), radius: 35)
+                .shadow(color: Color.white, radius: 15)  // Extra bright core glow
+                .brightness(0.1)  // Slight brightness boost
                 .position(x: size.width * 0.5, y: size.height * 0.5)
         }
     }
@@ -295,6 +323,181 @@ struct FPSCounterView: View {
                 fps = Double(frameCount) / elapsed
                 frameCount = 0
                 lastUpdate = now
+            }
+        }
+    }
+}
+
+// MARK: - Tuning View
+// Interactive tuning to match CSS exactly
+
+struct HeartCenterTuningView: View {
+    let size: CGSize
+    @State private var blurRadius: Double = 3
+    @State private var brightness: Double = 0.1
+    @State private var whiteStop: Double = 0.3
+    @State private var saturation: Double = 1.0
+
+    var body: some View {
+        ZStack {
+            // Background
+            Color(red: 5/255, green: 2/255, blue: 15/255).ignoresSafeArea()
+
+            VStack(spacing: 20) {
+                Spacer()
+
+                // Preview
+                ZStack {
+                    // Heart glow
+                    Ellipse()
+                        .fill(
+                            RadialGradient(
+                                gradient: Gradient(stops: [
+                                    .init(color: Color(red: 1.0, green: 230/255, blue: 120/255).opacity(0.6), location: 0),
+                                    .init(color: Color(red: 1.0, green: 100/255, blue: 180/255).opacity(0.4), location: 0.6),
+                                    .init(color: Color.clear, location: 0.9)
+                                ]),
+                                center: .center,
+                                startRadius: 0,
+                                endRadius: 100
+                            )
+                        )
+                        .frame(width: 200, height: 100)
+                        .blur(radius: 20)
+
+                    // Heart center - TUNABLE
+                    Circle()
+                        .fill(
+                            RadialGradient(
+                                gradient: Gradient(stops: [
+                                    .init(color: Color.white, location: 0),
+                                    .init(color: Color.white, location: whiteStop),
+                                    .init(color: Color(red: 1.0, green: 250/255, blue: 240/255), location: 0.6),
+                                    .init(color: Color(red: 1.0, green: 230/255, blue: 120/255), location: 1.0)
+                                ]),
+                                center: .center,
+                                startRadius: 0,
+                                endRadius: 30
+                            )
+                        )
+                        .frame(width: 60, height: 30)
+                        .blur(radius: blurRadius)
+                        .shadow(color: Color(red: 1.0, green: 250/255, blue: 240/255).opacity(0.9), radius: 35)
+                        .shadow(color: Color.white, radius: 15)
+                        .brightness(brightness)
+                        .saturation(saturation)
+                }
+                .frame(height: 200)
+                .padding(.top, 50)
+
+                Spacer()
+
+                // Controls
+                VStack(alignment: .leading, spacing: 15) {
+                    Text("Heart Center Tuning")
+                        .font(.headline)
+                        .foregroundColor(.white)
+
+                    VStack(alignment: .leading, spacing: 8) {
+                        HStack {
+                            Text("Blur: \(String(format: "%.1f", blurRadius))")
+                                .foregroundColor(.white)
+                                .frame(width: 100, alignment: .leading)
+                                .font(.caption)
+                            Slider(value: $blurRadius, in: 0...8)
+                        }
+
+                        HStack {
+                            Text("Bright: \(String(format: "%.2f", brightness))")
+                                .foregroundColor(.white)
+                                .frame(width: 100, alignment: .leading)
+                                .font(.caption)
+                            Slider(value: $brightness, in: -0.2...0.5)
+                        }
+
+                        HStack {
+                            Text("Core: \(String(format: "%.2f", whiteStop))")
+                                .foregroundColor(.white)
+                                .frame(width: 100, alignment: .leading)
+                                .font(.caption)
+                            Slider(value: $whiteStop, in: 0...0.6)
+                        }
+
+                        HStack {
+                            Text("Sat: \(String(format: "%.2f", saturation))")
+                                .foregroundColor(.white)
+                                .frame(width: 100, alignment: .leading)
+                                .font(.caption)
+                            Slider(value: $saturation, in: 0.5...1.5)
+                        }
+                    }
+
+                    // Presets
+                    Text("Presets:")
+                        .font(.caption)
+                        .foregroundColor(.gray)
+
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: 10) {
+                            Button("CSS") {
+                                blurRadius = 4
+                                brightness = 0
+                                whiteStop = 0.5
+                                saturation = 1.0
+                            }
+                            .buttonStyle(.bordered)
+                            .tint(.blue)
+
+                            Button("Crisp") {
+                                blurRadius = 3
+                                brightness = 0.1
+                                whiteStop = 0.3
+                                saturation = 1.1
+                            }
+                            .buttonStyle(.bordered)
+                            .tint(.green)
+
+                            Button("Extra Crisp") {
+                                blurRadius = 2
+                                brightness = 0.15
+                                whiteStop = 0.2
+                                saturation = 1.2
+                            }
+                            .buttonStyle(.bordered)
+                            .tint(.orange)
+
+                            Button("Soft") {
+                                blurRadius = 6
+                                brightness = 0
+                                whiteStop = 0.4
+                                saturation = 0.9
+                            }
+                            .buttonStyle(.bordered)
+                            .tint(.purple)
+                        }
+                    }
+
+                    // Code output
+                    Text("Copy these values:")
+                        .font(.caption)
+                        .foregroundColor(.gray)
+
+                    Text("""
+                    blur: \(String(format: "%.1f", blurRadius))
+                    brightness: \(String(format: "%.2f", brightness))
+                    whiteStop: \(String(format: "%.2f", whiteStop))
+                    saturation: \(String(format: "%.2f", saturation))
+                    """)
+                    .font(.system(.caption2, design: .monospaced))
+                    .foregroundColor(.green)
+                    .padding(8)
+                    .background(Color.black.opacity(0.5))
+                    .cornerRadius(5)
+                }
+                .padding()
+                .background(Color.gray.opacity(0.2))
+                .cornerRadius(10)
+                .padding()
             }
         }
     }
