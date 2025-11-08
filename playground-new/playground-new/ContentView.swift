@@ -309,7 +309,7 @@ struct ParticlesView: View {
             Particle(
                 size: size,
                 color: Color(red: 100/255, green: 220/255, blue: 220/255).opacity(0.65),
-                bottomPosition: 0.15,
+                bottomPosition: 0.35,
                 leftPosition: 0.12,
                 width: 0.10,
                 height: 0.05,
@@ -325,7 +325,7 @@ struct ParticlesView: View {
             Particle(
                 size: size,
                 color: Color(red: 255/255, green: 200/255, blue: 80/255).opacity(0.65),
-                bottomPosition: 0.20,
+                bottomPosition: 0.40,
                 leftPosition: 0.18,
                 width: 0.09,
                 height: 0.045,
@@ -341,7 +341,7 @@ struct ParticlesView: View {
             Particle(
                 size: size,
                 color: Color(red: 100/255, green: 100/255, blue: 240/255).opacity(0.65),
-                bottomPosition: 0.25,
+                bottomPosition: 0.45,
                 leftPosition: 0.25,
                 width: 0.11,
                 height: 0.055,
@@ -685,7 +685,7 @@ struct PulseEchoView: View {
                     .blur(radius: 4)  // Softer than original but still distinct
                     .scaleEffect(finalScale)
                     .opacity(calculateOpacity(progress: progress))
-                    .position(x: size.width * 0.5, y: size.height * 0.5)
+                    .position(x: size.width * 0.5, y: size.height * 0.3)
             }
         }
     }
@@ -814,7 +814,7 @@ struct HeartStaticView: View {
                     .frame(width: size.width * 0.4, height: size.height * 0.2)
                     .blur(radius: 20)
                     .scaleEffect(pulseScale)
-                    .position(x: size.width * 0.5, y: size.height * 0.5)
+                    .position(x: size.width * 0.5, y: size.height * 0.3)
 
                 // Subtle heart hint (two lobes with visible dip between)
                 ZStack {
@@ -855,11 +855,11 @@ struct HeartStaticView: View {
                         .offset(x: size.width * 0.035, y: -size.height * 0.015)
                 }
                 .scaleEffect(pulseScale)
-                .position(x: size.width * 0.5, y: size.height * 0.5)
+                .position(x: size.width * 0.5, y: size.height * 0.3)
 
                 // Heart center - PULSING SHARP LIGHT
                 HeartCenterPulsingView(size: size)
-                    .position(x: size.width * 0.5, y: size.height * 0.5)
+                    .position(x: size.width * 0.5, y: size.height * 0.3)
             }
         }
     }
