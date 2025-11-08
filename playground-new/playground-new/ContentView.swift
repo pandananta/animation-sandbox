@@ -700,8 +700,8 @@ struct PulseEchoView: View {
                         )
                     )
                     .frame(width: size.width * 0.28, height: size.height * 0.14)
-                    .blur(radius: 8)  // Increased blur to match heart's hazy quality
-                    .scaleEffect(1.15 + (easedProgress * 8.85))  // 1.15 to 10 - starts from heart boundary at peak
+                    .blur(radius: 4)  // Softer than original but still distinct
+                    .scaleEffect(1.15 + (easedProgress * 8.85))  // 1.15 to 10 - launches at heart's peak expansion
                     .opacity(calculateOpacity(progress: progress))
                     .position(x: size.width * 0.5, y: size.height * 0.5)
             }
