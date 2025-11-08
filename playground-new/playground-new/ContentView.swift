@@ -239,54 +239,95 @@ struct HeartStaticView: View {
                 .blur(radius: 20)
                 .position(x: size.width * 0.5, y: size.height * 0.5)
 
-            // Heart center - SHARP LIGHT (like Zelda fairy)
-            ZStack {
-                // Outer glow layer (soft)
-                Circle()
-                    .fill(
-                        RadialGradient(
-                            gradient: Gradient(stops: [
-                                .init(color: Color(red: 1.0, green: 250/255, blue: 240/255).opacity(0.8), location: 0),
-                                .init(color: Color(red: 1.0, green: 230/255, blue: 120/255).opacity(0.4), location: 0.5),
-                                .init(color: Color.clear, location: 1.0)
-                            ]),
-                            center: .center,
-                            startRadius: 0,
-                            endRadius: size.width * 0.06
-                        )
-                    )
-                    .frame(width: size.width * 0.12, height: size.height * 0.06)
-                    .blur(radius: 8)
-
-                // Core light (SHARP - minimal blur)
-                Circle()
-                    .fill(
-                        RadialGradient(
-                            gradient: Gradient(stops: [
-                                .init(color: Color.white, location: 0),
-                                .init(color: Color.white, location: 0.4),
-                                .init(color: Color(red: 1.0, green: 250/255, blue: 240/255), location: 0.7),
-                                .init(color: Color.clear, location: 1.0)
-                            ]),
-                            center: .center,
-                            startRadius: 0,
-                            endRadius: size.width * 0.04
-                        )
-                    )
-                    .frame(width: size.width * 0.08, height: size.height * 0.04)
-                    .blur(radius: 1)  // Minimal blur for sharp light
-                    .brightness(0.2)
-
-                // Bright center spot (NO blur - pure white point)
-                Circle()
-                    .fill(Color.white)
-                    .frame(width: size.width * 0.03, height: size.height * 0.015)
-                    .shadow(color: Color.white, radius: 15, x: 0, y: 0)
-                    .shadow(color: Color.white, radius: 8, x: 0, y: 0)
-                    .blendMode(.plusLighter)  // Ensures pure white brightness
-            }
-            .position(x: size.width * 0.5, y: size.height * 0.5)
+            // Heart center - PULSING SHARP LIGHT
+            HeartCenterPulsingView(size: size)
+                .position(x: size.width * 0.5, y: size.height * 0.5)
         }
+    }
+}
+
+// MARK: - Pulsing Heart Center
+// Animates between "Sharp" (dull) and "Max Bright" (peak)
+
+struct HeartCenterPulsingView: View {
+    let size: CGSize
+    @State private var pulse: CGFloat = 0
+
+    var body: some View {
+        ZStack {
+            // Outer glow layer (soft)
+            Circle()
+                .fill(
+                    RadialGradient(
+                        gradient: Gradient(stops: [
+                            .init(color: Color(red: 1.0, green: 250/255, blue: 240/255).opacity(0.8), location: 0),
+                            .init(color: Color(red: 1.0, green: 230/255, blue: 120/255).opacity(0.4), location: 0.5),
+                            .init(color: Color.clear, location: 1.0)
+                        ]),
+                        center: .center,
+                        startRadius: 0,
+                        endRadius: size.width * 0.06
+                    )
+                )
+                .frame(width: size.width * 0.12, height: size.height * 0.06)
+                .blur(radius: interpolate(dull: 8, bright: 15, progress: pulse))
+
+            // Core light (SHARP - minimal blur)
+            Circle()
+                .fill(
+                    RadialGradient(
+                        gradient: Gradient(stops: [
+                            .init(color: Color.white, location: 0),
+                            .init(color: Color.white, location: 0.4),
+                            .init(color: Color(red: 1.0, green: 250/255, blue: 240/255), location: 0.7),
+                            .init(color: Color.clear, location: 1.0)
+                        ]),
+                        center: .center,
+                        startRadius: 0,
+                        endRadius: size.width * 0.04
+                    )
+                )
+                .frame(
+                    width: size.width * interpolate(dull: 0.08, bright: 0.15, progress: pulse),
+                    height: size.height * interpolate(dull: 0.04, bright: 0.075, progress: pulse)
+                )
+                .blur(radius: interpolate(dull: 1, bright: 5, progress: pulse))
+                .brightness(interpolate(dull: 0.2, bright: 0.5, progress: pulse))
+
+            // Bright center spot (NO blur - pure white point)
+            Circle()
+                .fill(Color.white)
+                .frame(
+                    width: size.width * interpolate(dull: 0.03, bright: 0.05, progress: pulse),
+                    height: size.height * interpolate(dull: 0.015, bright: 0.025, progress: pulse)
+                )
+                .shadow(color: Color.white, radius: interpolate(dull: 15, bright: 25, progress: pulse), x: 0, y: 0)
+                .shadow(color: Color.white, radius: interpolate(dull: 8, bright: 15, progress: pulse), x: 0, y: 0)
+                .blendMode(.plusLighter)
+        }
+        .onAppear {
+            withAnimation(
+                Animation.easeInOut(duration: 2.5)
+                    .repeatForever(autoreverses: false)
+            ) {
+                pulse = 1.0
+            }
+        }
+    }
+
+    // Interpolate between dull and bright values based on pulse progress
+    func interpolate(dull: CGFloat, bright: CGFloat, progress: CGFloat) -> CGFloat {
+        // Create a pulse curve: 0 -> peak at 10% -> back to 0
+        let pulseIntensity: CGFloat
+        if progress < 0.1 {
+            // Rising to peak (0% to 10%)
+            pulseIntensity = progress / 0.1
+        } else {
+            // Falling from peak (10% to 100%)
+            pulseIntensity = 1.0 - ((progress - 0.1) / 0.9)
+        }
+
+        return dull + (bright - dull) * pulseIntensity
     }
 }
 
