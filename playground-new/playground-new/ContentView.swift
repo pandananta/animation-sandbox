@@ -105,11 +105,11 @@ struct FlowBandsView: View {
             // Flow-1: Top, teal, drifts right
             FlowBand(
                 size: size,
-                color: Color(red: 100/255, green: 220/255, blue: 220/255).opacity(0.28),
+                color: Color(red: 100/255, green: 220/255, blue: 220/255).opacity(0.196),
                 topPosition: 0.22,
                 height: 0.16,
                 blur: 39,
-                duration: 48,
+                duration: 72,
                 delay: 2,
                 direction: .right
             )
@@ -117,23 +117,23 @@ struct FlowBandsView: View {
             // Flow-2: Upper middle, teal lighter, drifts right
             FlowBand(
                 size: size,
-                color: Color(red: 100/255, green: 220/255, blue: 220/255).opacity(0.22),
+                color: Color(red: 100/255, green: 220/255, blue: 220/255).opacity(0.154),
                 topPosition: 0.35,
                 height: 0.14,
                 blur: 42,
-                duration: 37,
-                delay: 11,
+                duration: 56,
+                delay: 20,
                 direction: .right
             )
 
             // Flow-3: Lower middle, indigo, drifts left
             FlowBand(
                 size: size,
-                color: Color(red: 100/255, green: 100/255, blue: 240/255).opacity(0.29),
+                color: Color(red: 100/255, green: 100/255, blue: 240/255).opacity(0.203),
                 bottomPosition: 0.25,
                 height: 0.18,
                 blur: 39,
-                duration: 54,
+                duration: 81,
                 delay: 5,
                 direction: .left
             )
@@ -141,11 +141,11 @@ struct FlowBandsView: View {
             // Flow-4: Bottom, indigo lighter, drifts left
             FlowBand(
                 size: size,
-                color: Color(red: 100/255, green: 100/255, blue: 240/255).opacity(0.23),
+                color: Color(red: 100/255, green: 100/255, blue: 240/255).opacity(0.161),
                 bottomPosition: 0.38,
                 height: 0.15,
                 blur: 44,
-                duration: 41,
+                duration: 62,
                 delay: 17,
                 direction: .left
             )
@@ -222,7 +222,7 @@ struct ParticlesView: View {
             // Particle 1: Teal
             Particle(
                 size: size,
-                color: Color(red: 100/255, green: 220/255, blue: 220/255).opacity(0.45),
+                color: Color(red: 100/255, green: 220/255, blue: 220/255).opacity(0.65),
                 bottomPosition: 0.15,
                 leftPosition: 0.12,
                 width: 0.10,
@@ -236,7 +236,7 @@ struct ParticlesView: View {
             // Particle 2: Yellow
             Particle(
                 size: size,
-                color: Color(red: 255/255, green: 200/255, blue: 80/255).opacity(0.45),
+                color: Color(red: 255/255, green: 200/255, blue: 80/255).opacity(0.65),
                 bottomPosition: 0.20,
                 leftPosition: 0.18,
                 width: 0.09,
@@ -250,7 +250,7 @@ struct ParticlesView: View {
             // Particle 3: Indigo
             Particle(
                 size: size,
-                color: Color(red: 100/255, green: 100/255, blue: 240/255).opacity(0.45),
+                color: Color(red: 100/255, green: 100/255, blue: 240/255).opacity(0.65),
                 bottomPosition: 0.25,
                 leftPosition: 0.25,
                 width: 0.11,
