@@ -665,34 +665,46 @@ struct PulseEchoView: View {
         TimelineView(.animation) { timeline in
             let elapsed = timeline.date.timeIntervalSince(startTime)
             let cycle = elapsed.truncatingRemainder(dividingBy: 2.5)
-            let progress = CGFloat(cycle / 2.5)
+            let overallProgress = CGFloat(cycle / 2.5)
 
-            // Apply easing to expansion - fast at first (matching pulse), then slow down
-            let easedProgress = easeOutCubic(progress)
+            // Delay ring start until heart reaches peak brightness (10% of cycle)
+            // Map 10%-100% of overall cycle to 0%-100% of ring expansion
+            let ringDelay: CGFloat = 0.1
 
-            // Interpolate colors from heart (yellow-pink) to magenta as ring expands
-            let ringColors = getRingColors(progress: progress)
+            if overallProgress < ringDelay {
+                // Don't show ring yet - waiting for heart to reach peak
+                Color.clear
+                    .frame(width: 0, height: 0)
+            } else {
+                let progress = (overallProgress - ringDelay) / (1.0 - ringDelay)
 
-            Ellipse()
-                .fill(
-                    RadialGradient(
-                        gradient: Gradient(stops: [
-                            .init(color: Color.clear, location: 0),
-                            .init(color: Color.clear, location: 0.32),
-                            .init(color: ringColors.0.opacity(0.9), location: 0.4),
-                            .init(color: ringColors.1.opacity(0.7), location: 0.46),
-                            .init(color: Color.clear, location: 0.52)
-                        ]),
-                        center: .center,
-                        startRadius: 0,
-                        endRadius: size.width * 0.14
+                // Apply easing to expansion - fast at first (matching pulse), then slow down
+                let easedProgress = easeOutCubic(progress)
+
+                // Interpolate colors from heart (yellow-pink) to magenta as ring expands
+                let ringColors = getRingColors(progress: progress)
+
+                Ellipse()
+                    .fill(
+                        RadialGradient(
+                            gradient: Gradient(stops: [
+                                .init(color: Color.clear, location: 0),
+                                .init(color: Color.clear, location: 0.32),
+                                .init(color: ringColors.0.opacity(0.9), location: 0.4),
+                                .init(color: ringColors.1.opacity(0.7), location: 0.46),
+                                .init(color: Color.clear, location: 0.52)
+                            ]),
+                            center: .center,
+                            startRadius: 0,
+                            endRadius: size.width * 0.14
+                        )
                     )
-                )
-                .frame(width: size.width * 0.28, height: size.height * 0.14)
-                .blur(radius: 2)
-                .scaleEffect(1.15 + (easedProgress * 8.85))  // 1.15 to 10 - starts from heart boundary at peak
-                .opacity(calculateOpacity(progress: progress))
-                .position(x: size.width * 0.5, y: size.height * 0.5)
+                    .frame(width: size.width * 0.28, height: size.height * 0.14)
+                    .blur(radius: 2)
+                    .scaleEffect(1.15 + (easedProgress * 8.85))  // 1.15 to 10 - starts from heart boundary at peak
+                    .opacity(calculateOpacity(progress: progress))
+                    .position(x: size.width * 0.5, y: size.height * 0.5)
+            }
         }
     }
 
