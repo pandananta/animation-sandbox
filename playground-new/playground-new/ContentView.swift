@@ -82,7 +82,7 @@ struct FlowBandsView: View {
             // Flow-1: Top, teal, drifts right
             FlowBand(
                 size: size,
-                color: Color(red: 100/255, green: 220/255, blue: 220/255).opacity(0.2261),
+                color: Color(red: 100/255, green: 220/255, blue: 220/255).opacity(0.192),
                 topPosition: 0.22,
                 height: 0.06,
                 blur: 45,
@@ -96,7 +96,7 @@ struct FlowBandsView: View {
             // Flow-2: Upper middle, teal lighter, drifts right
             FlowBand(
                 size: size,
-                color: Color(red: 100/255, green: 220/255, blue: 220/255).opacity(0.17765),
+                color: Color(red: 100/255, green: 220/255, blue: 220/255).opacity(0.151),
                 topPosition: 0.35,
                 height: 0.0525,
                 blur: 50,
@@ -110,7 +110,7 @@ struct FlowBandsView: View {
             // Flow-3: Lower middle, indigo, drifts left (FIRST)
             FlowBand(
                 size: size,
-                color: Color(red: 100/255, green: 100/255, blue: 240/255).opacity(0.2465),
+                color: Color(red: 100/255, green: 100/255, blue: 240/255).opacity(0.209),
                 bottomPosition: 0.25,
                 height: 0.135,
                 blur: 45,
@@ -124,7 +124,7 @@ struct FlowBandsView: View {
             // Flow-4: Bottom, indigo lighter, drifts left
             FlowBand(
                 size: size,
-                color: Color(red: 100/255, green: 100/255, blue: 240/255).opacity(0.1955),
+                color: Color(red: 100/255, green: 100/255, blue: 240/255).opacity(0.166),
                 bottomPosition: 0.38,
                 height: 0.1125,
                 blur: 52,
@@ -305,7 +305,7 @@ struct ParticlesView: View {
             // Particle 1: Teal with color cycling
             Particle(
                 size: size,
-                color: Color(red: 100/255, green: 220/255, blue: 220/255).opacity(0.65),
+                color: Color(red: 100/255, green: 220/255, blue: 220/255).opacity(0.55),
                 bottomPosition: 0.35,
                 leftPosition: 0.12,
                 width: 0.10,
@@ -321,7 +321,7 @@ struct ParticlesView: View {
             // Particle 2: Yellow (no color cycling)
             Particle(
                 size: size,
-                color: Color(red: 255/255, green: 200/255, blue: 80/255).opacity(0.65),
+                color: Color(red: 255/255, green: 200/255, blue: 80/255).opacity(0.55),
                 bottomPosition: 0.40,
                 leftPosition: 0.18,
                 width: 0.09,
@@ -337,7 +337,7 @@ struct ParticlesView: View {
             // Particle 3: Indigo with color cycling
             Particle(
                 size: size,
-                color: Color(red: 100/255, green: 100/255, blue: 240/255).opacity(0.65),
+                color: Color(red: 100/255, green: 100/255, blue: 240/255).opacity(0.55),
                 bottomPosition: 0.45,
                 leftPosition: 0.25,
                 width: 0.11,
@@ -448,7 +448,7 @@ struct Particle: View {
     }
 
     func getCycledColor(baseColor: Color, cycleType: ParticleColorCycle, progress: Double) -> Color {
-        let baseOpacity = 0.65
+        let baseOpacity = 0.55
 
         switch cycleType {
         case .teal:
@@ -519,7 +519,7 @@ struct Particle: View {
 struct DiagonalMistView: View {
     let size: CGSize
     @State private var rotation: Double = -15
-    @State private var opacity: Double = 0.25
+    @State private var opacity: Double = 0.20
     @State private var startTime = Date()
 
     var body: some View {
@@ -558,7 +558,7 @@ struct DiagonalMistView: View {
                 Animation.easeInOut(duration: 14)
                     .repeatForever(autoreverses: true)
             ) {
-                opacity = 0.35
+                opacity = 0.28
             }
         }
     }
