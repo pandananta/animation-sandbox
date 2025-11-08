@@ -700,7 +700,7 @@ struct PulseEchoView: View {
                         )
                     )
                     .frame(width: size.width * 0.28, height: size.height * 0.14)
-                    .blur(radius: 2)
+                    .blur(radius: 8)  // Increased blur to match heart's hazy quality
                     .scaleEffect(1.15 + (easedProgress * 8.85))  // 1.15 to 10 - starts from heart boundary at peak
                     .opacity(calculateOpacity(progress: progress))
                     .position(x: size.width * 0.5, y: size.height * 0.5)
@@ -738,9 +738,10 @@ struct PulseEchoView: View {
     }
 
     func getRingColors(progress: CGFloat) -> (Color, Color) {
-        // Heart colors (at start)
-        let heartYellow = Color(red: 1.0, green: 230/255, blue: 120/255)
-        let heartPink = Color(red: 1.0, green: 100/255, blue: 180/255)
+        // Start with a warm blended tone (orange-pink) that matches the heart's combined glow
+        // Heart appears as yellow + magenta blended together = warm orange-pink
+        let warmBlend1 = Color(red: 1.0, green: 180/255, blue: 130/255)  // Warm peachy-orange
+        let warmBlend2 = Color(red: 1.0, green: 120/255, blue: 170/255)  // Warm coral-pink
 
         // Magenta colors (at end)
         let magenta1 = Color(red: 230/255, green: 50/255, blue: 140/255)
@@ -749,8 +750,8 @@ struct PulseEchoView: View {
         // Transition happens over first 30% of expansion
         let colorProgress = min(progress / 0.3, 1.0)
 
-        let color1 = interpolateRingColor(from: heartYellow, to: magenta1, progress: Double(colorProgress))
-        let color2 = interpolateRingColor(from: heartPink, to: magenta2, progress: Double(colorProgress))
+        let color1 = interpolateRingColor(from: warmBlend1, to: magenta1, progress: Double(colorProgress))
+        let color2 = interpolateRingColor(from: warmBlend2, to: magenta2, progress: Double(colorProgress))
 
         return (color1, color2)
     }
