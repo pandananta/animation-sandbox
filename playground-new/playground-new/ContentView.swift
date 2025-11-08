@@ -744,9 +744,9 @@ struct PulseEchoView: View {
         let warmBlend2 = Color(red: 1.0, green: 120/255, blue: 170/255)  // Warm coral-pink
 
         // Mauve-rose colors (at end) - aligned with app color #a05788
-        // Less purple, more dusty rose/mauve
-        let mauve1 = Color(red: 200/255, green: 90/255, blue: 150/255)  // Dusty rose-mauve
-        let mauve2 = Color(red: 180/255, green: 80/255, blue: 135/255)  // Deeper mauve-rose
+        // Richer, more saturated mauve (not pure pink)
+        let mauve1 = Color(red: 180/255, green: 70/255, blue: 145/255)  // Rich mauve
+        let mauve2 = Color(red: 160/255, green: 60/255, blue: 130/255)  // Deep mauve-wine
 
         // Transition happens over first 30% of expansion
         let colorProgress = min(progress / 0.3, 1.0)
