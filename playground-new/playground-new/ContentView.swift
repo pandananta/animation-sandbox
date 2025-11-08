@@ -664,8 +664,8 @@ struct PulseEchoView: View {
     var body: some View {
         TimelineView(.animation) { timeline in
             let elapsed = timeline.date.timeIntervalSince(startTime)
-            let cycle = elapsed.truncatingRemainder(dividingBy: 2.5)
-            let overallProgress = CGFloat(cycle / 2.5)
+            let cycle = elapsed.truncatingRemainder(dividingBy: 3.5)
+            let overallProgress = CGFloat(cycle / 3.5)
 
             // Delay ring start until heart reaches peak brightness (10% of cycle)
             // Map 10%-100% of overall cycle to 0%-100% of ring expansion
@@ -801,8 +801,8 @@ struct HeartStaticView: View {
     var body: some View {
         TimelineView(.animation) { timeline in
             let elapsed = timeline.date.timeIntervalSince(startTime)
-            let cycle = elapsed.truncatingRemainder(dividingBy: 2.5)
-            let progress = CGFloat(cycle / 2.5)
+            let cycle = elapsed.truncatingRemainder(dividingBy: 3.5)
+            let progress = CGFloat(cycle / 3.5)
 
             // Calculate pulse scale with pause at peak and slower retraction
             // 0-10%: Rise to peak, 10-30%: Hold at peak, 30-100%: Slowly fall back
@@ -898,8 +898,8 @@ struct HeartCenterPulsingView: View {
     var body: some View {
         TimelineView(.animation) { timeline in
             let elapsed = timeline.date.timeIntervalSince(startTime)
-            let cycle = elapsed.truncatingRemainder(dividingBy: 2.5) // 2.5 second cycle
-            let progress = CGFloat(cycle / 2.5) // 0 to 1
+            let cycle = elapsed.truncatingRemainder(dividingBy: 3.5) // 3.5 second cycle
+            let progress = CGFloat(cycle / 3.5) // 0 to 1
 
             ZStack {
                 // Outer glow layer (soft)
