@@ -56,11 +56,14 @@ struct HeartChakraTestView: View {
             // Background gradient
             BackgroundGradientView()
 
-            // Flow band with heavy blur (39px) - PERFORMANCE CRITICAL
-            FlowBandView(size: size)
+            // All 4 flow bands with individual timing
+            FlowBandsView(size: size)
 
-            // Diagonal mist with rotation and 50px blur - PERFORMANCE CRITICAL
+            // Diagonal mist with rotation and 50px blur
             DiagonalMistView(size: size)
+
+            // 3 Floating particles
+            ParticlesView(size: size)
 
             // Pulse echo - expanding ring
             PulseEchoView(size: size)
@@ -92,33 +95,250 @@ struct BackgroundGradientView: View {
     }
 }
 
-// MARK: - Flow Band (PERFORMANCE TEST)
-// This is the most expensive element - horizontal gradient with 39px blur moving across screen
+// MARK: - Flow Bands (All 4)
 
-struct FlowBandView: View {
+struct FlowBandsView: View {
     let size: CGSize
-    @State private var offset: CGFloat = -1.0
 
     var body: some View {
-        LinearGradient(
-            gradient: Gradient(stops: [
-                .init(color: Color.clear, location: 0),
-                .init(color: Color(red: 100/255, green: 220/255, blue: 220/255).opacity(0.28), location: 0.5),
-                .init(color: Color.clear, location: 1.0)
-            ]),
-            startPoint: .leading,
-            endPoint: .trailing
-        )
-        .frame(width: size.width, height: size.height * 0.16)
-        .blur(radius: 39) // HEAVY BLUR - this is the test
-        .offset(x: size.width * offset, y: size.height * 0.22)
-        .onAppear {
-            withAnimation(
-                Animation.easeInOut(duration: 48)
-                    .repeatForever(autoreverses: false)
-            ) {
-                offset = 2.0
-            }
+        ZStack {
+            // Flow-1: Top, teal, drifts right
+            FlowBand(
+                size: size,
+                color: Color(red: 100/255, green: 220/255, blue: 220/255).opacity(0.28),
+                topPosition: 0.22,
+                height: 0.16,
+                blur: 39,
+                duration: 48,
+                delay: 2,
+                direction: .right
+            )
+
+            // Flow-2: Upper middle, teal lighter, drifts right
+            FlowBand(
+                size: size,
+                color: Color(red: 100/255, green: 220/255, blue: 220/255).opacity(0.22),
+                topPosition: 0.35,
+                height: 0.14,
+                blur: 42,
+                duration: 37,
+                delay: 11,
+                direction: .right
+            )
+
+            // Flow-3: Lower middle, indigo, drifts left
+            FlowBand(
+                size: size,
+                color: Color(red: 100/255, green: 100/255, blue: 240/255).opacity(0.29),
+                bottomPosition: 0.25,
+                height: 0.18,
+                blur: 39,
+                duration: 54,
+                delay: 5,
+                direction: .left
+            )
+
+            // Flow-4: Bottom, indigo lighter, drifts left
+            FlowBand(
+                size: size,
+                color: Color(red: 100/255, green: 100/255, blue: 240/255).opacity(0.23),
+                bottomPosition: 0.38,
+                height: 0.15,
+                blur: 44,
+                duration: 41,
+                delay: 17,
+                direction: .left
+            )
+        }
+    }
+}
+
+enum FlowDirection {
+    case left, right
+}
+
+struct FlowBand: View {
+    let size: CGSize
+    let color: Color
+    var topPosition: CGFloat? = nil
+    var bottomPosition: CGFloat? = nil
+    let height: CGFloat
+    let blur: CGFloat
+    let duration: Double
+    let delay: Double
+    let direction: FlowDirection
+
+    @State private var startTime = Date()
+
+    var body: some View {
+        TimelineView(.animation) { timeline in
+            let elapsed = timeline.date.timeIntervalSince(startTime)
+            let adjustedTime = max(0, elapsed - delay)
+            let progress = adjustedTime.truncatingRemainder(dividingBy: duration) / duration
+
+            let offset: CGFloat = direction == .right ?
+                -1.0 + (progress * 3.0) :  // Right: -1 to 2
+                1.0 - (progress * 3.0)     // Left: 1 to -2
+
+            let opacity: Double = {
+                if elapsed < delay {
+                    return 0
+                } else if progress < 0.05 {
+                    return progress / 0.05
+                } else if progress > 0.75 {
+                    return 1.0 - ((progress - 0.75) / 0.25)
+                } else {
+                    return 1.0
+                }
+            }()
+
+            LinearGradient(
+                gradient: Gradient(stops: [
+                    .init(color: Color.clear, location: 0),
+                    .init(color: color, location: 0.5),
+                    .init(color: Color.clear, location: 1.0)
+                ]),
+                startPoint: .leading,
+                endPoint: .trailing
+            )
+            .frame(width: size.width, height: size.height * height)
+            .blur(radius: blur)
+            .opacity(opacity)
+            .offset(
+                x: size.width * offset,
+                y: topPosition != nil ? size.height * topPosition! : -(size.height * bottomPosition!)
+            )
+        }
+    }
+}
+
+// MARK: - Particles (All 3)
+
+struct ParticlesView: View {
+    let size: CGSize
+
+    var body: some View {
+        ZStack {
+            // Particle 1: Teal
+            Particle(
+                size: size,
+                color: Color(red: 100/255, green: 220/255, blue: 220/255).opacity(0.45),
+                bottomPosition: 0.15,
+                leftPosition: 0.12,
+                width: 0.10,
+                height: 0.05,
+                driftDuration: 12,
+                driftDelay: 0,
+                twinkleDuration: 5,
+                twinkleDelay: 0
+            )
+
+            // Particle 2: Yellow
+            Particle(
+                size: size,
+                color: Color(red: 255/255, green: 200/255, blue: 80/255).opacity(0.45),
+                bottomPosition: 0.20,
+                leftPosition: 0.18,
+                width: 0.09,
+                height: 0.045,
+                driftDuration: 14,
+                driftDelay: 3,
+                twinkleDuration: 4.5,
+                twinkleDelay: 1
+            )
+
+            // Particle 3: Indigo
+            Particle(
+                size: size,
+                color: Color(red: 100/255, green: 100/255, blue: 240/255).opacity(0.45),
+                bottomPosition: 0.25,
+                leftPosition: 0.25,
+                width: 0.11,
+                height: 0.055,
+                driftDuration: 13,
+                driftDelay: 6,
+                twinkleDuration: 5.5,
+                twinkleDelay: 2
+            )
+        }
+    }
+}
+
+struct Particle: View {
+    let size: CGSize
+    let color: Color
+    let bottomPosition: CGFloat
+    let leftPosition: CGFloat
+    let width: CGFloat
+    let height: CGFloat
+    let driftDuration: Double
+    let driftDelay: Double
+    let twinkleDuration: Double
+    let twinkleDelay: Double
+
+    @State private var startTime = Date()
+
+    var body: some View {
+        TimelineView(.animation) { timeline in
+            let elapsed = timeline.date.timeIntervalSince(startTime)
+
+            // Drift animation (diagonal up-right: 0,0 -> 80%, -180%)
+            let driftElapsed = max(0, elapsed - driftDelay)
+            let driftProgress = driftElapsed.truncatingRemainder(dividingBy: driftDuration) / driftDuration
+            let xOffset = size.width * width * 0.8 * driftProgress
+            let yOffset = -size.height * height * 1.8 * driftProgress
+
+            // Particle fade (0.2 -> 0.8 -> 0.7 -> 0)
+            let fadeOpacity: Double = {
+                if elapsed < driftDelay {
+                    return 0
+                }
+                if driftProgress < 0.3 {
+                    return 0.2 + (0.6 * (driftProgress / 0.3))
+                } else if driftProgress < 0.7 {
+                    return 0.8 - (0.1 * ((driftProgress - 0.3) / 0.4))
+                } else {
+                    return 0.7 * (1.0 - ((driftProgress - 0.7) / 0.3))
+                }
+            }()
+
+            // Twinkle animation (0.3 -> 0.9 -> 0.3)
+            let twinkleElapsed = max(0, elapsed - twinkleDelay)
+            let twinkleProgress = twinkleElapsed.truncatingRemainder(dividingBy: twinkleDuration) / twinkleDuration
+            let twinkleOpacity: Double = {
+                if elapsed < twinkleDelay {
+                    return 0.3
+                }
+                if twinkleProgress < 0.5 {
+                    return 0.3 + (0.6 * (twinkleProgress / 0.5))
+                } else {
+                    return 0.9 - (0.6 * ((twinkleProgress - 0.5) / 0.5))
+                }
+            }()
+
+            // Combined opacity
+            let finalOpacity = fadeOpacity * twinkleOpacity
+
+            Circle()
+                .fill(
+                    RadialGradient(
+                        gradient: Gradient(stops: [
+                            .init(color: color, location: 0),
+                            .init(color: Color.clear, location: 1.0)
+                        ]),
+                        center: .center,
+                        startRadius: 0,
+                        endRadius: size.width * width * 0.5
+                    )
+                )
+                .frame(width: size.width * width, height: size.height * height)
+                .blur(radius: 12)
+                .opacity(finalOpacity)
+                .offset(x: xOffset, y: yOffset)
+                .position(
+                    x: size.width * leftPosition,
+                    y: size.height * (1 - bottomPosition)
+                )
         }
     }
 }
