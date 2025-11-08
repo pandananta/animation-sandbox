@@ -107,8 +107,8 @@ struct FlowBandsView: View {
                 size: size,
                 color: Color(red: 100/255, green: 220/255, blue: 220/255).opacity(0.2261),
                 topPosition: 0.22,
-                height: 0.08,
-                blur: 39,
+                height: 0.06,
+                blur: 55,
                 duration: 72,
                 delay: 15,
                 direction: .right
@@ -119,8 +119,8 @@ struct FlowBandsView: View {
                 size: size,
                 color: Color(red: 100/255, green: 220/255, blue: 220/255).opacity(0.17765),
                 topPosition: 0.35,
-                height: 0.07,
-                blur: 42,
+                height: 0.0525,
+                blur: 60,
                 duration: 56,
                 delay: 35,
                 direction: .right
@@ -131,8 +131,8 @@ struct FlowBandsView: View {
                 size: size,
                 color: Color(red: 100/255, green: 100/255, blue: 240/255).opacity(0.2465),
                 bottomPosition: 0.25,
-                height: 0.18,
-                blur: 39,
+                height: 0.135,
+                blur: 55,
                 duration: 81,
                 delay: 0,
                 direction: .left
@@ -143,8 +143,8 @@ struct FlowBandsView: View {
                 size: size,
                 color: Color(red: 100/255, green: 100/255, blue: 240/255).opacity(0.1955),
                 bottomPosition: 0.38,
-                height: 0.15,
-                blur: 44,
+                height: 0.1125,
+                blur: 62,
                 duration: 62,
                 delay: 27,
                 direction: .left
@@ -195,8 +195,8 @@ struct FlowBand: View {
             LinearGradient(
                 gradient: Gradient(stops: [
                     .init(color: Color.clear, location: 0),
-                    .init(color: color, location: 0.5),
-                    .init(color: Color.clear, location: 1.0)
+                    .init(color: color, location: 0.35),
+                    .init(color: Color.clear, location: 0.65)
                 ]),
                 startPoint: .leading,
                 endPoint: .trailing
