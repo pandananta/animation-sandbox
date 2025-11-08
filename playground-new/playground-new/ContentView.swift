@@ -44,10 +44,6 @@ struct HeartChakraTestView: View {
 
             // Heart (static for now)
             HeartStaticView(size: size)
-
-            // FPS Counter
-            FPSCounterView()
-                .position(x: size.width - 50, y: 50)
         }
         .opacity(sceneOpacity)
         .onAppear {
@@ -400,7 +396,7 @@ struct Particle: View {
                 }
             }()
 
-            // Twinkle animation (0.3 -> 0.9 -> 0.3)
+            // Twinkle animation (0.3 -> 0.65 -> 0.3) - reduced peak intensity
             let twinkleElapsed = max(0, elapsed - twinkleDelay)
             let twinkleProgress = twinkleElapsed.truncatingRemainder(dividingBy: twinkleDuration) / twinkleDuration
             let twinkleOpacity: Double = {
@@ -408,9 +404,9 @@ struct Particle: View {
                     return 0.3
                 }
                 if twinkleProgress < 0.5 {
-                    return 0.3 + (0.6 * (twinkleProgress / 0.5))
+                    return 0.3 + (0.35 * (twinkleProgress / 0.5))
                 } else {
-                    return 0.9 - (0.6 * ((twinkleProgress - 0.5) / 0.5))
+                    return 0.65 - (0.35 * ((twinkleProgress - 0.5) / 0.5))
                 }
             }()
 
