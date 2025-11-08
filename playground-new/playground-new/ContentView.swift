@@ -667,14 +667,17 @@ struct PulseEchoView: View {
             let cycle = elapsed.truncatingRemainder(dividingBy: 2.5)
             let progress = CGFloat(cycle / 2.5)
 
+            // Interpolate colors from heart (yellow-pink) to magenta as ring expands
+            let ringColors = getRingColors(progress: progress)
+
             Ellipse()
                 .fill(
                     RadialGradient(
                         gradient: Gradient(stops: [
                             .init(color: Color.clear, location: 0),
                             .init(color: Color.clear, location: 0.32),
-                            .init(color: Color(red: 230/255, green: 50/255, blue: 140/255).opacity(0.9), location: 0.4),
-                            .init(color: Color(red: 210/255, green: 40/255, blue: 130/255).opacity(0.7), location: 0.46),
+                            .init(color: ringColors.0.opacity(0.9), location: 0.4),
+                            .init(color: ringColors.1.opacity(0.7), location: 0.46),
                             .init(color: Color.clear, location: 0.52)
                         ]),
                         center: .center,
@@ -702,76 +705,125 @@ struct PulseEchoView: View {
             return Double(0.7 * (1 - (progress - 0.15) / 0.85))
         }
     }
+
+    func getRingColors(progress: CGFloat) -> (Color, Color) {
+        // Heart colors (at start)
+        let heartYellow = Color(red: 1.0, green: 230/255, blue: 120/255)
+        let heartPink = Color(red: 1.0, green: 100/255, blue: 180/255)
+
+        // Magenta colors (at end)
+        let magenta1 = Color(red: 230/255, green: 50/255, blue: 140/255)
+        let magenta2 = Color(red: 210/255, green: 40/255, blue: 130/255)
+
+        // Transition happens over first 30% of expansion
+        let colorProgress = min(progress / 0.3, 1.0)
+
+        let color1 = interpolateRingColor(from: heartYellow, to: magenta1, progress: Double(colorProgress))
+        let color2 = interpolateRingColor(from: heartPink, to: magenta2, progress: Double(colorProgress))
+
+        return (color1, color2)
+    }
+
+    func interpolateRingColor(from: Color, to: Color, progress: Double) -> Color {
+        let fromComponents = UIColor(from).cgColor.components ?? [0, 0, 0, 1]
+        let toComponents = UIColor(to).cgColor.components ?? [0, 0, 0, 1]
+
+        let r = fromComponents[0] + (toComponents[0] - fromComponents[0]) * progress
+        let g = fromComponents[1] + (toComponents[1] - fromComponents[1]) * progress
+        let b = fromComponents[2] + (toComponents[2] - fromComponents[2]) * progress
+
+        return Color(red: r, green: g, blue: b)
+    }
 }
 
 // MARK: - Heart Shape and Glow
 
 struct HeartStaticView: View {
     let size: CGSize
+    @State private var startTime = Date()
 
     var body: some View {
-        ZStack {
-            // Heart glow (background)
-            Ellipse()
-                .fill(
-                    RadialGradient(
-                        gradient: Gradient(stops: [
-                            .init(color: Color(red: 1.0, green: 230/255, blue: 120/255).opacity(0.6), location: 0),
-                            .init(color: Color(red: 1.0, green: 100/255, blue: 180/255).opacity(0.4), location: 0.6),
-                            .init(color: Color.clear, location: 0.9)
-                        ]),
-                        center: .center,
-                        startRadius: 0,
-                        endRadius: size.width * 0.2
-                    )
-                )
-                .frame(width: size.width * 0.4, height: size.height * 0.2)
-                .blur(radius: 20)
-                .position(x: size.width * 0.5, y: size.height * 0.5)
+        TimelineView(.animation) { timeline in
+            let elapsed = timeline.date.timeIntervalSince(startTime)
+            let cycle = elapsed.truncatingRemainder(dividingBy: 2.5)
+            let progress = CGFloat(cycle / 2.5)
 
-            // Subtle heart hint (two lobes with visible dip between)
+            // Calculate pulse scale (1.0 -> 1.15 at 10% -> back to 1.0)
+            let pulseScale: CGFloat = {
+                if progress < 0.1 {
+                    // Rising to peak (0% to 10%)
+                    return 1.0 + (0.15 * (progress / 0.1))
+                } else {
+                    // Falling from peak (10% to 100%)
+                    return 1.15 - (0.15 * ((progress - 0.1) / 0.9))
+                }
+            }()
+
             ZStack {
-                // Left lobe
-                Circle()
+                // Heart glow (background) - NOW PULSING
+                Ellipse()
                     .fill(
                         RadialGradient(
                             gradient: Gradient(stops: [
-                                .init(color: Color(red: 1.0, green: 230/255, blue: 120/255).opacity(0.35), location: 0),
-                                .init(color: Color(red: 1.0, green: 100/255, blue: 180/255).opacity(0.18), location: 0.6),
-                                .init(color: Color.clear, location: 1.0)
+                                .init(color: Color(red: 1.0, green: 230/255, blue: 120/255).opacity(0.6), location: 0),
+                                .init(color: Color(red: 1.0, green: 100/255, blue: 180/255).opacity(0.4), location: 0.6),
+                                .init(color: Color.clear, location: 0.9)
                             ]),
-                            center: UnitPoint(x: 0.3, y: 0.4),
+                            center: .center,
                             startRadius: 0,
-                            endRadius: size.width * 0.08
+                            endRadius: size.width * 0.2
                         )
                     )
-                    .frame(width: size.width * 0.16, height: size.height * 0.128)
-                    .blur(radius: 10)
-                    .offset(x: -size.width * 0.035, y: -size.height * 0.015)
+                    .frame(width: size.width * 0.4, height: size.height * 0.2)
+                    .blur(radius: 20)
+                    .scaleEffect(pulseScale)
+                    .position(x: size.width * 0.5, y: size.height * 0.5)
 
-                // Right lobe
-                Circle()
-                    .fill(
-                        RadialGradient(
-                            gradient: Gradient(stops: [
-                                .init(color: Color(red: 1.0, green: 230/255, blue: 120/255).opacity(0.35), location: 0),
-                                .init(color: Color(red: 1.0, green: 100/255, blue: 180/255).opacity(0.18), location: 0.6),
-                                .init(color: Color.clear, location: 1.0)
-                            ]),
-                            center: UnitPoint(x: 0.7, y: 0.4),
-                            startRadius: 0,
-                            endRadius: size.width * 0.08
+                // Subtle heart hint (two lobes with visible dip between)
+                ZStack {
+                    // Left lobe
+                    Circle()
+                        .fill(
+                            RadialGradient(
+                                gradient: Gradient(stops: [
+                                    .init(color: Color(red: 1.0, green: 230/255, blue: 120/255).opacity(0.35), location: 0),
+                                    .init(color: Color(red: 1.0, green: 100/255, blue: 180/255).opacity(0.18), location: 0.6),
+                                    .init(color: Color.clear, location: 1.0)
+                                ]),
+                                center: UnitPoint(x: 0.3, y: 0.4),
+                                startRadius: 0,
+                                endRadius: size.width * 0.08
+                            )
                         )
-                    )
-                    .frame(width: size.width * 0.16, height: size.height * 0.128)
-                    .blur(radius: 10)
-                    .offset(x: size.width * 0.035, y: -size.height * 0.015)
-            }
-            .position(x: size.width * 0.5, y: size.height * 0.5)
+                        .frame(width: size.width * 0.16, height: size.height * 0.128)
+                        .blur(radius: 10)
+                        .offset(x: -size.width * 0.035, y: -size.height * 0.015)
 
-            // Heart center - PULSING SHARP LIGHT
-            HeartCenterPulsingView(size: size)
+                    // Right lobe
+                    Circle()
+                        .fill(
+                            RadialGradient(
+                                gradient: Gradient(stops: [
+                                    .init(color: Color(red: 1.0, green: 230/255, blue: 120/255).opacity(0.35), location: 0),
+                                    .init(color: Color(red: 1.0, green: 100/255, blue: 180/255).opacity(0.18), location: 0.6),
+                                    .init(color: Color.clear, location: 1.0)
+                                ]),
+                                center: UnitPoint(x: 0.7, y: 0.4),
+                                startRadius: 0,
+                                endRadius: size.width * 0.08
+                            )
+                        )
+                        .frame(width: size.width * 0.16, height: size.height * 0.128)
+                        .blur(radius: 10)
+                        .offset(x: size.width * 0.035, y: -size.height * 0.015)
+                }
+                .scaleEffect(pulseScale)
                 .position(x: size.width * 0.5, y: size.height * 0.5)
+
+                // Heart center - PULSING SHARP LIGHT
+                HeartCenterPulsingView(size: size)
+                    .position(x: size.width * 0.5, y: size.height * 0.5)
+            }
         }
     }
 }
