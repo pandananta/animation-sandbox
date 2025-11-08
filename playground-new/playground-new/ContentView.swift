@@ -659,37 +659,35 @@ struct DiagonalMistView: View {
 
 struct PulseEchoView: View {
     let size: CGSize
-    @State private var animationProgress: CGFloat = 0
+    @State private var startTime = Date()
 
     var body: some View {
-        Ellipse()
-            .fill(
-                RadialGradient(
-                    gradient: Gradient(stops: [
-                        .init(color: Color.clear, location: 0),
-                        .init(color: Color.clear, location: 0.32),
-                        .init(color: Color(red: 230/255, green: 50/255, blue: 140/255).opacity(0.9), location: 0.4),
-                        .init(color: Color(red: 210/255, green: 40/255, blue: 130/255).opacity(0.7), location: 0.46),
-                        .init(color: Color.clear, location: 0.52)
-                    ]),
-                    center: .center,
-                    startRadius: 0,
-                    endRadius: size.width * 0.14
+        TimelineView(.animation) { timeline in
+            let elapsed = timeline.date.timeIntervalSince(startTime)
+            let cycle = elapsed.truncatingRemainder(dividingBy: 2.5)
+            let progress = CGFloat(cycle / 2.5)
+
+            Ellipse()
+                .fill(
+                    RadialGradient(
+                        gradient: Gradient(stops: [
+                            .init(color: Color.clear, location: 0),
+                            .init(color: Color.clear, location: 0.32),
+                            .init(color: Color(red: 230/255, green: 50/255, blue: 140/255).opacity(0.9), location: 0.4),
+                            .init(color: Color(red: 210/255, green: 40/255, blue: 130/255).opacity(0.7), location: 0.46),
+                            .init(color: Color.clear, location: 0.52)
+                        ]),
+                        center: .center,
+                        startRadius: 0,
+                        endRadius: size.width * 0.14
+                    )
                 )
-            )
-            .frame(width: size.width * 0.28, height: size.height * 0.14)
-            .blur(radius: 2)
-            .scaleEffect(0.6 + (animationProgress * 9.4))  // 0.6 to 10
-            .opacity(calculateOpacity(progress: animationProgress))
-            .position(x: size.width * 0.5, y: size.height * 0.5)
-            .onAppear {
-                withAnimation(
-                    Animation.easeOut(duration: 2.5)
-                        .repeatForever(autoreverses: false)
-                ) {
-                    animationProgress = 1.0
-                }
-            }
+                .frame(width: size.width * 0.28, height: size.height * 0.14)
+                .blur(radius: 2)
+                .scaleEffect(0.6 + (progress * 9.4))  // 0.6 to 10
+                .opacity(calculateOpacity(progress: progress))
+                .position(x: size.width * 0.5, y: size.height * 0.5)
+        }
     }
 
     func calculateOpacity(progress: CGFloat) -> Double {
