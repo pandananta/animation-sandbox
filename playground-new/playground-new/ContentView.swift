@@ -8,11 +8,26 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var isPlaying = true  // Animation starts playing
+
     var body: some View {
         GeometryReader { geometry in
-            HeartChakraTestView(size: geometry.size)
-                .frame(width: geometry.size.width, height: geometry.size.height)
-                .background(Color.black)
+            ZStack {
+                HeartChakraTestView(size: geometry.size, isPlaying: $isPlaying)
+                    .frame(width: geometry.size.width, height: geometry.size.height)
+                    .background(Color.black)
+
+                // Play/pause button centered in bottom 20%
+                VStack {
+                    Spacer()
+                    Button(action: { isPlaying.toggle() }) {
+                        Image(systemName: isPlaying ? "pause.circle.fill" : "play.circle.fill")
+                            .font(.system(size: 60))
+                            .foregroundColor(.white.opacity(0.8))
+                    }
+                    .padding(.bottom, geometry.size.height * 0.1)  // Center in bottom 20%
+                }
+            }
         }
         .ignoresSafeArea()
     }
@@ -23,6 +38,7 @@ struct ContentView: View {
 
 struct HeartChakraTestView: View {
     let size: CGSize
+    @Binding var isPlaying: Bool
     @State private var sceneOpacity: Double = 0
 
     var body: some View {
@@ -30,20 +46,20 @@ struct HeartChakraTestView: View {
             // Background gradient
             BackgroundGradientView()
 
-            // All 4 flow bands with individual timing
+            // All 4 flow bands with individual timing (always loop)
             FlowBandsView(size: size)
 
-            // Diagonal mist with rotation and 50px blur
+            // Diagonal mist with rotation and 50px blur (always loop)
             DiagonalMistView(size: size)
 
-            // 3 Floating particles
+            // 3 Floating particles (always loop)
             ParticlesView(size: size)
 
-            // Pulse echo - expanding ring
-            PulseEchoView(size: size)
+            // Pulse echo - expanding ring (controlled by play/pause)
+            PulseEchoView(size: size, isPlaying: $isPlaying)
 
-            // Heart (static for now)
-            HeartStaticView(size: size)
+            // Heart (controlled by play/pause)
+            HeartStaticView(size: size, isPlaying: $isPlaying)
                 .drawingGroup()
         }
         .opacity(sceneOpacity)
@@ -629,7 +645,9 @@ struct DiagonalMistView: View {
 
 struct PulseEchoView: View {
     let size: CGSize
+    @Binding var isPlaying: Bool
     @State private var startTime = Date()
+    @State private var shouldAnimate = true
 
     var body: some View {
         TimelineView(.animation) { timeline in
@@ -637,12 +655,26 @@ struct PulseEchoView: View {
             let cycle = elapsed.truncatingRemainder(dividingBy: 3.5)
             let overallProgress = CGFloat(cycle / 3.5)
 
+            // Check if we should start a new cycle
+            if !isPlaying && overallProgress < 0.05 && shouldAnimate {
+                // Complete current cycle, then stop
+                DispatchQueue.main.async {
+                    shouldAnimate = false
+                }
+            } else if isPlaying && !shouldAnimate {
+                // Restart animation when play is pressed
+                DispatchQueue.main.async {
+                    startTime = timeline.date
+                    shouldAnimate = true
+                }
+            }
+
             // Delay ring start until heart reaches peak brightness (10% of cycle)
             // Map 10%-100% of overall cycle to 0%-100% of ring expansion
             let ringDelay: CGFloat = 0.1
 
-            if overallProgress < ringDelay {
-                // Don't show ring yet - waiting for heart to reach peak
+            if !shouldAnimate || overallProgress < ringDelay {
+                // Don't show ring yet - waiting for heart to reach peak or animation is stopped
                 Color.clear
                     .frame(width: 0, height: 0)
             } else {
@@ -689,6 +721,12 @@ struct PulseEchoView: View {
                     .opacity(calculateOpacity(progress: progress))
                     .position(x: size.width * 0.5, y: size.height * 0.3)
                 }
+            }
+        }
+        .onChange(of: isPlaying) { newValue in
+            if newValue {
+                // Reset timer when play is pressed
+                startTime = Date()
             }
         }
     }
@@ -767,7 +805,9 @@ struct PulseEchoView: View {
 
 struct HeartStaticView: View {
     let size: CGSize
+    @Binding var isPlaying: Bool
     @State private var startTime = Date()
+    @State private var shouldAnimate = true
 
     var body: some View {
         TimelineView(.animation) { timeline in
@@ -775,9 +815,26 @@ struct HeartStaticView: View {
             let cycle = elapsed.truncatingRemainder(dividingBy: 3.5)
             let progress = CGFloat(cycle / 3.5)
 
+            // Check if we should start a new cycle
+            if !isPlaying && progress < 0.05 && shouldAnimate {
+                // Complete current cycle, then stop
+                DispatchQueue.main.async {
+                    shouldAnimate = false
+                }
+            } else if isPlaying && !shouldAnimate {
+                // Restart animation when play is pressed
+                DispatchQueue.main.async {
+                    startTime = timeline.date
+                    shouldAnimate = true
+                }
+            }
+
             // Calculate pulse scale with pause at peak and slower retraction
             // 0-10%: Rise to peak, 10-30%: Hold at peak, 30-100%: Slowly fall back
             let pulseScale: CGFloat = {
+                if !shouldAnimate {
+                    return 1.0  // Resting state when paused
+                }
                 if progress < 0.1 {
                     // Rising to peak (0% to 10%)
                     return 1.0 + (0.15 * (progress / 0.1))
@@ -852,8 +909,14 @@ struct HeartStaticView: View {
                 .position(x: size.width * 0.5, y: size.height * 0.3)
 
                 // Heart center - PULSING SHARP LIGHT
-                HeartCenterPulsingView(size: size)
+                HeartCenterPulsingView(size: size, isPlaying: $isPlaying)
                     .position(x: size.width * 0.5, y: size.height * 0.3)
+            }
+        }
+        .onChange(of: isPlaying) { newValue in
+            if newValue {
+                // Reset timer when play is pressed
+                startTime = Date()
             }
         }
     }
@@ -864,13 +927,29 @@ struct HeartStaticView: View {
 
 struct HeartCenterPulsingView: View {
     let size: CGSize
+    @Binding var isPlaying: Bool
     @State private var startTime = Date()
+    @State private var shouldAnimate = true
 
     var body: some View {
         TimelineView(.animation) { timeline in
             let elapsed = timeline.date.timeIntervalSince(startTime)
             let cycle = elapsed.truncatingRemainder(dividingBy: 3.5) // 3.5 second cycle
             let progress = CGFloat(cycle / 3.5) // 0 to 1
+
+            // Check if we should start a new cycle
+            if !isPlaying && progress < 0.05 && shouldAnimate {
+                // Complete current cycle, then stop
+                DispatchQueue.main.async {
+                    shouldAnimate = false
+                }
+            } else if isPlaying && !shouldAnimate {
+                // Restart animation when play is pressed
+                DispatchQueue.main.async {
+                    startTime = timeline.date
+                    shouldAnimate = true
+                }
+            }
 
             ZStack {
                 // Outer glow layer (soft)
@@ -888,7 +967,7 @@ struct HeartCenterPulsingView: View {
                         )
                     )
                     .frame(width: size.width * 0.12, height: size.height * 0.06)
-                    .blur(radius: interpolate(dull: 8, bright: 15, progress: progress))
+                    .blur(radius: interpolate(dull: 8, bright: 15, progress: progress, shouldAnimate: shouldAnimate))
 
                 // Core light (SHARP - minimal blur)
                 Circle()
@@ -906,28 +985,38 @@ struct HeartCenterPulsingView: View {
                         )
                     )
                     .frame(
-                        width: size.width * interpolate(dull: 0.08, bright: 0.15, progress: progress),
-                        height: size.height * interpolate(dull: 0.04, bright: 0.075, progress: progress)
+                        width: size.width * interpolate(dull: 0.08, bright: 0.15, progress: progress, shouldAnimate: shouldAnimate),
+                        height: size.height * interpolate(dull: 0.04, bright: 0.075, progress: progress, shouldAnimate: shouldAnimate)
                     )
-                    .blur(radius: interpolate(dull: 1, bright: 5, progress: progress))
-                    .brightness(interpolate(dull: 0.2, bright: 0.5, progress: progress))
+                    .blur(radius: interpolate(dull: 1, bright: 5, progress: progress, shouldAnimate: shouldAnimate))
+                    .brightness(interpolate(dull: 0.2, bright: 0.5, progress: progress, shouldAnimate: shouldAnimate))
 
                 // Bright center spot (NO blur - pure white point)
                 Circle()
                     .fill(Color.white)
                     .frame(
-                        width: size.width * interpolate(dull: 0.03, bright: 0.05, progress: progress),
-                        height: size.height * interpolate(dull: 0.015, bright: 0.025, progress: progress)
+                        width: size.width * interpolate(dull: 0.03, bright: 0.05, progress: progress, shouldAnimate: shouldAnimate),
+                        height: size.height * interpolate(dull: 0.015, bright: 0.025, progress: progress, shouldAnimate: shouldAnimate)
                     )
-                    .shadow(color: Color.white, radius: interpolate(dull: 15, bright: 25, progress: progress), x: 0, y: 0)
-                    .shadow(color: Color.white, radius: interpolate(dull: 8, bright: 15, progress: progress), x: 0, y: 0)
+                    .shadow(color: Color.white, radius: interpolate(dull: 15, bright: 25, progress: progress, shouldAnimate: shouldAnimate), x: 0, y: 0)
+                    .shadow(color: Color.white, radius: interpolate(dull: 8, bright: 15, progress: progress, shouldAnimate: shouldAnimate), x: 0, y: 0)
                     .blendMode(.plusLighter)
+            }
+        }
+        .onChange(of: isPlaying) { newValue in
+            if newValue {
+                // Reset timer when play is pressed
+                startTime = Date()
             }
         }
     }
 
     // Interpolate between dull and bright values based on pulse progress
-    func interpolate(dull: CGFloat, bright: CGFloat, progress: CGFloat) -> CGFloat {
+    func interpolate(dull: CGFloat, bright: CGFloat, progress: CGFloat, shouldAnimate: Bool = true) -> CGFloat {
+        if !shouldAnimate {
+            return dull  // Return dull (resting state) when not animating
+        }
+
         // Create a pulse curve: 0 -> peak at 10% -> back to 0
         let pulseIntensity: CGFloat
         if progress < 0.1 {
