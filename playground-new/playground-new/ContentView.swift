@@ -681,8 +681,17 @@ struct PulseEchoView: View {
                 // Apply easing to expansion - fast at first (matching pulse), then slow down
                 let easedProgress = easeOutCubic(progress)
 
+                // Calculate heart's current pulse scale to make ring "breathe" with it
+                let heartPulseScale = calculateHeartPulseScale(overallProgress: overallProgress)
+
                 // Interpolate colors from heart (yellow-pink) to magenta as ring expands
                 let ringColors = getRingColors(progress: progress)
+
+                // Base expansion scale (1.15 to 6)
+                let baseScale = 1.15 + (easedProgress * 4.85)
+
+                // Apply heart pulse breathing on top of base expansion
+                let finalScale = baseScale * heartPulseScale
 
                 Ellipse()
                     .fill(
@@ -701,7 +710,7 @@ struct PulseEchoView: View {
                     )
                     .frame(width: size.width * 0.28, height: size.height * 0.14)
                     .blur(radius: 4)  // Softer than original but still distinct
-                    .scaleEffect(1.15 + (easedProgress * 4.85))  // 1.15 to 6 - smaller final size
+                    .scaleEffect(finalScale)
                     .opacity(calculateOpacity(progress: progress))
                     .position(x: size.width * 0.5, y: size.height * 0.5)
             }
@@ -712,6 +721,21 @@ struct PulseEchoView: View {
     func easeOutCubic(_ t: CGFloat) -> CGFloat {
         let p = 1 - t
         return 1 - (p * p * p)
+    }
+
+    // Calculate the heart's pulse scale at the current moment
+    // Same timing as HeartStaticView pulse
+    func calculateHeartPulseScale(overallProgress: CGFloat) -> CGFloat {
+        if overallProgress < 0.1 {
+            // Rising to peak (0% to 10%)
+            return 1.0 + (0.15 * (overallProgress / 0.1))
+        } else if overallProgress < 0.3 {
+            // Hold at peak (10% to 30%)
+            return 1.15
+        } else {
+            // Slowly falling from peak (30% to 100%)
+            return 1.15 - (0.15 * ((overallProgress - 0.3) / 0.7))
+        }
     }
 
     func calculateOpacity(progress: CGFloat) -> Double {
