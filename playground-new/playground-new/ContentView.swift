@@ -110,7 +110,7 @@ struct FlowBandsView: View {
                 height: 0.08,
                 blur: 39,
                 duration: 72,
-                delay: 10,
+                delay: 15,
                 direction: .right
             )
 
@@ -122,7 +122,7 @@ struct FlowBandsView: View {
                 height: 0.07,
                 blur: 42,
                 duration: 56,
-                delay: 20,
+                delay: 35,
                 direction: .right
             )
 
@@ -146,7 +146,7 @@ struct FlowBandsView: View {
                 height: 0.15,
                 blur: 44,
                 duration: 62,
-                delay: 17,
+                delay: 27,
                 direction: .left
             )
         }
@@ -343,29 +343,37 @@ struct Particle: View {
     }
 }
 
-// MARK: - Diagonal Mist (PERFORMANCE TEST)
-// 50px blur with rotation - very expensive
+// MARK: - Diagonal Mist
+// 50px blur with rotation and color cycling
 
 struct DiagonalMistView: View {
     let size: CGSize
     @State private var rotation: Double = -15
     @State private var opacity: Double = 0.25
+    @State private var startTime = Date()
 
     var body: some View {
-        LinearGradient(
-            gradient: Gradient(stops: [
-                .init(color: Color(red: 100/255, green: 220/255, blue: 220/255).opacity(0.25), location: 0),
-                .init(color: Color(red: 100/255, green: 100/255, blue: 240/255).opacity(0.2), location: 0.6),
-                .init(color: Color.clear, location: 0.9)
-            ]),
-            startPoint: .topLeading,
-            endPoint: .bottomTrailing
-        )
-        .frame(width: size.width * 0.8, height: size.height * 0.7)
-        .blur(radius: 50) // HEAVIEST BLUR - this is the real test
-        .rotationEffect(.degrees(rotation))
-        .opacity(opacity)
-        .position(x: size.width * 0.4, y: size.height * 0.55)
+        TimelineView(.animation) { timeline in
+            let elapsed = timeline.date.timeIntervalSince(startTime)
+            let colorCycle = elapsed.truncatingRemainder(dividingBy: 135) / 135
+
+            let colors = getColors(progress: colorCycle)
+
+            LinearGradient(
+                gradient: Gradient(stops: [
+                    .init(color: colors.0, location: 0),
+                    .init(color: colors.1, location: 0.6),
+                    .init(color: Color.clear, location: 0.9)
+                ]),
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+            .frame(width: size.width * 0.8, height: size.height * 0.7)
+            .blur(radius: 50)
+            .rotationEffect(.degrees(rotation))
+            .opacity(opacity)
+            .position(x: size.width * 0.4, y: size.height * 0.55)
+        }
         .onAppear {
             // Rotation animation
             withAnimation(
@@ -383,6 +391,67 @@ struct DiagonalMistView: View {
                 opacity = 0.35
             }
         }
+    }
+
+    func getColors(progress: Double) -> (Color, Color) {
+        // Color cycle: 0-30% teal→indigo, 30-50% blue→orange, 50-70% teal-cyan→indigo, 70-100% teal→indigo
+        if progress < 0.3 {
+            // Teal → Indigo
+            return (
+                Color(red: 100/255, green: 220/255, blue: 220/255).opacity(0.25),
+                Color(red: 100/255, green: 100/255, blue: 240/255).opacity(0.2)
+            )
+        } else if progress < 0.5 {
+            // Transition to Blue → Orange
+            let t = (progress - 0.3) / 0.2
+            let color1 = interpolateColor(
+                from: Color(red: 100/255, green: 220/255, blue: 220/255),
+                to: Color(red: 80/255, green: 120/255, blue: 255/255),
+                progress: t
+            ).opacity(0.25)
+            let color2 = interpolateColor(
+                from: Color(red: 100/255, green: 100/255, blue: 240/255),
+                to: Color(red: 255/255, green: 150/255, blue: 80/255),
+                progress: t
+            ).opacity(0.2)
+            return (color1, color2)
+        } else if progress < 0.7 {
+            // Transition to Teal-Cyan → Indigo
+            let t = (progress - 0.5) / 0.2
+            let color1 = interpolateColor(
+                from: Color(red: 80/255, green: 120/255, blue: 255/255),
+                to: Color(red: 80/255, green: 230/255, blue: 240/255),
+                progress: t
+            ).opacity(0.25)
+            let color2 = interpolateColor(
+                from: Color(red: 255/255, green: 150/255, blue: 80/255),
+                to: Color(red: 100/255, green: 100/255, blue: 240/255),
+                progress: t
+            ).opacity(0.2)
+            return (color1, color2)
+        } else {
+            // Transition back to Teal → Indigo
+            let t = (progress - 0.7) / 0.3
+            let color1 = interpolateColor(
+                from: Color(red: 80/255, green: 230/255, blue: 240/255),
+                to: Color(red: 100/255, green: 220/255, blue: 220/255),
+                progress: t
+            ).opacity(0.25)
+            let color2 = Color(red: 100/255, green: 100/255, blue: 240/255).opacity(0.2)
+            return (color1, color2)
+        }
+    }
+
+    func interpolateColor(from: Color, to: Color, progress: Double) -> Color {
+        // Simple RGB interpolation (not perfect but works for our case)
+        let fromComponents = UIColor(from).cgColor.components ?? [0, 0, 0, 1]
+        let toComponents = UIColor(to).cgColor.components ?? [0, 0, 0, 1]
+
+        let r = fromComponents[0] + (toComponents[0] - fromComponents[0]) * progress
+        let g = fromComponents[1] + (toComponents[1] - fromComponents[1]) * progress
+        let b = fromComponents[2] + (toComponents[2] - fromComponents[2]) * progress
+
+        return Color(red: r, green: g, blue: b)
     }
 }
 
