@@ -684,7 +684,7 @@ struct PulseEchoView: View {
                 )
                 .frame(width: size.width * 0.28, height: size.height * 0.14)
                 .blur(radius: 2)
-                .scaleEffect(1.0 + (progress * 9.0))  // 1.0 to 10 - starts with heart pulse
+                .scaleEffect(0.15 + (progress * 9.85))  // 0.15 to 10 - starts from bright center spot
                 .opacity(calculateOpacity(progress: progress))
                 .position(x: size.width * 0.5, y: size.height * 0.5)
         }
