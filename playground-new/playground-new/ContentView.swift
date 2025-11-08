@@ -747,9 +747,12 @@ struct PulseEchoView: View {
         } else if progress < 0.15 {
             // 5% to 15%: stay at peak while heart pulse peaks
             baseOpacity = 0.7
+        } else if progress < 0.6 {
+            // 15% to 60%: fade out faster with nice taper
+            baseOpacity = Double(0.7 * (1 - (progress - 0.15) / 0.45))
         } else {
-            // 15% to 100%: fade out as ring expands away
-            baseOpacity = Double(0.7 * (1 - (progress - 0.15) / 0.85))
+            // After 60%: fully transparent
+            return 0
         }
 
         // Add subtle wave motion (shimmer) as ring expands
