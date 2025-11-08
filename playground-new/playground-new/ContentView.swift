@@ -706,9 +706,23 @@ struct PulseEchoView: View {
                 // Reset timer and restart animation when play is pressed
                 startTime = Date()
                 shouldAnimate = true
-            } else {
-                // Mark to stop after current cycle completes
-                shouldAnimate = false
+            }
+            // When paused: let current cycle complete, stop at beginning of next cycle
+        }
+        .task(id: isPlaying) {
+            if !isPlaying && shouldAnimate {
+                // Wait for cycle to complete (check every 50ms)
+                while !isPlaying && shouldAnimate {
+                    try? await Task.sleep(nanoseconds: 50_000_000)
+                    let elapsed = Date().timeIntervalSince(startTime)
+                    let cycle = elapsed.truncatingRemainder(dividingBy: 3.5)
+                    let progress = cycle / 3.5
+                    if progress < 0.05 {
+                        // We're at the start of a new cycle, stop now
+                        shouldAnimate = false
+                        break
+                    }
+                }
             }
         }
     }
@@ -886,9 +900,23 @@ struct HeartStaticView: View {
                 // Reset timer and restart animation when play is pressed
                 startTime = Date()
                 shouldAnimate = true
-            } else {
-                // Mark to stop after current cycle completes
-                shouldAnimate = false
+            }
+            // When paused: let current cycle complete, stop at beginning of next cycle
+        }
+        .task(id: isPlaying) {
+            if !isPlaying && shouldAnimate {
+                // Wait for cycle to complete (check every 50ms)
+                while !isPlaying && shouldAnimate {
+                    try? await Task.sleep(nanoseconds: 50_000_000)
+                    let elapsed = Date().timeIntervalSince(startTime)
+                    let cycle = elapsed.truncatingRemainder(dividingBy: 3.5)
+                    let progress = cycle / 3.5
+                    if progress < 0.05 {
+                        // We're at the start of a new cycle, stop now
+                        shouldAnimate = false
+                        break
+                    }
+                }
             }
         }
     }
@@ -966,9 +994,23 @@ struct HeartCenterPulsingView: View {
                 // Reset timer and restart animation when play is pressed
                 startTime = Date()
                 shouldAnimate = true
-            } else {
-                // Mark to stop after current cycle completes
-                shouldAnimate = false
+            }
+            // When paused: let current cycle complete, stop at beginning of next cycle
+        }
+        .task(id: isPlaying) {
+            if !isPlaying && shouldAnimate {
+                // Wait for cycle to complete (check every 50ms)
+                while !isPlaying && shouldAnimate {
+                    try? await Task.sleep(nanoseconds: 50_000_000)
+                    let elapsed = Date().timeIntervalSince(startTime)
+                    let cycle = elapsed.truncatingRemainder(dividingBy: 3.5)
+                    let progress = cycle / 3.5
+                    if progress < 0.05 {
+                        // We're at the start of a new cycle, stop now
+                        shouldAnimate = false
+                        break
+                    }
+                }
             }
         }
     }
