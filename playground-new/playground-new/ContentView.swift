@@ -507,26 +507,38 @@ struct PulseEchoView: View {
 
 struct HeartStaticView: View {
     let size: CGSize
+    @State private var startTime = Date()
 
     var body: some View {
         ZStack {
-            // Heart glow (background)
-            Ellipse()
-                .fill(
-                    RadialGradient(
-                        gradient: Gradient(stops: [
-                            .init(color: Color(red: 1.0, green: 230/255, blue: 120/255).opacity(0.6), location: 0),
-                            .init(color: Color(red: 1.0, green: 100/255, blue: 180/255).opacity(0.4), location: 0.6),
-                            .init(color: Color.clear, location: 0.9)
-                        ]),
-                        center: .center,
-                        startRadius: 0,
-                        endRadius: size.width * 0.2
+            // Heart glow (background) - PULSING
+            TimelineView(.animation) { timeline in
+                let elapsed = timeline.date.timeIntervalSince(startTime)
+                let cycle = elapsed.truncatingRemainder(dividingBy: 2.5)
+                let progress = CGFloat(cycle / 2.5)
+
+                let blur = interpolatePulse(dull: 20, bright: 24, progress: progress)
+                let glowOpacity = interpolatePulse(dull: 0.6, bright: 0.75, progress: progress)
+
+                Ellipse()
+                    .fill(
+                        RadialGradient(
+                            gradient: Gradient(stops: [
+                                .init(color: Color(red: 1.0, green: 230/255, blue: 120/255).opacity(0.6), location: 0),
+                                .init(color: Color(red: 1.0, green: 100/255, blue: 180/255).opacity(0.4), location: 0.6),
+                                .init(color: Color.clear, location: 0.9)
+                            ]),
+                            center: .center,
+                            startRadius: 0,
+                            endRadius: size.width * 0.2
+                        )
                     )
-                )
-                .frame(width: size.width * 0.4, height: size.height * 0.2)
-                .blur(radius: 20)
-                .position(x: size.width * 0.5, y: size.height * 0.5)
+                    .frame(width: size.width * 0.4, height: size.height * 0.2)
+                    .blur(radius: blur)
+                    .brightness(interpolatePulse(dull: 0, bright: 0.2, progress: progress))
+                    .opacity(glowOpacity)
+                    .position(x: size.width * 0.5, y: size.height * 0.5)
+            }
 
             // Subtle heart hint (two lobes with visible dip between)
             ZStack {
@@ -572,6 +584,19 @@ struct HeartStaticView: View {
             HeartCenterPulsingView(size: size)
                 .position(x: size.width * 0.5, y: size.height * 0.5)
         }
+    }
+
+    // Pulse interpolation function (same curve as heart center)
+    func interpolatePulse(dull: CGFloat, bright: CGFloat, progress: CGFloat) -> CGFloat {
+        let pulseIntensity: CGFloat
+        if progress < 0.1 {
+            // Rising to peak (0% to 10%)
+            pulseIntensity = progress / 0.1
+        } else {
+            // Falling from peak (10% to 100%)
+            pulseIntensity = 1.0 - ((progress - 0.1) / 0.9)
+        }
+        return dull + (bright - dull) * pulseIntensity
     }
 }
 
