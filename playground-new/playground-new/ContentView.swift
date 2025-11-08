@@ -8,38 +8,11 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var showTuning = false
-
     var body: some View {
         GeometryReader { geometry in
-            ZStack {
-                if showTuning {
-                    HeartCenterTuningView(size: geometry.size)
-                } else {
-                    HeartChakraTestView(size: geometry.size)
-                }
-
-                // Toggle button - moved to bottom for easier tapping
-                VStack {
-                    Spacer()
-                    HStack {
-                        Button(action: { showTuning.toggle() }) {
-                            Text(showTuning ? "Performance Test" : "Tuning Mode")
-                                .font(.system(size: 14, weight: .semibold))
-                                .padding(.horizontal, 16)
-                                .padding(.vertical, 12)
-                                .background(Color.blue)
-                                .foregroundColor(.white)
-                                .cornerRadius(12)
-                        }
-                        .padding(.leading, 20)
-                        .padding(.bottom, 30)
-                        Spacer()
-                    }
-                }
-            }
-            .frame(width: geometry.size.width, height: geometry.size.height)
-            .background(Color.black)
+            HeartChakraTestView(size: geometry.size)
+                .frame(width: geometry.size.width, height: geometry.size.height)
+                .background(Color.black)
         }
         .ignoresSafeArea()
     }
@@ -770,15 +743,16 @@ struct PulseEchoView: View {
         let warmBlend1 = Color(red: 1.0, green: 180/255, blue: 130/255)  // Warm peachy-orange
         let warmBlend2 = Color(red: 1.0, green: 120/255, blue: 170/255)  // Warm coral-pink
 
-        // Magenta colors (at end)
-        let magenta1 = Color(red: 230/255, green: 50/255, blue: 140/255)
-        let magenta2 = Color(red: 210/255, green: 40/255, blue: 130/255)
+        // Mauve-rose colors (at end) - aligned with app color #a05788
+        // Less purple, more dusty rose/mauve
+        let mauve1 = Color(red: 200/255, green: 90/255, blue: 150/255)  // Dusty rose-mauve
+        let mauve2 = Color(red: 180/255, green: 80/255, blue: 135/255)  // Deeper mauve-rose
 
         // Transition happens over first 30% of expansion
         let colorProgress = min(progress / 0.3, 1.0)
 
-        let color1 = interpolateRingColor(from: warmBlend1, to: magenta1, progress: Double(colorProgress))
-        let color2 = interpolateRingColor(from: warmBlend2, to: magenta2, progress: Double(colorProgress))
+        let color1 = interpolateRingColor(from: warmBlend1, to: mauve1, progress: Double(colorProgress))
+        let color2 = interpolateRingColor(from: warmBlend2, to: mauve2, progress: Double(colorProgress))
 
         return (color1, color2)
     }
