@@ -675,15 +675,13 @@ struct PulseEchoView: View {
 
             if !shouldAnimate || overallProgress < ringDelay {
                 // Don't show ring yet - waiting for heart to reach peak or animation is stopped
-                Color.clear
-                    .frame(width: 0, height: 0)
+                EmptyView()
             } else {
                 let progress = (overallProgress - ringDelay) / (1.0 - ringDelay)
 
                 // Skip rendering if ring is invisible (optimization)
                 if progress >= 0.6 {
-                    Color.clear
-                        .frame(width: 0, height: 0)
+                    EmptyView()
                 } else {
                     // Apply easing to expansion - fast at first (matching pulse), then slow down
                     let easedProgress = easeOutCubic(progress)
@@ -723,8 +721,8 @@ struct PulseEchoView: View {
                 }
             }
         }
-        .onChange(of: isPlaying) { newValue in
-            if newValue {
+        .onChange(of: isPlaying) {
+            if isPlaying {
                 // Reset timer when play is pressed
                 startTime = Date()
             }
@@ -913,8 +911,8 @@ struct HeartStaticView: View {
                     .position(x: size.width * 0.5, y: size.height * 0.3)
             }
         }
-        .onChange(of: isPlaying) { newValue in
-            if newValue {
+        .onChange(of: isPlaying) {
+            if isPlaying {
                 // Reset timer when play is pressed
                 startTime = Date()
             }
@@ -1003,8 +1001,8 @@ struct HeartCenterPulsingView: View {
                     .blendMode(.plusLighter)
             }
         }
-        .onChange(of: isPlaying) { newValue in
-            if newValue {
+        .onChange(of: isPlaying) {
+            if isPlaying {
                 // Reset timer when play is pressed
                 startTime = Date()
             }
