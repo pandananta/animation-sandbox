@@ -50,6 +50,7 @@ struct ContentView: View {
 
 struct HeartChakraTestView: View {
     let size: CGSize
+    @State private var sceneOpacity: Double = 0
 
     var body: some View {
         ZStack {
@@ -74,6 +75,12 @@ struct HeartChakraTestView: View {
             // FPS Counter
             FPSCounterView()
                 .position(x: size.width - 50, y: 50)
+        }
+        .opacity(sceneOpacity)
+        .onAppear {
+            withAnimation(.easeIn(duration: 2.0)) {
+                sceneOpacity = 1.0
+            }
         }
     }
 }
