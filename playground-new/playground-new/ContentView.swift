@@ -134,7 +134,7 @@ struct FlowBandsView: View {
             // Flow-1: Top, teal/coral, drifts right
             FlowBand(
                 size: size,
-                color: Color(red: 100/255, green: 220/255, blue: 220/255).opacity(0.192),
+                color: Color(red: 100/255, green: 220/255, blue: 220/255).opacity(isDarkMode ? 0.192 : 0.50),
                 topPosition: 0.22,
                 height: 0.06,
                 blur: 45,
@@ -149,7 +149,7 @@ struct FlowBandsView: View {
             // Flow-2: Upper middle, teal/golden, drifts right
             FlowBand(
                 size: size,
-                color: Color(red: 100/255, green: 220/255, blue: 220/255).opacity(0.151),
+                color: Color(red: 100/255, green: 220/255, blue: 220/255).opacity(isDarkMode ? 0.151 : 0.40),
                 topPosition: 0.35,
                 height: 0.0525,
                 blur: 50,
@@ -164,7 +164,7 @@ struct FlowBandsView: View {
             // Flow-3: Lower middle, indigo/rose, drifts left (FIRST)
             FlowBand(
                 size: size,
-                color: Color(red: 100/255, green: 100/255, blue: 240/255).opacity(0.209),
+                color: Color(red: 100/255, green: 100/255, blue: 240/255).opacity(isDarkMode ? 0.209 : 0.55),
                 bottomPosition: 0.40,
                 height: 0.135,
                 blur: 45,
@@ -179,7 +179,7 @@ struct FlowBandsView: View {
             // Flow-4: Bottom, indigo/lavender, drifts left
             FlowBand(
                 size: size,
-                color: Color(red: 100/255, green: 100/255, blue: 240/255).opacity(0.166),
+                color: Color(red: 100/255, green: 100/255, blue: 240/255).opacity(isDarkMode ? 0.166 : 0.45),
                 bottomPosition: 0.53,
                 height: 0.1125,
                 blur: 52,
@@ -585,7 +585,7 @@ struct Particle: View {
     }
 
     func getCycledColor(baseColor: Color, cycleType: ParticleColorCycle, progress: Double) -> Color {
-        let baseOpacity = 0.55
+        let baseOpacity = isDarkMode ? 0.55 : 0.75  // Higher opacity in light mode
 
         if isDarkMode {
             // Dark mode: teal/magenta/orange
@@ -783,11 +783,11 @@ struct DiagonalMistView: View {
                 return (color1, color2)
             }
         } else {
-            // Light mode: golden hour mist - warm peachy/golden/rose
+            // Light mode: golden hour mist - warm peachy/golden/rose (higher opacity for visibility)
             if progress < 0.3 {
                 return (
-                    Color(red: 255/255, green: 200/255, blue: 150/255).opacity(0.25), // Warm golden
-                    Color(red: 255/255, green: 179/255, blue: 186/255).opacity(0.2)   // Soft rose
+                    Color(red: 255/255, green: 200/255, blue: 150/255).opacity(0.50), // Warm golden
+                    Color(red: 255/255, green: 179/255, blue: 186/255).opacity(0.40)  // Soft rose
                 )
             } else if progress < 0.5 {
                 let t = (progress - 0.3) / 0.2
@@ -795,12 +795,12 @@ struct DiagonalMistView: View {
                     from: Color(red: 255/255, green: 200/255, blue: 150/255),
                     to: Color(red: 255/255, green: 215/255, blue: 0/255),
                     progress: t
-                ).opacity(0.25)
+                ).opacity(0.50)
                 let color2 = interpolateColor(
                     from: Color(red: 255/255, green: 179/255, blue: 186/255),
                     to: Color(red: 255/255, green: 191/255, blue: 105/255),
                     progress: t
-                ).opacity(0.2)
+                ).opacity(0.40)
                 return (color1, color2)
             } else if progress < 0.7 {
                 let t = (progress - 0.5) / 0.2
@@ -808,12 +808,12 @@ struct DiagonalMistView: View {
                     from: Color(red: 255/255, green: 215/255, blue: 0/255),
                     to: Color(red: 255/255, green: 182/255, blue: 158/255),
                     progress: t
-                ).opacity(0.25)
+                ).opacity(0.50)
                 let color2 = interpolateColor(
                     from: Color(red: 255/255, green: 191/255, blue: 105/255),
                     to: Color(red: 230/255, green: 213/255, blue: 245/255),
                     progress: t
-                ).opacity(0.2)
+                ).opacity(0.40)
                 return (color1, color2)
             } else {
                 let t = (progress - 0.7) / 0.3
@@ -821,8 +821,8 @@ struct DiagonalMistView: View {
                     from: Color(red: 255/255, green: 182/255, blue: 158/255),
                     to: Color(red: 255/255, green: 200/255, blue: 150/255),
                     progress: t
-                ).opacity(0.25)
-                let color2 = Color(red: 255/255, green: 179/255, blue: 186/255).opacity(0.2)
+                ).opacity(0.50)
+                let color2 = Color(red: 255/255, green: 179/255, blue: 186/255).opacity(0.40)
                 return (color1, color2)
             }
         }
