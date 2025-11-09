@@ -871,43 +871,66 @@ struct PulseEchoView: View {
                 // Calculate heart's current pulse scale to make ring "breathe" with it
                 let heartPulseScale = calculateHeartPulseScale(overallProgress: overallProgress)
 
-                // Interpolate colors from heart (yellow-pink) to magenta as ring expands
-                let ringColors = getRingColors(progress: progress)
-
                 // Base expansion scale (1.15 to 6)
                 let baseScale = 1.15 + (easedProgress * 4.85)
 
                 // Apply heart pulse breathing on top of base expansion
                 let finalScale = baseScale * heartPulseScale
 
-                Ellipse()
-                .fill(
-                    RadialGradient(
-                        gradient: Gradient(stops: isDarkMode ? [
-                            .init(color: Color.clear, location: 0),
-                            .init(color: Color.clear, location: 0.32),
-                            .init(color: ringColors.0.opacity(0.9), location: 0.4),
-                            .init(color: ringColors.1.opacity(0.7), location: 0.46),
-                            .init(color: Color.clear, location: 0.52)
-                        ] : [
-                            // Light mode: thinner rainbow ring
-                            .init(color: Color.clear, location: 0),
-                            .init(color: Color.clear, location: 0.38),
-                            .init(color: ringColors.0.opacity(0.95), location: 0.42),
-                            .init(color: ringColors.1.opacity(0.95), location: 0.44),
-                            .init(color: Color.clear, location: 0.48)
-                        ]),
-                        center: .center,
-                        startRadius: 0,
-                        endRadius: size.width * 0.14
+                if isDarkMode {
+                    // Dark mode: original ring with color interpolation
+                    let ringColors = getRingColors(progress: progress)
+
+                    Ellipse()
+                    .fill(
+                        RadialGradient(
+                            gradient: Gradient(stops: [
+                                .init(color: Color.clear, location: 0),
+                                .init(color: Color.clear, location: 0.32),
+                                .init(color: ringColors.0.opacity(0.9), location: 0.4),
+                                .init(color: ringColors.1.opacity(0.7), location: 0.46),
+                                .init(color: Color.clear, location: 0.52)
+                            ]),
+                            center: .center,
+                            startRadius: 0,
+                            endRadius: size.width * 0.14
+                        )
                     )
-                )
-                .frame(width: size.width * 0.28, height: size.height * 0.14)
-                .blur(radius: isDarkMode ? 4 : 2)  // Sharper in light mode for rainbow effect
-                .scaleEffect(finalScale)
-                .opacity(calculateOpacity(progress: progress))
-                .blendMode(isDarkMode ? .normal : .plusLighter)  // Light mode: additive blending for luminous effect
-                .position(x: size.width * 0.5, y: size.height * 0.3)
+                    .frame(width: size.width * 0.28, height: size.height * 0.14)
+                    .blur(radius: 4)
+                    .scaleEffect(finalScale)
+                    .opacity(calculateOpacity(progress: progress))
+                    .position(x: size.width * 0.5, y: size.height * 0.3)
+                } else {
+                    // Light mode: thin rainbow gradient ring
+                    ZStack {
+                        // Rainbow angular gradient
+                        Circle()
+                            .stroke(
+                                AngularGradient(
+                                    gradient: Gradient(colors: [
+                                        Color(red: 1.0, green: 100/255, blue: 100/255),      // Red
+                                        Color(red: 1.0, green: 170/255, blue: 100/255),      // Orange
+                                        Color(red: 1.0, green: 240/255, blue: 120/255),      // Yellow
+                                        Color(red: 150/255, green: 1.0, blue: 150/255),      // Green
+                                        Color(red: 100/255, green: 230/255, blue: 1.0),      // Cyan
+                                        Color(red: 130/255, green: 150/255, blue: 1.0),      // Blue
+                                        Color(red: 180/255, green: 130/255, blue: 1.0),      // Indigo
+                                        Color(red: 230/255, green: 130/255, blue: 1.0),      // Violet
+                                        Color(red: 1.0, green: 100/255, blue: 100/255)       // Red (complete circle)
+                                    ]),
+                                    center: .center
+                                ),
+                                lineWidth: size.width * 0.012
+                            )
+                            .frame(width: size.width * 0.28, height: size.height * 0.14)
+                            .blur(radius: 3)
+                            .scaleEffect(finalScale)
+                            .opacity(calculateOpacity(progress: progress) * 0.9)
+                            .blendMode(.plusLighter)
+                            .position(x: size.width * 0.5, y: size.height * 0.3)
+                    }
+                }
             }
         }
         .onChange(of: isPlaying) {
