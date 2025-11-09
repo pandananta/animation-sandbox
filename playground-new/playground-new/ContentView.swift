@@ -899,6 +899,7 @@ struct PulseEchoView: View {
                 .blur(radius: 4)  // Softer than original but still distinct
                 .scaleEffect(finalScale)
                 .opacity(calculateOpacity(progress: progress))
+                .blendMode(isDarkMode ? .normal : .plusLighter)  // Light mode: additive blending for luminous effect
                 .position(x: size.width * 0.5, y: size.height * 0.3)
             }
         }
@@ -979,16 +980,16 @@ struct PulseEchoView: View {
             let color2 = interpolateRingColor(from: warmBlend2, to: mauve2, progress: Double(colorProgress))
             return (color1, color2)
         } else {
-            // Light mode: golden amber → rose gold halo
-            let goldenAmber1 = Color(red: 255/255, green: 179/255, blue: 102/255)  // #FFB366 warm amber
-            let goldenAmber2 = Color(red: 255/255, green: 200/255, blue: 120/255)  // Soft golden
+            // Light mode: luminous golden glow → soft peachy light (much lighter to appear as light, not pigment)
+            let goldenGlow1 = Color(red: 1.0, green: 235/255, blue: 180/255)     // Bright golden glow
+            let goldenGlow2 = Color(red: 1.0, green: 245/255, blue: 200/255)     // Very light golden
 
-            let roseGold1 = Color(red: 232/255, green: 158/255, blue: 142/255)    // #E89E8E rose gold
-            let roseGold2 = Color(red: 220/255, green: 140/255, blue: 130/255)    // Soft coral rose
+            let peachyLight1 = Color(red: 1.0, green: 210/255, blue: 200/255)    // Soft peachy light
+            let peachyLight2 = Color(red: 1.0, green: 220/255, blue: 210/255)    // Very light peach
 
             let colorProgress = min(progress / 0.3, 1.0)
-            let color1 = interpolateRingColor(from: goldenAmber1, to: roseGold1, progress: Double(colorProgress))
-            let color2 = interpolateRingColor(from: goldenAmber2, to: roseGold2, progress: Double(colorProgress))
+            let color1 = interpolateRingColor(from: goldenGlow1, to: peachyLight1, progress: Double(colorProgress))
+            let color2 = interpolateRingColor(from: goldenGlow2, to: peachyLight2, progress: Double(colorProgress))
             return (color1, color2)
         }
     }
