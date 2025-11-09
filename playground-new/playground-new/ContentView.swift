@@ -883,12 +883,19 @@ struct PulseEchoView: View {
                 Ellipse()
                 .fill(
                     RadialGradient(
-                        gradient: Gradient(stops: [
+                        gradient: Gradient(stops: isDarkMode ? [
                             .init(color: Color.clear, location: 0),
                             .init(color: Color.clear, location: 0.32),
                             .init(color: ringColors.0.opacity(0.9), location: 0.4),
                             .init(color: ringColors.1.opacity(0.7), location: 0.46),
                             .init(color: Color.clear, location: 0.52)
+                        ] : [
+                            // Light mode: thinner rainbow ring
+                            .init(color: Color.clear, location: 0),
+                            .init(color: Color.clear, location: 0.38),
+                            .init(color: ringColors.0.opacity(0.95), location: 0.42),
+                            .init(color: ringColors.1.opacity(0.95), location: 0.44),
+                            .init(color: Color.clear, location: 0.48)
                         ]),
                         center: .center,
                         startRadius: 0,
@@ -896,7 +903,7 @@ struct PulseEchoView: View {
                     )
                 )
                 .frame(width: size.width * 0.28, height: size.height * 0.14)
-                .blur(radius: 4)  // Softer than original but still distinct
+                .blur(radius: isDarkMode ? 4 : 2)  // Sharper in light mode for rainbow effect
                 .scaleEffect(finalScale)
                 .opacity(calculateOpacity(progress: progress))
                 .blendMode(isDarkMode ? .normal : .plusLighter)  // Light mode: additive blending for luminous effect
@@ -980,16 +987,46 @@ struct PulseEchoView: View {
             let color2 = interpolateRingColor(from: warmBlend2, to: mauve2, progress: Double(colorProgress))
             return (color1, color2)
         } else {
-            // Light mode: luminous golden glow → soft peachy light (much lighter to appear as light, not pigment)
-            let goldenGlow1 = Color(red: 1.0, green: 235/255, blue: 180/255)     // Bright golden glow
-            let goldenGlow2 = Color(red: 1.0, green: 245/255, blue: 200/255)     // Very light golden
+            // Light mode: rainbow refraction effect - cycles through visible spectrum
+            // Map progress to rainbow colors (ROYGBIV)
+            // Use lighter, more vibrant versions for light emission effect
 
-            let peachyLight1 = Color(red: 1.0, green: 210/255, blue: 200/255)    // Soft peachy light
-            let peachyLight2 = Color(red: 1.0, green: 220/255, blue: 210/255)    // Very light peach
+            // Define rainbow spectrum colors (bright, luminous versions)
+            let red = Color(red: 1.0, green: 100/255, blue: 100/255)           // Bright red
+            let orange = Color(red: 1.0, green: 170/255, blue: 100/255)        // Bright orange
+            let yellow = Color(red: 1.0, green: 240/255, blue: 120/255)        // Bright yellow
+            let green = Color(red: 150/255, green: 1.0, blue: 150/255)         // Bright green
+            let cyan = Color(red: 100/255, green: 230/255, blue: 1.0)          // Bright cyan
+            let blue = Color(red: 130/255, green: 150/255, blue: 1.0)          // Bright blue
+            let indigo = Color(red: 180/255, green: 130/255, blue: 1.0)        // Bright indigo
+            let violet = Color(red: 230/255, green: 130/255, blue: 1.0)        // Bright violet
 
-            let colorProgress = min(progress / 0.3, 1.0)
-            let color1 = interpolateRingColor(from: goldenGlow1, to: peachyLight1, progress: Double(colorProgress))
-            let color2 = interpolateRingColor(from: goldenGlow2, to: peachyLight2, progress: Double(colorProgress))
+            // Create a spectrum array for smooth interpolation
+            let spectrum: [Color] = [red, orange, yellow, green, cyan, blue, indigo, violet]
+
+            // Map progress (0 to 0.6) across the entire rainbow spectrum
+            let spectrumProgress = min(progress / 0.6, 1.0)  // Normalize to 0-1 over visible ring lifetime
+            let position = Double(spectrumProgress) * Double(spectrum.count - 1)
+            let index = Int(position)
+            let fraction = position - Double(index)
+
+            // Get two adjacent colors for inner and outer ring edges
+            let color1: Color
+            let color2: Color
+
+            if index >= spectrum.count - 1 {
+                // End of spectrum
+                color1 = spectrum[spectrum.count - 1]
+                color2 = spectrum[spectrum.count - 1]
+            } else {
+                // Interpolate between current and next color
+                color1 = interpolateRingColor(from: spectrum[index], to: spectrum[index + 1], progress: fraction)
+                // Use slightly ahead in spectrum for second color to create gradient across ring thickness
+                let nextIndex = min(index + 1, spectrum.count - 1)
+                let nextNextIndex = min(index + 2, spectrum.count - 1)
+                color2 = interpolateRingColor(from: spectrum[nextIndex], to: spectrum[nextNextIndex], progress: fraction)
+            }
+
             return (color1, color2)
         }
     }
