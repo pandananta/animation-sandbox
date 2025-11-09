@@ -8,18 +8,18 @@
 import SwiftUI
 
 enum LightBackgroundStyle: String, CaseIterable {
-    case warmBeige = "Warm Beige"
-    case softSky = "Soft Sky"
-    case goldenGlow = "Golden Glow"
-    case sunsetHaze = "Sunset Haze"
-    case creamYellow = "Cream Yellow"
-    case radialSunrise = "Radial Sunrise"
+    case peachLavender = "Peach Lavender"
+    case goldenRose = "Golden Rose"
+    case coralTwilight = "Coral Twilight"
+    case magentaGlow = "Magenta Glow"
+    case sunsetTeal = "Sunset Teal"
+    case warmHoney = "Warm Honey"
 }
 
 struct ContentView: View {
     @State private var isPlaying = true  // Animation starts playing
     @State private var isDarkMode = true  // Dark mode by default
-    @State private var lightBgStyle: LightBackgroundStyle = .warmBeige
+    @State private var lightBgStyle: LightBackgroundStyle = .peachLavender
 
     var body: some View {
         GeometryReader { geometry in
@@ -98,13 +98,13 @@ struct HeartChakraTestView: View {
             BackgroundGradientView(isDarkMode: isDarkMode, lightBgStyle: lightBgStyle)
 
             // All 4 flow bands with individual timing (always loop)
-            FlowBandsView(size: size, isDarkMode: isDarkMode)
+            FlowBandsView(size: size, isDarkMode: isDarkMode, lightBgStyle: lightBgStyle)
 
             // Diagonal mist with rotation and 50px blur (always loop)
-            DiagonalMistView(size: size, isDarkMode: isDarkMode)
+            DiagonalMistView(size: size, isDarkMode: isDarkMode, lightBgStyle: lightBgStyle)
 
             // 3 Floating particles (always loop)
-            ParticlesView(size: size, isDarkMode: isDarkMode)
+            ParticlesView(size: size, isDarkMode: isDarkMode, lightBgStyle: lightBgStyle)
 
             // Pulse echo - expanding ring (controlled by play/pause)
             PulseEchoView(size: size, isPlaying: $isPlaying, isDarkMode: isDarkMode)
@@ -142,41 +142,10 @@ struct BackgroundGradientView: View {
             )
             .ignoresSafeArea()
         } else {
-            // Light mode: multiple background options
+            // Light mode: sunset haze variations
             switch lightBgStyle {
-            case .warmBeige:
-                // Original warm beige
-                Color(red: 245/255, green: 235/255, blue: 225/255) // #F5EBE1
-                    .ignoresSafeArea()
-
-            case .softSky:
-                // Soft sky gradient - warm cream to pale blue
-                RadialGradient(
-                    gradient: Gradient(colors: [
-                        Color(red: 255/255, green: 250/255, blue: 245/255), // Warm cream
-                        Color(red: 240/255, green: 245/255, blue: 255/255)  // Pale blue
-                    ]),
-                    center: .center,
-                    startRadius: 0,
-                    endRadius: 500
-                )
-                .ignoresSafeArea()
-
-            case .goldenGlow:
-                // Golden hour glow centered at heart position
-                RadialGradient(
-                    gradient: Gradient(colors: [
-                        Color(red: 255/255, green: 248/255, blue: 220/255), // Pale golden yellow
-                        Color(red: 255/255, green: 242/255, blue: 230/255)  // Peachy cream
-                    ]),
-                    center: UnitPoint(x: 0.5, y: 0.3), // Center at heart
-                    startRadius: 0,
-                    endRadius: 600
-                )
-                .ignoresSafeArea()
-
-            case .sunsetHaze:
-                // Sunset gradient - peach to lavender
+            case .peachLavender:
+                // Original sunset haze - soft peach to pale lavender
                 LinearGradient(
                     gradient: Gradient(colors: [
                         Color(red: 255/255, green: 230/255, blue: 220/255), // Soft peach
@@ -187,28 +156,63 @@ struct BackgroundGradientView: View {
                 )
                 .ignoresSafeArea()
 
-            case .creamYellow:
-                // Warm cream to pale yellow
+            case .goldenRose:
+                // Warm golden hour to soft rose
                 LinearGradient(
                     gradient: Gradient(colors: [
-                        Color(red: 255/255, green: 249/255, blue: 240/255), // Warm cream #FFF9F0
-                        Color(red: 255/255, green: 250/255, blue: 237/255)  // Pale yellow #FFFAED
+                        Color(red: 255/255, green: 245/255, blue: 220/255), // Golden cream
+                        Color(red: 255/255, green: 225/255, blue: 235/255)  // Soft rose
                     ]),
-                    startPoint: .topLeading,
-                    endPoint: .bottomTrailing
+                    startPoint: .top,
+                    endPoint: .bottom
                 )
                 .ignoresSafeArea()
 
-            case .radialSunrise:
-                // Radial sunrise - slightly off-center glow
-                RadialGradient(
+            case .coralTwilight:
+                // Vibrant coral to cool twilight blue - high contrast
+                LinearGradient(
                     gradient: Gradient(colors: [
-                        Color(red: 255/255, green: 248/255, blue: 231/255), // Pale golden #FFF8E7
-                        Color(red: 255/255, green: 245/255, blue: 240/255)  // Peachy white #FFF5F0
+                        Color(red: 255/255, green: 210/255, blue: 200/255), // Coral
+                        Color(red: 220/255, green: 235/255, blue: 250/255)  // Twilight blue
                     ]),
-                    center: UnitPoint(x: 0.4, y: 0.45),
-                    startRadius: 0,
-                    endRadius: 500
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+                .ignoresSafeArea()
+
+            case .magentaGlow:
+                // Reinforces app color - peachy to soft magenta
+                LinearGradient(
+                    gradient: Gradient(colors: [
+                        Color(red: 255/255, green: 240/255, blue: 230/255), // Warm peachy white
+                        Color(red: 245/255, green: 225/255, blue: 240/255)  // Soft magenta-lavender
+                    ]),
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+                .ignoresSafeArea()
+
+            case .sunsetTeal:
+                // Warm peachy sunset with teal contrast
+                LinearGradient(
+                    gradient: Gradient(colors: [
+                        Color(red: 255/255, green: 220/255, blue: 200/255), // Warm peach
+                        Color(red: 230/255, green: 245/255, blue: 245/255)  // Pale teal
+                    ]),
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+                .ignoresSafeArea()
+
+            case .warmHoney:
+                // All warm tones - honey to peach
+                LinearGradient(
+                    gradient: Gradient(colors: [
+                        Color(red: 255/255, green: 245/255, blue: 215/255), // Warm honey
+                        Color(red: 255/255, green: 230/255, blue: 225/255)  // Warm peach
+                    ]),
+                    startPoint: .top,
+                    endPoint: .bottom
                 )
                 .ignoresSafeArea()
             }
@@ -221,6 +225,7 @@ struct BackgroundGradientView: View {
 struct FlowBandsView: View {
     let size: CGSize
     let isDarkMode: Bool
+    let lightBgStyle: LightBackgroundStyle
 
     var body: some View {
         ZStack {
@@ -236,7 +241,8 @@ struct FlowBandsView: View {
                 direction: .right,
                 colorCycleDuration: 192,
                 colorCycleType: .teal1,
-                isDarkMode: isDarkMode
+                isDarkMode: isDarkMode,
+                lightBgStyle: lightBgStyle
             )
 
             // Flow-2: Upper middle, teal/golden, drifts right
@@ -251,7 +257,8 @@ struct FlowBandsView: View {
                 direction: .right,
                 colorCycleDuration: 148,
                 colorCycleType: .teal2,
-                isDarkMode: isDarkMode
+                isDarkMode: isDarkMode,
+                lightBgStyle: lightBgStyle
             )
 
             // Flow-3: Lower middle, indigo/rose, drifts left (FIRST)
@@ -266,7 +273,8 @@ struct FlowBandsView: View {
                 direction: .left,
                 colorCycleDuration: 108,
                 colorCycleType: .magenta1,
-                isDarkMode: isDarkMode
+                isDarkMode: isDarkMode,
+                lightBgStyle: lightBgStyle
             )
 
             // Flow-4: Bottom, indigo/lavender, drifts left
@@ -281,7 +289,8 @@ struct FlowBandsView: View {
                 direction: .left,
                 colorCycleDuration: 82,
                 colorCycleType: .magenta2,
-                isDarkMode: isDarkMode
+                isDarkMode: isDarkMode,
+                lightBgStyle: lightBgStyle
             )
         }
     }
@@ -308,6 +317,7 @@ struct FlowBand: View {
     let colorCycleDuration: Double
     let colorCycleType: FlowBandColorCycle
     let isDarkMode: Bool
+    let lightBgStyle: LightBackgroundStyle
 
     @State private var startTime = Date()
 
@@ -431,80 +441,117 @@ struct FlowBand: View {
                 }
             }
         } else {
-            // Light mode: sunrise golden hour
+            // Light mode: colors vary by background style
+            return getLightModeFlowColor(cycleType: cycleType, progress: progress, baseOpacity: baseOpacity)
+        }
+    }
+
+    func getLightModeFlowColor(cycleType: FlowBandColorCycle, progress: Double, baseOpacity: CGFloat) -> Color {
+        switch lightBgStyle {
+        case .peachLavender, .warmHoney:
+            // Warm peachy/golden palette
             switch cycleType {
             case .teal1:
-                // Peachy coral to warm honey
-                if progress < 0.5 {
-                    let t = progress * 2
-                    return interpolateFlowColor(
-                        from: Color(red: 255/255, green: 182/255, blue: 158/255), // #FFB69E peachy coral
-                        to: Color(red: 255/255, green: 200/255, blue: 112/255), // #FFC870 golden honey
-                        progress: t
-                    ).opacity(baseOpacity)
-                } else {
-                    let t = (progress - 0.5) * 2
-                    return interpolateFlowColor(
-                        from: Color(red: 255/255, green: 200/255, blue: 112/255),
-                        to: Color(red: 255/255, green: 182/255, blue: 158/255),
-                        progress: t
-                    ).opacity(baseOpacity)
-                }
-
+                return cycleBetween(
+                    Color(red: 255/255, green: 182/255, blue: 158/255),
+                    Color(red: 255/255, green: 200/255, blue: 112/255),
+                    progress: progress
+                ).opacity(baseOpacity)
             case .teal2:
-                // Golden honey to soft peach
-                if progress < 0.5 {
-                    let t = progress * 2
-                    return interpolateFlowColor(
-                        from: Color(red: 255/255, green: 216/255, blue: 156/255), // #FFD89C warm honey
-                        to: Color(red: 255/255, green: 167/255, blue: 133/255), // #FFA785 soft peach
-                        progress: t
-                    ).opacity(baseOpacity)
-                } else {
-                    let t = (progress - 0.5) * 2
-                    return interpolateFlowColor(
-                        from: Color(red: 255/255, green: 167/255, blue: 133/255),
-                        to: Color(red: 255/255, green: 216/255, blue: 156/255),
-                        progress: t
-                    ).opacity(baseOpacity)
-                }
-
+                return cycleBetween(
+                    Color(red: 255/255, green: 216/255, blue: 156/255),
+                    Color(red: 255/255, green: 167/255, blue: 133/255),
+                    progress: progress
+                ).opacity(baseOpacity)
             case .magenta1:
-                // Delicate rose cycling
-                if progress < 0.5 {
-                    let t = progress * 2
-                    return interpolateFlowColor(
-                        from: Color(red: 255/255, green: 179/255, blue: 186/255), // #FFB3BA soft rose
-                        to: Color(red: 255/255, green: 157/255, blue: 166/255), // #FF9DA6 deeper rose
-                        progress: t
-                    ).opacity(baseOpacity)
-                } else {
-                    let t = (progress - 0.5) * 2
-                    return interpolateFlowColor(
-                        from: Color(red: 255/255, green: 157/255, blue: 166/255),
-                        to: Color(red: 255/255, green: 179/255, blue: 186/255),
-                        progress: t
-                    ).opacity(baseOpacity)
-                }
-
+                return cycleBetween(
+                    Color(red: 255/255, green: 179/255, blue: 186/255),
+                    Color(red: 255/255, green: 157/255, blue: 166/255),
+                    progress: progress
+                ).opacity(baseOpacity)
             case .magenta2:
-                // Lavender mist cycling
-                if progress < 0.5 {
-                    let t = progress * 2
-                    return interpolateFlowColor(
-                        from: Color(red: 230/255, green: 213/255, blue: 245/255), // #E6D5F5 lavender mist
-                        to: Color(red: 212/255, green: 191/255, blue: 232/255), // #D4BFE8 deeper lavender
-                        progress: t
-                    ).opacity(baseOpacity)
-                } else {
-                    let t = (progress - 0.5) * 2
-                    return interpolateFlowColor(
-                        from: Color(red: 212/255, green: 191/255, blue: 232/255),
-                        to: Color(red: 230/255, green: 213/255, blue: 245/255),
-                        progress: t
-                    ).opacity(baseOpacity)
-                }
+                return cycleBetween(
+                    Color(red: 230/255, green: 213/255, blue: 245/255),
+                    Color(red: 212/255, green: 191/255, blue: 232/255),
+                    progress: progress
+                ).opacity(baseOpacity)
             }
+
+        case .goldenRose:
+            // Golden and rose tones
+            switch cycleType {
+            case .teal1, .teal2:
+                return cycleBetween(
+                    Color(red: 255/255, green: 215/255, blue: 150/255), // Golden
+                    Color(red: 255/255, green: 190/255, blue: 130/255), // Peachy gold
+                    progress: progress
+                ).opacity(baseOpacity)
+            case .magenta1, .magenta2:
+                return cycleBetween(
+                    Color(red: 255/255, green: 180/255, blue: 200/255), // Rose
+                    Color(red: 240/255, green: 150/255, blue: 180/255), // Deeper rose
+                    progress: progress
+                ).opacity(baseOpacity)
+            }
+
+        case .coralTwilight:
+            // Coral with blue/teal contrast
+            switch cycleType {
+            case .teal1, .teal2:
+                return cycleBetween(
+                    Color(red: 120/255, green: 200/255, blue: 230/255), // Sky blue
+                    Color(red: 100/255, green: 220/255, blue: 240/255), // Bright cyan
+                    progress: progress
+                ).opacity(baseOpacity)
+            case .magenta1, .magenta2:
+                return cycleBetween(
+                    Color(red: 255/255, green: 180/255, blue: 170/255), // Coral
+                    Color(red: 255/255, green: 160/255, blue: 150/255), // Deeper coral
+                    progress: progress
+                ).opacity(baseOpacity)
+            }
+
+        case .magentaGlow:
+            // Peachy with magenta/pink reinforcement
+            switch cycleType {
+            case .teal1, .teal2:
+                return cycleBetween(
+                    Color(red: 255/255, green: 200/255, blue: 180/255), // Soft peach
+                    Color(red: 255/255, green: 180/255, blue: 160/255), // Peachy coral
+                    progress: progress
+                ).opacity(baseOpacity)
+            case .magenta1, .magenta2:
+                return cycleBetween(
+                    Color(red: 240/255, green: 160/255, blue: 200/255), // Bright magenta-pink
+                    Color(red: 220/255, green: 140/255, blue: 190/255), // Deeper magenta
+                    progress: progress
+                ).opacity(baseOpacity)
+            }
+
+        case .sunsetTeal:
+            // Peachy sunset with teal/cyan contrast
+            switch cycleType {
+            case .teal1, .teal2:
+                return cycleBetween(
+                    Color(red: 130/255, green: 220/255, blue: 220/255), // Teal
+                    Color(red: 100/255, green: 240/255, blue: 230/255), // Bright cyan
+                    progress: progress
+                ).opacity(baseOpacity)
+            case .magenta1, .magenta2:
+                return cycleBetween(
+                    Color(red: 255/255, green: 190/255, blue: 160/255), // Warm peach
+                    Color(red: 255/255, green: 170/255, blue: 140/255), // Coral sunset
+                    progress: progress
+                ).opacity(baseOpacity)
+            }
+        }
+    }
+
+    func cycleBetween(_ color1: Color, _ color2: Color, progress: Double) -> Color {
+        if progress < 0.5 {
+            return interpolateFlowColor(from: color1, to: color2, progress: progress * 2)
+        } else {
+            return interpolateFlowColor(from: color2, to: color1, progress: (progress - 0.5) * 2)
         }
     }
 
@@ -525,6 +572,7 @@ struct FlowBand: View {
 struct ParticlesView: View {
     let size: CGSize
     let isDarkMode: Bool
+    let lightBgStyle: LightBackgroundStyle
 
     var body: some View {
         ZStack {
@@ -542,7 +590,8 @@ struct ParticlesView: View {
                 twinkleDelay: 0,
                 colorCycleDuration: 192,
                 colorCycleType: .teal,
-                isDarkMode: isDarkMode
+                isDarkMode: isDarkMode,
+                lightBgStyle: lightBgStyle
             )
 
             // Particle 2: Yellow/Peachy (no color cycling in dark, sparkly gold in light)
@@ -559,7 +608,8 @@ struct ParticlesView: View {
                 twinkleDelay: 1,
                 colorCycleDuration: nil,
                 colorCycleType: nil,
-                isDarkMode: isDarkMode
+                isDarkMode: isDarkMode,
+                lightBgStyle: lightBgStyle
             )
 
             // Particle 3: Indigo/Amber with color cycling
@@ -576,7 +626,8 @@ struct ParticlesView: View {
                 twinkleDelay: 2,
                 colorCycleDuration: 104,
                 colorCycleType: .magenta,
-                isDarkMode: isDarkMode
+                isDarkMode: isDarkMode,
+                lightBgStyle: lightBgStyle
             )
         }
     }
@@ -600,6 +651,7 @@ struct Particle: View {
     let colorCycleDuration: Double?
     let colorCycleType: ParticleColorCycle?
     let isDarkMode: Bool
+    let lightBgStyle: LightBackgroundStyle
 
     @State private var startTime = Date()
 
@@ -727,44 +779,105 @@ struct Particle: View {
                 }
             }
         } else {
-            // Light mode: golden/peachy sparkles
+            // Light mode: vary by background style
+            return getLightModeParticleColor(cycleType: cycleType, progress: progress, baseOpacity: baseOpacity)
+        }
+    }
+
+    func getLightModeParticleColor(cycleType: ParticleColorCycle, progress: Double, baseOpacity: CGFloat) -> Color {
+        switch lightBgStyle {
+        case .peachLavender, .warmHoney:
+            // Warm sparkly particles
             switch cycleType {
             case .teal:
-                // Sparkly gold cycling
-                if progress < 0.5 {
-                    let t = progress * 2
-                    return interpolateParticleColor(
-                        from: Color(red: 255/255, green: 215/255, blue: 0/255), // #FFD700 sparkly gold
-                        to: Color(red: 255/255, green: 195/255, blue: 77/255), // Warm golden
-                        progress: t
-                    ).opacity(baseOpacity)
-                } else {
-                    let t = (progress - 0.5) * 2
-                    return interpolateParticleColor(
-                        from: Color(red: 255/255, green: 195/255, blue: 77/255),
-                        to: Color(red: 255/255, green: 215/255, blue: 0/255),
-                        progress: t
-                    ).opacity(baseOpacity)
-                }
-
+                return particleCycleBetween(
+                    Color(red: 255/255, green: 215/255, blue: 0/255),
+                    Color(red: 255/255, green: 195/255, blue: 77/255),
+                    progress: progress
+                ).opacity(baseOpacity)
             case .magenta:
-                // Warm amber cycling
-                if progress < 0.5 {
-                    let t = progress * 2
-                    return interpolateParticleColor(
-                        from: Color(red: 255/255, green: 191/255, blue: 105/255), // #FFBF69 warm amber
-                        to: Color(red: 255/255, green: 179/255, blue: 193/255), // #FFB3C1 soft peachy pink
-                        progress: t
-                    ).opacity(baseOpacity)
-                } else {
-                    let t = (progress - 0.5) * 2
-                    return interpolateParticleColor(
-                        from: Color(red: 255/255, green: 179/255, blue: 193/255),
-                        to: Color(red: 255/255, green: 191/255, blue: 105/255),
-                        progress: t
-                    ).opacity(baseOpacity)
-                }
+                return particleCycleBetween(
+                    Color(red: 255/255, green: 191/255, blue: 105/255),
+                    Color(red: 255/255, green: 179/255, blue: 193/255),
+                    progress: progress
+                ).opacity(baseOpacity)
             }
+
+        case .goldenRose:
+            // Golden and rose sparkles
+            switch cycleType {
+            case .teal:
+                return particleCycleBetween(
+                    Color(red: 255/255, green: 220/255, blue: 100/255),
+                    Color(red: 255/255, green: 200/255, blue: 120/255),
+                    progress: progress
+                ).opacity(baseOpacity)
+            case .magenta:
+                return particleCycleBetween(
+                    Color(red: 255/255, green: 160/255, blue: 180/255),
+                    Color(red: 255/255, green: 180/255, blue: 200/255),
+                    progress: progress
+                ).opacity(baseOpacity)
+            }
+
+        case .coralTwilight:
+            // Teal/blue sparkles for contrast
+            switch cycleType {
+            case .teal:
+                return particleCycleBetween(
+                    Color(red: 100/255, green: 230/255, blue: 240/255),
+                    Color(red: 120/255, green: 210/255, blue: 250/255),
+                    progress: progress
+                ).opacity(baseOpacity)
+            case .magenta:
+                return particleCycleBetween(
+                    Color(red: 255/255, green: 190/255, blue: 160/255),
+                    Color(red: 255/255, green: 170/255, blue: 150/255),
+                    progress: progress
+                ).opacity(baseOpacity)
+            }
+
+        case .magentaGlow:
+            // Magenta/pink sparkles
+            switch cycleType {
+            case .teal:
+                return particleCycleBetween(
+                    Color(red: 255/255, green: 200/255, blue: 160/255),
+                    Color(red: 255/255, green: 180/255, blue: 140/255),
+                    progress: progress
+                ).opacity(baseOpacity)
+            case .magenta:
+                return particleCycleBetween(
+                    Color(red: 240/255, green: 150/255, blue: 200/255),
+                    Color(red: 220/255, green: 130/255, blue: 190/255),
+                    progress: progress
+                ).opacity(baseOpacity)
+            }
+
+        case .sunsetTeal:
+            // Teal and coral sparkles
+            switch cycleType {
+            case .teal:
+                return particleCycleBetween(
+                    Color(red: 120/255, green: 230/255, blue: 220/255),
+                    Color(red: 100/255, green: 240/255, blue: 230/255),
+                    progress: progress
+                ).opacity(baseOpacity)
+            case .magenta:
+                return particleCycleBetween(
+                    Color(red: 255/255, green: 180/255, blue: 140/255),
+                    Color(red: 255/255, green: 200/255, blue: 160/255),
+                    progress: progress
+                ).opacity(baseOpacity)
+            }
+        }
+    }
+
+    func particleCycleBetween(_ color1: Color, _ color2: Color, progress: Double) -> Color {
+        if progress < 0.5 {
+            return interpolateParticleColor(from: color1, to: color2, progress: progress * 2)
+        } else {
+            return interpolateParticleColor(from: color2, to: color1, progress: (progress - 0.5) * 2)
         }
     }
 
@@ -786,6 +899,7 @@ struct Particle: View {
 struct DiagonalMistView: View {
     let size: CGSize
     let isDarkMode: Bool
+    let lightBgStyle: LightBackgroundStyle
     @State private var rotation: Double = -15
     @State private var opacity: Double = 0.20
     @State private var startTime = Date()
@@ -876,49 +990,66 @@ struct DiagonalMistView: View {
                 return (color1, color2)
             }
         } else {
-            // Light mode: golden hour mist - warm peachy/golden/rose (higher opacity for visibility)
-            if progress < 0.3 {
-                return (
-                    Color(red: 255/255, green: 200/255, blue: 150/255).opacity(0.50), // Warm golden
-                    Color(red: 255/255, green: 179/255, blue: 186/255).opacity(0.40)  // Soft rose
-                )
-            } else if progress < 0.5 {
-                let t = (progress - 0.3) / 0.2
-                let color1 = interpolateColor(
-                    from: Color(red: 255/255, green: 200/255, blue: 150/255),
-                    to: Color(red: 255/255, green: 215/255, blue: 0/255),
-                    progress: t
-                ).opacity(0.50)
-                let color2 = interpolateColor(
-                    from: Color(red: 255/255, green: 179/255, blue: 186/255),
-                    to: Color(red: 255/255, green: 191/255, blue: 105/255),
-                    progress: t
-                ).opacity(0.40)
-                return (color1, color2)
-            } else if progress < 0.7 {
-                let t = (progress - 0.5) / 0.2
-                let color1 = interpolateColor(
-                    from: Color(red: 255/255, green: 215/255, blue: 0/255),
-                    to: Color(red: 255/255, green: 182/255, blue: 158/255),
-                    progress: t
-                ).opacity(0.50)
-                let color2 = interpolateColor(
-                    from: Color(red: 255/255, green: 191/255, blue: 105/255),
-                    to: Color(red: 230/255, green: 213/255, blue: 245/255),
-                    progress: t
-                ).opacity(0.40)
-                return (color1, color2)
-            } else {
-                let t = (progress - 0.7) / 0.3
-                let color1 = interpolateColor(
-                    from: Color(red: 255/255, green: 182/255, blue: 158/255),
-                    to: Color(red: 255/255, green: 200/255, blue: 150/255),
-                    progress: t
-                ).opacity(0.50)
-                let color2 = Color(red: 255/255, green: 179/255, blue: 186/255).opacity(0.40)
-                return (color1, color2)
-            }
+            // Light mode: vary by background style
+            return getLightModeMistColors(progress: progress)
         }
+    }
+
+    func getLightModeMistColors(progress: Double) -> (Color, Color) {
+        switch lightBgStyle {
+        case .peachLavender, .warmHoney:
+            // Warm golden/peachy mist
+            let colors: [(Color, Color)] = [
+                (Color(red: 255/255, green: 200/255, blue: 150/255), Color(red: 255/255, green: 179/255, blue: 186/255)),
+                (Color(red: 255/255, green: 215/255, blue: 100/255), Color(red: 255/255, green: 191/255, blue: 105/255)),
+                (Color(red: 255/255, green: 182/255, blue: 158/255), Color(red: 230/255, green: 213/255, blue: 245/255))
+            ]
+            return cycleMistColors(colors, progress: progress, opacities: (0.50, 0.40))
+
+        case .goldenRose:
+            // Golden and rose mist
+            let colors: [(Color, Color)] = [
+                (Color(red: 255/255, green: 210/255, blue: 130/255), Color(red: 255/255, green: 180/255, blue: 200/255)),
+                (Color(red: 255/255, green: 220/255, blue: 150/255), Color(red: 255/255, green: 170/255, blue: 190/255))
+            ]
+            return cycleMistColors(colors, progress: progress, opacities: (0.50, 0.45))
+
+        case .coralTwilight:
+            // Coral with blue/teal mist
+            let colors: [(Color, Color)] = [
+                (Color(red: 120/255, green: 210/255, blue: 240/255), Color(red: 255/255, green: 180/255, blue: 170/255)),
+                (Color(red: 100/255, green: 230/255, blue: 250/255), Color(red: 255/255, green: 190/255, blue: 180/255))
+            ]
+            return cycleMistColors(colors, progress: progress, opacities: (0.45, 0.50))
+
+        case .magentaGlow:
+            // Peachy with magenta mist
+            let colors: [(Color, Color)] = [
+                (Color(red: 255/255, green: 200/255, blue: 180/255), Color(red: 240/255, green: 160/255, blue: 200/255)),
+                (Color(red: 255/255, green: 180/255, blue: 160/255), Color(red: 230/255, green: 150/255, blue: 190/255))
+            ]
+            return cycleMistColors(colors, progress: progress, opacities: (0.50, 0.50))
+
+        case .sunsetTeal:
+            // Peachy sunset with teal mist
+            let colors: [(Color, Color)] = [
+                (Color(red: 130/255, green: 230/255, blue: 230/255), Color(red: 255/255, green: 190/255, blue: 160/255)),
+                (Color(red: 110/255, green: 240/255, blue: 235/255), Color(red: 255/255, green: 180/255, blue: 150/255))
+            ]
+            return cycleMistColors(colors, progress: progress, opacities: (0.45, 0.50))
+        }
+    }
+
+    func cycleMistColors(_ colors: [(Color, Color)], progress: Double, opacities: (CGFloat, CGFloat)) -> (Color, Color) {
+        let count = colors.count
+        let position = progress * Double(count)
+        let index = Int(position) % count
+        let nextIndex = (index + 1) % count
+        let t = position - Double(Int(position))
+
+        let color1 = interpolateColor(from: colors[index].0, to: colors[nextIndex].0, progress: t).opacity(opacities.0)
+        let color2 = interpolateColor(from: colors[index].1, to: colors[nextIndex].1, progress: t).opacity(opacities.1)
+        return (color1, color2)
     }
 
     func interpolateColor(from: Color, to: Color, progress: Double) -> Color {
