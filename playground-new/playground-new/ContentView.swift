@@ -14,6 +14,13 @@ enum LightBackgroundStyle: String, CaseIterable {
     case magentaGlow = "Magenta Glow"
     case sunsetTeal = "Sunset Teal"
     case warmHoney = "Warm Honey"
+
+    // Sunset Teal Variations - Better magenta button compatibility
+    case sunsetTealWarm = "Sunset Teal: Warm"
+    case sunsetTealMagentaMid = "Sunset Teal: Magenta Mid"
+    case sunsetTealPeachyBlend = "Sunset Teal: Peachy Blend"
+    case sunsetTealMagentaAccents = "Sunset Teal: Magenta Accents"
+    case sunsetTealReverse = "Sunset Teal: Reverse"
 }
 
 struct ContentView: View {
@@ -210,6 +217,69 @@ struct BackgroundGradientView: View {
                     gradient: Gradient(colors: [
                         Color(red: 255/255, green: 245/255, blue: 215/255), // Warm honey
                         Color(red: 255/255, green: 230/255, blue: 225/255)  // Warm peach
+                    ]),
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+                .ignoresSafeArea()
+
+            // MARK: - Sunset Teal Variations
+
+            case .sunsetTealWarm:
+                // Warmer Teal Bottom - peachy-teal/mint with more warmth
+                LinearGradient(
+                    gradient: Gradient(colors: [
+                        Color(red: 255/255, green: 220/255, blue: 200/255), // Warm peach top
+                        Color(red: 220/255, green: 240/255, blue: 235/255)  // Warmer peachy-teal (less cyan, more mint)
+                    ]),
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+                .ignoresSafeArea()
+
+            case .sunsetTealMagentaMid:
+                // Add Magenta Midtone - three-tier gradient through magenta
+                LinearGradient(
+                    gradient: Gradient(stops: [
+                        .init(color: Color(red: 255/255, green: 220/255, blue: 200/255), location: 0.0),    // Warm peach top
+                        .init(color: Color(red: 245/255, green: 230/255, blue: 240/255), location: 0.5),    // Soft magenta-lavender mid
+                        .init(color: Color(red: 230/255, green: 245/255, blue: 245/255), location: 1.0)     // Pale teal bottom
+                    ]),
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+                .ignoresSafeArea()
+
+            case .sunsetTealPeachyBlend:
+                // Peachy-Teal Blend - dusty sage teal with warmth
+                LinearGradient(
+                    gradient: Gradient(colors: [
+                        Color(red: 255/255, green: 220/255, blue: 200/255), // Warm peach top
+                        Color(red: 215/255, green: 235/255, blue: 225/255)  // Dusty sage teal (less blue, more green/peachy)
+                    ]),
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+                .ignoresSafeArea()
+
+            case .sunsetTealMagentaAccents:
+                // Magenta Atmospheric Accents - keep teal contrast but with magenta sparkles
+                LinearGradient(
+                    gradient: Gradient(colors: [
+                        Color(red: 255/255, green: 220/255, blue: 200/255), // Warm peach top
+                        Color(red: 230/255, green: 245/255, blue: 245/255)  // Pale teal bottom
+                    ]),
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+                .ignoresSafeArea()
+
+            case .sunsetTealReverse:
+                // Reverse It - teal at top, warm peachy-magenta at bottom
+                LinearGradient(
+                    gradient: Gradient(colors: [
+                        Color(red: 210/255, green: 240/255, blue: 240/255), // Pale teal top
+                        Color(red: 255/255, green: 225/255, blue: 220/255)  // Warm peachy-magenta bottom
                     ]),
                     startPoint: .top,
                     endPoint: .bottom
@@ -544,6 +614,91 @@ struct FlowBand: View {
                     progress: progress
                 ).opacity(baseOpacity)
             }
+
+        case .sunsetTealWarm:
+            // Warmer teal with peachy undertones
+            switch cycleType {
+            case .teal1, .teal2:
+                return cycleBetween(
+                    Color(red: 150/255, green: 220/255, blue: 210/255), // Warmer teal
+                    Color(red: 120/255, green: 235/255, blue: 220/255), // Peachy-mint
+                    progress: progress
+                ).opacity(baseOpacity)
+            case .magenta1, .magenta2:
+                return cycleBetween(
+                    Color(red: 255/255, green: 195/255, blue: 170/255), // Peachy coral
+                    Color(red: 255/255, green: 175/255, blue: 150/255), // Warm coral
+                    progress: progress
+                ).opacity(baseOpacity)
+            }
+
+        case .sunsetTealMagentaMid:
+            // Magenta midtone blending
+            switch cycleType {
+            case .teal1, .teal2:
+                return cycleBetween(
+                    Color(red: 140/255, green: 220/255, blue: 220/255), // Teal
+                    Color(red: 180/255, green: 200/255, blue: 220/255), // Teal-lavender blend
+                    progress: progress
+                ).opacity(baseOpacity)
+            case .magenta1, .magenta2:
+                return cycleBetween(
+                    Color(red: 240/255, green: 180/255, blue: 200/255), // Soft magenta-pink
+                    Color(red: 255/255, green: 190/255, blue: 170/255), // Peachy
+                    progress: progress
+                ).opacity(baseOpacity)
+            }
+
+        case .sunsetTealPeachyBlend:
+            // Dusty sage teal with green/peachy undertones
+            switch cycleType {
+            case .teal1, .teal2:
+                return cycleBetween(
+                    Color(red: 160/255, green: 215/255, blue: 205/255), // Sage teal
+                    Color(red: 140/255, green: 230/255, blue: 215/255), // Dusty mint
+                    progress: progress
+                ).opacity(baseOpacity)
+            case .magenta1, .magenta2:
+                return cycleBetween(
+                    Color(red: 255/255, green: 200/255, blue: 175/255), // Warm peachy
+                    Color(red: 255/255, green: 180/255, blue: 160/255), // Soft coral
+                    progress: progress
+                ).opacity(baseOpacity)
+            }
+
+        case .sunsetTealMagentaAccents:
+            // Keep teal contrast but with magenta flow accents
+            switch cycleType {
+            case .teal1, .teal2:
+                return cycleBetween(
+                    Color(red: 130/255, green: 220/255, blue: 220/255), // Teal (same as original)
+                    Color(red: 100/255, green: 240/255, blue: 230/255), // Bright cyan
+                    progress: progress
+                ).opacity(baseOpacity)
+            case .magenta1, .magenta2:
+                return cycleBetween(
+                    Color(red: 240/255, green: 150/255, blue: 190/255), // Magenta accent
+                    Color(red: 255/255, green: 180/255, blue: 160/255), // Peachy-coral
+                    progress: progress
+                ).opacity(baseOpacity)
+            }
+
+        case .sunsetTealReverse:
+            // Reversed: teal top, warm magenta bottom
+            switch cycleType {
+            case .teal1, .teal2:
+                return cycleBetween(
+                    Color(red: 120/255, green: 230/255, blue: 230/255), // Bright teal
+                    Color(red: 140/255, green: 220/255, blue: 225/255), // Soft teal
+                    progress: progress
+                ).opacity(baseOpacity)
+            case .magenta1, .magenta2:
+                return cycleBetween(
+                    Color(red: 250/255, green: 170/255, blue: 180/255), // Peachy-magenta
+                    Color(red: 240/255, green: 150/255, blue: 170/255), // Warm magenta
+                    progress: progress
+                ).opacity(baseOpacity)
+            }
         }
     }
 
@@ -870,6 +1025,91 @@ struct Particle: View {
                     progress: progress
                 ).opacity(baseOpacity)
             }
+
+        case .sunsetTealWarm:
+            // Warmer teal and peachy sparkles
+            switch cycleType {
+            case .teal:
+                return particleCycleBetween(
+                    Color(red: 150/255, green: 230/255, blue: 215/255),
+                    Color(red: 130/255, green: 240/255, blue: 225/255),
+                    progress: progress
+                ).opacity(baseOpacity)
+            case .magenta:
+                return particleCycleBetween(
+                    Color(red: 255/255, green: 190/255, blue: 150/255),
+                    Color(red: 255/255, green: 200/255, blue: 170/255),
+                    progress: progress
+                ).opacity(baseOpacity)
+            }
+
+        case .sunsetTealMagentaMid:
+            // Magenta and teal sparkles
+            switch cycleType {
+            case .teal:
+                return particleCycleBetween(
+                    Color(red: 140/255, green: 230/255, blue: 220/255),
+                    Color(red: 160/255, green: 210/255, blue: 230/255),  // Teal-lavender
+                    progress: progress
+                ).opacity(baseOpacity)
+            case .magenta:
+                return particleCycleBetween(
+                    Color(red: 240/255, green: 160/255, blue: 200/255),  // Magenta sparkle
+                    Color(red: 255/255, green: 185/255, blue: 180/255),  // Peachy-pink
+                    progress: progress
+                ).opacity(baseOpacity)
+            }
+
+        case .sunsetTealPeachyBlend:
+            // Sage teal and warm peachy sparkles
+            switch cycleType {
+            case .teal:
+                return particleCycleBetween(
+                    Color(red: 160/255, green: 220/255, blue: 205/255),  // Sage teal
+                    Color(red: 150/255, green: 235/255, blue: 215/255),  // Dusty mint
+                    progress: progress
+                ).opacity(baseOpacity)
+            case .magenta:
+                return particleCycleBetween(
+                    Color(red: 255/255, green: 200/255, blue: 160/255),  // Warm peachy
+                    Color(red: 255/255, green: 185/255, blue: 150/255),  // Golden coral
+                    progress: progress
+                ).opacity(baseOpacity)
+            }
+
+        case .sunsetTealMagentaAccents:
+            // Teal with MAGENTA sparkles (key difference)
+            switch cycleType {
+            case .teal:
+                return particleCycleBetween(
+                    Color(red: 250/255, green: 150/255, blue: 200/255),  // Bright magenta sparkle!
+                    Color(red: 240/255, green: 130/255, blue: 190/255),  // Deep magenta sparkle!
+                    progress: progress
+                ).opacity(baseOpacity)
+            case .magenta:
+                return particleCycleBetween(
+                    Color(red: 255/255, green: 140/255, blue: 190/255),  // Magenta-pink
+                    Color(red: 240/255, green: 160/255, blue: 180/255),  // Soft magenta
+                    progress: progress
+                ).opacity(baseOpacity)
+            }
+
+        case .sunsetTealReverse:
+            // Reversed: peachy-magenta and teal sparkles
+            switch cycleType {
+            case .teal:
+                return particleCycleBetween(
+                    Color(red: 130/255, green: 235/255, blue: 230/255),  // Bright teal
+                    Color(red: 150/255, green: 225/255, blue: 230/255),  // Soft teal
+                    progress: progress
+                ).opacity(baseOpacity)
+            case .magenta:
+                return particleCycleBetween(
+                    Color(red: 250/255, green: 160/255, blue: 180/255),  // Peachy-magenta
+                    Color(red: 240/255, green: 140/255, blue: 170/255),  // Warm magenta
+                    progress: progress
+                ).opacity(baseOpacity)
+            }
         }
     }
 
@@ -1035,6 +1275,46 @@ struct DiagonalMistView: View {
             let colors: [(Color, Color)] = [
                 (Color(red: 130/255, green: 230/255, blue: 230/255), Color(red: 255/255, green: 190/255, blue: 160/255)),
                 (Color(red: 110/255, green: 240/255, blue: 235/255), Color(red: 255/255, green: 180/255, blue: 150/255))
+            ]
+            return cycleMistColors(colors, progress: progress, opacities: (0.45, 0.50))
+
+        case .sunsetTealWarm:
+            // Warmer peachy-teal mist
+            let colors: [(Color, Color)] = [
+                (Color(red: 150/255, green: 230/255, blue: 220/255), Color(red: 255/255, green: 195/255, blue: 165/255)),
+                (Color(red: 130/255, green: 240/255, blue: 225/255), Color(red: 255/255, green: 185/255, blue: 155/255))
+            ]
+            return cycleMistColors(colors, progress: progress, opacities: (0.45, 0.50))
+
+        case .sunsetTealMagentaMid:
+            // Teal with magenta-lavender midtone mist
+            let colors: [(Color, Color)] = [
+                (Color(red: 140/255, green: 230/255, blue: 230/255), Color(red: 240/255, green: 180/255, blue: 210/255)),  // Teal to magenta
+                (Color(red: 160/255, green: 210/255, blue: 230/255), Color(red: 255/255, green: 195/255, blue: 175/255))   // Teal-lavender to peachy
+            ]
+            return cycleMistColors(colors, progress: progress, opacities: (0.45, 0.50))
+
+        case .sunsetTealPeachyBlend:
+            // Sage teal with warm peachy mist
+            let colors: [(Color, Color)] = [
+                (Color(red: 160/255, green: 220/255, blue: 210/255), Color(red: 255/255, green: 200/255, blue: 170/255)),  // Sage teal to peachy
+                (Color(red: 150/255, green: 235/255, blue: 220/255), Color(red: 255/255, green: 190/255, blue: 160/255))   // Dusty mint to coral
+            ]
+            return cycleMistColors(colors, progress: progress, opacities: (0.45, 0.50))
+
+        case .sunsetTealMagentaAccents:
+            // Teal mist with magenta accents
+            let colors: [(Color, Color)] = [
+                (Color(red: 130/255, green: 230/255, blue: 230/255), Color(red: 250/255, green: 160/255, blue: 200/255)),  // Teal to magenta!
+                (Color(red: 110/255, green: 240/255, blue: 235/255), Color(red: 240/255, green: 150/255, blue: 190/255))   // Cyan to magenta-pink!
+            ]
+            return cycleMistColors(colors, progress: progress, opacities: (0.45, 0.55))  // Higher magenta opacity
+
+        case .sunsetTealReverse:
+            // Reversed: teal at top, peachy-magenta at bottom
+            let colors: [(Color, Color)] = [
+                (Color(red: 130/255, green: 235/255, blue: 235/255), Color(red: 250/255, green: 170/255, blue: 185/255)),  // Teal to peachy-magenta
+                (Color(red: 150/255, green: 225/255, blue: 230/255), Color(red: 240/255, green: 160/255, blue: 175/255))   // Soft teal to warm magenta
             ]
             return cycleMistColors(colors, progress: progress, opacities: (0.45, 0.50))
         }
