@@ -887,18 +887,27 @@ struct PulseEchoView: View {
     }
 
     // Calculate the heart's pulse scale at the current moment
-    // Same timing as HeartStaticView pulse
+    // Same timing as HeartStaticView pulse - gentler for reduced eye strain
     func calculateHeartPulseScale(overallProgress: CGFloat) -> CGFloat {
         if overallProgress < 0.1 {
-            // Rising to peak (0% to 10%)
-            return 1.0 + (0.15 * (overallProgress / 0.1))
+            // Rising to peak (0% to 10%) - gentler easing
+            let t = overallProgress / 0.1
+            let eased = easeInOutCubic(t)
+            return 1.0 + (0.10 * eased)  // Reduced from 0.15 to 0.10
         } else if overallProgress < 0.3 {
             // Hold at peak (10% to 30%)
-            return 1.15
+            return 1.10  // Reduced from 1.15
         } else {
-            // Slowly falling from peak (30% to 100%)
-            return 1.15 - (0.15 * ((overallProgress - 0.3) / 0.7))
+            // Slowly falling from peak (30% to 100%) - gentler easing
+            let t = (overallProgress - 0.3) / 0.7
+            let eased = easeInOutCubic(t)
+            return 1.10 - (0.10 * eased)  // Reduced from 0.15
         }
+    }
+
+    // Smooth easing function for gentler transitions
+    func easeInOutCubic(_ t: CGFloat) -> CGFloat {
+        return t < 0.5 ? 4 * t * t * t : 1 - pow(-2 * t + 2, 3) / 2
     }
 
     func calculateOpacity(progress: CGFloat) -> Double {
@@ -967,20 +976,24 @@ struct HeartStaticView: View {
             let progress = CGFloat(cycle / 3.5)
 
             // Calculate pulse scale with pause at peak and slower retraction
-            // 0-10%: Rise to peak, 10-30%: Hold at peak, 30-100%: Slowly fall back
+            // Gentler pulse for reduced eye strain
             let pulseScale: CGFloat = {
                 if !shouldAnimate {
                     return 1.0  // Resting state when paused
                 }
                 if progress < 0.1 {
-                    // Rising to peak (0% to 10%)
-                    return 1.0 + (0.15 * (progress / 0.1))
+                    // Rising to peak (0% to 10%) - smooth easing
+                    let t = progress / 0.1
+                    let eased = t < 0.5 ? 4 * t * t * t : 1 - pow(-2 * t + 2, 3) / 2
+                    return 1.0 + (0.10 * eased)  // Reduced from 0.15 to 0.10
                 } else if progress < 0.3 {
                     // Hold at peak (10% to 30%)
-                    return 1.15
+                    return 1.10  // Reduced from 1.15
                 } else {
-                    // Slowly falling from peak (30% to 100%)
-                    return 1.15 - (0.15 * ((progress - 0.3) / 0.7))
+                    // Slowly falling from peak (30% to 100%) - smooth easing
+                    let t = (progress - 0.3) / 0.7
+                    let eased = t < 0.5 ? 4 * t * t * t : 1 - pow(-2 * t + 2, 3) / 2
+                    return 1.10 - (0.10 * eased)  // Reduced from 0.15
                 }
             }()
 
@@ -1105,18 +1118,21 @@ struct HeartCenterPulsingView: View {
             let cycle = elapsed.truncatingRemainder(dividingBy: 3.5) // 3.5 second cycle
             let progress = CGFloat(cycle / 3.5) // 0 to 1
 
+            // Warm ivory color for gentler eye impact (reduces blue light)
+            let warmIvory = Color(red: 1.0, green: 250/255, blue: 235/255)
+
             ZStack {
                 // Outer glow layer (soft)
                 Circle()
                     .fill(
                         RadialGradient(
                             gradient: Gradient(stops: isDarkMode ? [
-                                .init(color: Color(red: 1.0, green: 250/255, blue: 240/255).opacity(0.8), location: 0),
-                                .init(color: Color(red: 1.0, green: 230/255, blue: 120/255).opacity(0.4), location: 0.5),
+                                .init(color: Color(red: 1.0, green: 245/255, blue: 230/255).opacity(0.7), location: 0),  // Warmed up, reduced opacity
+                                .init(color: Color(red: 1.0, green: 230/255, blue: 120/255).opacity(0.35), location: 0.5),  // Reduced opacity
                                 .init(color: Color.clear, location: 1.0)
                             ] : [
-                                .init(color: Color(red: 1.0, green: 245/255, blue: 230/255).opacity(0.8), location: 0),  // Warm white
-                                .init(color: Color(red: 255/255, green: 210/255, blue: 140/255).opacity(0.4), location: 0.5),  // Soft golden
+                                .init(color: Color(red: 1.0, green: 242/255, blue: 225/255).opacity(0.7), location: 0),  // Warmer, softer
+                                .init(color: Color(red: 255/255, green: 210/255, blue: 140/255).opacity(0.35), location: 0.5),  // Reduced opacity
                                 .init(color: Color.clear, location: 1.0)
                             ]),
                             center: .center,
@@ -1125,21 +1141,21 @@ struct HeartCenterPulsingView: View {
                         )
                     )
                     .frame(width: size.width * 0.12, height: size.height * 0.06)
-                    .blur(radius: interpolate(dull: 8, bright: 15, progress: progress, shouldAnimate: shouldAnimate))
+                    .blur(radius: interpolate(dull: 8, bright: 12, progress: progress, shouldAnimate: shouldAnimate))  // Reduced from 15 to 12
 
-                // Core light (SHARP - minimal blur)
+                // Core light (softer - increased blur for gentler effect)
                 Circle()
                     .fill(
                         RadialGradient(
                             gradient: Gradient(stops: isDarkMode ? [
-                                .init(color: Color.white, location: 0),
-                                .init(color: Color.white, location: 0.4),
-                                .init(color: Color(red: 1.0, green: 250/255, blue: 240/255), location: 0.7),
+                                .init(color: warmIvory, location: 0),  // Warm ivory instead of pure white
+                                .init(color: warmIvory.opacity(0.9), location: 0.4),
+                                .init(color: Color(red: 1.0, green: 245/255, blue: 225/255), location: 0.7),  // Warmer
                                 .init(color: Color.clear, location: 1.0)
                             ] : [
-                                .init(color: Color.white, location: 0),
-                                .init(color: Color.white, location: 0.4),
-                                .init(color: Color(red: 1.0, green: 245/255, blue: 220/255), location: 0.7),  // Warm white
+                                .init(color: warmIvory, location: 0),  // Warm ivory instead of pure white
+                                .init(color: warmIvory.opacity(0.9), location: 0.4),
+                                .init(color: Color(red: 1.0, green: 240/255, blue: 215/255), location: 0.7),  // Warmer
                                 .init(color: Color.clear, location: 1.0)
                             ]),
                             center: .center,
@@ -1148,21 +1164,21 @@ struct HeartCenterPulsingView: View {
                         )
                     )
                     .frame(
-                        width: size.width * interpolate(dull: 0.08, bright: 0.15, progress: progress, shouldAnimate: shouldAnimate),
-                        height: size.height * interpolate(dull: 0.04, bright: 0.075, progress: progress, shouldAnimate: shouldAnimate)
+                        width: size.width * interpolate(dull: 0.08, bright: 0.13, progress: progress, shouldAnimate: shouldAnimate),  // Reduced from 0.15
+                        height: size.height * interpolate(dull: 0.04, bright: 0.065, progress: progress, shouldAnimate: shouldAnimate)  // Reduced from 0.075
                     )
-                    .blur(radius: interpolate(dull: 1, bright: 5, progress: progress, shouldAnimate: shouldAnimate))
-                    .brightness(interpolate(dull: 0.2, bright: 0.5, progress: progress, shouldAnimate: shouldAnimate))
+                    .blur(radius: interpolate(dull: 2, bright: 6, progress: progress, shouldAnimate: shouldAnimate))  // Increased blur (was 1-5)
+                    .brightness(interpolate(dull: 0.15, bright: 0.30, progress: progress, shouldAnimate: shouldAnimate))  // Reduced from 0.2-0.5
 
-                // Bright center spot (NO blur - pure white point)
+                // Bright center spot (softer with increased blur)
                 Circle()
-                    .fill(Color.white)
+                    .fill(warmIvory)  // Warm ivory instead of pure white
                     .frame(
-                        width: size.width * interpolate(dull: 0.03, bright: 0.05, progress: progress, shouldAnimate: shouldAnimate),
-                        height: size.height * interpolate(dull: 0.015, bright: 0.025, progress: progress, shouldAnimate: shouldAnimate)
+                        width: size.width * interpolate(dull: 0.03, bright: 0.045, progress: progress, shouldAnimate: shouldAnimate),  // Slightly reduced
+                        height: size.height * interpolate(dull: 0.015, bright: 0.0225, progress: progress, shouldAnimate: shouldAnimate)
                     )
-                    .shadow(color: Color.white, radius: interpolate(dull: 15, bright: 25, progress: progress, shouldAnimate: shouldAnimate), x: 0, y: 0)
-                    .shadow(color: Color.white, radius: interpolate(dull: 8, bright: 15, progress: progress, shouldAnimate: shouldAnimate), x: 0, y: 0)
+                    .shadow(color: warmIvory.opacity(0.8), radius: interpolate(dull: 12, bright: 18, progress: progress, shouldAnimate: shouldAnimate), x: 0, y: 0)  // Reduced from 15-25
+                    .shadow(color: warmIvory.opacity(0.6), radius: interpolate(dull: 6, bright: 10, progress: progress, shouldAnimate: shouldAnimate), x: 0, y: 0)  // Reduced from 8-15
                     .blendMode(.plusLighter)
             }
         }
@@ -1193,19 +1209,22 @@ struct HeartCenterPulsingView: View {
     }
 
     // Interpolate between dull and bright values based on pulse progress
+    // Uses gentle easing for reduced eye strain
     func interpolate(dull: CGFloat, bright: CGFloat, progress: CGFloat, shouldAnimate: Bool = true) -> CGFloat {
         if !shouldAnimate {
             return dull  // Return dull (resting state) when not animating
         }
 
-        // Create a pulse curve: 0 -> peak at 10% -> back to 0
+        // Create a pulse curve with smooth easing: 0 -> peak at 10% -> back to 0
         let pulseIntensity: CGFloat
         if progress < 0.1 {
-            // Rising to peak (0% to 10%)
-            pulseIntensity = progress / 0.1
+            // Rising to peak (0% to 10%) - smooth ease in-out
+            let t = progress / 0.1
+            pulseIntensity = t < 0.5 ? 4 * t * t * t : 1 - pow(-2 * t + 2, 3) / 2
         } else {
-            // Falling from peak (10% to 100%)
-            pulseIntensity = 1.0 - ((progress - 0.1) / 0.9)
+            // Falling from peak (10% to 100%) - smooth ease in-out
+            let t = (progress - 0.1) / 0.9
+            pulseIntensity = 1.0 - (t < 0.5 ? 4 * t * t * t : 1 - pow(-2 * t + 2, 3) / 2)
         }
 
         return dull + (bright - dull) * pulseIntensity
