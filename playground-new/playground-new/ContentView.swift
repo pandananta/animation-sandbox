@@ -7,21 +7,45 @@
 
 import SwiftUI
 
+enum LightBackgroundStyle: String, CaseIterable {
+    case warmBeige = "Warm Beige"
+    case softSky = "Soft Sky"
+    case goldenGlow = "Golden Glow"
+    case sunsetHaze = "Sunset Haze"
+    case creamYellow = "Cream Yellow"
+    case radialSunrise = "Radial Sunrise"
+}
+
 struct ContentView: View {
     @State private var isPlaying = true  // Animation starts playing
     @State private var isDarkMode = true  // Dark mode by default
+    @State private var lightBgStyle: LightBackgroundStyle = .warmBeige
 
     var body: some View {
         GeometryReader { geometry in
             ZStack {
-                HeartChakraTestView(size: geometry.size, isPlaying: $isPlaying, isDarkMode: $isDarkMode)
+                HeartChakraTestView(size: geometry.size, isPlaying: $isPlaying, isDarkMode: $isDarkMode, lightBgStyle: $lightBgStyle)
                     .frame(width: geometry.size.width, height: geometry.size.height)
                     .background(Color.black)
 
-                // Light/dark mode toggle in top-right corner
+                // Top controls
                 VStack {
                     HStack {
+                        // Background style picker (only visible in light mode)
+                        if !isDarkMode {
+                            Picker("Background", selection: $lightBgStyle) {
+                                ForEach(LightBackgroundStyle.allCases, id: \.self) { style in
+                                    Text(style.rawValue).tag(style)
+                                }
+                            }
+                            .pickerStyle(.menu)
+                            .padding(.leading, 20)
+                            .foregroundColor(Color(red: 160/255, green: 87/255, blue: 136/255))
+                        }
+
                         Spacer()
+
+                        // Light/dark mode toggle
                         Button(action: { isDarkMode.toggle() }) {
                             Image(systemName: isDarkMode ? "sun.max.fill" : "moon.fill")
                                 .font(.system(size: 24))
@@ -65,12 +89,13 @@ struct HeartChakraTestView: View {
     let size: CGSize
     @Binding var isPlaying: Bool
     @Binding var isDarkMode: Bool
+    @Binding var lightBgStyle: LightBackgroundStyle
     @State private var sceneOpacity: Double = 0
 
     var body: some View {
         ZStack {
             // Background gradient
-            BackgroundGradientView(isDarkMode: isDarkMode)
+            BackgroundGradientView(isDarkMode: isDarkMode, lightBgStyle: lightBgStyle)
 
             // All 4 flow bands with individual timing (always loop)
             FlowBandsView(size: size, isDarkMode: isDarkMode)
@@ -101,6 +126,7 @@ struct HeartChakraTestView: View {
 
 struct BackgroundGradientView: View {
     let isDarkMode: Bool
+    let lightBgStyle: LightBackgroundStyle
 
     var body: some View {
         if isDarkMode {
@@ -116,9 +142,76 @@ struct BackgroundGradientView: View {
             )
             .ignoresSafeArea()
         } else {
-            // Light mode: warm beige
-            Color(red: 245/255, green: 235/255, blue: 225/255) // #F5EBE1
+            // Light mode: multiple background options
+            switch lightBgStyle {
+            case .warmBeige:
+                // Original warm beige
+                Color(red: 245/255, green: 235/255, blue: 225/255) // #F5EBE1
+                    .ignoresSafeArea()
+
+            case .softSky:
+                // Soft sky gradient - warm cream to pale blue
+                RadialGradient(
+                    gradient: Gradient(colors: [
+                        Color(red: 255/255, green: 250/255, blue: 245/255), // Warm cream
+                        Color(red: 240/255, green: 245/255, blue: 255/255)  // Pale blue
+                    ]),
+                    center: .center,
+                    startRadius: 0,
+                    endRadius: 500
+                )
                 .ignoresSafeArea()
+
+            case .goldenGlow:
+                // Golden hour glow centered at heart position
+                RadialGradient(
+                    gradient: Gradient(colors: [
+                        Color(red: 255/255, green: 248/255, blue: 220/255), // Pale golden yellow
+                        Color(red: 255/255, green: 242/255, blue: 230/255)  // Peachy cream
+                    ]),
+                    center: UnitPoint(x: 0.5, y: 0.3), // Center at heart
+                    startRadius: 0,
+                    endRadius: 600
+                )
+                .ignoresSafeArea()
+
+            case .sunsetHaze:
+                // Sunset gradient - peach to lavender
+                LinearGradient(
+                    gradient: Gradient(colors: [
+                        Color(red: 255/255, green: 230/255, blue: 220/255), // Soft peach
+                        Color(red: 245/255, green: 235/255, blue: 250/255)  // Pale lavender
+                    ]),
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+                .ignoresSafeArea()
+
+            case .creamYellow:
+                // Warm cream to pale yellow
+                LinearGradient(
+                    gradient: Gradient(colors: [
+                        Color(red: 255/255, green: 249/255, blue: 240/255), // Warm cream #FFF9F0
+                        Color(red: 255/255, green: 250/255, blue: 237/255)  // Pale yellow #FFFAED
+                    ]),
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                )
+                .ignoresSafeArea()
+
+            case .radialSunrise:
+                // Radial sunrise - slightly off-center glow
+                RadialGradient(
+                    gradient: Gradient(colors: [
+                        Color(red: 255/255, green: 248/255, blue: 231/255), // Pale golden #FFF8E7
+                        Color(red: 255/255, green: 245/255, blue: 240/255)  // Peachy white #FFF5F0
+                    ]),
+                    center: UnitPoint(x: 0.4, y: 0.45),
+                    startRadius: 0,
+                    endRadius: 500
+                )
+                .ignoresSafeArea()
+            }
         }
     }
 }
