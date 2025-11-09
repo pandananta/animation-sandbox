@@ -29,6 +29,7 @@ struct ContentView: View {
                                 .padding(20)
                         }
                     }
+                    .padding(.top, 40)  // Move down into safe area
                     Spacer()
                 }
 
