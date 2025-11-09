@@ -1,41 +1,15 @@
-//
-//  ContentView.swift
-//  playground-new
-//
-//  Created by ananta on 11/7/25.
-//
-
 import SwiftUI
-
-// No longer needed - using fixed sunset teal warm style
 
 struct ContentView: View {
     @State private var isPlaying = true  // Animation starts playing
-    @State private var isDarkMode = true  // Dark mode by default
+    @Environment(\.colorScheme) var colorScheme  // System color scheme (light/dark)
 
     var body: some View {
         GeometryReader { geometry in
             ZStack {
-                HeartChakraTestView(size: geometry.size, isPlaying: $isPlaying, isDarkMode: $isDarkMode)
+                HeartChakraTestView(size: geometry.size, isPlaying: $isPlaying, colorScheme: colorScheme)
                     .frame(width: geometry.size.width, height: geometry.size.height)
                     .background(Color.black)
-
-                // Top controls
-                VStack {
-                    HStack {
-                        Spacer()
-
-                        // Light/dark mode toggle
-                        Button(action: { isDarkMode.toggle() }) {
-                            Image(systemName: isDarkMode ? "sun.max.fill" : "moon.fill")
-                                .font(.system(size: 24))
-                                .foregroundColor(Color(red: 160/255, green: 87/255, blue: 136/255)) // #a05788
-                                .padding(20)
-                        }
-                    }
-                    .padding(.top, 40)  // Move down into safe area
-                    Spacer()
-                }
 
                 // Play/pause button centered in bottom 20%
                 VStack {
@@ -62,34 +36,22 @@ struct ContentView: View {
     }
 }
 
-// MARK: - Performance Test View
-// This tests the 3 most expensive elements to verify iOS can handle the blur load
+// MARK: - Heart Chakra Animation View
 
 struct HeartChakraTestView: View {
     let size: CGSize
     @Binding var isPlaying: Bool
-    @Binding var isDarkMode: Bool
+    let colorScheme: ColorScheme
     @State private var sceneOpacity: Double = 0
 
     var body: some View {
         ZStack {
-            // Background gradient
-            BackgroundGradientView(isDarkMode: isDarkMode)
-
-            // All 4 flow bands with individual timing (always loop)
-            FlowBandsView(size: size, isDarkMode: isDarkMode)
-
-            // Diagonal mist with rotation and 50px blur (always loop)
-            DiagonalMistView(size: size, isDarkMode: isDarkMode)
-
-            // 3 Floating particles (always loop)
-            ParticlesView(size: size, isDarkMode: isDarkMode)
-
-            // Pulse echo - expanding ring (controlled by play/pause)
-            PulseEchoView(size: size, isPlaying: $isPlaying, isDarkMode: isDarkMode)
-
-            // Heart (controlled by play/pause)
-            HeartStaticView(size: size, isPlaying: $isPlaying, isDarkMode: isDarkMode)
+            BackgroundGradientView(colorScheme: colorScheme)
+            FlowBandsView(size: size, colorScheme: colorScheme)
+            DiagonalMistView(size: size, colorScheme: colorScheme)
+            ParticlesView(size: size, colorScheme: colorScheme)
+            PulseEchoView(size: size, isPlaying: $isPlaying, colorScheme: colorScheme)
+            HeartStaticView(size: size, isPlaying: $isPlaying, colorScheme: colorScheme)
                 .drawingGroup()
         }
         .opacity(sceneOpacity)
@@ -104,11 +66,10 @@ struct HeartChakraTestView: View {
 // MARK: - Background Gradient
 
 struct BackgroundGradientView: View {
-    let isDarkMode: Bool
+    let colorScheme: ColorScheme
 
     var body: some View {
-        if isDarkMode {
-            // Dark mode: current purple gradient
+        if colorScheme == .dark {
             RadialGradient(
                 gradient: Gradient(colors: [
                     Color(red: 35/255, green: 18/255, blue: 55/255),
@@ -120,11 +81,11 @@ struct BackgroundGradientView: View {
             )
             .ignoresSafeArea()
         } else {
-            // Light mode: Sunset Teal Warm - peachy-teal/mint with warmth
+            // Sunset Teal Warm: peachy-teal/mint gradient
             LinearGradient(
                 gradient: Gradient(colors: [
-                    Color(red: 255/255, green: 220/255, blue: 200/255), // Warm peach top
-                    Color(red: 220/255, green: 240/255, blue: 235/255)  // Warmer peachy-teal (less cyan, more mint)
+                    Color(red: 255/255, green: 220/255, blue: 200/255),
+                    Color(red: 220/255, green: 240/255, blue: 235/255)
                 ]),
                 startPoint: .top,
                 endPoint: .bottom
@@ -134,18 +95,19 @@ struct BackgroundGradientView: View {
     }
 }
 
-// MARK: - Flow Bands (All 4)
+// MARK: - Flow Bands
 
 struct FlowBandsView: View {
     let size: CGSize
-    let isDarkMode: Bool
+    let colorScheme: ColorScheme
 
     var body: some View {
+        let isDark = colorScheme == .dark
+
         ZStack {
-            // Flow-1: Top, teal/coral, drifts right
             FlowBand(
                 size: size,
-                color: Color(red: 100/255, green: 220/255, blue: 220/255).opacity(isDarkMode ? 0.192 : 0.55),
+                color: Color(red: 100/255, green: 220/255, blue: 220/255).opacity(isDark ? 0.192 : 0.55),
                 topPosition: 0.22,
                 height: 0.06,
                 blur: 45,
@@ -154,13 +116,12 @@ struct FlowBandsView: View {
                 direction: .right,
                 colorCycleDuration: 192,
                 colorCycleType: .teal1,
-                isDarkMode: isDarkMode
+                colorScheme: colorScheme
             )
 
-            // Flow-2: Upper middle, teal/golden, drifts right
             FlowBand(
                 size: size,
-                color: Color(red: 100/255, green: 220/255, blue: 220/255).opacity(isDarkMode ? 0.151 : 0.45),
+                color: Color(red: 100/255, green: 220/255, blue: 220/255).opacity(isDark ? 0.151 : 0.45),
                 topPosition: 0.35,
                 height: 0.0525,
                 blur: 50,
@@ -169,13 +130,12 @@ struct FlowBandsView: View {
                 direction: .right,
                 colorCycleDuration: 148,
                 colorCycleType: .teal2,
-                isDarkMode: isDarkMode
+                colorScheme: colorScheme
             )
 
-            // Flow-3: Lower middle, indigo/rose, drifts left (FIRST)
             FlowBand(
                 size: size,
-                color: Color(red: 100/255, green: 100/255, blue: 240/255).opacity(isDarkMode ? 0.209 : 0.60),
+                color: Color(red: 100/255, green: 100/255, blue: 240/255).opacity(isDark ? 0.209 : 0.60),
                 bottomPosition: 0.40,
                 height: 0.135,
                 blur: 45,
@@ -184,13 +144,12 @@ struct FlowBandsView: View {
                 direction: .left,
                 colorCycleDuration: 108,
                 colorCycleType: .magenta1,
-                isDarkMode: isDarkMode
+                colorScheme: colorScheme
             )
 
-            // Flow-4: Bottom, indigo/lavender, drifts left
             FlowBand(
                 size: size,
-                color: Color(red: 100/255, green: 100/255, blue: 240/255).opacity(isDarkMode ? 0.166 : 0.50),
+                color: Color(red: 100/255, green: 100/255, blue: 240/255).opacity(isDark ? 0.166 : 0.50),
                 bottomPosition: 0.53,
                 height: 0.1125,
                 blur: 52,
@@ -199,7 +158,7 @@ struct FlowBandsView: View {
                 direction: .left,
                 colorCycleDuration: 82,
                 colorCycleType: .magenta2,
-                isDarkMode: isDarkMode
+                colorScheme: colorScheme
             )
         }
     }
@@ -225,7 +184,7 @@ struct FlowBand: View {
     let direction: FlowDirection
     let colorCycleDuration: Double
     let colorCycleType: FlowBandColorCycle
-    let isDarkMode: Bool
+    let colorScheme: ColorScheme
 
     @State private var startTime = Date()
 
@@ -302,7 +261,7 @@ struct FlowBand: View {
     func getCycledFlowBandColor(baseColor: Color, cycleType: FlowBandColorCycle, progress: Double) -> Color {
         let baseOpacity = UIColor(baseColor).cgColor.components?[3] ?? 0.2
 
-        if isDarkMode {
+        if colorScheme == .dark {
             // Dark mode: cosmic purple/teal
             switch cycleType {
             case .teal1, .teal2:
@@ -403,15 +362,14 @@ struct FlowBand: View {
     }
 }
 
-// MARK: - Particles (All 3)
+// MARK: - Particles
 
 struct ParticlesView: View {
     let size: CGSize
-    let isDarkMode: Bool
+    let colorScheme: ColorScheme
 
     var body: some View {
         ZStack {
-            // Particle 1: Teal/Gold with color cycling
             Particle(
                 size: size,
                 color: Color(red: 100/255, green: 220/255, blue: 220/255).opacity(0.55),
@@ -425,10 +383,9 @@ struct ParticlesView: View {
                 twinkleDelay: 0,
                 colorCycleDuration: 192,
                 colorCycleType: .teal,
-                isDarkMode: isDarkMode
+                colorScheme: colorScheme
             )
 
-            // Particle 2: Yellow/Peachy (no color cycling in dark, sparkly gold in light)
             Particle(
                 size: size,
                 color: Color(red: 255/255, green: 200/255, blue: 80/255).opacity(0.55),
@@ -442,10 +399,9 @@ struct ParticlesView: View {
                 twinkleDelay: 1,
                 colorCycleDuration: nil,
                 colorCycleType: nil,
-                isDarkMode: isDarkMode
+                colorScheme: colorScheme
             )
 
-            // Particle 3: Indigo/Amber with color cycling
             Particle(
                 size: size,
                 color: Color(red: 100/255, green: 100/255, blue: 240/255).opacity(0.55),
@@ -459,7 +415,7 @@ struct ParticlesView: View {
                 twinkleDelay: 2,
                 colorCycleDuration: 104,
                 colorCycleType: .magenta,
-                isDarkMode: isDarkMode
+                colorScheme: colorScheme
             )
         }
     }
@@ -482,7 +438,7 @@ struct Particle: View {
     let twinkleDelay: Double
     let colorCycleDuration: Double?
     let colorCycleType: ParticleColorCycle?
-    let isDarkMode: Bool
+    let colorScheme: ColorScheme
 
     @State private var startTime = Date()
 
@@ -561,9 +517,9 @@ struct Particle: View {
     }
 
     func getCycledColor(baseColor: Color, cycleType: ParticleColorCycle, progress: Double) -> Color {
-        let baseOpacity = isDarkMode ? 0.55 : 0.75  // Higher opacity in light mode
+        let baseOpacity = colorScheme == .dark ? 0.55 : 0.75
 
-        if isDarkMode {
+        if colorScheme == .dark {
             // Dark mode: teal/magenta/orange
             switch cycleType {
             case .teal:
@@ -652,11 +608,10 @@ struct Particle: View {
 }
 
 // MARK: - Diagonal Mist
-// 50px blur with rotation and color cycling
 
 struct DiagonalMistView: View {
     let size: CGSize
-    let isDarkMode: Bool
+    let colorScheme: ColorScheme
     @State private var rotation: Double = -15
     @State private var opacity: Double = 0.20
     @State private var startTime = Date()
@@ -703,7 +658,7 @@ struct DiagonalMistView: View {
     }
 
     func getColors(progress: Double) -> (Color, Color) {
-        if isDarkMode {
+        if colorScheme == .dark {
             // Dark mode: teal/indigo cosmic mist
             if progress < 0.3 {
                 return (
@@ -786,12 +741,12 @@ struct DiagonalMistView: View {
     }
 }
 
-// MARK: - Pulse Echo (Red-Leaning Variant)
+// MARK: - Pulse Echo
 
 struct PulseEchoView: View {
     let size: CGSize
     @Binding var isPlaying: Bool
-    let isDarkMode: Bool
+    let colorScheme: ColorScheme
     @State private var startTime = Date()
     @State private var shouldAnimate = true
 
@@ -827,14 +782,13 @@ struct PulseEchoView: View {
                 Ellipse()
                 .fill(
                     RadialGradient(
-                        gradient: Gradient(stops: isDarkMode ? [
+                        gradient: Gradient(stops: colorScheme == .dark ? [
                             .init(color: Color.clear, location: 0),
                             .init(color: Color.clear, location: 0.32),
                             .init(color: ringColors.0.opacity(0.9), location: 0.4),
                             .init(color: ringColors.1.opacity(0.7), location: 0.46),
                             .init(color: Color.clear, location: 0.52)
                         ] : [
-                            // Light mode: simple peachy ring
                             .init(color: Color.clear, location: 0),
                             .init(color: Color.clear, location: 0.38),
                             .init(color: ringColors.0.opacity(0.8), location: 0.42),
@@ -847,10 +801,10 @@ struct PulseEchoView: View {
                     )
                 )
                 .frame(width: size.width * 0.28, height: size.height * 0.14)
-                .blur(radius: isDarkMode ? 4 : 3)
+                .blur(radius: colorScheme == .dark ? 4 : 3)
                 .scaleEffect(finalScale)
                 .opacity(calculateOpacity(progress: progress))
-                .blendMode(isDarkMode ? .normal : .plusLighter)
+                .blendMode(colorScheme == .dark ? .normal : .plusLighter)
                 .position(x: size.width * 0.5, y: size.height * 0.3)
             }
         }
@@ -928,22 +882,19 @@ struct PulseEchoView: View {
     }
 
     func getRingColors(progress: CGFloat) -> (Color, Color) {
-        if isDarkMode {
-            // Dark mode: warm blend → mauve
-            let warmBlend1 = Color(red: 1.0, green: 180/255, blue: 130/255)  // Warm peachy-orange
-            let warmBlend2 = Color(red: 1.0, green: 120/255, blue: 170/255)  // Warm coral-pink
-            let mauve1 = Color(red: 180/255, green: 70/255, blue: 145/255)   // Rich mauve
-            let mauve2 = Color(red: 160/255, green: 60/255, blue: 130/255)   // Deep mauve-wine
+        if colorScheme == .dark {
+            let warmBlend1 = Color(red: 1.0, green: 180/255, blue: 130/255)
+            let warmBlend2 = Color(red: 1.0, green: 120/255, blue: 170/255)
+            let mauve1 = Color(red: 180/255, green: 70/255, blue: 145/255)
+            let mauve2 = Color(red: 160/255, green: 60/255, blue: 130/255)
 
             let colorProgress = min(progress / 0.3, 1.0)
             let color1 = interpolateRingColor(from: warmBlend1, to: mauve1, progress: Double(colorProgress))
             let color2 = interpolateRingColor(from: warmBlend2, to: mauve2, progress: Double(colorProgress))
             return (color1, color2)
         } else {
-            // Light mode: simple peachy ring matching the heart
-            let goldenAmber = Color(red: 255/255, green: 200/255, blue: 120/255)  // Golden amber (same as heart glow)
-            let softPeach = Color(red: 255/255, green: 160/255, blue: 130/255)    // Soft peach (same as heart glow)
-
+            let goldenAmber = Color(red: 255/255, green: 200/255, blue: 120/255)
+            let softPeach = Color(red: 255/255, green: 160/255, blue: 130/255)
             return (goldenAmber, softPeach)
         }
     }
@@ -965,7 +916,7 @@ struct PulseEchoView: View {
 struct HeartStaticView: View {
     let size: CGSize
     @Binding var isPlaying: Bool
-    let isDarkMode: Bool
+    let colorScheme: ColorScheme
     @State private var startTime = Date()
     @State private var shouldAnimate = true
 
@@ -998,17 +949,16 @@ struct HeartStaticView: View {
             }()
 
             ZStack {
-                // Heart glow (background) - NOW PULSING
                 Ellipse()
                     .fill(
                         RadialGradient(
-                            gradient: Gradient(stops: isDarkMode ? [
+                            gradient: Gradient(stops: colorScheme == .dark ? [
                                 .init(color: Color(red: 1.0, green: 230/255, blue: 120/255).opacity(0.6), location: 0),
                                 .init(color: Color(red: 1.0, green: 100/255, blue: 180/255).opacity(0.4), location: 0.6),
                                 .init(color: Color.clear, location: 0.9)
                             ] : [
-                                .init(color: Color(red: 255/255, green: 200/255, blue: 120/255).opacity(0.6), location: 0),  // Golden amber
-                                .init(color: Color(red: 255/255, green: 160/255, blue: 130/255).opacity(0.4), location: 0.6),  // Soft peach
+                                .init(color: Color(red: 255/255, green: 200/255, blue: 120/255).opacity(0.6), location: 0),
+                                .init(color: Color(red: 255/255, green: 160/255, blue: 130/255).opacity(0.4), location: 0.6),
                                 .init(color: Color.clear, location: 0.9)
                             ]),
                             center: .center,
@@ -1021,19 +971,17 @@ struct HeartStaticView: View {
                     .scaleEffect(pulseScale)
                     .position(x: size.width * 0.5, y: size.height * 0.3)
 
-                // Subtle heart hint (two lobes with visible dip between)
                 ZStack {
-                    // Left lobe
                     Circle()
                         .fill(
                             RadialGradient(
-                                gradient: Gradient(stops: isDarkMode ? [
+                                gradient: Gradient(stops: colorScheme == .dark ? [
                                     .init(color: Color(red: 1.0, green: 230/255, blue: 120/255).opacity(0.35), location: 0),
                                     .init(color: Color(red: 1.0, green: 100/255, blue: 180/255).opacity(0.18), location: 0.6),
                                     .init(color: Color.clear, location: 1.0)
                                 ] : [
-                                    .init(color: Color(red: 255/255, green: 200/255, blue: 120/255).opacity(0.35), location: 0),  // Golden
-                                    .init(color: Color(red: 255/255, green: 160/255, blue: 130/255).opacity(0.18), location: 0.6),  // Peach
+                                    .init(color: Color(red: 255/255, green: 200/255, blue: 120/255).opacity(0.35), location: 0),
+                                    .init(color: Color(red: 255/255, green: 160/255, blue: 130/255).opacity(0.18), location: 0.6),
                                     .init(color: Color.clear, location: 1.0)
                                 ]),
                                 center: UnitPoint(x: 0.3, y: 0.4),
@@ -1045,17 +993,16 @@ struct HeartStaticView: View {
                         .blur(radius: 10)
                         .offset(x: -size.width * 0.035, y: -size.height * 0.015)
 
-                    // Right lobe
                     Circle()
                         .fill(
                             RadialGradient(
-                                gradient: Gradient(stops: isDarkMode ? [
+                                gradient: Gradient(stops: colorScheme == .dark ? [
                                     .init(color: Color(red: 1.0, green: 230/255, blue: 120/255).opacity(0.35), location: 0),
                                     .init(color: Color(red: 1.0, green: 100/255, blue: 180/255).opacity(0.18), location: 0.6),
                                     .init(color: Color.clear, location: 1.0)
                                 ] : [
-                                    .init(color: Color(red: 255/255, green: 200/255, blue: 120/255).opacity(0.35), location: 0),  // Golden
-                                    .init(color: Color(red: 255/255, green: 160/255, blue: 130/255).opacity(0.18), location: 0.6),  // Peach
+                                    .init(color: Color(red: 255/255, green: 200/255, blue: 120/255).opacity(0.35), location: 0),
+                                    .init(color: Color(red: 255/255, green: 160/255, blue: 130/255).opacity(0.18), location: 0.6),
                                     .init(color: Color.clear, location: 1.0)
                                 ]),
                                 center: UnitPoint(x: 0.7, y: 0.4),
@@ -1070,8 +1017,7 @@ struct HeartStaticView: View {
                 .scaleEffect(pulseScale)
                 .position(x: size.width * 0.5, y: size.height * 0.3)
 
-                // Heart center - PULSING SHARP LIGHT
-                HeartCenterPulsingView(size: size, isPlaying: $isPlaying, isDarkMode: isDarkMode)
+                HeartCenterPulsingView(size: size, isPlaying: $isPlaying, colorScheme: colorScheme)
                     .position(x: size.width * 0.5, y: size.height * 0.3)
             }
         }
@@ -1103,12 +1049,11 @@ struct HeartStaticView: View {
 }
 
 // MARK: - Pulsing Heart Center
-// Animates between "Sharp" (dull) and "Max Bright" (peak)
 
 struct HeartCenterPulsingView: View {
     let size: CGSize
     @Binding var isPlaying: Bool
-    let isDarkMode: Bool
+    let colorScheme: ColorScheme
     @State private var startTime = Date()
     @State private var shouldAnimate = true
 
@@ -1122,17 +1067,16 @@ struct HeartCenterPulsingView: View {
             let warmIvory = Color(red: 1.0, green: 250/255, blue: 235/255)
 
             ZStack {
-                // Outer glow layer (soft)
                 Circle()
                     .fill(
                         RadialGradient(
-                            gradient: Gradient(stops: isDarkMode ? [
-                                .init(color: Color(red: 1.0, green: 245/255, blue: 230/255).opacity(0.7), location: 0),  // Warmed up, reduced opacity
-                                .init(color: Color(red: 1.0, green: 230/255, blue: 120/255).opacity(0.35), location: 0.5),  // Reduced opacity
+                            gradient: Gradient(stops: colorScheme == .dark ? [
+                                .init(color: Color(red: 1.0, green: 245/255, blue: 230/255).opacity(0.7), location: 0),
+                                .init(color: Color(red: 1.0, green: 230/255, blue: 120/255).opacity(0.35), location: 0.5),
                                 .init(color: Color.clear, location: 1.0)
                             ] : [
-                                .init(color: Color(red: 1.0, green: 242/255, blue: 225/255).opacity(0.7), location: 0),  // Warmer, softer
-                                .init(color: Color(red: 255/255, green: 210/255, blue: 140/255).opacity(0.35), location: 0.5),  // Reduced opacity
+                                .init(color: Color(red: 1.0, green: 242/255, blue: 225/255).opacity(0.7), location: 0),
+                                .init(color: Color(red: 255/255, green: 210/255, blue: 140/255).opacity(0.35), location: 0.5),
                                 .init(color: Color.clear, location: 1.0)
                             ]),
                             center: .center,
@@ -1141,21 +1085,20 @@ struct HeartCenterPulsingView: View {
                         )
                     )
                     .frame(width: size.width * 0.12, height: size.height * 0.06)
-                    .blur(radius: interpolate(dull: 8, bright: 12, progress: progress, shouldAnimate: shouldAnimate))  // Reduced from 15 to 12
+                    .blur(radius: interpolate(dull: 8, bright: 12, progress: progress, shouldAnimate: shouldAnimate))
 
-                // Core light (softer - increased blur for gentler effect)
                 Circle()
                     .fill(
                         RadialGradient(
-                            gradient: Gradient(stops: isDarkMode ? [
-                                .init(color: warmIvory, location: 0),  // Warm ivory instead of pure white
+                            gradient: Gradient(stops: colorScheme == .dark ? [
+                                .init(color: warmIvory, location: 0),
                                 .init(color: warmIvory.opacity(0.9), location: 0.4),
-                                .init(color: Color(red: 1.0, green: 245/255, blue: 225/255), location: 0.7),  // Warmer
+                                .init(color: Color(red: 1.0, green: 245/255, blue: 225/255), location: 0.7),
                                 .init(color: Color.clear, location: 1.0)
                             ] : [
-                                .init(color: warmIvory, location: 0),  // Warm ivory instead of pure white
+                                .init(color: warmIvory, location: 0),
                                 .init(color: warmIvory.opacity(0.9), location: 0.4),
-                                .init(color: Color(red: 1.0, green: 240/255, blue: 215/255), location: 0.7),  // Warmer
+                                .init(color: Color(red: 1.0, green: 240/255, blue: 215/255), location: 0.7),
                                 .init(color: Color.clear, location: 1.0)
                             ]),
                             center: .center,
@@ -1164,21 +1107,20 @@ struct HeartCenterPulsingView: View {
                         )
                     )
                     .frame(
-                        width: size.width * interpolate(dull: 0.08, bright: 0.13, progress: progress, shouldAnimate: shouldAnimate),  // Reduced from 0.15
-                        height: size.height * interpolate(dull: 0.04, bright: 0.065, progress: progress, shouldAnimate: shouldAnimate)  // Reduced from 0.075
+                        width: size.width * interpolate(dull: 0.08, bright: 0.13, progress: progress, shouldAnimate: shouldAnimate),
+                        height: size.height * interpolate(dull: 0.04, bright: 0.065, progress: progress, shouldAnimate: shouldAnimate)
                     )
-                    .blur(radius: interpolate(dull: 2, bright: 6, progress: progress, shouldAnimate: shouldAnimate))  // Increased blur (was 1-5)
-                    .brightness(interpolate(dull: 0.15, bright: 0.30, progress: progress, shouldAnimate: shouldAnimate))  // Reduced from 0.2-0.5
+                    .blur(radius: interpolate(dull: 2, bright: 6, progress: progress, shouldAnimate: shouldAnimate))
+                    .brightness(interpolate(dull: 0.15, bright: 0.30, progress: progress, shouldAnimate: shouldAnimate))
 
-                // Bright center spot (softer with increased blur)
                 Circle()
-                    .fill(warmIvory)  // Warm ivory instead of pure white
+                    .fill(warmIvory)
                     .frame(
-                        width: size.width * interpolate(dull: 0.03, bright: 0.045, progress: progress, shouldAnimate: shouldAnimate),  // Slightly reduced
+                        width: size.width * interpolate(dull: 0.03, bright: 0.045, progress: progress, shouldAnimate: shouldAnimate),
                         height: size.height * interpolate(dull: 0.015, bright: 0.0225, progress: progress, shouldAnimate: shouldAnimate)
                     )
-                    .shadow(color: warmIvory.opacity(0.8), radius: interpolate(dull: 12, bright: 18, progress: progress, shouldAnimate: shouldAnimate), x: 0, y: 0)  // Reduced from 15-25
-                    .shadow(color: warmIvory.opacity(0.6), radius: interpolate(dull: 6, bright: 10, progress: progress, shouldAnimate: shouldAnimate), x: 0, y: 0)  // Reduced from 8-15
+                    .shadow(color: warmIvory.opacity(0.8), radius: interpolate(dull: 12, bright: 18, progress: progress, shouldAnimate: shouldAnimate), x: 0, y: 0)
+                    .shadow(color: warmIvory.opacity(0.6), radius: interpolate(dull: 6, bright: 10, progress: progress, shouldAnimate: shouldAnimate), x: 0, y: 0)
                     .blendMode(.plusLighter)
             }
         }
