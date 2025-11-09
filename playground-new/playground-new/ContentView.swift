@@ -9,13 +9,28 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var isPlaying = true  // Animation starts playing
+    @State private var isDarkMode = true  // Dark mode by default
 
     var body: some View {
         GeometryReader { geometry in
             ZStack {
-                HeartChakraTestView(size: geometry.size, isPlaying: $isPlaying)
+                HeartChakraTestView(size: geometry.size, isPlaying: $isPlaying, isDarkMode: $isDarkMode)
                     .frame(width: geometry.size.width, height: geometry.size.height)
                     .background(Color.black)
+
+                // Light/dark mode toggle in top-right corner
+                VStack {
+                    HStack {
+                        Spacer()
+                        Button(action: { isDarkMode.toggle() }) {
+                            Image(systemName: isDarkMode ? "sun.max.fill" : "moon.fill")
+                                .font(.system(size: 24))
+                                .foregroundColor(Color(red: 160/255, green: 87/255, blue: 136/255)) // #a05788
+                                .padding(20)
+                        }
+                    }
+                    Spacer()
+                }
 
                 // Play/pause button centered in bottom 20%
                 VStack {
@@ -48,12 +63,13 @@ struct ContentView: View {
 struct HeartChakraTestView: View {
     let size: CGSize
     @Binding var isPlaying: Bool
+    @Binding var isDarkMode: Bool
     @State private var sceneOpacity: Double = 0
 
     var body: some View {
         ZStack {
             // Background gradient
-            BackgroundGradientView()
+            BackgroundGradientView(isDarkMode: isDarkMode)
 
             // All 4 flow bands with individual timing (always loop)
             FlowBandsView(size: size)
@@ -83,17 +99,26 @@ struct HeartChakraTestView: View {
 // MARK: - Background Gradient
 
 struct BackgroundGradientView: View {
+    let isDarkMode: Bool
+
     var body: some View {
-        RadialGradient(
-            gradient: Gradient(colors: [
-                Color(red: 35/255, green: 18/255, blue: 55/255),
-                Color(red: 5/255, green: 2/255, blue: 15/255)
-            ]),
-            center: UnitPoint(x: 0.4, y: 0.45),
-            startRadius: 0,
-            endRadius: 500
-        )
-        .ignoresSafeArea()
+        if isDarkMode {
+            // Dark mode: current purple gradient
+            RadialGradient(
+                gradient: Gradient(colors: [
+                    Color(red: 35/255, green: 18/255, blue: 55/255),
+                    Color(red: 5/255, green: 2/255, blue: 15/255)
+                ]),
+                center: UnitPoint(x: 0.4, y: 0.45),
+                startRadius: 0,
+                endRadius: 500
+            )
+            .ignoresSafeArea()
+        } else {
+            // Light mode: warm beige
+            Color(red: 245/255, green: 235/255, blue: 225/255) // #F5EBE1
+                .ignoresSafeArea()
+        }
     }
 }
 
